@@ -1,6 +1,5 @@
 package com.ist440.lightingsystem;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
