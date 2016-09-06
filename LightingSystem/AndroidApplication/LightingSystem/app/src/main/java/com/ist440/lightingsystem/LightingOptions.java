@@ -20,7 +20,7 @@ public class LightingOptions extends AppCompatActivity {
 
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "192.168.1.1";
+        final String hostname = "192.168.1.251";
         final int port = 22;
 
         toggleFogLights = (ToggleButton) findViewById(R.id.toggleFogLights);
