@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Controls</string>
+    <string name="app_name">Car Control Center</string>
     <string name="lighting_controls">Lighting Controls</string>
     <string name="lightingcontrols">LightingControls</string>
 </resources>
