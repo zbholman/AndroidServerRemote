@@ -1,17 +1,13 @@
 from sense_hat import SenseHat
+import time
 
 sense = SenseHat()
-sense.clear()
 
-tmax = 31
-tmin = tmax - 8
-
-while True:
+while True :
+    pressure = sense.get_pressure()
     temp = sense.get_temperature()
-    print(temp)
-    temp = int(temp) - tmin
-    for x in range(0, 8):
-        for y in range(0, temp):
-            sense.set_pixel(x, y, 255, 0, 0)
-        for y in range(temp, 8):
-            sense.set_pixel(x, y, 0, 0, 0)
+    humidity = sense.get_humidity()
+    calctemp = 0.0071*temp*temp+0.86*temp-10.0
+    calchum=humidity*(2.5-0.029*temp)
+    print '%.0f %.1f %.0f' % (pressure, calctemp, calchum)
+    time.sleep(5)
