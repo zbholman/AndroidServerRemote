@@ -16,10 +16,7 @@ for x in range(0, number_of_blinks):
     sense.set_pixel(5, 1, 255, 191, 0)
     sense.set_pixel(4, 7, 255, 191, 0)
     sense.set_pixel(4, 0, 255, 191, 0)
-    sense.set_pixel (0, 4, 255, 191, 0)
-    sense.set_pixel(0, 3, 255, 191, 0)
-
-   
+ 
     time.sleep(.5)
     sense.clear()
     time.sleep(.5)
