@@ -9,5 +9,11 @@ public class LightsControl extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lights_control);
+
+        final String username = "pi";
+        final String password = "raspberry";
+        final String hostname = "192.168.1.251";
+        final int port = 22;
+
     }
 }
