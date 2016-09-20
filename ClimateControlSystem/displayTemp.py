@@ -1,13 +1,20 @@
 from sense_hat import SenseHat
-import time
-
 sense = SenseHat()
 
-while True :
-    pressure = sense.get_pressure()
-    temp = sense.get_temperature()
-    humidity = sense.get_humidity()
-    calctemp = 0.0071*temp*temp+0.86*temp-10.0
-    calchum=humidity*(2.5-0.029*temp)
-    print '%.0f %.1f %.0f' % (pressure, calctemp, calchum)
-    time.sleep(5)
+while True:
+    t = sense.get_temperature()
+    p = sense.get_pressure()
+    h = sense.get_humidity()
+
+    t = round(t, 1)
+    p = round(p, 1)
+    h = round(h, 1)
+
+    if t > 18.3 and t < 26.7:
+        bg = [0, 100, 0]  # green
+    else:
+        bg = [100, 0, 0]  # red
+
+    msg = "Temperature = {0}, Pressure = {1}, Humidity = {2}".format(t, p, h)
+
+    sense.show_message(msg, scroll_speed=0.05, back_colour=bg)
