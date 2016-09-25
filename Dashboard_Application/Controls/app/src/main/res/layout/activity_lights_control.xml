@@ -23,17 +23,50 @@
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fog Lights"
-        android:id="@+id/switchFogLights"
-        android:layout_below="@+id/lblLightingControls"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:text="High Beams"
+        android:id="@+id/switchHighBeams"
         android:textSize="28dp"
         android:textColor="#ffffff"
         android:trackTint="#ffffff"
         android:splitTrack="false"
-        android:singleLine="false"
         android:showText="true"
         android:switchPadding="15dp"
-        android:switchMinWidth="10dp" />
+        android:switchMinWidth="10dp"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/switchFogLights"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Head Lights"
+        android:id="@+id/switchHeadLights"
+        android:textSize="28dp"
+        android:textColor="#ffffff"
+        android:trackTint="#ffffff"
+        android:splitTrack="false"
+        android:showText="true"
+        android:switchPadding="15dp"
+        android:switchMinWidth="10dp"
+        android:layout_below="@+id/switchFogLights"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fog Lights"
+        android:id="@+id/switchFogLights"
+        android:textSize="28dp"
+        android:textColor="#ffffff"
+        android:trackTint="#ffffff"
+        android:splitTrack="false"
+        android:showText="true"
+        android:switchPadding="15dp"
+        android:switchMinWidth="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/lblLightingControls"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
