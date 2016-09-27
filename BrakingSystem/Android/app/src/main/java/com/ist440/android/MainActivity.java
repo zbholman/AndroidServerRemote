@@ -26,17 +26,20 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Message already sent to Pi", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 JSONObject jsonObj = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
                 try {
                     jsonObj.put("id", "car440brs");
-                    jsonObj.put("name", "Climate System");
+                    jsonObj.put("name", "Braking System");
+                    jsonObj.put("OID", "brs");
+                    jsonObj.put("DID", "lis");
+                    jsonObj.put("CKS", "  ");
 
-                    jsonArray.put("system1");
-                    jsonArray.put("system2");
+                    jsonArray.put("Braking System");
+                    jsonArray.put("Lighting System");
 
                     jsonObj.put("sys", jsonArray);
 
