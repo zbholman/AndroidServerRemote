@@ -10,8 +10,9 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Properties;
+
+import static android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class LightsControl extends AppCompatActivity {
 
@@ -20,20 +21,25 @@ public class LightsControl extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private Switch switchFogLights;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lights_control);
 
-        final String username = "";
+        final String username = "pi";
         final String password = "raspberry";
         final String hostname = "192.168.1.251";
+        //final String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py";
         final int port = 22;
 
         switchFogLights = (Switch) findViewById(R.id.switchFogLights);
         switchFogLights.setChecked(false);
-        switchFogLights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switchFogLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -41,11 +47,11 @@ public class LightsControl extends AppCompatActivity {
 
                 if (isChecked) {
                     // turn on fog lights
-                    command = ""; // Need to add command to be executed
+                    command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py"; // Need to add command to be executed
                     runPiCommand(username, password, hostname, command, port);
                 } else {
                     // turn off fog lights
-                    command = ""; // Need to add command to be executed
+                    //command = ""; // Need to add command to be executed
                     runPiCommand(username, password, hostname, command, port);
 
                 }
@@ -77,13 +83,13 @@ public class LightsControl extends AppCompatActivity {
         // SSH Channel
         ChannelExec channelssh = null;
         try {
-            channelssh = (ChannelExec)
-                    session.openChannel("exec");
+            channelssh = (ChannelExec)session.openChannel("exec");
         } catch (JSchException e) {
             e.printStackTrace();
         }
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        channelssh.setOutputStream(baos);
+        // ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        // channelssh.setOutputStream(baos);
 
         // Execute command
         channelssh.setCommand(command);
