@@ -2,6 +2,7 @@
 from gopigo import *
 import sys
 
+#Displays the Start Up Screen
 print('Welcome to the DriveTrain System')
 print('Press:')
 print('p to Park the Car')
