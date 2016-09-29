@@ -28,15 +28,15 @@
         android:text="Lighting Controls"
         android:id="@+id/lblLightingControls"
         android:textSize="40dp"
-        android:layout_marginTop="66dp"
         android:autoText="false"
         android:lines="2"
         android:width="200dp"
         android:textAlignment="center"
+        android:textColor="#ffffff"
         android:layout_below="@+id/txtControlCenterHome"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#ffffff" />
+        android:layout_marginTop="27dp" />
 
     <ImageButton
         android:layout_width="200dp"
@@ -45,11 +45,9 @@
         android:background="@android:drawable/ic_menu_compass"
         android:backgroundTint="#f6eeba"
         android:backgroundTintMode="screen"
-        android:layout_alignBottom="@+id/lblLightingControls"
-        android:layout_alignRight="@+id/lblLightingControls"
-        android:layout_alignEnd="@+id/lblLightingControls"
-        android:layout_marginRight="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="63dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="54dp" />
 
 </RelativeLayout>
