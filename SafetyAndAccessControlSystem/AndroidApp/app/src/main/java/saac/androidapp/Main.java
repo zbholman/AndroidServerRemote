@@ -309,6 +309,34 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        button12.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                String sCode = editText.getText().toString();
+                String sNum = editText2.getText().toString();
+                int codeLen = sCode.length();
+                int numLen = sNum.length();
+                StringBuilder myCode = new StringBuilder(sCode);
+                if(codeLen == 1){
+                    codeLen -= 1;
+                    myCode.deleteCharAt(codeLen);
+                }
+                else{
+                    codeLen -= 1;
+                    myCode.deleteCharAt(codeLen);
+                    codeLen -= 1;
+                    myCode.deleteCharAt(codeLen);
+                }
+
+
+                StringBuilder myNum = new StringBuilder(sNum);
+                numLen -= 1;
+                myNum.deleteCharAt(numLen);
+
+                editText.setText(myCode.toString());
+                editText2.setText(myNum.toString());
+            }
+        });
+
 
     }
 

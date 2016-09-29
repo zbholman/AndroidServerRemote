@@ -2,6 +2,7 @@
 from gopigo import *
 import sys
 
+#Displays the Start Up Screen
 print('Welcome to the DriveTrain System')
 print('Press:')
 print('p to Park the Car')
@@ -27,13 +28,14 @@ while True:
         fwd() #Car Moving Forward
     elif (mode == 'l'):
         left() #Car Turning Left
-    elif (mode == 'r'):
+    elif (mode == 't'):
         right() #Car Turning Right
     elif (mode == 'i'):
         increase_speed() #Increasing The Car Speed
     elif (mode == 'e'):
         decrease_speed() #Car Turning Left
     elif (mode == 'z'):
+        stop() #Car Stops before Exiting Drive Mode
         print('Exiting Drive Mode') #Leaving Drive Mode
         sys.exit()
     else:
