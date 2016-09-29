@@ -75,6 +75,7 @@ public class LightsControl extends AppCompatActivity {
             e.printStackTrace();
         }
         // Set the password for the session
+        assert session != null;
         session.setPassword(password);
 
         // Avoid asking for key confirmation
@@ -101,6 +102,7 @@ public class LightsControl extends AppCompatActivity {
         // channelssh.setOutputStream(baos);
 
         // Execute command
+        assert channelssh != null;
         channelssh.setCommand(command);
         try {
             channelssh.connect();
