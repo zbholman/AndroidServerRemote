@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Button down = (Button) findViewById(R.id.downButton);
 
         up.setOnClickListener(new View.OnClickListener() {
-            int counter;
+            int counter = 55;
 
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray();
 
                 try {
-                    jsonObj.put("temp", 55 + counter);
+                    jsonObj.put("temp",counter);
                     jsonObj.put("name", "Climate System");
 
                     text1.setText(jsonObj.toString());
@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                counter ++;
+                counter --;
 
                 JSONObject jsonObj = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
 
                 try {
-                    jsonObj.put("temp", 55 - counter);
+                    jsonObj.put("temp",counter);
                     jsonObj.put("name", "Climate System");
 
                     text1.setText(jsonObj.toString());
