@@ -27,7 +27,7 @@ while True:
         fwd() #Car Moving Forward
     elif (mode == 'l'):
         left() #Car Turning Left
-    elif (mode == 'r'):
+    elif (mode == 't'):
         right() #Car Turning Right
     elif (mode == 'i'):
         increase_speed() #Increasing The Car Speed
