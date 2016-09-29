@@ -29,10 +29,3 @@ for x in range(0, number_of_blinks):
   time.sleep(.5)
   sense.clear()
   time.sleep(.5)
-
-
-user_word = input()
-
-user_number = int(input())
-
-print('%s,%d' % (user_word,user_number))
