@@ -34,6 +34,7 @@ while True:
     elif (mode == 'e'):
         decrease_speed() #Car Turning Left
     elif (mode == 'z'):
+        stop() #Car Stops before Exiting Drive Mode
         print('Exiting Drive Mode') #Leaving Drive Mode
         sys.exit()
     else:
