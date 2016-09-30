@@ -20,15 +20,67 @@
         android:text="Hello Pi Braking System"
         android:id="@+id/TextView1" />
 
+    <Button
+        android:text="Forward"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/forwardButton"
+        android:layout_below="@+id/TextView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Brake"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:id="@+id/brakeButton"
+        android:layout_below="@+id/forwardButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="BlueTooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ABSButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btooth"
+        android:textSize="18sp" />
+
+    <Button
+        android:text="ON"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:id="@+id/btOn"
+        android:layout_below="@+id/btooth"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="OFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:id="@+id/btOFF"
+        android:layout_below="@+id/btOn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <ToggleButton
         android:text="ToggleButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ABSButton"
         style="@style/Animation.AppCompat.DropDownUp"
         android:textOff="ABS: OFF"
         android:textOn="ABS: ON"
-        android:layout_below="@+id/TextView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="186dp" />
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/brakeButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
