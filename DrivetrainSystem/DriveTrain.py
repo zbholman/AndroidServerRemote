@@ -1,3 +1,8 @@
+#IST 440
+# Drive Train (Team 02)
+# Author: Ghansyam Patel, Rahul Manoharan, and Klaus 
+# Version: 1.02
+# Date: 09/30/2016
 #GoPiGo Robot for DriveTrain
 from gopigo import *
 import sys
@@ -14,6 +19,10 @@ print('r to Move the Car Right')
 print('i to Increase the Speed')
 print('e to Decrease the Speed')
 print('z to Exit the Drive Mode')
+
+car = '    ______'
+car1= '  /___ __\\___'
+car2= '   o-----o    '
 
 while True:
     print"Drive Mode:",
@@ -37,6 +46,10 @@ while True:
     elif (mode == 'z'):
         stop() #Car Stops before Exiting Drive Mode
         print('Exiting Drive Mode') #Leaving Drive Mode
+        print(car) #Printing Car
+        print(car1) #Printing Car
+        print(car2) #Printing Car
+        print('Good Bye!') #Exiting Message!
         sys.exit()
     else:
         print('Wrong Drive Mode Command, Please Try Again')
