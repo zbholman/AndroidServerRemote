@@ -11,11 +11,11 @@ from time import sleep
 sense = SenseHat()
 
 #Prints Message for each Drive Mode the Car is in
-sense.show_message("PARK",text_colour=[255, 0, 0])
+sense.show_message("PARK",text_colour=[255, 0, 0]) #Red Color
 sleep(1)
-sense.show_message("REVERSE",text_colour=[0, 0, 255])
+sense.show_message("REVERSE",text_colour=[0, 0, 255]) #Green Color
 sleep(1)
-sense.show_message("NEUTRAL",text_colour=[0, 255, 0])
+sense.show_message("NEUTRAL",text_colour=[0, 255, 0]) #Blue Color
 sleep(1)
 sense.show_message("DRIVE",text_colour=[255, 0, 0])
 sleep(1)
