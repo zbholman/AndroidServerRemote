@@ -43,7 +43,7 @@ def run(pin):
     if float(temp) >= FAN_START:
         print(temp+' @ '+str(current_date))
         if check_fan(pin) == 1:
-            print('Fan is Off...Starting Fan')
+            print('The Fan is Off...Starting Fan')
             fanON()
         else:
             time.sleep(5) # Remove, if you want real-time checking
@@ -51,7 +51,7 @@ def run(pin):
     elif float(temp) <= FAN_END:
         print(temp+' @ '+str(current_date))
         if check_fan(pin) == 0:
-            print('Fan is on...Shuting it Down')
+            print('The Fan is on...Shuting it Down')
             fanOFF()
             GPIO.cleanup()
             return 1 # exit script. The pi has cooled down
