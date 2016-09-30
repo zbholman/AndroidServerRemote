@@ -1,10 +1,13 @@
-
 import grovepi
+
+# Connect the Grove Temperature & Humidity Sensor Pro to digital port D4
+
 sensor = 4
 
-try:
+while True:
+    try:
         [temp,humidity] = grovepi.dht(sensor,1)
-        print temp 
+        print "temp =", temp, " humidity =", humidity
 
-except IOError:
+    except IOError:
         print "Error"
