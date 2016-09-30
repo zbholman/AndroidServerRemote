@@ -68,12 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     jsonObj.put("id", "car440brs");
                     jsonObj.put("name", "Braking System");
-                    jsonObj.put("OID", "brs");
-                    jsonObj.put("DID", "lis");
-                    jsonObj.put("CKS", "  ");
+
 
                     jsonArray.put("Braking System");
-                    jsonArray.put("Lighting System");
+
 
                     jsonObj.put("sys", jsonArray);
 
