@@ -9,6 +9,3 @@ sense = SenseHat()
 raw = sense.get_accelerometer_raw()
 
 print(sense.accelerometer)
-
-
-
