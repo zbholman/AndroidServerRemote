@@ -1,3 +1,7 @@
+#Ashish Baby
+#Version 1.00
+#10-1-16
+
 from sense_hat import SenseHat
 import time
 
