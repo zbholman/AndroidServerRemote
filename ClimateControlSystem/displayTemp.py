@@ -6,7 +6,7 @@ import decimal
 
 sensor = 4 #set which port is being used
 
-While True:
+while True:
   try:
       [temp,humidity] = grovepi.dht(sensor,1) #Checks if the sensor is in the right port
       temp = round(temp * 9/5 + 32.1) #temperature conversion from Celsius to Fahrenheit
