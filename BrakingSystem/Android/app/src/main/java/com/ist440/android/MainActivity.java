@@ -5,19 +5,53 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private Button forwardButton, brakeButton, btOn, btOFF;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Define button - the ID of the xml that you created
+        forwardButton = (Button) findViewById(R.id.forwardButton);
+        brakeButton = (Button) findViewById(R.id.brakeButton);
+        btOn = (Button) findViewById(R.id.btOn);
+        btOFF = (Button) findViewById(R.id.btOFF);
+
+        forwardButton.setOnClickListener(MainActivity.this);
+        brakeButton.setOnClickListener(MainActivity.this);
+        btOn.setOnClickListener(MainActivity.this);
+        btOFF.setOnClickListener(MainActivity.this);
+    }
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.forwardButton:
+                Log.d(TAG, "Forward Button Clicked");
+                break;
+
+            case R.id.brakeButton:
+                Log.d(TAG, "Brake Button Clicked");
+                break;
+
+            case R.id.btOn:
+                Log.d(TAG, "Bluetooth On Clicked");
+                break;
+
+            case R.id.btOFF:
+                Log.d(TAG, "Bluetooth Off Clicked");
+                break;
+        }
+
         final TextView text1 = (TextView) findViewById(R.id.TextView1);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -26,17 +60,18 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Message already sent to Pi", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
                 JSONObject jsonObj = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
                 try {
                     jsonObj.put("id", "car440brs");
-                    jsonObj.put("name", "Climate System");
+                    jsonObj.put("name", "Braking System");
 
-                    jsonArray.put("system1");
-                    jsonArray.put("system2");
+
+                    jsonArray.put("Braking System");
+
 
                     jsonObj.put("sys", jsonArray);
 
@@ -50,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

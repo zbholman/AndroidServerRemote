@@ -1,20 +1,18 @@
-from sense_hat import SenseHat
-sense = SenseHat()
+import grovepi
+import math
+import decimal
+
+#Connect sensor to port D4
+
+sensor = 4 #set which port is being used
 
 while True:
-    t = sense.get_temperature()
-    p = sense.get_pressure()
-    h = sense.get_humidity()
-
-    t = round(t, 1)
-    p = round(p, 1)
-    h = round(h, 1)
-
-    if t > 18.3 and t < 26.7:
-        bg = [0, 100, 0]  # green
-    else:
-        bg = [100, 0, 0]  # red
-
-    msg = "Temperature = {0}, Pressure = {1}, Humidity = {2}".format(t, p, h)
-
-    sense.show_message(msg, scroll_speed=0.05, back_colour=bg)
+  try:
+      [temp,humidity] = grovepi.dht(sensor,1) #Checks if the sensor is in the right port
+      temp = round(temp * 9/5 + 32.1) #temperature conversion from Celsius to Fahrenheit
+      print "temp =", temp, "F/thumidity =", humidity,"%"
+      t = str(temp)
+      h = str(humidity)
+   
+   except IOError:
+      print "Error"

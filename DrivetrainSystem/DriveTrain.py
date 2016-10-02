@@ -1,40 +1,55 @@
+#IST 440
+# Drive Train (Team 02)
+# Author: Ghansyam Patel, Rahul Manoharan, and Klaus 
+# Version: 1.02
+# Date: 09/30/2016
 #GoPiGo Robot for DriveTrain
 from gopigo import *
 import sys
 
+#Displays the Start Up Screen
 print('Welcome to the DriveTrain System')
 print('Press:')
-print('P or p to Park the Car')
-print('R or r to Reverse the Car')
-print('N or n to Neutral')
-print('D or d to Drive the Car')
-print('L or l to Move the Car Left')
-print('R or r to Move the Car Right')
-print('I or i to Increase the Speed')
-print('E or e to Decrease the Speed')
-print('Z or z to Exit the Drive Mode')
+print('p to Park the Car')
+print('r to Reverse the Car')
+print('n to Neutral')
+print('d to Drive the Car')
+print('l to Move the Car Left')
+print('r to Move the Car Right')
+print('i to Increase the Speed')
+print('e to Decrease the Speed')
+print('z to Exit the Drive Mode')
+
+car = '    ______'
+car1= '  /___ __\\___'
+car2= '   o-----o    '
 
 while True:
     print"Drive Mode:",
     mode = raw_input()
-    if (mode == 'P' or 'p'):
+    if (mode == 'p'):
         stop()  #Car In The Park Mode
-    elif (mode == 'R' or 'r'):
+    elif (mode == 'r'):
         bwd() #Car Reversing
-    elif (mode == 'N' or 'n'):
+    elif (mode == 'n'):
         stop()  #Car In The Neutral Mode
-    elif (mode == 'D' or 'd'):
+    elif (mode == 'd'):
         fwd() #Car Moving Forward
-    elif (mode == 'L' or 'l'):
+    elif (mode == 'l'):
         left() #Car Turning Left
-    elif (mode == 'R' or 'r'):
+    elif (mode == 't'):
         right() #Car Turning Right
-    elif (mode == 'I' or 'i'):
+    elif (mode == 'i'):
         increase_speed() #Increasing The Car Speed
-    elif (mode == 'E' or 'e'):
+    elif (mode == 'e'):
         decrease_speed() #Car Turning Left
-    elif (mode == 'Z' or 'z'):
+    elif (mode == 'z'):
+        stop() #Car Stops before Exiting Drive Mode
         print('Exiting Drive Mode') #Leaving Drive Mode
+        print(car) #Printing Car
+        print(car1) #Printing Car
+        print(car2) #Printing Car
+        print('Good Bye!') #Exiting Message!
         sys.exit()
     else:
         print('Wrong Drive Mode Command, Please Try Again')
