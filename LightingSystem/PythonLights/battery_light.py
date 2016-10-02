@@ -5,9 +5,8 @@ sense = SenseHat()
 sense.clear()
 
 batterylight = True
-number_of_blinks = 5
 
-for x in range(0, number_of_blinks):
+if (batterylight == True):
     
     sense.set_pixel(0, 6, 255, 0, 0)
     sense.set_pixel(1, 6, 255, 0, 0)
@@ -44,11 +43,6 @@ for x in range(0, number_of_blinks):
     sense.set_pixel(4, 3, 255, 0, 0)
     sense.set_pixel(5, 2, 255, 0, 0)
     sense.set_pixel(5, 4, 255, 0, 0)
-    
-    
-    time.sleep(.5)
-    sense.clear()
-    time.sleep(.5)
     
     
   
