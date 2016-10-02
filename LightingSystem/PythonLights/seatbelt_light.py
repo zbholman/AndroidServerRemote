@@ -5,9 +5,8 @@ sense = SenseHat()
 sense.clear()
 
 seatbeltlight = True
-number_of_blinks = 5
 
-for x in range(0, number_of_blinks):
+if (seatbeltlight == True):
     
     sense.set_pixel(2, 7, 255, 0, 0)
     sense.set_pixel(5, 7, 255, 0, 0)
@@ -48,11 +47,4 @@ for x in range(0, number_of_blinks):
     sense.set_pixel(7, 0, 128, 128, 128)
     sense.set_pixel(6, 5, 128, 128, 128)
     sense.set_pixel(7, 6, 128, 128, 128)
-    
-    
-    time.sleep(.5)
-    sense.clear()
-    time.sleep(.5)
-    
-    
-  
+     
