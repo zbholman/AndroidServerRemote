@@ -5,9 +5,8 @@ sense = SenseHat()
 sense.clear()
 
 breaklights = True
-number_of_blinks = 5
 
-for x in range(0, number_of_blinks):
+if (breaklights == True):
     
     sense.set_pixel(0, 7, 255, 0, 0)
     sense.set_pixel(1, 7, 255, 0, 0)
@@ -40,11 +39,6 @@ for x in range(0, number_of_blinks):
     sense.set_pixel(2, 0, 255, 0, 0)
     sense.set_pixel(1, 0, 255, 0, 0)
     
-    
-    
-    time.sleep(.5)
-    sense.clear()
-    time.sleep(.5)
-    
+       
     
   
