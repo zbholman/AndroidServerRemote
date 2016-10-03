@@ -1,12 +1,13 @@
+#Andrew Rooney
 import time
 from sense_hat import SenseHat
 
 sense = SenseHat()
-sense.clear()
+sense.clear() #clears prevous sense hat image
 
 seatbeltlight = True
 
-if (seatbeltlight == True):
+if (seatbeltlight == True): #sets seatbelt light to true, places pixel on given spot.
     
     sense.set_pixel(2, 7, 255, 0, 0)
     sense.set_pixel(5, 7, 255, 0, 0)
