@@ -14,7 +14,7 @@ raw = sense.get_accelerometer_raw()
 #Display speed
 print(sense.accelerometer)
 
-#Call functions to lock/unlock car if speed is over or under 5
+#Call display functions of locking/unlocking car if speed is over or under 5
 if sense.accelerometer >= 5:
 	door_lock()
 else sense.accelerometer < 5:
