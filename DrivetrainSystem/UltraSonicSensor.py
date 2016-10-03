@@ -8,6 +8,7 @@ from gopigo import *
 import sys 
 import time
 
+#UltraSonice Sensor to be connected on Port A01 on the Pi
 #Distance from obstacle where the GoPiGo should stop
 distance_to_stop=20
  
