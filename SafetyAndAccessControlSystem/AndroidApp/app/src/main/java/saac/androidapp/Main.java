@@ -9,6 +9,15 @@ import android.widget.EditText;
 
 public class Main extends AppCompatActivity {
 
+/*
+    This Android application was starter in September as part of the IST 440 Group 6, Safety and Access Control Systems
+    This application will be a control board to support and communicate with the car robot in order to perform necessary functions
+    Functions included:
+    - Unlock, Lock, and Alarm settings. This will be in the form of visual buttons as well as a keypad code.
+    - Create JSON objects upon successful event calls to send to Pi robot for logging
+
+    This app was primarily developed by team member: Matt Handwerk
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,28 +38,43 @@ public class Main extends AppCompatActivity {
         Button button12 = (Button) findViewById(R.id.button12);
         final EditText editText = (EditText) findViewById(R.id.editText);
         final EditText editText2 = (EditText) findViewById(R.id.editText2);
+        final EditText editText3 = (EditText) findViewById(R.id.editText3);
 
         //ALL NUMBER BUTTONS AND ACTION BUTTON DECLARATIONS
+
+        //All number buttons have same code, see BUTTON 1 for comments
+        //BUTTON 1
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
+
+                //gets current text and sets temp variables as content
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
+                //checks if door was just unlocked/wrong password was entered
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("1");
+
                     sCode = "*";
                     sNum = "1";
                 }
+                //checks if PASSWORD is 1 digit away from being 6, therefore it need to authenticate
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "1";
+                    //CORRECT
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
+                    //INCORRECT
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
+                //If string is not empty, adds space and * for better visual display of Asterisks
                 else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "1");
@@ -58,12 +82,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 2
         button2.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("2");
                     sCode = "*";
@@ -72,10 +98,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "2";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -85,12 +113,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 3
         button3.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("3");
                     sCode = "*";
@@ -99,10 +129,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "3";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -112,12 +144,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 4
         button4.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("4");
                     sCode = "*";
@@ -126,10 +160,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "4";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -139,12 +175,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 5
         button5.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("5");
                     sCode = "*";
@@ -153,10 +191,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "5";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -166,12 +206,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 6
         button6.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("6");
                     sCode = "*";
@@ -180,10 +222,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "6";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -193,12 +237,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 7
         button7.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("7");
                     sCode = "*";
@@ -207,10 +253,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "7";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -220,12 +268,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 8
         button8.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("8");
                     sCode = "*";
@@ -234,10 +284,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "8";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -247,12 +299,14 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //BUTTON 9
         button9.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("9");
                     sCode = "*";
@@ -261,10 +315,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "1";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -274,20 +330,24 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        //clear button
+        //CLEAR button
+        //Sets both code and display string to empty
         button10.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                     editText.setText("");
                     editText2.setText("");
+                    editText3.setText("");
             }
         });
 
+        //BUTTON 0
         button11.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
                 if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                    editText3.setText("");
                     editText.setText("*");
                     editText2.setText("0");
                     sCode = "*";
@@ -296,10 +356,12 @@ public class Main extends AppCompatActivity {
                 else if (sCode.matches("\\* \\* \\* \\* \\*")){
                     sNum = sNum + "0";
                     if(sNum.matches("123456")){
-                        editText.setText("Doors Unlocked!");
+                        editText.setText("");
+                        editText3.setText("Doors Unlocked!");
                     }
                     else{
-                        editText.setText("Wrong Password");
+                        editText.setText("");
+                        editText3.setText("Wrong Password");
                     }
                 }
                 else {
@@ -309,6 +371,7 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //Backspace Button
         button12.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 String sCode = editText.getText().toString();
@@ -316,24 +379,28 @@ public class Main extends AppCompatActivity {
                 int codeLen = sCode.length();
                 int numLen = sNum.length();
                 StringBuilder myCode = new StringBuilder(sCode);
-                if(codeLen == 1){
-                    codeLen -= 1;
-                    myCode.deleteCharAt(codeLen);
+
+                //checks for empty string
+                if(codeLen != 0) {
+                    if (codeLen == 1) {
+                        codeLen -= 1;
+                        myCode.deleteCharAt(codeLen);
+                    } else {
+                        codeLen -= 1;
+                        myCode.deleteCharAt(codeLen);
+                        codeLen -= 1;
+                        myCode.deleteCharAt(codeLen);
+                    }
+
+
+                    StringBuilder myNum = new StringBuilder(sNum);
+                    numLen -= 1;
+                    myNum.deleteCharAt(numLen);
+
+                    //sets newly modified text as string
+                    editText.setText(myCode.toString());
+                    editText2.setText(myNum.toString());
                 }
-                else{
-                    codeLen -= 1;
-                    myCode.deleteCharAt(codeLen);
-                    codeLen -= 1;
-                    myCode.deleteCharAt(codeLen);
-                }
-
-
-                StringBuilder myNum = new StringBuilder(sNum);
-                numLen -= 1;
-                myNum.deleteCharAt(numLen);
-
-                editText.setText(myCode.toString());
-                editText2.setText(myNum.toString());
             }
         });
 
