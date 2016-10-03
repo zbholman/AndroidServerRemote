@@ -1,12 +1,13 @@
+#Andrew Rooney
 import time
 from sense_hat import SenseHat
 
 sense = SenseHat()
-sense.clear()
+sense.clear() #clears previous image
 
-batterylight = True
+batterylight = True #sets batery light to true
 
-if (batterylight == True):
+if (batterylight == True): #if battery light is true than place the following pixels
     
     sense.set_pixel(0, 6, 255, 0, 0)
     sense.set_pixel(1, 6, 255, 0, 0)
