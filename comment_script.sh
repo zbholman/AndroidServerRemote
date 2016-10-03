@@ -11,9 +11,9 @@ printf "Hopefully it saves you some time\n\n"
 ### Create variables
 printf "Enter your first name:\n"
 read firstName
-printf "Enter your last name:\n"
+printf "\nEnter your last name:\n"
 read lastName
-printf "Enter your team directory in the git repo, ex: LightingSystem\n"
+printf "\nEnter your team directory in the git repo, ex: LightingSystem\n"
 read teamDirectory
 todaysDate=$(date +%m-%d-%Y) # Date format of MM-DD-YYYY
 
@@ -30,7 +30,7 @@ function checkHeader() {
 	if [[ "$firstLine" != "# Author" ]]; then
 
 		# If the first line doesn't, ask user if they created it
-		printf "$f doesn't have a header comment\n"
+		printf "\n$f doesn't have a header comment\n"
 		read -p "If you created it, would you like to add a header comment? (y/n)" -n 1 -r
 		echo
 
