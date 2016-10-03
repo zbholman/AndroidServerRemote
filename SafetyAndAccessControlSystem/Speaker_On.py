@@ -7,7 +7,7 @@ import time
 
 sense = SenseHat()
 
-b = [0, 0, 255]
+b = [0, 255, 0]
 e = [0, 0, 0]
 
 image = [
