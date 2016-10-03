@@ -1,12 +1,13 @@
+#andrew Rooney
 import time
 from sense_hat import SenseHat
 
 sense = SenseHat()
-sense.clear()
+sense.clear() #clears previous image
 
-turn_signal = True
-number_of_blinks = 5
-for x in range(0, number_of_blinks):
+turn_signal = True #Set turn_signal to true
+number_of_blinks = 5 #gave the light 5 blinks
+for x in range(0, number_of_blinks): #sets the lights pixel by pixel on the sense hat
     sense.set_pixel(7, 4, 255, 191, 0)
     sense.set_pixel(7, 3, 255, 191, 0)
     sense.set_pixel(6, 5, 255, 191, 0)
@@ -37,6 +38,6 @@ for x in range(0, number_of_blinks):
     sense.set_pixel(4, 6, 255, 191, 0)
     
     
-    time.sleep(.5)
-    sense.clear()
-    time.sleep(.5)
+    time.sleep(.5) #there is a .5 second timer between flashes
+    sense.clear() #clears the sense hat
+    time.sleep(.5) #another .5 second timer
