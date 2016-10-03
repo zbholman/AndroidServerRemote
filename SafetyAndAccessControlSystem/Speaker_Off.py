@@ -24,4 +24,5 @@ b,e,e,b,b,e,e,e
 
 sense.set_pixels(image)
 time.sleep(3)
+#shows message on sense hat
 sense.show_message("Speaker Off")
