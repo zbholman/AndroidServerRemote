@@ -1,12 +1,13 @@
+#Andrew Roonwt
 import time
 from sense_hat import SenseHat
 
 sense = SenseHat()
 sense.clear()
 
-breaklights = True
+breaklights = True #sets break lights to true
 
-if (breaklights == True):
+if (breaklights == True): #if break lights is true than place the following pixels
     
     sense.set_pixel(0, 7, 255, 0, 0)
     sense.set_pixel(1, 7, 255, 0, 0)
