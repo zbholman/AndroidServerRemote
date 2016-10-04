@@ -1,0 +1,24 @@
+package dashboard;
+import javax.swing.*;
+public class Dashboard {
+ public static void main(String[] args) {
+ // Create application frame and a dashboard surface
+ JFrame frame = new JFrame("Dashboard");
+ frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+ DashboardSurface s = new DashboardSurface();
+ // Builds a car
+ Car myCar = new Car("car.png");
+ myCar.updatePosition(450, 450);
+ myCar.setMass(1.0f);
+ myCar.setMaxSpeed(100.0f);
+ myCar.setMaxSteering(70.0f);
+ myCar.addBehaviour(new RoamBehaviour(100, 100, 300, 300)); 
+ 
+ s.getVehicles().add(myCar);
+ 
+ frame.setContentPane(s);
+ frame.setSize(500, 500);
+ frame.setVisible(true); 
+ 
+  }
+ }
