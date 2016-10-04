@@ -16,8 +16,6 @@ import static android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class LightsControl extends AppCompatActivity {
 
-    private Switch switchFogLights;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +29,7 @@ public class LightsControl extends AppCompatActivity {
         final int port = 22;
 
         // Create switch for lights
-        switchFogLights = (Switch) findViewById(R.id.switchFogLights);
+        Switch switchFogLights = (Switch) findViewById(R.id.switchFogLights);
 
         // Set default state to false (off)
         switchFogLights.setChecked(false);
@@ -65,15 +63,14 @@ public class LightsControl extends AppCompatActivity {
         // New Jsch object for connecting
         JSch jsch = new JSch();
 
-        // Initialize a session object
-        Session session = null;
-
         // Try to create a session using username, hostname, and port
+        Session session = null;
         try {
             session = jsch.getSession(username, hostname, port);
         } catch (JSchException e) {
             e.printStackTrace();
         }
+
         // Set the password for the session
         assert session != null;
         session.setPassword(password);
@@ -93,13 +90,14 @@ public class LightsControl extends AppCompatActivity {
         // SSH Channel
         ChannelExec channelssh = null;
         try {
-            channelssh = (ChannelExec)session.openChannel("exec");
+            channelssh = (ChannelExec)
+                         session.openChannel("exec");
         } catch (JSchException e) {
             e.printStackTrace();
         }
-        // ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        // channelssh.setOutputStream(baos);
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//        channelssh.setOutputStream(baos);
 
         // Execute command
         assert channelssh != null;
