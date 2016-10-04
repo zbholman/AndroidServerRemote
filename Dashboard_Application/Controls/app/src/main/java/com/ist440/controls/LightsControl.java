@@ -26,7 +26,6 @@ public class LightsControl extends AppCompatActivity {
         final String username = "pi";
         final String password = "raspberry";
         final String hostname = "192.168.1.251";
-        //final String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py";
         final int port = 22;
 
         // Create switch for lights
@@ -34,8 +33,6 @@ public class LightsControl extends AppCompatActivity {
 
         // Set default state to false (off)
         switchFogLights.setChecked(false);
-
-
 
         // Create listener event
         switchFogLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -45,11 +42,14 @@ public class LightsControl extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // If the toggle is switched to "ON" run the following
                 if (isChecked) {
-                    // turn on fog lights
+                    // Create Asynchronous task, allows commands to be run in background of android application
                     new AsyncTask<Integer, Void, Void>(){
+                        // Command to turn lights on
                         String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py"; // Need to add command to be executed
+                        
                         protected Void doInBackground(Integer... params) {
                             try {
+                                // Execute command on the pi
                                 runPiCommand(username, password, hostname, command, port);
                             } catch (JSchException e) {
                                 e.printStackTrace();
@@ -59,13 +59,21 @@ public class LightsControl extends AppCompatActivity {
                     }.execute(1);
                 } else {
                     // Else, turn off fog lights
-                    String command = ""; // Need to add command to be executed
-                    try {
-                        runPiCommand(username, password, hostname, command, port);
-                    } catch (JSchException e) {
-                        e.printStackTrace();
-                    }
-
+                    // Create Asynchronous task, allows commands to be run in background of android application
+                    new AsyncTask<Integer, Void, Void>(){
+                        // Command to turn lights off
+                        String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py"; // Need to add command to be executed
+                        
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
                 }
             }
         });
@@ -74,7 +82,6 @@ public class LightsControl extends AppCompatActivity {
     // This method is connects to the pi, and runs the command given
     public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
         // New Jsch object for connecting
-
         JSch jsch = new JSch();
 
         // Try to create a session using username, hostname, and port
@@ -109,6 +116,7 @@ public class LightsControl extends AppCompatActivity {
         } catch (JSchException e) {
             e.printStackTrace();
         }
+        // Use this if there is any need for output to return to android
 //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //
 //        channelssh.setOutputStream(baos);
