@@ -1,8 +1,6 @@
-package dashboard;
-import javax.swing.*;
 public class Dashboard {
  public static void main(String[] args) {
- // Create application frame and a dashboard surface
+ // Creates a dashboard frame
  JFrame frame = new JFrame("Dashboard");
  frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
  DashboardSurface s = new DashboardSurface();
