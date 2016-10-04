@@ -24,10 +24,10 @@ headerComment="# Author: $firstName $lastName&\n# Course: IST 440&\n# Team: $tea
 function checkHeader() {
 
 	# Variable to check the first line of the file
-	firstLine=$(head -c 8 $1)
+	firstChar=$(head -c 1 $1)
 
 	# If the first line starts with '# Author' skip file
-	if [[ "$firstLine" != "# Author" ]]; then
+	if [[ "$firstLine" != "#" ]]; then
 
 		# If the first line doesn't, ask user if they created it
 		printf "\n$f doesn't have a header comment\n"
