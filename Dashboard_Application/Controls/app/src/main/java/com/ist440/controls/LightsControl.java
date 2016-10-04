@@ -1,5 +1,6 @@
 package com.ist440.controls;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
@@ -34,24 +35,36 @@ public class LightsControl extends AppCompatActivity {
         // Set default state to false (off)
         switchFogLights.setChecked(false);
 
+
+
         // Create listener event
         switchFogLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Initialize command string, this is what will run on the pi
-                String command = "";
-
                 // If the toggle is switched to "ON" run the following
                 if (isChecked) {
                     // turn on fog lights
-                    command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py"; // Need to add command to be executed
-                    runPiCommand(username, password, hostname, command, port);
+                    new AsyncTask<Integer, Void, Void>(){
+                        String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py"; // Need to add command to be executed
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
                 } else {
                     // Else, turn off fog lights
-                    command = ""; // Need to add command to be executed
-                    runPiCommand(username, password, hostname, command, port);
+                    String command = ""; // Need to add command to be executed
+                    try {
+                        runPiCommand(username, password, hostname, command, port);
+                    } catch (JSchException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }
@@ -59,8 +72,9 @@ public class LightsControl extends AppCompatActivity {
     }
 
     // This method is connects to the pi, and runs the command given
-    public void runPiCommand(String username, String password, String hostname, String command, int port) {
+    public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
         // New Jsch object for connecting
+
         JSch jsch = new JSch();
 
         // Try to create a session using username, hostname, and port
