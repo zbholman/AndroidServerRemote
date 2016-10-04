@@ -23,9 +23,15 @@ setResizable(false);
 setVisible(true);
 
 }
+
+@Override
+public void paint(Graphics g){
+super.paint(g);
+g.drawImage(bg,0,0,getWidth(),getHeight(), null);
+}
  
  
- /*Builds a car*/
+ /*Imports a car*/
  
  Car myCar = new Car("car.png");
  myCar.updatePosition(450, 450);
