@@ -1,4 +1,4 @@
-package com.ist440.android;
+package ist440.android;
 
 import org.junit.Test;
 
