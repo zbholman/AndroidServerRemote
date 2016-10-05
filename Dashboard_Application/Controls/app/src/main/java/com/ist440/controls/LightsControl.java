@@ -26,6 +26,7 @@ public class LightsControl extends AppCompatActivity {
         final String username = "pi";
         final String password = "raspberry";
         final String hostname = "192.168.1.251";
+
         final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights";
         final int port = 22;
 
@@ -46,9 +47,9 @@ public class LightsControl extends AppCompatActivity {
                 if (isChecked) {
                     new AsyncTask<Integer, Void, Void>() {
                         String command = lightsDir + "/high_beam.py";
-
                         protected Void doInBackground(Integer... params) {
                             try {
+                                // Execute command on the pi
                                 runPiCommand(username, password, hostname, command, port);
                             } catch (JSchException e) {
                                 e.printStackTrace();
@@ -56,13 +57,13 @@ public class LightsControl extends AppCompatActivity {
                             return null;
                         }
                     }.execute(1);
-                }
-                else {
+                } else {
                     new AsyncTask<Integer, Void, Void>() {
                         String command = lightsDir + "/checkengine.py";
                         protected Void doInBackground(Integer... params) {
                             // Else, turn off high beams
                             try {
+                                // Execute command on the pi
                                 runPiCommand(username, password, hostname, command, port);
                             } catch (JSchException e) {
                                 e.printStackTrace();
@@ -78,7 +79,6 @@ public class LightsControl extends AppCompatActivity {
     // This method is connects to the pi, and runs the command given
     public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
         // New Jsch object for connecting
-
         JSch jsch = new JSch();
 
         // Try to create a session using username, hostname, and port
@@ -113,6 +113,7 @@ public class LightsControl extends AppCompatActivity {
         } catch (JSchException e) {
             e.printStackTrace();
         }
+        // Use this if there is any need for output to return to android
 //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //
 //        channelssh.setOutputStream(baos);

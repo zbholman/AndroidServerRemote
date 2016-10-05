@@ -4,45 +4,20 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public static void main(String[] args) {
-
-public class JavaFrame extends Frame {
+public class DashboardFrame(){
  
  /*Imports dashboard frame image*/
- 
- BufferedImage img = bg;
- 
- public void myFrame(){
-try {
-    bg = ImageIO.read(new File("background.png"));
-} catch (IOException ex) {
-}
+    Image img;
+ /*Loads the background image and stores in img object*/
+       Image img = ImageIO.read(new File("background.jpg"));
+ }
 
-setSize(450, 450);
-setResizable(false);
-setVisible(true);
-
-}
-
-@Override
-public void paint(Graphics g){
-super.paint(g);
-g.drawImage(bg,0,0,getWidth(),getHeight(), null);
-}
- 
- 
- /*Imports a car*/
- 
- Car myCar = new Car("car.png");
- myCar.updatePosition(450, 450);
- myCar.setMass(1.0f);
- myCar.setMaxSpeed(100.0f);
- myCar.setMaxSteering(70.0f);
- myCar.addBehaviour(new RoamBehaviour(100, 100, 300, 300)); 
- 
- s.getVehicles().add(myCar);
- 
+ public void paint(Graphics g)
+    {
+        // Draws the img to the DashboardFrame.
+        g.drawImage(img, 0, 0, null);
+    }
  
  
   }
- }
+ 
