@@ -39,15 +39,17 @@
         android:layout_marginTop="27dp" />
 
     <ImageButton
-        android:layout_width="200dp"
-        android:layout_height="200dp"
         android:id="@+id/btnLightControls"
-        android:background="@android:drawable/ic_menu_compass"
         android:backgroundTint="#f6eeba"
-        android:backgroundTintMode="screen"
-        android:layout_alignParentBottom="true"
+        android:backgroundTintMode="multiply"
+        android:background="@drawable/icon_light_bulb"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="54dp" />
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignRight="@+id/lblLightingControls"
+        android:layout_alignEnd="@+id/lblLightingControls"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/lblLightingControls" />
 
 </RelativeLayout>
