@@ -1,3 +1,8 @@
+# Contributors: Phuong Lu, Joey Lee, and Matt Handwerk
+# Date: 10/4/2016
+# Course: IST 440W, Team 6
+# Purpose: Display car alarm logo on Sense HAT when alarm is turned on
+
 from sense_hat import SenseHat
 import time
 
@@ -8,7 +13,6 @@ green = (0, 0, 0)
 red = (0, 0, 0)
 blue = (0, 0, 255)
 nothing = (0, 0, 0)
-
 
 def car_alarm():
   B = blue
@@ -25,7 +29,6 @@ def car_alarm():
     ]
   return logo
     
-  
 images = [car_alarm]
 count = 0
 
