@@ -3,7 +3,9 @@ package com.ist440.controls;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.jcraft.jsch.ChannelExec;
@@ -33,6 +35,9 @@ public class LightsControl extends AppCompatActivity {
         // Create switch for lights
         Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
 
+        // Create icon images
+        final ImageView iconHighBeams = (ImageView) findViewById(R.id.iconHighBeams);
+
         // Set default state to false (off)
         switchHighBeams.setChecked(false);
 
@@ -45,6 +50,7 @@ public class LightsControl extends AppCompatActivity {
                 // If the toggle is switched to "ON" run the following
                 // turn on high beams
                 if (isChecked) {
+                    boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
                         String command = lightsDir + "/high_beam.py";
                         protected Void doInBackground(Integer... params) {
@@ -57,9 +63,11 @@ public class LightsControl extends AppCompatActivity {
                             return null;
                         }
                     }.execute(1);
+                    if (success) {iconHighBeams.setVisibility(View.VISIBLE);}
                 } else {
+                    boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "/checkengine.py";
+                        String command = lightsDir + "/turn_off_sense_hat_lights.py";
                         protected Void doInBackground(Integer... params) {
                             // Else, turn off high beams
                             try {
@@ -71,6 +79,7 @@ public class LightsControl extends AppCompatActivity {
                             return null;
                         }
                     }.execute(1);
+                    if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
                 }
             }
         });
