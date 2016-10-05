@@ -1,3 +1,7 @@
+// Author: Brian Holman
+// Project: IST 440 - Lighting System
+// Date: 10-05-2016
+
 package com.ist440.controls;
 
 import org.junit.Test;
