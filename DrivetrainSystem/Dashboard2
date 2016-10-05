@@ -24,19 +24,6 @@ public class DashboardFrame extends Frame {
     }
  
  
- /*Imports a car*/
- 
- Car myCar = new Car("car.png");
- myCar.updatePosition(450, 450);
- myCar.setMass(1.0f);
- myCar.setMaxSpeed(100.0f);
- myCar.setMaxSteering(70.0f);
- myCar.addBehaviour(new RoamBehaviour(100, 100, 300, 300)); 
- 
- s.getVehicles().add(myCar);
- 
- 
- 
   }
  }
  
