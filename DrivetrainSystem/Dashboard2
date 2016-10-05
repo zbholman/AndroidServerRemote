@@ -12,7 +12,7 @@ public class JavaFrame extends Frame {
  
  BufferedImage img = bg;
  
- public void myFrame(){
+ public void JavaFrame(){
 try {
     bg = ImageIO.read(new File("background.png"));
 } catch (IOException ex) {
