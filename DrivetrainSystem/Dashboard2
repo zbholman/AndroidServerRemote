@@ -14,7 +14,7 @@ public class DashboardFrame extends Frame {
  public void DashboardFrame()
  {
 /*Loads the background image and stores in img object*/
-        img = Toolkit.getDefaultToolkit().createImage("background.jpg");
+        Image img = ImageIO.read(new File("background.jpg");
  }
 
  public void paint(Graphics g)
