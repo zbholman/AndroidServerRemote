@@ -26,28 +26,27 @@ public class LightsControl extends AppCompatActivity {
         final String username = "pi";
         final String password = "raspberry";
         final String hostname = "192.168.1.251";
-        //final String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py";
+        final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights";
         final int port = 22;
 
         // Create switch for lights
-        Switch switchFogLights = (Switch) findViewById(R.id.switchFogLights);
+        Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
 
         // Set default state to false (off)
-        switchFogLights.setChecked(false);
-
-
+        switchHighBeams.setChecked(false);
 
         // Create listener event
-        switchFogLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // If the toggle is switched to "ON" run the following
+                // turn on high beams
                 if (isChecked) {
-                    // turn on fog lights
-                    new AsyncTask<Integer, Void, Void>(){
-                        String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py"; // Need to add command to be executed
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/high_beam.py";
+
                         protected Void doInBackground(Integer... params) {
                             try {
                                 runPiCommand(username, password, hostname, command, port);
@@ -57,15 +56,20 @@ public class LightsControl extends AppCompatActivity {
                             return null;
                         }
                     }.execute(1);
-                } else {
-                    // Else, turn off fog lights
-                    String command = ""; // Need to add command to be executed
-                    try {
-                        runPiCommand(username, password, hostname, command, port);
-                    } catch (JSchException e) {
-                        e.printStackTrace();
-                    }
-
+                }
+                else {
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/checkengine.py";
+                        protected Void doInBackground(Integer... params) {
+                            // Else, turn off high beams
+                            try {
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
                 }
             }
         });
