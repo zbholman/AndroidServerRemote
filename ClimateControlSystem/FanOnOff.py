@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
 
@@ -6,7 +5,7 @@ GPIO.setmode(GPIO.BCM)
 
 # init list with pin numbers
 
-pinList = [2]
+pinList = [2, 3]
 
 # loop through pins and set mode and state to 'high'
 
@@ -16,24 +15,28 @@ for i in pinList:
 
 # time to sleep between operations in the main loop
 
-SleepTimeS = 5
+SleepTimeL = 5
 
 # main loop
 
 try:
-  while True:
+  
+  GPIO.output(2, GPIO.LOW)
+  print "FAN ONE ON"
+  time.sleep(SleepTimeL)
 
-    for i in pinList:
-      GPIO.output(i, GPIO.LOW)
-      print("ON")
-      time.sleep(SleepTimeS);
+  GPIO.output(3, GPIO.LOW)
+  print "FAN TWO ON"
+  time.sleep(SleepTimeL);
+   
 
-    for i in pinList:
-      GPIO.output(i, GPIO.HIGH)
-      print("OFF")
-      time.sleep(SleepTimeS);
-      
-    pinList.reverse()
+  GPIO.output(2, GPIO.LOW) 
+  GPIO.output(3, GPIO.LOW)
+  print " TWO FANS ON"
+  time.sleep(SleepTimeL);  
+ 
+  GPIO.cleanup()
+  print "Good bye!"
 
 # End program cleanly with keyboard
 except KeyboardInterrupt:
@@ -41,4 +44,3 @@ except KeyboardInterrupt:
 
   # Reset GPIO settings
   GPIO.cleanup()
-
