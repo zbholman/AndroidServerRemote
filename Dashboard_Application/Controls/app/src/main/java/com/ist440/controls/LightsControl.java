@@ -32,6 +32,8 @@ public class LightsControl extends AppCompatActivity {
         final String username = "pi";
         final String password = "raspberry";
         final String hostname = "130.203.105.70";
+//        final String hostname = "192.168.1.251";
+
 
         final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights";
         final int port = 22;
