@@ -41,34 +41,20 @@ class Connected_notification
                 else:
                 print ('No device is connected through USB')
                 return device
-	
 
-#probably how a connection notification class should look like for emergency
-LITHIUMKWHPACKFULL = 100
-LITHIUMKWHPACKHIGH = 75
-LITHIUMKWHPACKMEDIUM = 50
-LITHIUMKWHPACKLOW = 25
-NOTIFYLEVEL = ''
-
-class notification_level:
-    def __init__(self,kwhLevel):
-        self.kwhLevel = 100
-
-    def notifykwhLevel(kwhLevel):
-        if kwhLevel <= LITHIUMKWHPACKLOW:
-            NOTIFYLEVEL = 'CRITICAL'
-            print (NOTIFYLEVEL)
-        elif kwhLevel <= LITHIUMKWHPACKMEDIUM:
-            NOTIFYLEVEL = 'HIGH'
-            print(NOTIFYLEVEL)
-        elif kwhLevel <= LITHIUMKWHPACKHIGH:
-            NOTIFYLEVEL = 'MEDIUM'
-            print(NOTIFYLEVEL)
-        elif kwhLevel <= LITHIUMKWHPACKFULL:
-            NOTIFYLEVEL = 'LOW'
-            print(NOTIFYLEVEL)
-## probabaly how a notification level is calculated for the battery
-
+    	def BatteryPackStatus(self,kwhLevel):
+        	if self.kwhLevel <= LITHIUMKWHPACKLOW:
+            	NOTIFYLEVEL = 'CRITICAL'
+            	print (NOTIFYLEVEL)
+        	elif self.kwhLevel <= LITHIUMKWHPACKMEDIUM:
+            	NOTIFYLEVEL = 'HIGH'
+           	 print(NOTIFYLEVEL)
+        	elif self.kwhLevel <= LITHIUMKWHPACKHIGH:
+            	NOTIFYLEVEL = 'MEDIUM'
+            	print(NOTIFYLEVEL)
+        	elif self.kwhLevel <= LITHIUMKWHPACKFULL:
+            	NOTIFYLEVEL = 'LOW'
+            	print(NOTIFYLEVEL)
 
 ##probably how a connection notification class should look like for system/mant
 redAlert = 100 #send notice on phone / manufa / dealer
