@@ -13,6 +13,9 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Properties;
 
 public class Main extends AppCompatActivity {
@@ -85,10 +88,10 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final String user = "pi";
-        final String pass = "raspberry";
-        final String host = "192.168.1.251";
+        final String pass = "";
+        final String host = "130.203.87.170";
 
-        final String dir = "" /*python /Your/Path/Here/ */;
+        final String dir = "python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
         final int port = 22;
 
         //Instantiates widgets for use in onclick
@@ -310,9 +313,26 @@ public class Main extends AppCompatActivity {
                     if(sNum.matches("123456")){
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
+                        /*JSONObject jsonObj = new JSONObject();
+                        JSONArray jsonArray = new JSONArray();
+                        try {
+                            jsonObj.put("id", 12345);
+                            jsonObj.put("name", "Door Unlock Event");
+
+                            jsonArray.put("system1");
+                            jsonArray.put("system2");
+
+                            jsonObj.put("sys", jsonArray);
+
+                        }catch (Exception ex)
+                        {
+                            ex.printStackTrace();
+
+                        }*/
+
                         //Access Pi asynchronously
                         new AsyncTask<Integer, Void, Void>() {
-                            String command = dir + "/unlockCar.py";
+                            String command = dir + "/Doors_unlock.py";
                             protected Void doInBackground(Integer... params) {
                                 try {
                                     // Execute command on the pi
