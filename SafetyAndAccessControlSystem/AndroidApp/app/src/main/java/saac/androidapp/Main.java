@@ -1,16 +1,24 @@
 package saac.androidapp;
 
 import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+
+import java.util.Properties;
+
 public class Main extends AppCompatActivity {
 
 /*
-    This Android application was starter in September as part of the IST 440 Group 6, Safety and Access Control Systems
+    This Android application was started in September as part of the IST 440 Group 6, Safety and Access Control Systems
     This application will be a control board to support and communicate with the car robot in order to perform necessary functions
     Functions included:
     - Unlock, Lock, and Alarm settings. This will be in the form of visual buttons as well as a keypad code.
@@ -18,10 +26,70 @@ public class Main extends AppCompatActivity {
 
     This app was primarily developed by team member: Matt Handwerk
      */
+
+    public void runPiCommand(String user, String pass, String host, String command, int port) throws JSchException {
+        // New Jsch object for connecting
+        JSch jsch = new JSch();
+
+        // Try to create a session using username, hostname, and port
+        Session session = null;
+        try {
+            session = jsch.getSession(user, host, port);
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+
+        // Set the password for the session
+        assert session != null;
+        session.setPassword(pass);
+
+        // Avoid asking for key confirmation
+        Properties prop = new Properties();
+        prop.put("StrictHostKeyChecking", "no");
+        session.setConfig(prop);
+
+        // Attempt to connect
+        try {
+            session.connect();
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+
+        // SSH Channel
+        ChannelExec channelssh = null;
+        try {
+            channelssh = (ChannelExec)
+                    session.openChannel("exec");
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+        // Use this if there is any need for output to return to android
+        //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        //
+        //        channelssh.setOutputStream(baos);
+
+        // Execute command
+        assert channelssh != null;
+        channelssh.setCommand(command);
+        try {
+            channelssh.connect();
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+        channelssh.disconnect();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final String user = "pi";
+        final String pass = "raspberry";
+        final String host = "192.168.1.251";
+
+        final String dir = "" /*python /Your/Path/Here/ */;
+        final int port = 22;
 
         //Instantiates widgets for use in onclick
         Button button = (Button) findViewById(R.id.button);
@@ -59,6 +127,8 @@ public class Main extends AppCompatActivity {
         assert editText != null;
         assert editText2 != null;
         assert editText3 != null;
+
+
 
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
@@ -240,6 +310,19 @@ public class Main extends AppCompatActivity {
                     if(sNum.matches("123456")){
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
+                        //Access Pi asynchronously
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command = dir + "/unlockCar.py";
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    // Execute command on the pi
+                                    runPiCommand(user, pass, host, command, port);
+                                } catch (JSchException e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
                     }
                     else{
                         editText.setText("");
