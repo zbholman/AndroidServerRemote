@@ -44,10 +44,26 @@ public class Main extends AppCompatActivity {
 
         //All number buttons have same code, see BUTTON 1 for comments
         //BUTTON 1
+        assert button != null;
+        assert button2 != null;
+        assert button3 != null;
+        assert button4 != null;
+        assert button5 != null;
+        assert button6 != null;
+        assert button7 != null;
+        assert button8 != null;
+        assert button9 != null;
+        assert button10 != null;
+        assert button11 != null;
+        assert button12 != null;
+        assert editText != null;
+        assert editText2 != null;
+        assert editText3 != null;
+
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-
                 //gets current text and sets temp variables as content
+
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
