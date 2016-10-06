@@ -32,6 +32,7 @@ class ConnectFromPi:
                         c.close()
 
 # Connection to Pi2 via Pi1
+#This is Pi1
 class PiToPiConnection:
         def __init__(self):
                 s = socket.socket()
@@ -40,8 +41,8 @@ class PiToPiConnection:
                 s.connect((host,port))
                 print s.recv(1024)
                 s.close()
-
-				class FromPiToPiConnection:
+#This is Pi2
+class FromPiToPiConnection:
         def __init__(self):
                 s = socket.socket()
                 host = 192.168.1.201
