@@ -13,6 +13,6 @@ while True:
       print "temp =", temp, "F/thumidity =", humidity,"%"
       t = str(temp)
       h = str(humidity)
-   
-   except IOError:
-      print "Error"
+
+  except IOError:
+        print "Error"

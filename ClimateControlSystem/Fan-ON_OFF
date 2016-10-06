@@ -6,7 +6,7 @@ import datetime
 import sys
 
 # Identify which pin controls the relay
-FAN_PIN = 18 # the yellow box ex: GPIO18
+FAN_PIN = 18 
 # Temperature check. Start fan if temp > [Temp wanted Celsius]
 FAN_START = [Temp]
 # Temperature check. Shut down under [Temp wanted]

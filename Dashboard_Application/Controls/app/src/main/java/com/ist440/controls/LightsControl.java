@@ -1,8 +1,15 @@
+// Author: Brian Holman
+// Project: IST 440 - Lighting System
+// Date: 10-05-2016
+
 package com.ist440.controls;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.jcraft.jsch.ChannelExec;
@@ -16,8 +23,6 @@ import static android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class LightsControl extends AppCompatActivity {
 
-    private Switch switchFogLights;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,53 +32,76 @@ public class LightsControl extends AppCompatActivity {
         final String username = "pi";
         final String password = "raspberry";
         final String hostname = "192.168.1.251";
-        //final String command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py";
+
+        final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights";
         final int port = 22;
 
         // Create switch for lights
-        switchFogLights = (Switch) findViewById(R.id.switchFogLights);
+        Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
+
+        // Create icon images
+        final ImageView iconHighBeams = (ImageView) findViewById(R.id.iconHighBeams);
 
         // Set default state to false (off)
-        switchFogLights.setChecked(false);
+        switchHighBeams.setChecked(false);
 
         // Create listener event
-        switchFogLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // Initialize command string, this is what will run on the pi
-                String command = "";
-
                 // If the toggle is switched to "ON" run the following
+                // turn on high beams
                 if (isChecked) {
-                    // turn on fog lights
-                    command = "python /home/team/PSUABFA16IST440/SamplePython/helloworld.py"; // Need to add command to be executed
-                    runPiCommand(username, password, hostname, command, port);
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/high_beam.py";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {iconHighBeams.setVisibility(View.VISIBLE);}
                 } else {
-                    // Else, turn off fog lights
-                    command = ""; // Need to add command to be executed
-                    runPiCommand(username, password, hostname, command, port);
-
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/turn_off_sense_hat_lights.py";
+                        protected Void doInBackground(Integer... params) {
+                            // Else, turn off high beams
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
                 }
             }
         });
     }
 
     // This method is connects to the pi, and runs the command given
-    public void runPiCommand(String username, String password, String hostname, String command, int port) {
+    public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
         // New Jsch object for connecting
         JSch jsch = new JSch();
 
-        // Initialize a session object
-        Session session = null;
-
         // Try to create a session using username, hostname, and port
+        Session session = null;
         try {
             session = jsch.getSession(username, hostname, port);
         } catch (JSchException e) {
             e.printStackTrace();
         }
+
         // Set the password for the session
         assert session != null;
         session.setPassword(password);
@@ -93,13 +121,15 @@ public class LightsControl extends AppCompatActivity {
         // SSH Channel
         ChannelExec channelssh = null;
         try {
-            channelssh = (ChannelExec)session.openChannel("exec");
+            channelssh = (ChannelExec)
+                         session.openChannel("exec");
         } catch (JSchException e) {
             e.printStackTrace();
         }
-        // ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        // channelssh.setOutputStream(baos);
+        // Use this if there is any need for output to return to android
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//        channelssh.setOutputStream(baos);
 
         // Execute command
         assert channelssh != null;

@@ -20,53 +20,51 @@
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff" />
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_high_beam"
+        android:layout_below="@+id/lblLightingControls"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/iconHighBeams"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_blue_bright"
+        android:backgroundTintMode="add" />
+
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Head Lights"
         android:id="@+id/switchHeadLights"
-        android:textSize="28dp"
         android:textColor="#ffffff"
         android:trackTint="#ffffff"
         android:splitTrack="false"
         android:showText="true"
         android:switchPadding="15dp"
         android:switchMinWidth="10dp"
-        android:layout_above="@+id/switchHighBeams"
+        android:textSize="40dp"
+        android:layout_below="@+id/iconHighBeams"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fog Lights"
-        android:id="@+id/switchFogLights"
-        android:textSize="28dp"
-        android:textColor="#ffffff"
-        android:trackTint="#ffffff"
-        android:splitTrack="false"
-        android:showText="true"
-        android:switchPadding="15dp"
-        android:switchMinWidth="10dp"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/switchHeadLights"
-        android:layout_alignRight="@+id/switchHeadLights"
-        android:layout_alignEnd="@+id/switchHeadLights" />
+        android:layout_alignParentStart="true"
+        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="High Beams"
         android:id="@+id/switchHighBeams"
-        android:textSize="28dp"
         android:textColor="#ffffff"
         android:trackTint="#ffffff"
         android:splitTrack="false"
         android:showText="true"
         android:switchPadding="15dp"
         android:switchMinWidth="10dp"
-        android:layout_marginBottom="111dp"
-        android:layout_alignParentBottom="true"
+        android:textSize="40dp"
+        android:layout_below="@+id/switchHeadLights"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch" />
 </RelativeLayout>

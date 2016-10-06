@@ -6,14 +6,14 @@ android {
 
     defaultConfig {
         applicationId "com.ist440.controls"
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -24,8 +24,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
-    compile 'com.jcraft:jzlib:1.1.3'
-    compile 'com.jcraft:jsch.agentproxy:0.0.9'
-    compile 'com.jcraft:jsch:0.1.54'
-    compile 'jsch:jsch:0.1.29'
+    compile files('libs/jsch-0.1.54-brian.jar')
 }
