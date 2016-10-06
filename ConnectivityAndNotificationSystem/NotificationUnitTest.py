@@ -42,3 +42,4 @@ class Connected_notification:
 		elif self.kwhLevel <= LITHIUMKWHPACKFULL:
 			NOTIFYLEVEL = 'LOW'
 			print(NOTIFYLEVEL)
+sendMessage = Message('car10393','CC','ML', 3, 100, '')
