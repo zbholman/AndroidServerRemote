@@ -1,9 +1,13 @@
 # Enter notification classes here 
 # define notification classes
-
+import json
 import hashlib
 
 class Connected_notification
+	def ConvertFromJSON(json_string):
+    		contents = json.loads(json_string)
+    		return Message(contents['CID'], contents['OID'], contents['DID'], contents['HC'], contents['TS'], contents['TTL'], contents['PLD'], contents['UID'], contents['CKS'])
+	
 	def cell_connection (self,Cellular)
 		devicename=''		
 		if (self.Cellular == True):
