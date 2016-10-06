@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_pi_braking"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/auto_pic_resize"
+    tools:context="ist440.pibraking.PiBraking">
+
+    <Button
+        android:text="Brake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/brakeControlButton" />
+
+    <ToggleButton
+        android:text="ABS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/absButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textOff="ABS:OFF"
+        android:textOn="ABS:ON" />
+
+    <ImageButton
+        android:alpha="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/tire_b"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:id="@+id/flBrake"
+        android:contentDescription="tiresbutton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
+
+    <ImageButton
+        android:alpha="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/tire_b"
+        android:id="@+id/frBrake"
+        android:contentDescription="tiresbutton"
+        android:layout_alignTop="@+id/flBrake"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="42dp"
+        android:layout_marginEnd="42dp" />
+
+    <ImageButton
+        android:alpha="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/tire_b"
+        android:id="@+id/rlBrake"
+        android:contentDescription="tiresbutton"
+        android:layout_above="@+id/absButton"
+        android:layout_alignLeft="@+id/flBrake"
+        android:layout_alignStart="@+id/flBrake" />
+
+    <ImageButton
+        android:alpha="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/tire_b"
+        android:id="@+id/rrBrake"
+        android:contentDescription="tiresbutton"
+        android:layout_above="@+id/brakeControlButton"
+        android:layout_alignLeft="@+id/frBrake"
+        android:layout_alignStart="@+id/frBrake" />
+
+
+</RelativeLayout>

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static String executeRemoteCommand(String username, String password, String hostname, int port)
+    public static String executeRemoteCommand(String username, String password, String hostname, int port, String SSH)
             throws Exception {
         JSch jsch = new JSch();
         Session session = jsch.getSession(username, hostname, port);
