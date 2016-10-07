@@ -30,15 +30,24 @@ class Connected_notification:
 			print ('No device is connected through USB')
 		return device
 	def BatteryPackStatus(self,kwhLevel):
-		if self.kwhLevel <= LITHIUMKWHPACKLOW:
+		if kwhLevel <= LITHIUMKWHPACKLOW:
 			NOTIFYLEVEL = 'CRITICAL'
 			print (NOTIFYLEVEL)
-		elif self.kwhLevel <= LITHIUMKWHPACKMEDIUM:
+		elif kwhLevel <= LITHIUMKWHPACKMEDIUM:
 			NOTIFYLEVEL = 'HIGH'
 			print(NOTIFYLEVEL)
-		elif self.kwhLevel <= LITHIUMKWHPACKHIGH:
+		elif kwhLevel <= LITHIUMKWHPACKHIGH:
 			NOTIFYLEVEL = 'MEDIUM'
 			print(NOTIFYLEVEL)
-		elif self.kwhLevel <= LITHIUMKWHPACKFULL:
+		elif kwhLevel <= LITHIUMKWHPACKFULL:
 			NOTIFYLEVEL = 'LOW'
 			print(NOTIFYLEVEL)
+
+			
+#This part tests the BatteryPackStatus method functionality.
+LITHIUMKWHPACKLOW = 25
+LITHIUMKWHPACKMEDIUM = 50
+LITHIUMKWHPACKHIGH = 75
+LITHIUMKWHPACKFULL = 100
+kwhLevel = 68
+Connected_notification.BatteryPackStatus(kwhLevel)
