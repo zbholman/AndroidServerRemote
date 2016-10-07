@@ -49,16 +49,16 @@ class Connected_notification
     	def BatteryPackStatus(self,kwhLevel):
         	if self.kwhLevel <= LITHIUMKWHPACKLOW:
             	NOTIFYLEVEL = 'CRITICAL'
-            	print (NOTIFYLEVEL)
+            	print (NOTIFYLEVEL,"Please connect to the charger!")
         	elif self.kwhLevel <= LITHIUMKWHPACKMEDIUM:
             	NOTIFYLEVEL = 'HIGH'
-           	 print(NOTIFYLEVEL)
+           	 print(NOTIFYLEVEL"Connecting to the charger would be a great idea!")
         	elif self.kwhLevel <= LITHIUMKWHPACKHIGH:
             	NOTIFYLEVEL = 'MEDIUM'
-            	print(NOTIFYLEVEL)
+            	print(NOTIFYLEVEL, "You've got some time on you")
         	elif self.kwhLevel <= LITHIUMKWHPACKFULL:
             	NOTIFYLEVEL = 'LOW'
-            	print(NOTIFYLEVEL)
+            	print(NOTIFYLEVEL, "Battery Status near Optimal")
 
 ##probably how a connection notification class should look like for system/mant
 redAlert = 100 #send notice on phone / manufa / dealer
