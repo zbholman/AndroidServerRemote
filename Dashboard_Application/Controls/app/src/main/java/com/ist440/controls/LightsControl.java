@@ -31,9 +31,8 @@ public class LightsControl extends AppCompatActivity {
         // initialize variables for connecting to pi
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "130.203.105.70";
-//        final String hostname = "192.168.1.251";
-
+        final String hostname = "130.203.105.70"; // Pi IP on PSU network
+//        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
         final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights";
         final int port = 22;
@@ -69,6 +68,8 @@ public class LightsControl extends AppCompatActivity {
                             return null;
                         }
                     }.execute(1);
+
+                    // If the light turns on, set icon to visible
                     if (success) {iconHighBeams.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
@@ -85,6 +86,8 @@ public class LightsControl extends AppCompatActivity {
                             return null;
                         }
                     }.execute(1);
+
+                    // If light turns off, set icon to invisible
                     if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
                 }
             }
