@@ -37,3 +37,4 @@ while True:
     s.set_pixels(images[count % len(images)]())
     time.sleep(.75)
     count += 1
+sense.clear()
