@@ -6,6 +6,7 @@ from sense_hat import SenseHat
 import time
 
 s = SenseHat()
+s.clear()
 s.low_light = True
 
 green = (0, 255, 0)
@@ -37,3 +38,4 @@ while True:
     s.set_pixels(images[count % len(images)]())
     time.sleep(.75)
     count += 1
+

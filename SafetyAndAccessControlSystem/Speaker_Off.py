@@ -7,6 +7,7 @@ from sense_hat import SenseHat
 import time
 
 sense = SenseHat()
+sense.clear()
 
 b = [255, 0, 0]
 e = [0, 0, 0]
