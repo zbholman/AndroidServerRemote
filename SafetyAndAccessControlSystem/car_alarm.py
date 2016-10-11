@@ -7,6 +7,7 @@ from sense_hat import SenseHat
 import time
 
 s = SenseHat()
+s.clear()
 s.low_light = True
 
 green = (0, 0, 0)
