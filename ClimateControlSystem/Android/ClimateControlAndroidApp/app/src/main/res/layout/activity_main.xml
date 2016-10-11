@@ -169,6 +169,7 @@
         android:layout_toRightOf="@+id/btnTemp1Dec"
         android:layout_toEndOf="@+id/btnTemp1Dec" />
 
+
     <Switch
         android:text="Dual"
         android:layout_width="150dp"
@@ -177,10 +178,20 @@
         android:textSize="40sp"
         android:textAllCaps="false"
         android:textColor="#000000"
-        android:layout_alignTop="@+id/switchAuto"
+        android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/btnTemp2Dec"
-        android:layout_toStartOf="@+id/btnTemp2Dec"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp" />
+        android:layout_toStartOf="@+id/btnTemp2Dec" />
+
+    <Switch
+        android:text="Fan"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:id="@+id/switchFan"
+        android:textSize="40sp"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:layout_below="@+id/btnTemp2Inc"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
