@@ -1,5 +1,6 @@
 package saac.androidapp;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,7 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -19,6 +24,11 @@ import org.json.JSONObject;
 import java.util.Properties;
 
 public class Main extends AppCompatActivity {
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 /*
     This Android application was started in September as part of the IST 440 Group 6, Safety and Access Control Systems
@@ -110,6 +120,9 @@ public class Main extends AppCompatActivity {
         final EditText editText = (EditText) findViewById(R.id.editText);
         final EditText editText2 = (EditText) findViewById(R.id.editText2);
         final EditText editText3 = (EditText) findViewById(R.id.editText3);
+        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
+        ImageButton imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
+        ImageButton imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
 
         //ALL NUMBER BUTTONS AND ACTION BUTTON DECLARATIONS
 
@@ -130,7 +143,9 @@ public class Main extends AppCompatActivity {
         assert editText != null;
         assert editText2 != null;
         assert editText3 != null;
-
+        assert imageButton != null;
+        assert imageButton2 != null;
+        assert imageButton3 != null;
 
 
         button.setOnClickListener(new OnClickListener() {
@@ -141,7 +156,7 @@ public class Main extends AppCompatActivity {
                 String sNum = editText2.getText().toString();
 
                 //checks if door was just unlocked/wrong password was entered
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("1");
@@ -150,15 +165,15 @@ public class Main extends AppCompatActivity {
                     sNum = "1";
                 }
                 //checks if PASSWORD is 1 digit away from being 6, therefore it need to authenticate
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "1";
                     //CORRECT
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
                     }
                     //INCORRECT
-                    else{
+                    else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
@@ -177,25 +192,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("2");
                     sCode = "*";
                     sNum = "2";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "2";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "2");
                 }
@@ -208,25 +220,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("3");
                     sCode = "*";
                     sNum = "3";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "3";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "3");
                 }
@@ -239,25 +248,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("4");
                     sCode = "*";
                     sNum = "4";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "4";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "4");
                 }
@@ -270,25 +276,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("5");
                     sCode = "*";
                     sNum = "5";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "5";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "5");
                 }
@@ -301,16 +304,15 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("6");
                     sCode = "*";
                     sNum = "6";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "6";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
                         /*JSONObject jsonObj = new JSONObject();
@@ -333,6 +335,7 @@ public class Main extends AppCompatActivity {
                         //Access Pi asynchronously
                         new AsyncTask<Integer, Void, Void>() {
                             String command = dir + "/Doors_unlock.py";
+
                             protected Void doInBackground(Integer... params) {
                                 try {
                                     // Execute command on the pi
@@ -343,13 +346,11 @@ public class Main extends AppCompatActivity {
                                 return null;
                             }
                         }.execute(1);
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "6");
                 }
@@ -362,25 +363,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("7");
                     sCode = "*";
                     sNum = "7";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "7";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "7");
                 }
@@ -393,25 +391,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("8");
                     sCode = "*";
                     sNum = "8";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "8";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "8");
                 }
@@ -424,25 +419,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("9");
                     sCode = "*";
                     sNum = "9";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "1";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "9");
                 }
@@ -453,9 +445,9 @@ public class Main extends AppCompatActivity {
         //Sets both code and display string to empty
         button10.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-                    editText.setText("");
-                    editText2.setText("");
-                    editText3.setText("");
+                editText.setText("");
+                editText2.setText("");
+                editText3.setText("");
             }
         });
 
@@ -465,25 +457,22 @@ public class Main extends AppCompatActivity {
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
-                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")){
+                if (sCode.matches("") || sCode.matches("Doors Unlocked!") || sCode.matches("Wrong Password")) {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("0");
                     sCode = "*";
                     sNum = "0";
-                }
-                else if (sCode.matches("\\* \\* \\* \\* \\*")){
+                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "0";
-                    if(sNum.matches("123456")){
+                    if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
-                    }
-                    else{
+                    } else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                }
-                else {
+                } else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "0");
                 }
@@ -500,7 +489,7 @@ public class Main extends AppCompatActivity {
                 StringBuilder myCode = new StringBuilder(sCode);
 
                 //checks for empty string
-                if(codeLen != 0) {
+                if (codeLen != 0) {
                     if (codeLen == 1) {
                         codeLen -= 1;
                         myCode.deleteCharAt(codeLen);
@@ -524,6 +513,48 @@ public class Main extends AppCompatActivity {
         });
 
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://saac.androidapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://saac.androidapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
