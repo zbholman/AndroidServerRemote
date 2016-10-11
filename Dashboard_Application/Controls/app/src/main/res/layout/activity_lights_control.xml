@@ -20,20 +20,6 @@
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff" />
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="110dp"
-        android:src="@drawable/icon_high_beam"
-        android:layout_below="@+id/lblLightingControls"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:id="@+id/iconHighBeams"
-        android:visibility="invisible"
-        android:elevation="24dp"
-        android:tint="@android:color/holo_blue_bright"
-        android:backgroundTintMode="add" />
-
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,4 +53,31 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_head_lights"
+        android:layout_marginTop="30dp"
+        android:id="@+id/imageView"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_orange_light"
+        android:backgroundTintMode="add"
+        android:layout_below="@+id/lblLightingControls"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_high_beam"
+        android:id="@+id/iconHighBeams"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_blue_bright"
+        android:backgroundTintMode="add"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignRight="@+id/switchHeadLights"
+        android:layout_alignEnd="@+id/switchHeadLights" />
 </RelativeLayout>
