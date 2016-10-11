@@ -98,7 +98,7 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final String user = "pi";
-        final String pass = "";
+        final String pass = "IST440FA";
         final String host = "130.203.87.170";
 
         final String dir = "python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
@@ -127,7 +127,8 @@ public class Main extends AppCompatActivity {
         //ALL NUMBER BUTTONS AND ACTION BUTTON DECLARATIONS
 
         //All number buttons have same code, see BUTTON 1 for comments
-        //BUTTON 1
+        //BUTTON 6 has correct passcode and UNLOCK ssh call
+
         assert button != null;
         assert button2 != null;
         assert button3 != null;
@@ -147,7 +148,62 @@ public class Main extends AppCompatActivity {
         assert imageButton2 != null;
         assert imageButton3 != null;
 
+        imageButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                new AsyncTask<Integer, Void, Void>() {
+                    String command = dir + "/Doors_locked.py";
 
+                    protected Void doInBackground(Integer... params) {
+                        try {
+                            // Execute command on the pi
+                            runPiCommand(user, pass, host, command, port);
+                        } catch (JSchException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                }.execute(1);
+            }
+        });
+
+        imageButton2.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                new AsyncTask<Integer, Void, Void>() {
+                    String command = dir + "/Doors_unlock.py";
+
+                    protected Void doInBackground(Integer... params) {
+                        try {
+                            // Execute command on the pi
+                            runPiCommand(user, pass, host, command, port);
+                        } catch (JSchException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                }.execute(1);
+            }
+        });
+
+        imageButton3.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                new AsyncTask<Integer, Void, Void>() {
+                    String command = dir + "/car_alarm.py";
+
+                    protected Void doInBackground(Integer... params) {
+                        try {
+                            // Execute command on the pi
+                            runPiCommand(user, pass, host, command, port);
+                        } catch (JSchException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                }.execute(1);
+            }
+        });
+
+
+        //BUTTON 1
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 //gets current text and sets temp variables as content
