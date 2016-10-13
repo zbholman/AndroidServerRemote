@@ -34,8 +34,11 @@ def doors_lock():
 images = [doors_lock]
 count = 0
 
-while True: 
-    s.set_pixels(images[count % len(images)]())
-    time.sleep(.75)
-    count += 1
+while (i<5): 
+   s.set_pixels(images[count % len(images)]())
+   time.sleep(.75)
+   s.clear()
+   time.sleep(.75)
+   s.set_pixels(images[count % len(images)]())
+   i + = 1
 
