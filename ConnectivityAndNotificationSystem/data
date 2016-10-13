@@ -1,0 +1,56 @@
+{
+  "CID": [
+{
+    "HC": 3,
+    "UID": "3h3453d3426da463d743",
+    "DID": "brs",
+    "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a",
+    "TTL": "100",
+    "OID": "ccs",
+    "PLD": "Emergency",
+    "TS": "1235542453.24325"
+  },
+{
+  "HC": 3,
+  "UID": "3h3453d3426da463d743",
+  "DID": "brs",
+  "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a",
+  "TTL": "100",
+  "OID": "scs",
+  "PLD": "locked",
+  "TS": "1235542453.24325"
+},
+    {
+  "HC": 3,
+  "UID": "3h3453d3426da463d743",
+  "DID": "brs",
+  "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a",
+  "TTL": "100",
+  "OID": "scs",
+  "PLD": "fuck abu",
+  "TS": "1235542453.24325"
+},
+    {
+  "HC": 3,
+  "UID": "3h3453d3426da463d743",
+  "DID": "brs",
+  "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a",
+  "TTL": "100",
+  "OID": "scs",
+  "PLD": "locked",
+  "TS": "1235542453.24325"
+},
+    {
+  "HC": 3,
+  "UID": "3h3453d3426da463d743",
+  "DID": "brs",
+  "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a",
+  "TTL": "100",
+  "OID": "scs",
+  "PLD": "locked",
+  "TS": "1235542453.24325"
+}
+
+
+
+]}
