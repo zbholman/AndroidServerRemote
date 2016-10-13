@@ -34,10 +34,12 @@ def doors_unlock():
 images = [doors_unlock]
 count = 0
 
+i=0
+
 while (i<3): 
    s.set_pixels(images[count % len(images)]())
    time.sleep(.75)
    s.clear()
    time.sleep(.75)
    s.set_pixels(images[count % len(images)]())
-   i + = 1
+   i+=1
