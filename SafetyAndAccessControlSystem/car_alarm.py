@@ -33,7 +33,7 @@ def car_alarm():
 images = [car_alarm]
 count = 0
 
-while True: 
-    s.set_pixels(images[count % len(images)]())
-    time.sleep(.75)
-    count += 1
+
+s.set_pixels(images[count % len(images)]())
+time.sleep(.75)
+count += 1
