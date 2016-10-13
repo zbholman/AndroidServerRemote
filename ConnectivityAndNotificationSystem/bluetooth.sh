@@ -56,3 +56,5 @@ cat /etc/group | grep bluetooth
 		echo "no bluetooth activity found" 1>&2
 		exit 1
 	fi
+	
+	#testing
