@@ -31,7 +31,7 @@ public class LightsControl extends AppCompatActivity {
         // initialize variables for connecting to pi
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "130.203.105.70"; // Pi IP on PSU network
+        final String hostname = "75.102.85.173"; // Pi IP on PSU network
 //        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
         final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights";
