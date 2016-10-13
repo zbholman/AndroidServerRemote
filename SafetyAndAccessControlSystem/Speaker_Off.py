@@ -23,7 +23,12 @@ e,b,b,b,e,b,e,e,
 b,e,e,b,b,e,e,e
 ]
 
-sense.set_pixels(image)
-time.sleep(3)
-#shows message on sense hat
-sense.show_message("Speaker Off")
+count = 0
+i=0
+while (i<3): 
+   sense.set_pixels(image)
+   time.sleep(.75)
+   sense.clear()
+   time.sleep(.75)
+   sense.set_pixels(image)
+   i+=1

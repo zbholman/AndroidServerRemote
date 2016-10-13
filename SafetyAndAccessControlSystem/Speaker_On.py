@@ -21,7 +21,12 @@ e,e,b,b,e,b,e,e,
 e,e,e,b,b,e,e,e
 ]
 
-sense.set_pixels(image)
-time.sleep(3)
-
-sense.show_message("Speaker On")
+count = 0
+i=0
+while (i<3): 
+   sense.set_pixels(image)
+   time.sleep(.75)
+   sense.clear()
+   time.sleep(.75)
+   sense.set_pixels(image)
+   i+=1

@@ -36,7 +36,7 @@ def car_alarmOff():
 images = [car_alarmOff]
 count = 0
 
-while True: 
+while count<3:
     s.set_pixels(images[count % len(images)]())
     time.sleep(.75)
     count += 1

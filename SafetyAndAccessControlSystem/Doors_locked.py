@@ -1,6 +1,6 @@
 #Ashish Baby
-#Version 1.00
-#10-1-16
+#Version 1.04
+#10-13-16
 
 from sense_hat import SenseHat
 import time
@@ -34,8 +34,12 @@ def doors_lock():
 images = [doors_lock]
 count = 0
 
-while True: 
-    s.set_pixels(images[count % len(images)]())
-    time.sleep(.75)
-    count += 1
+i=0
 
+while (i<3): 
+   s.set_pixels(images[count % len(images)]())
+   time.sleep(.75)
+   s.clear()
+   time.sleep(.75)
+   s.set_pixels(images[count % len(images)]())
+   i+=1

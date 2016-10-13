@@ -1,8 +1,9 @@
 import time
+import json
 
 '''
 Author: Ivan Iakimenko
-Ver: 5
+Ver: 6
 Description: This class stores all of the properties of a message and has methods to convert it to a json string, generate a checksum
 based on the payload, and check the generated payload against the one supplied at initialization. If no checksum is available
 at initialization, a checksum is automatically generated based on the current payload (this is useful for sending messages so 
@@ -36,7 +37,6 @@ class Message:
     def ConvertToJSON(self):
         contents={'CID':self.car_id,'OID':self.origin_id,'DID':self.destination_id, 'HC':self.health_code, 'TS':self.timestamp, 'TTL':self.ttl, 'UID':self.uuid, 'CKS':self.checksum }
         contents['PLD']=self.payload
-        import json
         return json.dumps(contents)
 
     #Returns a md5 checksum based on current payload
@@ -57,4 +57,11 @@ class Message:
     def TranslateTimestamp(self):
         return time.ctime(self.timestamp)
 
-    
+'''
+This method takes a json string, converts it into a python dictionary object and the returns it as a Message object
+This is how you go from a message your subsystem gets on the serial port to a usable message object with variables
+The Key in contents['Key'] must match the standard abbreviations for message properties
+'''
+def ConvertFromJSON(json_string):
+    contents = json.loads(json_string)
+    return Message(contents['CID'], contents['OID'], contents['DID'], contents['HC'], contents['TTL'], contents['PLD'], contents['TS'], contents['UID'], contents['CKS'])    

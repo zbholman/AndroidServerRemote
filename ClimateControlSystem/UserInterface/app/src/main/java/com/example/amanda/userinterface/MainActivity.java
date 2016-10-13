@@ -9,13 +9,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private int mCounter = 60;
-    private int mInteger = 60;
     Button increase;
     Button decrease;
     TextView temp;
-    Button increase_pass;
-    Button decrease_pass;
-    TextView temp_pass;
 
 
     @Override
@@ -34,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 temp.setText(Integer.toString(mCounter));
 
             }
+
         });
 
         decrease = (Button) findViewById(R.id.decrease);
@@ -53,31 +50,33 @@ public class MainActivity extends AppCompatActivity {
         //
         //passenger
 
-        increase_pass = (Button) findViewById(R.id.increase_pass);
-        temp_pass = (TextView) findViewById(R.id.temp_pass);
+        //increase_pass = (Button) findViewById(R.id.increase_pass);
+        //temp_pass = (TextView) findViewById(R.id.temp_pass);
 
-        increase_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        //increase_pass.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+            //public void onClick(View view) {
 
-                mInteger ++;
-                temp_pass.setText(Integer.toString(mInteger));
+//                mInteger ++;
+  //              temp_pass.setText(Integer.toString(mInteger));
 
-            }
-        });
+    //        }
+      //  });
 
-        decrease_pass = (Button) findViewById(R.id.decrease_pass);
-        temp_pass = (TextView) findViewById(R.id.temp_pass);
+        //decrease_pass = (Button) findViewById(R.id.decrease_pass);
+        //temp_pass = (TextView) findViewById(R.id.temp_pass);
 
-        decrease_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //decrease_pass.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+            //public void onClick(View v) {
 
-                mInteger --;
-                temp_pass.setText(Integer.toString(mInteger));
-            }
-        });
+              //  mInteger --;
+                //temp_pass.setText(Integer.toString(mInteger));
+            //}
+       // });
 
+
+        //heat
 
 
 

@@ -1,10 +1,9 @@
 #IST 440 
 # Drive Train (Team 02) 
-# Author: Ghansyam Patel, Rahul Manoharan, and Klaus Herchenroder
+# Author: Rahul Manoharan
 # Date: 10/03/2016
 # GoPiGo Robot for DriveTrain
 # UltraSonic Sensor Python Code
-#sensor code by Rahul
 from gopigo import * 
 import sys 
 import time
