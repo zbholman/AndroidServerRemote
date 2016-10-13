@@ -60,4 +60,4 @@ def turn_right(tf):
 forward(2)
 reverse(2)
 turn_left(2)
-turn_left(2)
+turn_right(2)
