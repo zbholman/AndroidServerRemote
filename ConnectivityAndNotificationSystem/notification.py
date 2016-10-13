@@ -20,7 +20,11 @@ Notification.connectivitystatus(True)
         with open('data') as json_data: #opens json file
             que = json_data.read()
             message = json.loads(que)
-            for id['PLD'] == '
+            for id['PLD'] == 'batteryLow':
+                print ('Battery status low' + id['PLD'])
+                kwhStatus = 'True'
+        return kwhStatus
+Notification.batterypackStatus(True)
 
     #md5_object =hashlib.md5()#(md5_object (message).hexdigest())
 
