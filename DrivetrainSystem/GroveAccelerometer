@@ -1,0 +1,20 @@
+#IST 440
+# Drive Train (Team 02)
+# Author: LaQuelle Martin
+# Date: 10/10/2016
+#Grove Accelerometer 
+
+import time
+import grovepi
+
+# 
+
+while True:
+   try:
+       print(grovepi.acc_xyz())
+       time.sleep(.5)
+
+
+
+   except IOError:
+       print ("Error")
