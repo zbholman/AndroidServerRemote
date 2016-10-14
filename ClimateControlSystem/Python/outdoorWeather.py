@@ -7,7 +7,7 @@ owm = pyowm.OWM(API_key)
 #Register a lcoation: city,state AND print
 location = 'Philadelphia,PA'
 print('Location:',location)
-
+ 
 #Find a location to observe outdoor weather
 obs = owm.weather_at_place(location)
 w = obs.get_weather()
