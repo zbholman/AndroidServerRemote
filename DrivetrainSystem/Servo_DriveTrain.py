@@ -49,12 +49,12 @@ def turn_left(tf):
     gpio.cleanup()
 
 #TURN RIGHT
-# tf =pio.output(11, False)
-     Time Frame
+# tf = Time Frame
 def turn_right(tf):
     init()
     gpio.output(7, False)
-    ggpio.output(13, False)
+    gpio.output(11, False)
+    gpio.output(13, False)
     gpio.output(15, True)
     time.sleep(tf)
     gpio.cleanup()
