@@ -56,9 +56,8 @@ cat /etc/group | grep bluetooth
 		echo "no bluetooth activity found" 1>&2
 		exit 1
 	fi
-	
-sudo apt-get install bluetooth bluez-utils bluez-compat
 
-sudo bluez-test-device list
 
-sudo pand
+# package required for 'pand' command
+sudo apt-get install bluez-compat
+
