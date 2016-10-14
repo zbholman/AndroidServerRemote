@@ -57,4 +57,8 @@ cat /etc/group | grep bluetooth
 		exit 1
 	fi
 	
-	#testing
+sudo apt-get install bluetooth bluez-utils bluez-compat
+
+sudo bluez-test-device list
+
+sudo pand
