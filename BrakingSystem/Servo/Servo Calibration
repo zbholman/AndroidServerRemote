@@ -1,0 +1,27 @@
+Calibrating Servo
+
+Enter python on pi
+>>> import RPi.GPIO as GPIO
+>>> GPIO.setmode(GPIO.BOARD)
+>>> GPIO.setup(''Select Pin'',GPIO.OUT)
+>>> pwm=GPIO.PWM(11,50)
+
+Find where servo hits extremes
+>>> pwm.ChangeDutyCycle(2)
+>>> pwm.ChangeDutyCycle(3)
+>>> pwm.ChangeDutyCycle(12)
+>>> pwm.stop()
+>> GPIO.cleanup()
+
+Now do math
+Full left calibration (0,'2?')
+Full Right calibratio (180,'12?')
+
+m= (y2-y1)/(x2-x1)=(12-2)/(180-0)=1/18
+for point (0,2)
+y-y1 = m(x-x1)
+y-2=1/18(x-0)
+
+DutyCycle = 1/18*(desiredAngle)+2
+
+test servo control with servoTest.py
