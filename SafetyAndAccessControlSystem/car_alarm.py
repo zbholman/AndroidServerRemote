@@ -7,7 +7,7 @@ from sense_hat import SenseHat
 import time
 
 sound = Sound() 
-sound.read('setalarm.wav') 
+sound.read('setalarm.mp3') 
 sound.play()
 
 s = SenseHat()
