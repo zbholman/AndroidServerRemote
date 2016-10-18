@@ -99,7 +99,7 @@ public class Main extends AppCompatActivity {
 
         final String user = "pi";
         final String pass = "IST440FA";
-        final String host = "130.203.87.170";
+        final String host = "130.203.86.177";
 
         final String dir = "python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
         final int port = 22;
