@@ -5,6 +5,10 @@
 from sense_hat import SenseHat
 import time
 
+sound = Sound() 
+sound.read('lockcar.wav') 
+sound.play()
+
 s = SenseHat()
 s.clear()
 s.low_light = True
