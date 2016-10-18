@@ -39,7 +39,7 @@ public class LightsControl extends AppCompatActivity {
 
         // Create switch for lights
         Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
-        Switch switchHeadLights = (Switch) findViewById(switchHeadLights);
+        Switch switchHeadLights = (Switch) findViewById(R.id.switchHeadLights);
         Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
 
         // Create icon images
@@ -52,7 +52,6 @@ public class LightsControl extends AppCompatActivity {
         switchHeadLights.setChecked(false);
         switchLeftTurn.setChecked(false);
 
-        // Create listener event for high beams
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
@@ -98,54 +97,55 @@ public class LightsControl extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    // Create listener event for high beams
-    switchHeadLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-        // Function that gets called when switch is toggled
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            // If the toggle is switched to "ON" run the following
-            // turn on high beams
-            if (isChecked) {
-                boolean success = true;
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = lightsDir + "/high_beam.py";
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            // Execute command on the pi
-                            runPiCommand(username, password, hostname, command, port);
-                        } catch (JSchException e) {
-                            e.printStackTrace();
+        // Create listener event for high beams
+        switchHeadLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called when switch is toggled
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on high beams
+                if (isChecked) {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/head_lights.py";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
                         }
-                        return null;
-                    }
-                }.execute(1);
+                    }.execute(1);
 
-                // If the light turns on, set icon to visible
-                if (success) {iconHighBeams.setVisibility(View.VISIBLE);}
-            } else {
-                boolean success = true;
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = lightsDir + "/turn_off_sense_hat_lights.py";
-                    protected Void doInBackground(Integer... params) {
-                        // Else, turn off high beams
-                        try {
-                            // Execute command on the pi
-                            runPiCommand(username, password, hostname, command, port);
-                        } catch (JSchException e) {
-                            e.printStackTrace();
+                    // If the light turns on, set icon to visible
+                    if (success) {iconHeadLights.setVisibility(View.VISIBLE);}
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/turn_off_sense_hat_lights.py";
+                        protected Void doInBackground(Integer... params) {
+                            // Else, turn off high beams
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
                         }
-                        return null;
-                    }
-                }.execute(1);
+                    }.execute(1);
 
-                // If light turns off, set icon to invisible
-                if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
+                    // If light turns off, set icon to invisible
+                    if (success) {iconHeadLights.setVisibility(View.INVISIBLE);}
+                }
             }
-        }
-    });
+        });
+    }
 
     // This method is connects to the pi, and runs the command given
     public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
