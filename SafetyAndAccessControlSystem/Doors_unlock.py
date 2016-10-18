@@ -4,10 +4,11 @@
 
 from sense_hat import SenseHat
 import time
+import pygame
 
-sound = Sound() 
-sound.read('unlockcar.wav') 
-sound.play()
+pygame.mixer.init()
+pygame.mixer.music.load("unlockcar.wav")
+pygame.mixer.music.play()
 
 s = SenseHat()
 s.clear()
