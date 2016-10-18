@@ -39,14 +39,20 @@ public class LightsControl extends AppCompatActivity {
 
         // Create switch for lights
         Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
+        Switch switchHeadLights = (Switch) findViewById(R.id.switchHeadLights);
+        Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
 
         // Create icon images
         final ImageView iconHighBeams = (ImageView) findViewById(R.id.iconHighBeams);
+        final ImageView iconHeadLights = (ImageView) findViewById(R.id.iconHeadLights);
+        final ImageView iconLeftTurn = (ImageView) findViewById(R.id.iconLeftTurn);
 
         // Set default state to false (off)
         switchHighBeams.setChecked(false);
+        switchHeadLights.setChecked(false);
+        switchLeftTurn.setChecked(false);
 
-        // Create listener event
+        // Create listener event for high beams
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
