@@ -98,35 +98,6 @@
         android:layout_toRightOf="@+id/iconHeadLights"
         android:layout_toEndOf="@+id/iconHeadLights" />
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="110dp"
-        android:src="@drawable/icon_left_turn"
-        android:id="@+id/iconLeftTurn"
-        android:visibility="invisible"
-        android:elevation="24dp"
-        android:tint="@android:color/holo_blue_bright"
-        android:backgroundTintMode="add"
-        android:layout_above="@+id/switchHeadLights"
-        android:layout_toRightOf="@+id/iconHighBeams"
-        android:layout_toEndOf="@+id/iconHighBeams" />
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="110dp"
-        android:src="@drawable/icon_left_turn"
-        android:id="@+id/iconRightTurn"
-        android:visibility="invisible"
-        android:elevation="24dp"
-        android:tint="@android:color/holo_blue_bright"
-        android:backgroundTintMode="add"
-        android:layout_alignTop="@+id/iconLeftTurn"
-        android:layout_toRightOf="@+id/iconLeftTurn"
-        android:layout_toEndOf="@+id/iconLeftTurn"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="15dp" />
-
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -143,4 +114,30 @@
         android:layout_below="@+id/switch1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_left_turn"
+        android:id="@+id/iconLeftTurn"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_blue_bright"
+        android:backgroundTintMode="add"
+        android:layout_alignTop="@+id/iconHighBeams"
+        android:layout_toRightOf="@+id/iconHighBeams"
+        android:layout_toEndOf="@+id/iconHighBeams" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_left_turn"
+        android:id="@+id/iconRightTurn"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_blue_bright"
+        android:backgroundTintMode="add"
+        android:layout_alignTop="@+id/iconLeftTurn"
+        android:layout_toRightOf="@+id/iconLeftTurn"
+        android:layout_toEndOf="@+id/iconLeftTurn" />
 </RelativeLayout>
