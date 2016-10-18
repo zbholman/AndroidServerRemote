@@ -1,25 +1,45 @@
-import json
-import grovepi
-import math
-import decimal
+from grovepi import grovepi
+import os
+import time
 
-#Connect sensor to port D4
+# --------- User Settings ---------
+# The DHT_SENSOR_TYPE below may need to be changed depending on which DHT sensor you have:
+#  0 - DHT11 - blue one - comes with the GrovePi+ Starter Kit
+#  1 - DHT22 - white one, aka DHT Pro or AM2302
+#  2 - DHT21 - black one, aka AM2301
+DHT_SENSOR_TYPE = 1
+# Connect the DHT sensor to one of the digital pins (i.e. 2, 3, 4, 7, or 8)
+DHT_SENSOR_PIN = 4
+CONVERT_TO_FAHRENHEIT = True
+# ---------------------------------
 
-sensor = 4 #set which port is being used
+def isFloat(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
+
 
 while True:
     try:
-[temp,humidity] = grovepi.dht(sensor,1) #Checks if the sensor is in the right port
-temp = round(temp * 9/5 + 32.1) #temperature conversion from Celsius to Fahrenheit
-    print ("temp =", temp, "F/thumidity =", humidity,"%")
-t = str(temp)
-h = str(humidity)
-tempTOjson = {'temp': t, 'humidity': h}
+        [temp_c,hum] = grovepi.dht(DHT_SENSOR_PIN,DHT_SENSOR_TYPE)
+        if isFloat(temp_c):
+                if (CONVERT_TO_FAHRENHEIT):
+                        temp_f = temp_c * 9.0 / 5.0 + 32.0
+                        print "Temperature(F):", temp_f
+                else:
+                        print "Temperature(C):", temp_c
 
-fileName = 'displayTemp.json'#name of the python code
-outFile = open(fileName, 'w')#W stands for writing
-json.dump(tempTOjson, outFile)#Dumping all contents from Temp to Json
-outFile.close()#Close the outfile
+        if ((isFloat(hum)) and (hum >= 0)):
+                print "Humidity(%):", hum
+    tempTOjson = {'temp': t, 'humidity': h}
 
-except IOError:
-print ("Error")
+    fileName = 'displayTemp.json'#name of the python code
+    outFile = open(fileName, 'w')#W stands for writing
+    json.dump(tempTOjson, outFile)#Dumping all contents from Temp to Json
+    outFile.close()#Close the outfile
+    except IOError:
+        print ("Error")
+
+    time.sleep(5)
