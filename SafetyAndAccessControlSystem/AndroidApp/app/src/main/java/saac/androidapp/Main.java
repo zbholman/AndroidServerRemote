@@ -1,5 +1,6 @@
 package saac.androidapp;
 
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.AsyncTask;
@@ -124,6 +125,11 @@ public class Main extends AppCompatActivity {
         ImageButton imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
         ImageButton imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
 
+        //Initialize media player files
+        final MediaPlayer unlock = MediaPlayer.create(this, R.raw.unlockcar);
+        final MediaPlayer lock = MediaPlayer.create(this, R.raw.lockcar);
+        //final MediaPlayer alarm = MediaPlayer.create(this, R.raw.setalarm);
+
         //ALL NUMBER BUTTONS AND ACTION BUTTON DECLARATIONS
 
         //All number buttons have same code, see BUTTON 1 for comments
@@ -148,6 +154,8 @@ public class Main extends AppCompatActivity {
         assert imageButton2 != null;
         assert imageButton3 != null;
 
+
+        //LOCK BUTTON
         imageButton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 new AsyncTask<Integer, Void, Void>() {
@@ -157,6 +165,7 @@ public class Main extends AppCompatActivity {
                         try {
                             // Execute command on the pi
                             runPiCommand(user, pass, host, command, port);
+                            lock.start();
                         } catch (JSchException e) {
                             e.printStackTrace();
                         }
@@ -166,6 +175,7 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //UNLOCK BUTTON
         imageButton2.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 new AsyncTask<Integer, Void, Void>() {
@@ -175,6 +185,7 @@ public class Main extends AppCompatActivity {
                         try {
                             // Execute command on the pi
                             runPiCommand(user, pass, host, command, port);
+                            unlock.start();
                         } catch (JSchException e) {
                             e.printStackTrace();
                         }
@@ -184,6 +195,7 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        //SET ALARM BUTTON
         imageButton3.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 new AsyncTask<Integer, Void, Void>() {
@@ -193,6 +205,7 @@ public class Main extends AppCompatActivity {
                         try {
                             // Execute command on the pi
                             runPiCommand(user, pass, host, command, port);
+                            //alarm.start()
                         } catch (JSchException e) {
                             e.printStackTrace();
                         }
@@ -396,6 +409,7 @@ public class Main extends AppCompatActivity {
                                 try {
                                     // Execute command on the pi
                                     runPiCommand(user, pass, host, command, port);
+                                    unlock.start();
                                 } catch (JSchException e) {
                                     e.printStackTrace();
                                 }
