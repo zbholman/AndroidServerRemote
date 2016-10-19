@@ -35,31 +35,17 @@
         android:layout_below="@+id/iconHighBeams"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="High Beams"
-        android:id="@+id/switchHighBeams"
-        android:textColor="#ffffff"
-        android:trackTint="#ffffff"
-        android:splitTrack="false"
-        android:showText="true"
-        android:switchPadding="15dp"
-        android:switchMinWidth="10dp"
-        android:textSize="40dp"
-        android:layout_below="@+id/switchHeadLights"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch" />
+        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
+        android:layout_toStartOf="@+id/iconRightTurn"
+        android:layout_alignRight="@+id/switchHighBeams"
+        android:layout_alignEnd="@+id/switchHighBeams" />
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="110dp"
         android:src="@drawable/icon_head_lights"
         android:layout_marginTop="30dp"
-        android:id="@+id/imageView"
+        android:id="@+id/iconHeadLights"
         android:visibility="invisible"
         android:elevation="24dp"
         android:tint="@android:color/holo_orange_light"
@@ -77,7 +63,120 @@
         android:elevation="24dp"
         android:tint="@android:color/holo_blue_bright"
         android:backgroundTintMode="add"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignRight="@+id/switchHeadLights"
-        android:layout_alignEnd="@+id/switchHeadLights" />
+        android:layout_alignTop="@+id/iconHeadLights"
+        android:layout_toRightOf="@+id/iconHeadLights"
+        android:layout_toEndOf="@+id/iconHeadLights" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Right Turn Signal"
+        android:id="@+id/switchRightTurn"
+        android:textColor="#ffffff"
+        android:trackTint="#ffffff"
+        android:splitTrack="false"
+        android:showText="true"
+        android:switchPadding="15dp"
+        android:switchMinWidth="10dp"
+        android:textSize="40dp"
+        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
+        android:layout_below="@+id/switchLeftTurn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_left_turn"
+        android:id="@+id/iconLeftTurn"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_blue_bright"
+        android:backgroundTintMode="add"
+        android:layout_alignTop="@+id/iconHighBeams"
+        android:layout_toRightOf="@+id/iconHighBeams"
+        android:layout_toEndOf="@+id/iconHighBeams" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Left Turn Signal"
+        android:id="@+id/switchLeftTurn"
+        android:textColor="#ffffff"
+        android:trackTint="#ffffff"
+        android:splitTrack="false"
+        android:showText="true"
+        android:switchPadding="15dp"
+        android:switchMinWidth="10dp"
+        android:textSize="40dp"
+        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
+        android:layout_below="@+id/switchHighBeams"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/iconRightTurn"
+        android:layout_alignRight="@+id/switchRightTurn"
+        android:layout_alignEnd="@+id/switchRightTurn"
+        android:layout_toLeftOf="@+id/iconRightTurn" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="High Beams"
+        android:id="@+id/switchHighBeams"
+        android:textColor="#ffffff"
+        android:trackTint="#ffffff"
+        android:splitTrack="false"
+        android:showText="true"
+        android:switchPadding="15dp"
+        android:switchMinWidth="10dp"
+        android:textSize="40dp"
+        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
+        android:layout_below="@+id/switchHeadLights"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hazard Light"
+        android:textColor="#ffffff"
+        android:trackTint="#ffffff"
+        android:splitTrack="false"
+        android:showText="true"
+        android:switchPadding="15dp"
+        android:switchMinWidth="10dp"
+        android:textSize="40dp"
+        tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
+        android:id="@+id/switchHazardLight"
+        android:layout_below="@+id/iconRightTurn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_left_turn"
+        android:id="@+id/iconRightTurn"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_blue_bright"
+        android:backgroundTintMode="add"
+        android:layout_alignTop="@+id/iconLeftTurn"
+        android:layout_alignLeft="@+id/switchHazardLight"
+        android:layout_alignStart="@+id/switchHazardLight" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_left_turn"
+        android:visibility="invisible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_blue_bright"
+        android:backgroundTintMode="add"
+        android:layout_above="@+id/switchHazardLight"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/iconHazardLight" />
 </RelativeLayout>
