@@ -9,7 +9,7 @@ import time
 #  2 - DHT21 - black one, aka AM2301
 DHT_SENSOR_TYPE = 1
 # Connect the DHT sensor to one of the digital pins (i.e. 2, 3, 4, 7, or 8)
-DHT_SENSOR_PIN = 4
+DHT_SENSOR_PIN = 3
 CONVERT_TO_FAHRENHEIT = True
 # ---------------------------------
 
@@ -37,5 +37,5 @@ while True:
     except IOError:
         print ("Error")
 
-    time.sleep(5)
+    time.sleep(.10)
 
