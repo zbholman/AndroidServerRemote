@@ -1,30 +1,29 @@
-#!/usr/bin/python
 import RPi.GPIO as GPIO
 import time
-GPIO.setwarnings(False)
+
 GPIO.setmode(GPIO.BCM)
 
 # init list with pin numbers
 
-pinList = [2]
+pin = 4
 
 # loop through pins and set mode and state to 'high'
 
-for i in pinList: 
-    GPIO.setup(i, GPIO.OUT) 
-    GPIO.output(i, GPIO.HIGH)
+GPIO.setup(pin, GPIO.OUT) 
+GPIO.output(pin, GPIO.HIGH)
 
 # time to sleep between operations in the main loop
 
-SleepTimeL = 2
+SleepTimeL = 10
 
 # main loop
 
 try:
-  GPIO.output(2, GPIO.LOW)
+  GPIO.output(4, GPIO.LOW)
   print "ONE"
   time.sleep(SleepTimeL); 
   
+  time.sleep(SleepTimeL);
   GPIO.cleanup()
   print "Good bye!"
 
