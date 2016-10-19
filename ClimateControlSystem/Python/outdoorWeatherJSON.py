@@ -1,4 +1,4 @@
-mport json
+import json
 import pyowm
 
 try:
