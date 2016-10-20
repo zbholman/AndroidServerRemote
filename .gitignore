@@ -1,0 +1,13 @@
+*.pyc
+*~
+build/*
+bin/*
+dist/*
+pyowm.egg-info/*
+sphinx/_build/*
+.settings/*
+.project
+.pydevproject
+.idea/*
+.tox/*
+.coverage
