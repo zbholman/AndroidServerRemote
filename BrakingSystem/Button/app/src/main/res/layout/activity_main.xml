@@ -34,7 +34,52 @@
         android:textOff="Brake Off"
         android:layout_gravity="center_horizontal"
         android:onClick="changeButtonState"
-        android:layout_marginTop="298dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="195dp" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:id="@+id/imageView"
+        android:background="#50ff2f2f"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toRightOf="@+id/result_text"
+        android:layout_toEndOf="@+id/result_text"
+        />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:layout_marginTop="61dp"
+        android:id="@+id/imageView3"
+        android:background="#50ff2f2f"
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/toggle_button_1"
+        android:layout_toStartOf="@+id/toggle_button_1" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:layout_marginTop="38dp"
+        android:id="@+id/imageView2"
+        android:background="#50ff2f2f"
+        android:layout_below="@+id/result_text"
+        android:layout_alignLeft="@+id/imageView3"
+        android:layout_alignStart="@+id/imageView3" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:id="@+id/imageView4"
+        android:background="#50ff2f2f"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_toRightOf="@+id/result_text"
+        android:layout_toEndOf="@+id/result_text" />
 </RelativeLayout>
