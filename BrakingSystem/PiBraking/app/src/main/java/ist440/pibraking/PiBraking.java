@@ -13,108 +13,106 @@ import com.jcraft.jsch.Session;
 
 import java.util.Properties;
 
-/**
- * Created by QILI JIAN on 10/5/2016.
- */
-
-
 public class PiBraking extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pi_braking);
 
-        //initialize variable for connection of pi
-
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "192.168.1.112";
+        final String hostname = "192.168.1.149";
+
+        final String scriptDir = "touch /home/pi/Desktop";
         final int port = 22;
 
-        final String brakeDir = "python /home/pi/Desktop/PSUABFA16IST440/BrakingSystem/Relay/4port";
+        final Button piBrake = (Button) findViewById(R.id.allBrake);
 
+        piBrake.setOnClickListener(new View.OnClickListener() {
 
-        // create button to apply abs
-        final Button allBrake = (Button) findViewById(R.id.brakeControlButton);
-
-        //Set Default ABS to off (False)
-
-
-        allBrake.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) {
                 new AsyncTask<Integer, Void, Void>() {
-                    String command = brakeDir + "/script1.py";
+                    String command = scriptDir + "/brake.py";
 
                     protected Void doInBackground(Integer... params) {
                         try {
-                            // Execute command on the pi
-                            remoteCommand(username, password, hostname, command, port);
-                        } catch (JSchException e) {
+                            executeRemoteCommand(username, password, hostname, command, port);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         return null;
                     }
-                };
+                }.execute(1);
+
             }
 
+
         });
-        //ImageButton btnFL = (ImageButton) findViewById(R.id.btnFL);
-        //ImageButton btnRR = (ImageButton) findViewById(R.id.btnRR);
-        //ImageButton btnRL = (ImageButton) findViewById(R.id.btnRL);
-
-
     }
-    public void remoteCommand(String username, String password, String hostname, String command, int port) throws JSchException {
-        // New Jsch object for connecting
-        JSch jsch = new JSch();
 
-        // Try to create a session using username, hostname, and port
-        Session session = null;
-        try {
-            session = jsch.getSession(username, hostname, port);
-        } catch (JSchException e) {
-            e.printStackTrace();
+
+            // This method is connects to the pi, and runs the command given
+            public void executeRemoteCommand(String username,
+                                             String password,
+                                             String hostname,
+                                             String command,
+                                             int port)
+                    throws JSchException {
+                // New Jsch object for connecting
+                JSch jsch = new JSch();
+
+                // Try to create a session using username, hostname, and port
+                Session session = null;
+                try {
+                    session = jsch.getSession(username, hostname, port);
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+
+                // Set the password for the session
+                assert session != null;
+                session.setPassword(password);
+
+                // Avoid asking for key confirmation
+                Properties prop = new Properties();
+                prop.put("StrictHostKeyChecking", "no");
+                session.setConfig(prop);
+
+                // Attempt to connect
+                try {
+                    session.connect();
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+
+                // SSH Channel
+                ChannelExec channelssh = null;
+                try {
+                    channelssh = (ChannelExec)
+                            session.openChannel("exec");
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+                // Use this if there is any need for output to return to android
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//        channelssh.setOutputStream(baos);
+
+                // Execute command
+                assert channelssh != null;
+                channelssh.setCommand(command);
+                try {
+                    channelssh.connect();
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+                channelssh.disconnect();
+            }
         }
 
-        // Set the password for the session
-        assert session != null;
-        session.setPassword(password);
 
-        // Avoid asking for key confirmation
-        Properties prop = new Properties();
-        prop.put("StrictHostKeyChecking", "no");
-        session.setConfig(prop);
 
-        // Attempt to connect
-        try {
-            session.connect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-
-        // SSH Channel
-        ChannelExec channelSSH = null;
-        try {
-            channelSSH = (ChannelExec)
-                    session.openChannel("exec");
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        // Use this if there is any need for output to return to android
-        //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //
-        //        channelssh.setOutputStream(baos);
-
-        // Execute command
-        assert channelSSH != null;
-        channelSSH.setCommand(command);
-        try {
-            channelSSH.connect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        channelSSH.disconnect();
-    }
-}
