@@ -3,29 +3,39 @@ import smtplib
 import hashlib
 
 class Notification :
-    def connectivitystatus(bluetooth=):
-        with open ('data') as json_data: #opens json file
+    def connectivitystatus(bluetooth):
+        with open ('Data') as json_data: #opens json file
             que = json_data.read()
             message = json.loads(que)
-            for id in message['CID'] :
+            for id in message['CID']:
                 if id['PLD'] == 'connected':
                     print ('Bluetooth device is now '+id['PLD'])
                     bluetooth = 'True'
-
         return bluetooth
-Notification.connectivitystatus(True)
-
 
     def batterypackStatus(kwhStatus):
-        with open('data') as json_data: #opens json file
+        with open('Data') as json_data: #opens json file
             que = json_data.read()
             message = json.loads(que)
-            for id['PLD'] == 'batteryLow':
-                print ('Battery status low' + id['PLD'])
-                kwhStatus = 'True'
+            for id in message['CID']:
+                if id['PLD'] == 'batteryLow':
+                    print ('Battery status: ' + id['PLD'])
+                    kwhStatus = 'True'
         return kwhStatus
-Notification.batterypackStatus(True)
 
+
+    def doorLock(asd):
+        with open('Data') as json_data:  # opens json file
+            que = json_data.read()
+            message = json.loads(que)
+            for id in message['CID']:
+                if id['PLD'] == 'locked':
+                    print('Door is now: ' + id['PLD'])
+                    asd = 'True'
+
+Notification.doorLock(True)
+Notification.batterypackStatus(True)
+Notification.connectivitystatus(True)
     #md5_object =hashlib.md5()#(md5_object (message).hexdigest())
 
 
