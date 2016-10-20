@@ -42,7 +42,7 @@ while True:
                 print "Humidity(%):", hum
 
    	
-	if temp_f > 72:
+	if temp_f > 86:
 		GPIO.output(4,GPIO.LOW)
 		print "FAN ON"
 	#	time.sleep(30);

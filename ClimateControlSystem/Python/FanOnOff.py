@@ -1,46 +1,96 @@
+import os
 import RPi.GPIO as GPIO
 import time
-
-GPIO.setmode(GPIO.BCM)
-
-# init list with pin numbers
-
-pinList = [2, 3]
-
-# loop through pins and set mode and state to 'high'
-
-for i in pinList: 
-    GPIO.setup(i, GPIO.OUT) 
-    GPIO.output(i, GPIO.HIGH)
-
-# time to sleep between operations in the main loop
-
-SleepTimeL = 5
-
-# main loop
-
-try:
-  
-  GPIO.output(2, GPIO.LOW)
-  print "FAN ONE ON"
-  time.sleep(SleepTimeL)
-
-  GPIO.output(3, GPIO.LOW)
-  print "FAN TWO ON"
-  time.sleep(SleepTimeL);
-   
-
-  GPIO.output(2, GPIO.LOW) 
-  GPIO.output(3, GPIO.LOW)
-  print " TWO FANS ON"
-  time.sleep(SleepTimeL);  
+import datetime
+import sys
  
-  GPIO.cleanup()
-  print "Good bye!"
+# 5 * * * * sudo python /home/pi/fan.py
+# A crontab will run every hour and check the temp. If the temp is > 49 the script will start the fan
+# until the temperature goes down to 28. When it does, the script will end, shutting down the fan as well.
+# If the script executes again while a previous script is running, the latter will exit
+# ... meaning the pi is in hell, and will never get bellow FAN_END value :P
+ 
+# Identify which pin controls the relay
+FAN_PIN = 4
+# the yellow box ex: GPIO18
+# Temperature check. Start fan if temp > 49C
+FAN_START = 85
+# Temperature check. Shut down under 28C
+FAN_END = 84
 
-# End program cleanly with keyboard
-except KeyboardInterrupt:
-  print "  Quit"
+DHT_SENSOR_TYPE = 1
+# Connect the DHT sensor to one of the digital pins (i.e. 2, 3, 4, 7, or 8)
+DHT_SENSOR_PIN = 3
 
-  # Reset GPIO settings
-  GPIO.cleanup()
+CONVERT_TO_FAHRENHEIT = True
+# ---------------------------------
+
+def isFloat(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
+
+# Get what action. If you manually turning on/off the fan
+action = sys.argv.pop()
+
+def GPIOsetup():
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(FAN_PIN, GPIO.OUT)
+       
+def fanON():
+        GPIOsetup()
+        GPIO.output(FAN_PIN, 0) #fan on
+        return()
+def fanOFF():
+        GPIOsetup()
+        GPIO.output(FAN_PIN, 1) #fan off
+        return()
+       
+def get_temp_from_system():
+        
+	[temp_c,hum] = grovepi.dht(DHT_SENSOR_PIN,DHT_SENSOR_TYPE)
+        if isFloat(temp_c):
+                if (CONVERT_TO_FAHRENHEIT):
+                        temp_f = temp_c * 9.0 / 5.0 + 32.0
+                        print "Temperature(F):", temp_f
+                else:
+                        print "Temperature(C):", temp_c
+ 
+def check_fan(pin):
+        GPIOsetup()
+        return GPIO.input(pin)
+ 
+def run(pin):
+        current_date = datetime.datetime.now()
+        temp = get_temp_from_system()
+        if float(temp) >= FAN_START:
+                print(temp+' @ '+str(current_date))
+                if check_fan(pin) == 1:
+                        print('Fan is Off...Starting Fan')
+                        fanON()
+                else:
+                        time.sleep(5) # Remove, if you want real-time checking
+                        print('Fan is ON')
+        elif float(temp) <= FAN_END:
+                print(temp+' @ '+str(current_date))
+                if check_fan(pin) == 0:
+                        print('Fan is on...Shuting it Down')
+                        fanOFF()
+                        GPIO.cleanup()
+                        return 1 # exit script. The pi has cooled down
+                else:
+                        time.sleep(5) # Remove, if you want real-time checking
+                        print('Fan is OFF')
+        else:
+                        pass # while the script is passing through here, there will be no output on screen
+                       
+                       
+if action == "on" :
+   print "Turning fan on"
+   fanON()
+elif action == "off" :
+   print "Turning fan off"
+   fanOFF()
