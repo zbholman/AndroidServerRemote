@@ -58,6 +58,22 @@ cat /etc/group | grep bluetooth
 	fi
 
 
+
+# to check the raspberry pi bluetooth name
+sudo hciconfig hci0 name
+
+# to set the bluetooth name
+sudo hciconfig hci0 name raspberrypi
+
+# make the raspberry pi discoverable
+sudo hciconfig hci0 piscan
+
+# setup agent to listen for pairing request
+sudo bluetooth-agent 1234
+
+# list currently connected bluetooth devices
+sudo bluez-test-device list
+
 # package required for 'pand' command
 sudo apt-get install bluez-compat
 
