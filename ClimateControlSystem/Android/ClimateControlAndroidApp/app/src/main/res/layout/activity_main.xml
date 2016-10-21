@@ -193,5 +193,14 @@
         android:layout_below="@+id/btnTemp2Inc"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnTemp1Dec"
+        android:layout_alignLeft="@+id/switchDual"
+        android:layout_alignStart="@+id/switchDual"
+        android:id="@+id/btntest" />
+
 
 </RelativeLayout>
