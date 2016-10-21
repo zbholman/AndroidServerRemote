@@ -34,7 +34,7 @@ class Message:
 
     #Returns string JSON representation of current message object based on message formatting standard
     def ConvertToJSON(self):
-        contents={'CID':self.car_id,'OID':self.origin_id,'DID':self.destination_id, 'HC':self.health_code, 'TS':self.timestamp, 'TTL':self.ttl, 'UID':self.uuid, 'CKS':self.checksum }
+        contents={'CID':self.car_id,'OID':self.origin_id,'DID':self.destination_id, 'TS':self.timestamp, 'TTL':self.ttl, 'UID':self.uuid, 'CKS':self.checksum }
         contents['PLD']=self.payload
         return json.dumps(contents)
 
@@ -63,4 +63,4 @@ The Key in contents['Key'] must match the standard abbreviations for message pro
 '''
 def ConvertFromJSON(json_string):
     contents = json.loads(json_string)
-    return Message(contents['CID'], contents['OID'], contents['DID'], contents['HC'], contents['TTL'], contents['PLD'], contents['TS'], contents['UID'], contents['CKS'])    
+    return Message(contents['CID'], contents['OID'], contents['DID'], contents['TTL'], contents['PLD'], contents['TS'], contents['UID'], contents['CKS'])    
