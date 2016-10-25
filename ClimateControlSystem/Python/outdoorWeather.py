@@ -1,4 +1,4 @@
-import pyowm
+import pyowm #Python Library, Open Weather Map
 
 #Register API Key with source
 API_key = '89cb9b3c8c3c1ee033be08ffcfd26076'

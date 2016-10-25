@@ -7,13 +7,13 @@
 import time
 import grovepi
 
+# The GrovePi connects the Raspberry Pi and Grove sensors
 # Connect the Grove Accelerometer (+/- 1.5g) to any I2C port
 
 while True:
    try:
        print(grovepi.acc_xyz())
        time.sleep(.5)
-
 
 
    except IOError:
