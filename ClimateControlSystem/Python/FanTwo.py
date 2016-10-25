@@ -3,12 +3,9 @@
 # author: Nirav
 
 #import statements
-
-import os
 import RPi.GPIO as GPIO
 import time
-import datetime
-import sys
+
 
 # GPIO pin on raspberry Pi to connect relay pin(Fan connected to relay two)
 
