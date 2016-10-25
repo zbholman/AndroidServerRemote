@@ -3,12 +3,9 @@
 # author: Nirav
 
 #import statements
-
-import os
 import RPi.GPIO as GPIO
 import time
-import datetime
-import sys
+
 
 # GPIO pin on raspberry Pi to connect Heating Pad to pin(Fan connected to relay One)
 Heating_Pin = 4
