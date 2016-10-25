@@ -1,7 +1,7 @@
 #Class: IST440W 
 #Professor: Joe Oakes
 #Team 3
-#Authors: Nirav
+#Authors: Nirav, Mohammed, Yusef
 
 # /usr/bin/env python3
 import os
