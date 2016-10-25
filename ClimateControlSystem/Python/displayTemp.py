@@ -30,19 +30,19 @@ def isFloat(string):
 
 while True:
     try:
-        [temp_c,hum] = grovepi.dht(DHT_SENSOR_PIN,DHT_SENSOR_TYPE)
-        if isFloat(temp_c):
-                if (CONVERT_TO_FAHRENHEIT):
+        [temp_c,hum] = grovepi.dht(DHT_SENSOR_PIN,DHT_SENSOR_TYPE) #Gets sensor pin
+        if isFloat(temp_c): #Shows the temp from grovepi sensor
+                if (CONVERT_TO_FAHRENHEIT): 
                         temp_f = temp_c * 9.0 / 5.0 + 32.0
                         print "Temperature(F):", temp_f
                 else:
                         print "Temperature(C):", temp_c
 
-        if ((isFloat(hum)) and (hum >= 0)):
+        if ((isFloat(hum)) and (hum >= 0)): #Shows the humidity from sensor
                 print "Humidity(%):", hum
 
    	
-	if temp_f > 86:
+	if temp_f > 86:  #Fan turns on when temp_f is greater than 86
 		GPIO.output(4,GPIO.LOW)
 		print "FAN ON"
 	#	time.sleep(30);
