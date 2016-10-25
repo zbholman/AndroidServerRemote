@@ -38,6 +38,11 @@ class Message:
         contents['PLD']=self.payload
         return json.dumps(contents)
 
+    #Returns a dictionary from the message object
+    def ConvertToDictionary(self):
+        return {"CID": self.car_id, "OID": self.origin_id, "DID": self.destination_id, "TTL": self.ttl, "TS": self.timestamp, "UID": self.uuid, "PLD": self.payload, "CKS": self.checksum}
+
+
     #Returns a md5 checksum based on current payload
     def CalculateChecksum(self):
         import hashlib
