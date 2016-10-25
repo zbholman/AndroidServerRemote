@@ -23,8 +23,8 @@ try:
 	print('Humidity:', outdoorHumidity, '%')
 
 	outdoorTempTOjson = {'Location': location, 'Fahrenheit temperature': outdoorFahrenheit, 'Humidity': outdoorHumidity}
-	fileName = 'outdoorWeather.json' # name of the python code
-	outFile = open(fileName, 'w') # W stands for writing
+	fileName = 'outdoorWeather.json' # name of the JSON output file
+	outFile = open(fileName, 'w') # W stands for writing, writing out to the JSON file
 	json.dump(outdoorTempTOjson, outFile) # Dumping all contents from Temp to Json
 	outFile.close() # Close the outfile
 
