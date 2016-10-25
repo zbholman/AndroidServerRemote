@@ -25,6 +25,7 @@ DHT_SENSOR_TYPE = 1
 # Connect the DHT sensor to one of the digital pins (i.e. 2, 3, 4, 7, or 8)
 DHT_SENSOR_PIN = 3
 
+# If TRUE, Temperature will be shown in Fahrenehit
 CONVERT_TO_FAHRENHEIT = True
 # ---------------------------------
 
