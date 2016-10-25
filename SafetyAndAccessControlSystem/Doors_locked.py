@@ -5,6 +5,12 @@
 from sense_hat import SenseHat
 import time
 
+import pygame
+
+pygame.mixer.init()
+pygame.mixer.music.load("lockcar.wav")
+pygame.mixer.music.play()
+
 s = SenseHat()
 s.clear()
 s.low_light = True

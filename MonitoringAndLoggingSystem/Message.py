@@ -10,11 +10,10 @@ at initialization, a checksum is automatically generated based on the current pa
 you don't have to compute the payload from whatever code you're sending it from)
 '''
 class Message:
-    def __init__(self, car_id, origin_id, destination_id, health_code, time_to_live, payload, timestamp=0.0, uuid='0', checksum='0'):
+    def __init__(self, car_id, origin_id, destination_id, time_to_live, payload, timestamp=0.0, uuid='0', checksum='0'):
         self.car_id = car_id
         self.origin_id = origin_id
         self.destination_id = destination_id
-        self.health_code = health_code
         self.ttl = time_to_live
         self.payload = payload
 
@@ -35,7 +34,7 @@ class Message:
 
     #Returns string JSON representation of current message object based on message formatting standard
     def ConvertToJSON(self):
-        contents={'CID':self.car_id,'OID':self.origin_id,'DID':self.destination_id, 'HC':self.health_code, 'TS':self.timestamp, 'TTL':self.ttl, 'UID':self.uuid, 'CKS':self.checksum }
+        contents={'CID':self.car_id,'OID':self.origin_id,'DID':self.destination_id, 'TS':self.timestamp, 'TTL':self.ttl, 'UID':self.uuid, 'CKS':self.checksum }
         contents['PLD']=self.payload
         return json.dumps(contents)
 
@@ -64,4 +63,4 @@ The Key in contents['Key'] must match the standard abbreviations for message pro
 '''
 def ConvertFromJSON(json_string):
     contents = json.loads(json_string)
-    return Message(contents['CID'], contents['OID'], contents['DID'], contents['HC'], contents['TTL'], contents['PLD'], contents['TS'], contents['UID'], contents['CKS'])    
+    return Message(contents['CID'], contents['OID'], contents['DID'], contents['TTL'], contents['PLD'], contents['TS'], contents['UID'], contents['CKS'])    

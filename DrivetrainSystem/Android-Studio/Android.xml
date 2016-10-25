@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.tapanapatel.jsonwriter.MainActivity"
-    android:background="@drawable/dashboard">
+    tools:context="com.example.tapanapatel.drivetrainfinal.MainActivity"
+    android:background="@drawable/newdashboard">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,27 +22,81 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <include layout="@layout/content_main"
+        android:visibility="visible" />
+
+    <ToggleButton
+        android:text="N"
+        android:layout_height="100dp"
+        android:id="@+id/toggleButton3"
+        app:layout_anchor="@+id/progressBar2"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        android:layout_gravity="top|right"
+        android:layout_width="100dp"
+        android:textOff="N"
+        android:textOn="NEUTRAL" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:id="@+id/progressBar"
+        app:layout_anchor="@+id/progressBar2"
+        app:layout_anchorGravity="center_vertical|right"
+        android:layout_gravity="top|left"
+        android:layout_height="350dp"
+        android:layout_width="250dp" />
+
+    <ToggleButton
+        android:text="D"
+        android:layout_height="100dp"
+        android:id="@+id/toggleButton4"
+        app:layout_anchor="@+id/progressBar2"
+        app:layout_anchorGravity="bottom|right"
+        android:layout_gravity="top|left"
+        android:layout_width="100dp"
+        android:textOff="D"
+        android:textOn="DRIVE" />
+
+    <ProgressBar
+        style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progressBar2" />
+
+    <ToggleButton
+        android:text="R"
+        android:id="@+id/toggleButton2"
+        android:layout_height="100dp"
+        app:layout_anchor="@+id/progressBar2"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        android:layout_gravity="top|left"
+        android:layout_width="100dp"
+        android:textOff="R"
+        android:textOn="REVERSE" />
+
+    <ToggleButton
+        android:text="P"
+        android:id="@+id/toggleButton"
+        app:layout_anchor="@+id/progressBar2"
+        app:layout_anchorGravity="bottom|left"
+        android:layout_gravity="center_vertical|right"
+        android:layout_width="100dp"
+        android:textOff="P"
+        android:textOn="PARK"
+        android:layout_height="100dp" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="top|right"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"
-        app:backgroundTint="@android:color/holo_green_dark" />
-
-    <Switch
-        android:text="Switch"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:id="@+id/switch1"
-        app:layout_anchor="@+id/TextFile1"
+        app:srcCompat="@android:drawable/ic_btn_speak_now"
+        app:backgroundTint="@android:color/black"
+        app:elevation="10dp"
+        app:layout_anchor="@+id/progressBar2"
         app:layout_anchorGravity="center_vertical|left"
-        android:layout_gravity="center_vertical|right" />
+        android:layout_height="45dp"
+        android:layout_width="45dp" />
 
-    <include layout="@layout/content_main"
-        android:id="@+id/TextFile1"
-        android:layout_height="394dp"
-        android:layout_width="match_parent" />
+
 
 </android.support.design.widget.CoordinatorLayout>
+

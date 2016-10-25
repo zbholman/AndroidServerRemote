@@ -1,3 +1,4 @@
+
 package ist440.pibraking;
 
 import android.os.AsyncTask;
@@ -5,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.ToggleButton;
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -13,108 +17,150 @@ import com.jcraft.jsch.Session;
 
 import java.util.Properties;
 
-/**
- * Created by QILI JIAN on 10/5/2016.
- */
-
-
 public class PiBraking extends AppCompatActivity {
+
+    ImageView imageView, imageView2, imageView3, imageView4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pi_braking);
 
-        //initialize variable for connection of pi
-
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "192.168.1.112";
+        final String hostname = "104.39.123.213";
+
+        final String scriptDir = "python /home/pi";
         final int port = 22;
 
-        final String brakeDir = "python /home/pi/Desktop/PSUABFA16IST440/BrakingSystem/Relay/4port";
+
+        final ToggleButton absBrake = (ToggleButton) findViewById(R.id.absBrake);
+
+        final ImageView imageView =(ImageView) findViewById(R.id.imageView);
+        final ImageView imageView2 =(ImageView) findViewById(R.id.imageView2);
+        final ImageView imageView3 =(ImageView) findViewById(R.id.imageView3);
+        final ImageView imageView4 =(ImageView) findViewById(R.id.imageView4);
+
+        imageView.setVisibility(View.INVISIBLE);
+        imageView2.setVisibility(View.INVISIBLE);
+        imageView3.setVisibility(View.INVISIBLE);
+        imageView4.setVisibility(View.INVISIBLE);
 
 
-        // create button to apply abs
-        final Button allBrake = (Button) findViewById(R.id.brakeControlButton);
-
-        //Set Default ABS to off (False)
 
 
-        allBrake.setOnClickListener(new View.OnClickListener()  {
+        absBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = brakeDir + "/script1.py";
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/servo1.py";
 
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            // Execute command on the pi
-                            remoteCommand(username, password, hostname, command, port);
-                        } catch (JSchException e) {
-                            e.printStackTrace();
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
                         }
-                        return null;
+                    }.execute(1);
+                    if (success) {
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView2.setVisibility(View.VISIBLE);
+                        imageView3.setVisibility(View.VISIBLE);
+                        imageView4.setVisibility(View.VISIBLE);
+
                     }
-                };
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = "^c";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.INVISIBLE);
+                        imageView3.setVisibility(View.INVISIBLE);
+                        imageView4.setVisibility(View.INVISIBLE);
+
+                    }
+                }
+
             }
-
         });
-        //ImageButton btnFL = (ImageButton) findViewById(R.id.btnFL);
-        //ImageButton btnRR = (ImageButton) findViewById(R.id.btnRR);
-        //ImageButton btnRL = (ImageButton) findViewById(R.id.btnRL);
-
-
     }
-    public void remoteCommand(String username, String password, String hostname, String command, int port) throws JSchException {
-        // New Jsch object for connecting
-        JSch jsch = new JSch();
 
-        // Try to create a session using username, hostname, and port
-        Session session = null;
-        try {
-            session = jsch.getSession(username, hostname, port);
-        } catch (JSchException e) {
-            e.printStackTrace();
+
+
+
+            // This method is connects to the pi, and runs the command given
+            public void executeRemoteCommand(String username,
+                                             String password,
+                                             String hostname,
+                                             String command,
+                                             int port)
+                    throws JSchException {
+                // New Jsch object for connecting
+                JSch jsch = new JSch();
+
+                // Try to create a session using username, hostname, and port
+                Session session = null;
+                try {
+                    session = jsch.getSession(username, hostname, port);
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+
+                // Set the password for the session
+                assert session != null;
+                session.setPassword(password);
+
+                // Avoid asking for key confirmation
+                Properties prop = new Properties();
+                prop.put("StrictHostKeyChecking", "no");
+                session.setConfig(prop);
+
+                // Attempt to connect
+                try {
+                    session.connect();
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+
+                // SSH Channel
+                ChannelExec channelssh = null;
+                try {
+                    channelssh = (ChannelExec)
+                            session.openChannel("exec");
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+                // Use this if there is any need for output to return to android
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//        channelssh.setOutputStream(baos);
+
+                // Execute command
+                assert channelssh != null;
+                channelssh.setCommand(command);
+                try {
+                    channelssh.connect();
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+                channelssh.disconnect();
+            }
         }
 
-        // Set the password for the session
-        assert session != null;
-        session.setPassword(password);
 
-        // Avoid asking for key confirmation
-        Properties prop = new Properties();
-        prop.put("StrictHostKeyChecking", "no");
-        session.setConfig(prop);
 
-        // Attempt to connect
-        try {
-            session.connect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-
-        // SSH Channel
-        ChannelExec channelSSH = null;
-        try {
-            channelSSH = (ChannelExec)
-                    session.openChannel("exec");
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        // Use this if there is any need for output to return to android
-        //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //
-        //        channelssh.setOutputStream(baos);
-
-        // Execute command
-        assert channelSSH != null;
-        channelSSH.setCommand(command);
-        try {
-            channelSSH.connect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        channelSSH.disconnect();
-    }
-}

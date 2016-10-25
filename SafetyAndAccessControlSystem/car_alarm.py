@@ -5,6 +5,11 @@
 
 from sense_hat import SenseHat
 import time
+import pygame
+
+pygame.mixer.init()
+pygame.mixer.music.load("setalarm.mp3")
+pygame.mixer.music.play()
 
 s = SenseHat()
 s.clear()

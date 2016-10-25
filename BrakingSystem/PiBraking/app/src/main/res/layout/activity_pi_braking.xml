@@ -12,74 +12,64 @@
     android:background="@drawable/auto_pic_resize"
     tools:context="ist440.pibraking.PiBraking">
 
-    <Button
-        android:text="Brake"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/brakeControlButton" />
 
     <ToggleButton
-        android:text="ABS"
+        android:text="ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/absButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:id="@+id/absBrake"
         android:textOff="ABS:OFF"
         android:textOn="ABS:ON" />
 
-    <ImageButton
-        android:alpha="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/tire_b"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:id="@+id/flBrake"
-        android:contentDescription="tiresbutton"
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:id="@+id/imageView4"
+        android:background="#50ff2f2f"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_above="@+id/absBrake"
+        android:layout_toRightOf="@+id/absBrake"
+        android:layout_toEndOf="@+id/absBrake" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:layout_marginTop="53dp"
+        android:id="@+id/imageView2"
+        android:background="#50ff2f2f"
+
+        android:layout_below="@+id/absBrake"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView4" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:layout_marginTop="60dp"
+        android:id="@+id/imageView3"
+        android:background="#50ff2f2f"
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="41dp" />
+        android:layout_toLeftOf="@+id/absBrake"
+        android:layout_toStartOf="@+id/absBrake" />
 
-    <ImageButton
-        android:alpha="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/tire_b"
-        android:id="@+id/frBrake"
-        android:contentDescription="tiresbutton"
-        android:layout_alignTop="@+id/flBrake"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="42dp"
-        android:layout_marginEnd="42dp" />
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="65dp"
+        app:srcCompat="@android:color/transparent"
+        android:id="@+id/imageView"
+        android:background="#50ff2f2f"
 
-    <ImageButton
-        android:alpha="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/tire_b"
-        android:id="@+id/rlBrake"
-        android:contentDescription="tiresbutton"
-        android:layout_above="@+id/absButton"
-        android:layout_alignLeft="@+id/flBrake"
-        android:layout_alignStart="@+id/flBrake" />
-
-    <ImageButton
-        android:alpha="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/tire_b"
-        android:id="@+id/rrBrake"
-        android:contentDescription="tiresbutton"
-        android:layout_above="@+id/brakeControlButton"
-        android:layout_alignLeft="@+id/frBrake"
-        android:layout_alignStart="@+id/frBrake" />
-
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignLeft="@+id/imageView3"
+        android:layout_alignStart="@+id/imageView3" />
 
 </RelativeLayout>

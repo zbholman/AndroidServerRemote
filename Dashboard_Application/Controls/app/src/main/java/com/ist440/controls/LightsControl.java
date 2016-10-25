@@ -29,8 +29,8 @@ public class LightsControl extends AppCompatActivity {
         setContentView(R.layout.activity_lights_control);
 
         // initialize variables for connecting to pi
-        final String username = "pi";
-        final String password = "raspberry";
+        final String username = "team";
+        final String password = "lightingsystem";
         final String hostname = "75.102.85.173"; // Pi IP on PSU network
 //        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
@@ -39,14 +39,19 @@ public class LightsControl extends AppCompatActivity {
 
         // Create switch for lights
         Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
+        Switch switchHeadLights = (Switch) findViewById(R.id.switchHeadLights);
+        Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
 
         // Create icon images
         final ImageView iconHighBeams = (ImageView) findViewById(R.id.iconHighBeams);
+        final ImageView iconHeadLights = (ImageView) findViewById(R.id.iconHeadLights);
+        final ImageView iconLeftTurn = (ImageView) findViewById(R.id.iconLeftTurn);
 
         // Set default state to false (off)
         switchHighBeams.setChecked(false);
+        switchHeadLights.setChecked(false);
+        switchLeftTurn.setChecked(false);
 
-        // Create listener event
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
@@ -92,6 +97,102 @@ public class LightsControl extends AppCompatActivity {
                 }
             }
         });
+
+
+        // Create listener event for high beams
+        switchHeadLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called when switch is toggled
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on high beams
+                if (isChecked) {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/head_lights.py";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+
+                    // If the light turns on, set icon to visible
+                    if (success) {iconHeadLights.setVisibility(View.VISIBLE);}
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/turn_off_sense_hat_lights.py";
+                        protected Void doInBackground(Integer... params) {
+                            // Else, turn off high beams
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+
+                    // If light turns off, set icon to invisible
+                    if (success) {iconHeadLights.setVisibility(View.INVISIBLE);}
+                }
+            }
+        });
+
+        // Create listener event for high beams
+        switchLeftTurn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called when switch is toggled
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on high beams
+                if (isChecked) {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/Left_turn.py";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+
+                    // If the light turns on, set icon to visible
+                    if (success) {iconLeftTurn.setVisibility(View.VISIBLE);}
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = lightsDir + "/turn_off_sense_hat_lights.py";
+                        protected Void doInBackground(Integer... params) {
+                            // Else, turn off high beams
+                            try {
+                                // Execute command on the pi
+                                runPiCommand(username, password, hostname, command, port);
+                            } catch (JSchException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+
+                    // If light turns off, set icon to invisible
+                    if (success) {iconLeftTurn.setVisibility(View.INVISIBLE);}
+                }
+            }
+        });
+
     }
 
     // This method is connects to the pi, and runs the command given

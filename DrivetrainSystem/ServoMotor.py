@@ -1,5 +1,6 @@
 # IST 440
 # Servo DriveTrain
+# Rahul, Gee snd Klaus
 import RPi.GPIO as GPIO
 from time import sleep
  
