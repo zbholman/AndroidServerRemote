@@ -6,9 +6,21 @@
 
 import time
 import grovepi
+import math
+
+d = input("Please enter your name: ")
+
+t =
+
+# Getting speed from 1 direction
+
+
+
+# Getting speed from 2 directions
 
 # The GrovePi connects the Raspberry Pi and Grove sensors
 # Connect the Grove Accelerometer (+/- 1.5g) to any I2C port
+
 
 while True:
    try:
