@@ -1,5 +1,20 @@
 package saac.androidapp;
 
+/*
+    Class: IST440W
+    Professor: Joseph Oakes
+    Penn State Abington
+    Team 6 - Safety and Access Control
+
+    This Android application was started in September as part of the IST 440 Group 6, Safety and Access Control Systems
+    This application will be a control board to support and communicate with the car robot in order to perform necessary functions
+    Functions included:
+    - Unlock, Lock, and Alarm settings. This will be in the form of visual buttons as well as a keypad code.
+    - Create JSON objects upon successful event calls to send to Pi robot for logging
+
+    This app was primarily developed by team member: Matt Handwerk
+ */
+
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -32,16 +47,6 @@ public class Main extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
-/*
-    This Android application was started in September as part of the IST 440 Group 6, Safety and Access Control Systems
-    This application will be a control board to support and communicate with the car robot in order to perform necessary functions
-    Functions included:
-    - Unlock, Lock, and Alarm settings. This will be in the form of visual buttons as well as a keypad code.
-    - Create JSON objects upon successful event calls to send to Pi robot for logging
-
-    This app was primarily developed by team member: Matt Handwerk
-     */
 
     public void runPiCommand(String user, String pass, String host, String command, int port) throws JSchException {
         // New Jsch object for connecting
