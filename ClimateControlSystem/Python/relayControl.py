@@ -1,3 +1,7 @@
+#Class: IST440W 
+#Professor: Joe Oakes
+#Team 3
+
 import os
 import RPi.GPIO as GPIO
 import time
