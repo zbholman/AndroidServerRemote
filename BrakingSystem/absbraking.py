@@ -1,3 +1,9 @@
+#Penn State Abington
+#IST 440W
+#Fall 2016
+#Team Pump Your Brakes
+#Members: Abu Sakif, David Austin, Qili Jian, Abu Chowdhury, Gary Martorana, Chakman Fung
+
 import RPi.GPIO as GPIO
 import time
 
@@ -19,8 +25,9 @@ try:
                 time.sleep(0.125)#time between brake pumps
                 p.ChangeDutyCycle(9)#disengages brake
                 time.sleep(0.125)
-                if timePassed >= 4:
-                        p.stop()#stops power to servo after 4 seconds
+        if timePassed >= 4:
+                p.stop()#stops power to servo after 4 seconds
+                GPIO.cleanup()
 
 except KeyboardInterrupt:
         GPIO.cleanup()
