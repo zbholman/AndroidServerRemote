@@ -15,8 +15,10 @@ class Log:
                 db = client.dbNiravkumar
                 return db
 
-        def add_message(db):
-                db.logging.insert({"PLD": "payload: This message format defined by subteams", "UID": "cc077cc47be14d968fc1947e7edd3436", "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a", "CID": "car10393", "DID": "ML", "HC": 3, "TTL": 100, "OID": "CC", "TS": 1476407469.717848})
+        def add_message(db, message):
+               
+		db.logging.insert(message.ConvertToDictionary)
+		 #db.logging.insert({"PLD": "payload: This message format defined by subteams", "UID": "cc077cc47be14d968fc1947e7edd3436", "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a", "CID": "car10393", "DID": "ML", "HC": 3, "TTL": 100, "OID": "CC", "TS": 1476407469.717848})
 	#returns a message from the current database, collection 'logging'
         def get_message(db):
                 return db.logging.find_one()

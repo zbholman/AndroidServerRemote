@@ -138,6 +138,7 @@ public class Main extends AppCompatActivity {
 
         //Initialize media player files
         final MediaPlayer unlock = MediaPlayer.create(this, R.raw.unlockcar);
+        final MediaPlayer alarm = MediaPlayer.create(this, R.raw.setalarm);
         final MediaPlayer lock = MediaPlayer.create(this, R.raw.lockcar);
         //final MediaPlayer alarm = MediaPlayer.create(this, R.raw.setalarm);
 
@@ -230,6 +231,7 @@ public class Main extends AppCompatActivity {
                         try {
                             // Execute command on the pi
                             runPiCommand(user, pass, host, command, port);
+                            //unlocklights for final car - LightingSystem/PythonLights/Scroll_phat/unlock_lights.py
                             unlock.start();
                         } catch (JSchException e) {
                             e.printStackTrace();
@@ -267,7 +269,7 @@ public class Main extends AppCompatActivity {
                         try {
                             // Execute command on the pi
                             runPiCommand(user, pass, host, command, port);
-                            //alarm.start()
+                            alarm.start();
                         } catch (JSchException e) {
                             e.printStackTrace();
                         }
