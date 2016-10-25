@@ -1,3 +1,8 @@
+#Class: IST440W 
+#Professor: Joe Oakes
+#Team 3
+#Authors: Mohammed, Ahmad
+
 from grovepi import grovepi
 import os
 import time
