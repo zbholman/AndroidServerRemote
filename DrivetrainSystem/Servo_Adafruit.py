@@ -25,7 +25,7 @@ servo_min = 150  # Min pulse length out of 4096
 servo_neutral = 375
 servo_max = 600  # Max pulse length out of 4096
 
-# Helper function to make setting a servo pulse width simpler.
+# Helper function to make setting a servo pulse width simpler
 def set_servo_pulse(channel, pulse):
     pulse_length = 1000000    # 1,000,000 us per second
     pulse_length //= 60       # 60 Hz
@@ -36,7 +36,7 @@ def set_servo_pulse(channel, pulse):
     pulse //= pulse_length
     pwm.set_pwm(channel, 0, pulse)
 
-# Set frequency to 60hz, good for servos.
+# Set frequency to 60hz, for servos.
 pwm.set_pwm_freq(60)
 
 print('Moving servo on channel 0, press Ctrl-C to quit...')
