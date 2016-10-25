@@ -1,3 +1,7 @@
+#Class: IST440W 
+#Professor: Joe Oakes
+#Team 3
+
 from grovepi import grovepi
 import os
 import time

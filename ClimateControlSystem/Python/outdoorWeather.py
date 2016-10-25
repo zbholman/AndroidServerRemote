@@ -1,3 +1,8 @@
+#Class: IST440W 
+#Professor: Joe Oakes
+#Team 3
+#Authors: Yusef, Mohammed
+
 import pyowm #Python Library, Open Weather Map
 
 #Register API Key with source
