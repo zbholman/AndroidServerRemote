@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+//Imports for SSH into Pi
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -118,12 +120,16 @@ public class Main extends AppCompatActivity {
         Button button10 = (Button) findViewById(R.id.button10);
         Button button11 = (Button) findViewById(R.id.button11);
         Button button12 = (Button) findViewById(R.id.button12);
+
+        //Fields to contain password and password asteriks, as well as event description
         final EditText editText = (EditText) findViewById(R.id.editText);
         final EditText editText2 = (EditText) findViewById(R.id.editText2);
         final EditText editText3 = (EditText) findViewById(R.id.editText3);
-        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
-        ImageButton imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
-        ImageButton imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
+
+        //Picture buttons
+        ImageButton lockButton = (ImageButton) findViewById(R.id.lockButton);
+        ImageButton unlockButton = (ImageButton) findViewById(R.id.unlockButton);
+        ImageButton alarmButton = (ImageButton) findViewById(R.id.alarmButton);
 
         //Initialize media player files
         final MediaPlayer unlock = MediaPlayer.create(this, R.raw.unlockcar);
@@ -150,14 +156,31 @@ public class Main extends AppCompatActivity {
         assert editText != null;
         assert editText2 != null;
         assert editText3 != null;
-        assert imageButton != null;
-        assert imageButton2 != null;
-        assert imageButton3 != null;
+        assert unlockButton != null;
+        assert lockButton != null;
+        assert alarmButton != null;
 
 
         //LOCK BUTTON
-        imageButton.setOnClickListener(new OnClickListener() {
+        lockButton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
+                //JSON Object LOCK
+                        /*JSONObject jsonObj = new JSONObject();
+                        JSONArray jsonArray = new JSONArray();
+                        try {
+                            jsonObj.put("CD", 23790);
+                            jsonObj.put("Lock", "Door Lock Event");
+
+                            jsonArray.put("system1");
+                            jsonArray.put("system2");
+
+                            jsonObj.put("sys", jsonArray);
+
+                        }catch (Exception ex)
+                        {
+                            ex.printStackTrace();
+
+                        }*/
                 new AsyncTask<Integer, Void, Void>() {
                     String command = dir + "/Doors_locked.py";
 
@@ -176,8 +199,25 @@ public class Main extends AppCompatActivity {
         });
 
         //UNLOCK BUTTON
-        imageButton2.setOnClickListener(new OnClickListener() {
+        unlockButton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
+                //JSON Object UNLOCK
+                /*JSONObject jsonObj = new JSONObject();
+                        JSONArray jsonArray = new JSONArray();
+                        try {
+                            jsonObj.put("CD", 23789);
+                            jsonObj.put("Unlock", "Door Unlock Event");
+
+                            jsonArray.put("system1");
+                            jsonArray.put("system2");
+
+                            jsonObj.put("sys", jsonArray);
+
+                        }catch (Exception ex)
+                        {
+                            ex.printStackTrace();
+
+                        }*/
                 new AsyncTask<Integer, Void, Void>() {
                     String command = dir + "/Doors_unlock.py";
 
@@ -196,8 +236,25 @@ public class Main extends AppCompatActivity {
         });
 
         //SET ALARM BUTTON
-        imageButton3.setOnClickListener(new OnClickListener() {
+        alarmButton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
+                //JSON Object ALARM
+                        /*JSONObject jsonObj = new JSONObject();
+                        JSONArray jsonArray = new JSONArray();
+                        try {
+                            jsonObj.put("CA", 33789);
+                            jsonObj.put("Alarm", "Alarm Set event");
+
+                            jsonArray.put("system1");
+                            jsonArray.put("system2");
+
+                            jsonObj.put("sys", jsonArray);
+
+                        }catch (Exception ex)
+                        {
+                            ex.printStackTrace();
+
+                        }*/
                 new AsyncTask<Integer, Void, Void>() {
                     String command = dir + "/car_alarm.py";
 
@@ -384,11 +441,12 @@ public class Main extends AppCompatActivity {
                     if (sNum.matches("123456")) {
                         editText.setText("");
                         editText3.setText("Doors Unlocked!");
+                        //JSON Object UNLOCK
                         /*JSONObject jsonObj = new JSONObject();
                         JSONArray jsonArray = new JSONArray();
                         try {
-                            jsonObj.put("id", 12345);
-                            jsonObj.put("name", "Door Unlock Event");
+                            jsonObj.put("CD", 23789);
+                            jsonObj.put("Unlock", "Door Unlock Event");
 
                             jsonArray.put("system1");
                             jsonArray.put("system2");

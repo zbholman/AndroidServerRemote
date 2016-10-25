@@ -242,36 +242,36 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:id="@+id/lockButton"
         android:src="@mipmap/lockityo"
         android:background="@drawable/selector"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/imageButton3"
-        android:layout_toLeftOf="@+id/imageButton3"
+        android:layout_toStartOf="@+id/alarmButton"
+        android:layout_toLeftOf="@+id/alarmButton"
         android:paddingTop="10dp"
         android:paddingBottom="10dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
+        android:id="@+id/unlockButton"
         android:src="@mipmap/unlockityo"
         android:background="@drawable/selector"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/imageButton3"
-        android:layout_toRightOf="@+id/imageButton3"
+        android:layout_toEndOf="@+id/alarmButton"
+        android:layout_toRightOf="@+id/alarmButton"
         android:paddingTop="10dp"
         android:paddingBottom="10dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton3"
+        android:id="@+id/alarmButton"
         android:src="@mipmap/alarmonyo"
         android:background="@drawable/selector"
-        android:layout_alignTop="@+id/imageButton2"
+        android:layout_alignTop="@+id/unlockButton"
         android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/imageButton"
+        android:layout_alignBottom="@+id/unlockButton"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
 
