@@ -32,7 +32,7 @@ def fanOFF():
         GPIO.output(FAN_PIN, 1) #fan off
         return()
 
-#While loop to keep Fan On until user end loop using Ctrl + C
+#While loop to keep Fan On until user end loop using Ctrl + Z
 while True:
         try:
                 fanON()
