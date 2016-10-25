@@ -1,7 +1,6 @@
 #Class: IST440W 
 #Professor: Joe Oakes
 #Team 3
-#Authors: 
 
 from grovepi import grovepi
 import os
