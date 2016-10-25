@@ -133,7 +133,9 @@
         tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
         android:layout_below="@+id/switchHeadLights"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/switchLeftTurn"
+        android:layout_alignEnd="@+id/switchLeftTurn" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -162,8 +164,8 @@
         android:tint="@android:color/holo_blue_bright"
         android:backgroundTintMode="add"
         android:layout_alignTop="@+id/iconLeftTurn"
-        android:layout_alignLeft="@+id/switchHazardLight"
-        android:layout_alignStart="@+id/switchHazardLight" />
+        android:layout_toRightOf="@+id/switchRightTurn"
+        android:layout_toEndOf="@+id/switchRightTurn" />
 
     <ImageView
         android:layout_width="150dp"
@@ -173,10 +175,8 @@
         android:elevation="24dp"
         android:tint="@android:color/holo_blue_bright"
         android:backgroundTintMode="add"
-        android:layout_above="@+id/switchHazardLight"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginEnd="30dp"
-        android:id="@+id/iconHazardLight" />
+        android:id="@+id/iconHazardLight"
+        android:layout_alignTop="@+id/iconRightTurn"
+        android:layout_toRightOf="@+id/iconRightTurn"
+        android:layout_toEndOf="@+id/iconRightTurn" />
 </RelativeLayout>
