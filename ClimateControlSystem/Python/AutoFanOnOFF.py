@@ -1,3 +1,8 @@
+#Class: IST440W 
+#Professor: Joe Oakes
+#Team 3
+#Authors: Nirav
+
 # /usr/bin/env python3
 import os
 import RPi.GPIO as GPIO
