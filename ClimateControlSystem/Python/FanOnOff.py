@@ -75,10 +75,7 @@ def run(pin):
                         GPIO.cleanup()
                         return 1 # exit script. 
                 else:
-                        time.sleep(5) # Remove, if you want real-time checking
                         print('Fan is OFF')
-        else:
-                        pass # while the script is passing through here, there will be no output on screen
                        
 #testing command line                        
 if action == "on" :
