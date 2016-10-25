@@ -38,13 +38,13 @@ pwm.set_pwm_freq(60)
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 while True:
     # Move servo on channel O between extremes.
-    pwm.set_pwm(0, 0, servo_min) # 0 on Servo
+    pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
     time.sleep(1)
-    pwm.set_pwm(0, 0, servo_neutral) # 90 on Servo
+    pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
     time.sleep(1)
-    pwm.set_pwm(0, 0, servo_max) # 180 on Servo
+    pwm.set_pwm(0, 0, servo_max) # Servo will be on position 180
     time.sleep(1)
-    pwm.set_pwm(0, 0, servo_neutral) # 90 on Servo
+    pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
     time.sleep(1)
-    pwm.set_pwm(0, 0, servo_min) # 0 on Servo
+    pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
     time.sleep(1)
