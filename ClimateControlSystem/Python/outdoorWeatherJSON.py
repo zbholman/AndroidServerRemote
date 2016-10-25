@@ -1,5 +1,5 @@
 import json
-import pyowm
+import pyowm #Python Open Weather Map
 
 try:
 # Register API Key with source
