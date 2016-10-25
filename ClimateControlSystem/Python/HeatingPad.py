@@ -1,43 +1,47 @@
+# Heating.py
+# IST440 Team 3
+# author: Nirav
+
+#import statements
+
+import os
 import RPi.GPIO as GPIO
 import time
-from grovepi import grovepi
+import datetime
+import sys
 
-GPIO.setmode(GPIO.BCM)
+# GPIO pin on raspberry Pi to connect Heating Pad to pin(Fan connected to relay One)
+Heating_Pin = 4
 
-# init list with pin numbers
+# Method to setup GPIO pins.
+def GPIOsetup():
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(Heating_Pin, GPIO.OUT)
 
-pinList = [4]
+# Method to turn relay ON that is Heating Pad ON
+def HeatON():
+        GPIOsetup()
+        GPIO.output(Heating_Pin, 0) #Heat on
+	print("Heat On")
+        return()
 
-# loop through pins and set mode and state to 'high'
-
-for i in pinList: 
-    GPIO.setup(i, GPIO.OUT) 
-    GPIO.output(i, GPIO.HIGH)
-
-# time to sleep between operations in the main loop
-
-SleepTimeL = 10
-
-# main loop
-DHT_SENSOR_TYPE = 1
-DHT_SENSOR_PIN = 3
+# Method to tur relay OFF that is Heating Pad OFF
+def HeatOFF():
+        GPIOsetup()
+        GPIO.output(Heating_Pin, 1) #Heat off
+	print("Heat Off")
+        return()
 
 try:
-  
-  [temp_c,hum] = grovepi.dht(DHT_SENSOR_PIN,DHT_SENSOR_TYPE)
-  temp_f = temp_c * 9.0 / 5.0 + 32.0
-  
-  if temp_f > 70:
-        GPIO.output(4,GPIO.LOW)
-  	print "Fan ON"
-        time.sleep(30);	
- 
-  GPIO.cleanup()
-  print "Good bye!"
+	HeatON()
+        time.sleep(15)
+	HeatOFF()
 
-# End program cleanly with keyboard
 except KeyboardInterrupt:
-  print "  Quit"
+        print "Quit"
 
   # Reset GPIO settings
-  GPIO.cleanup()
+GPIO.cleanup()
+
+
