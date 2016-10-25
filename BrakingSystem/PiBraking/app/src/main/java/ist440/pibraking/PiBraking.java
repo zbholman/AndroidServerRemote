@@ -1,3 +1,4 @@
+
 package ist440.pibraking;
 
 import android.os.AsyncTask;
@@ -5,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.ToggleButton;
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -15,7 +19,7 @@ import java.util.Properties;
 
 public class PiBraking extends AppCompatActivity {
 
-
+    ImageView imageView, imageView2, imageView3, imageView4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,35 +28,79 @@ public class PiBraking extends AppCompatActivity {
 
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "192.168.1.149";
+        final String hostname = "104.39.123.213";
 
-        final String scriptDir = "touch /home/pi/Desktop";
+        final String scriptDir = "python /home/pi";
         final int port = 22;
 
-        final Button piBrake = (Button) findViewById(R.id.allBrake);
 
-        piBrake.setOnClickListener(new View.OnClickListener() {
+        final ToggleButton absBrake = (ToggleButton) findViewById(R.id.absBrake);
 
+        final ImageView imageView =(ImageView) findViewById(R.id.imageView);
+        final ImageView imageView2 =(ImageView) findViewById(R.id.imageView2);
+        final ImageView imageView3 =(ImageView) findViewById(R.id.imageView3);
+        final ImageView imageView4 =(ImageView) findViewById(R.id.imageView4);
+
+        imageView.setVisibility(View.INVISIBLE);
+        imageView2.setVisibility(View.INVISIBLE);
+        imageView3.setVisibility(View.INVISIBLE);
+        imageView4.setVisibility(View.INVISIBLE);
+
+
+
+
+        absBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = scriptDir + "/brake.py";
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/servo1.py";
 
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            executeRemoteCommand(username, password, hostname, command, port);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
                         }
-                        return null;
+                    }.execute(1);
+                    if (success) {
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView2.setVisibility(View.VISIBLE);
+                        imageView3.setVisibility(View.VISIBLE);
+                        imageView4.setVisibility(View.VISIBLE);
+
                     }
-                }.execute(1);
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = "^c";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        imageView.setVisibility(View.INVISIBLE);
+                        imageView2.setVisibility(View.INVISIBLE);
+                        imageView3.setVisibility(View.INVISIBLE);
+                        imageView4.setVisibility(View.INVISIBLE);
+
+                    }
+                }
 
             }
-
-
         });
     }
+
+
 
 
             // This method is connects to the pi, and runs the command given
