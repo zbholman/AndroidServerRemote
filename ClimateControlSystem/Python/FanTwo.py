@@ -3,16 +3,13 @@
 # author: Nirav
 
 #import statements
-
-import os
 import RPi.GPIO as GPIO
 import time
-import datetime
-import sys
 
-# GPIO pin on raspberry Pi to connect relay pin(Fan connected to relay One)
 
-FAN_PIN = 4
+# GPIO pin on raspberry Pi to connect relay pin(Fan connected to relay two)
+
+FAN_PIN = 17
 
 # Method to setup GPIO pins.
 def GPIOsetup():
@@ -32,7 +29,7 @@ def fanOFF():
         GPIO.output(FAN_PIN, 1) #fan off
         return()
 
-#While loop to keep Fan On until user end loop using Ctrl + C
+#While loop to keep Fan On until user end loop using Ctrl + Z
 while True:
         try:
                 fanON()

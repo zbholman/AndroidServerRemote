@@ -1,5 +1,5 @@
 import json
-import pyowm
+import pyowm #Python Open Weather Map
 
 try:
 # Register API Key with source
@@ -22,9 +22,10 @@ try:
 	outdoorHumidity = w.get_humidity()
 	print('Humidity:', outdoorHumidity, '%')
 
+# Create a dictionary object for gathering all data from PYOWM to write out to a JSON file
 	outdoorTempTOjson = {'Location': location, 'Fahrenheit temperature': outdoorFahrenheit, 'Humidity': outdoorHumidity}
-	fileName = 'outdoorWeather.json' # name of the python code
-	outFile = open(fileName, 'w') # W stands for writing
+	fileName = 'outdoorWeather.json' # name of the JSON output file
+	outFile = open(fileName, 'w') # W stands for writing, writing out to the JSON file
 	json.dump(outdoorTempTOjson, outFile) # Dumping all contents from Temp to Json
 	outFile.close() # Close the outfile
 
