@@ -1,15 +1,21 @@
-import json
+import time
+from grovepi import *
 
-class brakingsystem:
+# Connect the Grove LED to digital port 04
+led = 4
 
-    def brakestatus(bluetooth):
-
-        with open ('Data') as json_data: #opens json file
-
-            que = json_data.read()
-
-            message = json.loads(que)
-
-            for id in message['CID']:
-
-                message.insert["OID:BSS, DID:LMS, PLD:brakes applied"]
+pinMode(led,"OUTPUT")
+time.sleep(1)
+while True:
+	try:
+		#Blink the LED
+		digitalWrite(led,1)   # Send HIGH to switch LED
+		time.sleep(1)
+		
+		digitalWrite(led,0)   # Send LOW to swtich off LED
+		time.sleep(1)
+	except KeyboardInterrupt:
+		digitalWrite(led,0)   # Turn LED off before stopping
+		break
+	except IOError:
+		print "Error"
