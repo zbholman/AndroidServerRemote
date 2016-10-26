@@ -19,65 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        increase = (Button) findViewById(R.id.increase);
-        temp = (TextView) findViewById(R.id.temp);
-
-        increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                mCounter ++;
-                temp.setText(Integer.toString(mCounter));
-
-            }
-
-        });
-
-        decrease = (Button) findViewById(R.id.decrease);
-        temp = (TextView) findViewById(R.id.temp);
-
-        decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mCounter --;
-                temp.setText(Integer.toString(mCounter));
-
-            }
-        });
-
-        //
-        //
-        //passenger
-
-        //increase_pass = (Button) findViewById(R.id.increase_pass);
-        //temp_pass = (TextView) findViewById(R.id.temp_pass);
-
-        //increase_pass.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View view) {
-
-//                mInteger ++;
-  //              temp_pass.setText(Integer.toString(mInteger));
-
-    //        }
-      //  });
-
-        //decrease_pass = (Button) findViewById(R.id.decrease_pass);
-        //temp_pass = (TextView) findViewById(R.id.temp_pass);
-
-        //decrease_pass.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View v) {
-
-              //  mInteger --;
-                //temp_pass.setText(Integer.toString(mInteger));
-            //}
-       // });
-
-
-        //heat
-
 
 
     }
