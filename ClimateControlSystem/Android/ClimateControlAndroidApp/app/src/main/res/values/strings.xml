@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">ClimateControlAndroidApp</string>
-    <string name="toggle_ac_on">AC On</string>
-    <string name="toggle_ac_off">AC Off</string>
-    <string name="toggle_heat_on">Heat On</string>
-    <string name="toggle_heat_off">Heat Off</string>
-</resources>
