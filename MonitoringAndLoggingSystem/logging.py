@@ -2,6 +2,7 @@
 # logging.py
 # author: IST411 Group 2
 # 9/8/2016
+# Version 4
 #This class is the code responsible for creating logs and storing them in a Mongo Database. 
 import json
 from pymongo import MongoClient
