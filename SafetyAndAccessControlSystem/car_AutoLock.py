@@ -1,6 +1,6 @@
 # Author: Phuong Lu
 # Date: 10/1/2016
-# Course: IST 440W, Team 6
+# Course: IST 440W - Team 6, Professor Oakes
 # Purpose: Detect car speed with accelerometer from Sense HAT and display door lock/unlock functions based on speed
 
 from sense_hat import SenseHat

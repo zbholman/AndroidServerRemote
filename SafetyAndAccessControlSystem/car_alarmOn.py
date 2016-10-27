@@ -1,6 +1,6 @@
 # Contributors: Phuong Lu, Joey Lee, and Matt Handwerk
 # Date: 10/4/2016
-# Course: IST 440W, Team 6
+# Course: IST 440W - Team 6, Professor Oakes
 # Purpose: Display car alarm logo on Sense HAT when alarm is turned on
 
 from sense_hat import SenseHat

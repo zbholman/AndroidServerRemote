@@ -1,21 +1,26 @@
 #Ashish Baby
+#IST 440W Fall 2016
+#PennState Abington
+#Professor Oakes
 #Version 1.04
+#Creates image on sense hat indicating that the car doors are locked
 #10-13-16
+
 
 from sense_hat import SenseHat
 import time
 
-import pygame
+import pygame #python module
 
 pygame.mixer.init()
 pygame.mixer.music.load("lockcar.wav")
 pygame.mixer.music.play()
 
 s = SenseHat()
-s.clear()
+s.clear() #clears previous sense hat image
 s.low_light = True
-
-green = (0, 255, 0)
+used
+green = (0, 255, 0) #teling the sense what colors are going to be 
 red = (255, 0, 0)
 nothing = (0,0,0)
 
@@ -34,7 +39,7 @@ def doors_lock():
     R, O, O, O, O, O, O, R,
     ]
   return logo
-    
+    #mapping out how the pixels and different colors will be arranged
   
 
 images = [doors_lock]
@@ -42,7 +47,7 @@ count = 0
 
 i=0
 
-while (i<3): 
+while (i<3): #image will flash 3 times when 
    s.set_pixels(images[count % len(images)]())
    time.sleep(.75)
    s.clear()

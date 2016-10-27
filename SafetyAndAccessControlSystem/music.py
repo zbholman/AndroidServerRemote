@@ -6,9 +6,7 @@
 #python code for playing sound/music.
 
 import pygame
-
-#	initialize the mixer module
-pygame.mixer.init()
+pygame.mixer.init() #initialize the mixer module
 
 #Load a music file forever.mp3 for playback
 pygame.mixer.music.load("Forever.mp3")
