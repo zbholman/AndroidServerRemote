@@ -1,4 +1,10 @@
+#IST 440
+# Drive Train (Team 02)
+# Author:Tapan Patel, Joe Altomare 
+# Version: 5
+# Date: 10/27/2016
 package com.example.tapanapatel.drivetrainfinal;
+
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
+        #gets called by the toggle buttons
         ToggleButton tg1, tg2, tg3, tg4;
         tg1 = (ToggleButton) findViewById(R.id.toggleButton1);
         tg2 = (ToggleButton) findViewById(R.id.toggleButton2);
