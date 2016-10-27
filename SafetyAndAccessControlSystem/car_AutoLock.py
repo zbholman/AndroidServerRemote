@@ -6,6 +6,12 @@
 from sense_hat import SenseHat
 from doors_locked.py import doors_lock
 from doors_unlock.py import doors_unlock
+import pygame #Python module
+
+#Play door locking sound
+pygame.mixer.init()
+pygame.mixer.music.load("/home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/lockcar.wav")
+pygame.mixer.music.play()
 
 #Get car speed from accelerometer
 sense = SenseHat()
