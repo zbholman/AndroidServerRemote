@@ -69,11 +69,11 @@ class Message:
     def TranslateTimestamp(self):
         return time.ctime(self.timestamp)
 
-'''
-This method takes a json string, converts it into a python dictionary object and the returns it as a Message object
-This is how you go from a message your subsystem gets on the serial port to a usable message object with variables
-The Key in contents['Key'] must match the standard abbreviations for message properties
-'''
-def ConvertFromJSON(json_string):
-    contents = json.loads(json_string)
-    return Message(contents['CID'], contents['OID'], contents['DID'], contents['TTL'], contents['PLD'], contents['TS'], contents['UID'], contents['CKS'])    
+    '''
+    This method takes a json string, converts it into a python dictionary object and the returns it as a Message object
+    This is how you go from a message your subsystem gets on the serial port to a usable message object with variables
+    The Key in contents['Key'] must match the standard abbreviations for message properties
+    '''
+    def ConvertFromJSON(json_string):
+        contents = json.loads(json_string)
+        return Message(contents['CID'], contents['OID'], contents['DID'], contents['TTL'], contents['PLD'], contents['TS'], contents['UID'], contents['CKS'])    
