@@ -13,13 +13,12 @@ import time
 import pygame #python module
 
 pygame.mixer.init()
-pygame.mixer.music.load("lockcar.wav")
+pygame.mixer.music.load("/home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/lockcar.wav")
 pygame.mixer.music.play()
 
 s = SenseHat()
 s.clear() #clears previous sense hat image
 s.low_light = True
-used
 green = (0, 255, 0) #teling the sense what colors are going to be 
 red = (255, 0, 0)
 nothing = (0,0,0)

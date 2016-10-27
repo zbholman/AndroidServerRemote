@@ -1,13 +1,9 @@
 pip install libusb1 pyserial
 
-sudo apt-get install bzr
-cd <somedir>
-bzr branch lp:nfcpy trunk
-
 import nfc
-clf = nfc.ContactlessFrontend('usb')
+clf = nfc.ContactlessFrontend('ttys0')
 print(clf)
 
 import nfc
-clf = nfc.ContactlessFrontend('usb')
+clf = nfc.ContactlessFrontend('ttys0')
 clf.connect(rdwr={}) # now touch a tag and remove it

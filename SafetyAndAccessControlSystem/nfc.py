@@ -8,12 +8,12 @@ import nfc
 def connected(tag): print(tag); return False
 
 #Locates and Opens contactless reader on raspberry Pi Uart
-clf = nfc.ContactlessFrontend('tty')
+clf = nfc.ContactlessFrontend('ttys0')
 
 print(clf)
 
 #Should Print Out a Certain String
-assert(clf == 'Adafruit Board on tty:USB0:pn532' )
+assert(clf == 'Adafruit Board on ttys0:USB0:pn532' )
 
 #Tests if a tag is recognized and removed
 clf.connect(rdwr={})

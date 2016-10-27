@@ -13,7 +13,7 @@ import time
 import pygame #python module
 
 pygame.mixer.init()
-pygame.mixer.music.load("unlockcar.wav")
+pygame.mixer.music.load("/home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/unlockcar.wav")
 pygame.mixer.music.play()
 
 s = SenseHat()
