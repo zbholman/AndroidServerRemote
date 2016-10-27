@@ -1,5 +1,6 @@
 import json
 import pyowm #Python Open Weather Map
+from bluetooth import * # Python bluetooth tools 
 
 server_sock= BluetoothSocket( RFCOMM ) 
 server_sock.bind(("",PORT_ANY)) 
