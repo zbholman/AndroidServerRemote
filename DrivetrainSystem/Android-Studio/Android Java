@@ -5,7 +5,6 @@
 # Date: 10/27/2016
 package com.example.tapanapatel.drivetrainfinal;
 
-
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,12 +14,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ToggleButton;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import android.os.Message;
-import java.io.IOException;
-import android.util.JsonWriter;
-import android.widget.TextView;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -62,21 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        #gets called by the toggle buttons
+
         ToggleButton tg1, tg2, tg3, tg4;
         tg1 = (ToggleButton) findViewById(R.id.toggleButton1);
         tg2 = (ToggleButton) findViewById(R.id.toggleButton2);
         tg3 = (ToggleButton) findViewById(R.id.toggleButton3);
         tg4 = (ToggleButton) findViewById(R.id.toggleButton4);
-
-        public void onClick(View v) {
-            StringBuffer result = new StringBuffer();
-            result.append("You have clicked Park ").append(tg1.getText());
-            result.append("You have clicked Reverse ").append(tg2.getText());
-            result.append("You have clicked Neutral ").append(tg3.getText());
-            result.append("You have clicked Drive ").append(tg4.getText());
-            Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
-        }
     }
        /* @Override
         public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,27 +85,25 @@ public class MainActivity extends AppCompatActivity {
         } */
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_main, menu);
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
         }
     }
-
-}
