@@ -2,8 +2,8 @@ import time
 import json
 
 '''
-Author: Ivan Iakimenko
-Ver: 6
+Author: Ivan Iakimenko and Ion Sirotkin
+Ver: 7
 Description: This class stores all of the properties of a message and has methods to convert it to a json string, generate a checksum
 based on the payload, and check the generated payload against the one supplied at initialization. If no checksum is available
 at initialization, a checksum is automatically generated based on the current payload (this is useful for sending messages so 
@@ -42,6 +42,14 @@ class Message:
     def ConvertToDictionary(self):
         return {"CID": self.car_id, "OID": self.origin_id, "DID": self.destination_id, "TTL": self.ttl, "TS": self.timestamp, "UID": self.uuid, "PLD": self.payload, "CKS": self.checksum}
 
+
+    #Returns the payload of the message
+    def Return_Payload(self):
+        return self.payload
+
+    #Returns the origin ID of the message
+    def Return_Origin_ID(self):
+        return self.origin_id
 
     #Returns a md5 checksum based on current payload
     def CalculateChecksum(self):
