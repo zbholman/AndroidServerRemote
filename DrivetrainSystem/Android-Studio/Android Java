@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ToggleButton;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import android.os.Message;
@@ -54,34 +55,45 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+
+        ToggleButton tg1, tg2, tg3, tg4;
+        tg1 = (ToggleButton) findViewById(R.id.toggleButton1);
+        tg2 = (ToggleButton) findViewById(R.id.toggleButton2);
+        tg3 = (ToggleButton) findViewById(R.id.toggleButton3);
+        tg4 = (ToggleButton) findViewById(R.id.toggleButton4);
+
+        public void onClick(View v) {
+            StringBuffer result = new StringBuffer();
+            result.append("You have clicked Park ").append(tg1.getText());
+            result.append("You have clicked Reverse ").append(tg2.getText());
+            result.append("You have clicked Neutral ").append(tg3.getText());
+            result.append("You have clicked Drive ").append(tg4.getText());
+            Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
-  /*  @Override
-    public void onStart(){
-        super.onStart();
-        final Speedometer speedometer = (Speedometer) findViewById(R.id.Speedometer);
-        Button increaseSpeed = (Button) findViewById(R.id.IncreaseSpeed);
-        Button decreaseSpeed = (Button) findViewById(R.id.DecreaseSpeed);
-        increaseSpeed.setOnClickListener(new OnClickListener(){
+       /* @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+            return true;
+        } */
 
-            @Override
-            public void onClick(View view) {
-                speedometer.onSpeedChanged(speedometer.getCurrentSpeed()+8);
+       /* @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
             }
+            return super.onOptionsItemSelected(item);
+        } */
 
-        });
-        decreaseSpeed.setOnClickListener(new OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                speedometer.onSpeedChanged(speedometer.getCurrentSpeed()-8);
-            }
-
-            public interface SpeedChangeListener {
-
-	public void onSpeedChanged(float newSpeedValue);
-
-}
-*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+        }
     }
-}
 
+}
