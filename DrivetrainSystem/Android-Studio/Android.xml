@@ -25,6 +25,18 @@
     <include layout="@layout/content_main"
         android:visibility="visible" />
 
+
+    <ToggleButton
+        android:text="P"
+        android:id="@+id/toggleButton1"
+        app:layout_anchor="@+id/progressBar2"
+        app:layout_anchorGravity="bottom|left"
+        android:layout_gravity="center_vertical|right"
+        android:layout_width="100dp"
+        android:textOff="P"
+        android:textOn="PARK"
+        android:layout_height="100dp" />
+
     <ToggleButton
         android:text="N"
         android:layout_height="100dp"
@@ -35,15 +47,6 @@
         android:layout_width="100dp"
         android:textOff="N"
         android:textOn="NEUTRAL" />
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleSmall"
-        android:id="@+id/progressBar"
-        app:layout_anchor="@+id/progressBar2"
-        app:layout_anchorGravity="center_vertical|right"
-        android:layout_gravity="top|left"
-        android:layout_height="350dp"
-        android:layout_width="250dp" />
 
     <ToggleButton
         android:text="D"
@@ -57,32 +60,23 @@
         android:textOn="DRIVE" />
 
     <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:id="@+id/progressBar"
+        app:layout_anchor="@+id/progressBar2"
+        app:layout_anchorGravity="center_vertical|right"
+        android:layout_gravity="top|left"
+        android:layout_height="350dp"
+        android:layout_width="250dp" />
+
+
+
+    <ProgressBar
         style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/progressBar2" />
 
-    <ToggleButton
-        android:text="R"
-        android:id="@+id/toggleButton2"
-        android:layout_height="100dp"
-        app:layout_anchor="@+id/progressBar2"
-        app:layout_anchorGravity="bottom|center_horizontal"
-        android:layout_gravity="top|left"
-        android:layout_width="100dp"
-        android:textOff="R"
-        android:textOn="REVERSE" />
 
-    <ToggleButton
-        android:text="P"
-        android:id="@+id/toggleButton"
-        app:layout_anchor="@+id/progressBar2"
-        app:layout_anchorGravity="bottom|left"
-        android:layout_gravity="center_vertical|right"
-        android:layout_width="100dp"
-        android:textOff="P"
-        android:textOn="PARK"
-        android:layout_height="100dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -96,7 +90,16 @@
         android:layout_height="45dp"
         android:layout_width="45dp" />
 
+    <ToggleButton
+        android:text="R"
+        android:id="@+id/toggleButton2"
+        android:layout_height="100dp"
+        app:layout_anchor="@+id/progressBar2"
+        android:layout_width="100dp"
+        android:textOff="R"
+        android:textOn="REVERSE"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        android:layout_gravity="top|left" />
 
 
 </android.support.design.widget.CoordinatorLayout>
-
