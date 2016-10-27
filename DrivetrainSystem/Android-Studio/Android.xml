@@ -1,3 +1,10 @@
+#IST 440
+# Drive Train (Team 02)
+# Author: Joe Altomare, Tapan Patel
+# Version: 5
+# Date: 10/27/2016
+
+
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,7 +32,7 @@
     <include layout="@layout/content_main"
         android:visibility="visible" />
 
-
+    #Park Toggle Button
     <ToggleButton
         android:text="P"
         android:id="@+id/toggleButton1"
@@ -36,7 +43,21 @@
         android:textOff="P"
         android:textOn="PARK"
         android:layout_height="100dp" />
-
+    
+     #Reverse ToggleButton
+     <ToggleButton
+        android:text="R"
+        android:id="@+id/toggleButton2"
+        android:layout_height="100dp"
+        app:layout_anchor="@+id/progressBar2"
+        android:layout_width="100dp"
+        android:textOff="R"
+        android:textOn="REVERSE"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        android:layout_gravity="top|left" />
+    
+    
+     #Neutral ToggleButton
     <ToggleButton
         android:text="N"
         android:layout_height="100dp"
@@ -47,7 +68,7 @@
         android:layout_width="100dp"
         android:textOff="N"
         android:textOn="NEUTRAL" />
-
+        #Drive ToggleButton
     <ToggleButton
         android:text="D"
         android:layout_height="100dp"
@@ -57,8 +78,9 @@
         android:layout_gravity="top|left"
         android:layout_width="100dp"
         android:textOff="D"
-        android:textOn="DRIVE" />
-
+        android:textOn="DRIVE" /
+                  
+     #ProgressBar that will surround the Speedometer
     <ProgressBar
         style="?android:attr/progressBarStyleSmall"
         android:id="@+id/progressBar"
@@ -90,16 +112,7 @@
         android:layout_height="45dp"
         android:layout_width="45dp" />
 
-    <ToggleButton
-        android:text="R"
-        android:id="@+id/toggleButton2"
-        android:layout_height="100dp"
-        app:layout_anchor="@+id/progressBar2"
-        android:layout_width="100dp"
-        android:textOff="R"
-        android:textOn="REVERSE"
-        app:layout_anchorGravity="bottom|center_horizontal"
-        android:layout_gravity="top|left" />
+   
 
 
 </android.support.design.widget.CoordinatorLayout>
