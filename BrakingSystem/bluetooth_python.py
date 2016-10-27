@@ -1,3 +1,8 @@
+#Penn State Abington
+#IST 440W
+#Fall 2016
+#Team Pump Your Brakes
+#Members: Abu Sakif, David Austin, Qili Jian, Abu Chowdhury, Gary Martorana, Chakman Fung
 import bluetooth
 
 server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
