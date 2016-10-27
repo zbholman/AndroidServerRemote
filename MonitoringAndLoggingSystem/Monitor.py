@@ -1,6 +1,10 @@
 # monitoring.py
 # author: IST411 Group 2
-# 9/8/2016
+# Version 3
+#This class is in charge of monitoring the communications between modules in
+#the automobile and checking them for health or other patterns. This module
+#also has the capability to intermittedly request status updates from other
+#modules and to send alerts if something isn't working correctly
 
 import json
 import datetime
@@ -11,10 +15,6 @@ import queue
 
 subsys_ids = {'brs':'Braking System','clc':'Climate Control System', 'ems':'Energy Management System', 'ccs':'Command and Control System', 'mls':'Monitoring and Logging System', 'cns':'Connectivity and Notification System', 'dts':'Drivetrain System', 'lts':'Lighting System', 'sac':'Safety and Access Control System'}
 
-#This class is in charge of monitoring the communications between modules in
-#the automobile and checking them for health or other patterns. This module
-#also has the capability to intermittedly request status updates from other
-#modules and to send alerts if something isn't working correctly
 class Monitor:
     
     #stores last time subsystems sent out message to comm. bus
