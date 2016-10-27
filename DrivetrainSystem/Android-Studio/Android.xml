@@ -68,6 +68,7 @@
         android:layout_width="100dp"
         android:textOff="N"
         android:textOn="NEUTRAL" />
+    
         #Drive ToggleButton
     <ToggleButton
         android:text="D"
@@ -78,20 +79,20 @@
         android:layout_gravity="top|left"
         android:layout_width="100dp"
         android:textOff="D"
-        android:textOn="DRIVE" /
+        android:textOn="DRIVE" />
                   
      #ProgressBar that will surround the Speedometer
-    <ProgressBar
+     <ProgressBar
         style="?android:attr/progressBarStyleSmall"
         android:id="@+id/progressBar"
         app:layout_anchor="@+id/progressBar2"
         app:layout_anchorGravity="center_vertical|right"
         android:layout_gravity="top|left"
         android:layout_height="350dp"
-        android:layout_width="250dp" />
+       android:layout_width="250dp" />
 
 
-
+    #ProgressBar that will surround the Speedometer
     <ProgressBar
         style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
         android:layout_width="match_parent"
