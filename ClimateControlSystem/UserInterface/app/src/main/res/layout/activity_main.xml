@@ -12,86 +12,79 @@
     android:background="#000000"
     tools:context="com.example.amanda.userinterface.MainActivity">
 
-    <Switch
-        android:text="HEAT"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="35sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/heat_pass"
-        android:layout_alignBaseline="@+id/ac"
-        android:layout_alignBottom="@+id/ac"
-        android:layout_centerHorizontal="true" />
-
-    <Switch
-        android:text="Defrost"
-        android:textColor="@android:color/white"
-        android:textSize="35sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/switch1"
-        android:layout_alignBaseline="@+id/heat_pass"
-        android:layout_alignBottom="@+id/heat_pass"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <TextView
         android:text="Humidity:"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:id="@+id/textView"
+        android:id="@+id/lbl_Humdity"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/switch_AC"
+        android:layout_alignStart="@+id/switch_AC" />
 
     <TextView
-        android:text="Exterior Temp:"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:text="87.0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/exterior_degree"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/heat_pass"
-        android:layout_toEndOf="@+id/heat_pass" />
+        android:layout_alignBottom="@+id/lbl_Humdity"
+        android:layout_toLeftOf="@+id/imageButtonInc"
+        android:id="@+id/txt_Humidity"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="30sp"/>
+
+    <Switch
+        android:text="AUTO"
+        android:layout_width="155dp"
+        android:layout_height="60dp"
+        android:id="@+id/switch_Auto"
+        android:textSize="40sp"
+        android:textColor="#ffffff"
+        android:layout_alignTop="@+id/switch_AC"
+        android:layout_centerHorizontal="true" />
+
+    <Switch
+        android:text="HEAT"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="40sp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:id="@+id/switch_Heat"
+        android:textAllCaps="false"
+        android:layout_alignTop="@+id/switch_Auto"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp" />
 
     <Switch
         android:text="A/C"
         android:textColor="@android:color/holo_blue_light"
-        android:textSize="35sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ac"
-        android:layout_marginTop="94dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="40sp"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:id="@+id/switch_AC"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/lbl_Humdity"
+        android:layout_toLeftOf="@+id/txt_Humidity"
+        android:layout_toStartOf="@+id/txt_Humidity"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
 
     <TextView
-        android:text="FAN"
+        android:text="60"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="70sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fan"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/heat_pass"
-        android:layout_toStartOf="@+id/heat_pass" />
-
-    <ToggleButton
-        android:text="On"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/toggleButton"
-        tools:text="On"
-        android:layout_alignBaseline="@+id/fan"
-        android:layout_alignBottom="@+id/fan"
-        android:layout_alignRight="@+id/heat_pass"
-        android:layout_alignEnd="@+id/heat_pass" />
+        android:id="@+id/txt_Temp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/imageButtonInc"
+        android:layout_alignLeft="@+id/imageButtonInc"
+        android:layout_alignStart="@+id/imageButtonInc"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
 
     <ImageButton
         app:srcCompat="@drawable/up"
@@ -100,35 +93,88 @@
         android:layout_height="60dp"
         android:src="@drawable/up"
         android:scaleType="fitCenter"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="58dp"
         android:background="#000000"
-        android:layout_below="@+id/heat_pass"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/switch_Auto"
+        android:layout_alignLeft="@+id/switch_Auto"
+        android:layout_alignStart="@+id/switch_Auto" />
 
-    <TextView
-        android:text="60"
-        android:textColor="@android:color/white"
-        android:textSize="70sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/temp"
-        android:layout_marginTop="118dp"
-        android:layout_below="@+id/imageButtonInc"
-        android:layout_alignRight="@+id/imageButtonInc"
-        android:layout_alignEnd="@+id/imageButtonInc" />
 
     <ImageButton
-        app:srcCompat="@drawable/down"
-        android:id="@+id/imageButtonDec"
         android:layout_width="100dp"
         android:layout_height="60dp"
-        android:src="@drawable/down"
+        app:srcCompat="@drawable/down"
+        android:layout_marginTop="50dp"
+        android:id="@+id/imageButtonDec"
         android:scaleType="fitCenter"
-        android:background="#000000"
-        android:layout_marginBottom="69dp"
-        android:layout_above="@+id/toggleButton"
-        android:layout_alignRight="@+id/temp"
-        android:layout_alignEnd="@+id/temp" />
+        android:layout_below="@+id/txt_Temp"
+        android:layout_alignLeft="@+id/imageButtonInc"
+        android:layout_alignStart="@+id/imageButtonInc"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:text="Exterior Temp:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_Exterior_Temp"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_alignBaseline="@+id/txt_Humidity"
+        android:layout_alignBottom="@+id/txt_Humidity"
+        android:layout_alignLeft="@+id/txt_Temp"
+        android:layout_alignStart="@+id/txt_Temp" />
+
+    <TextView
+        android:text="75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_Exterior_Temp"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="30sp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_alignBaseline="@+id/lbl_Exterior_Temp"
+        android:layout_alignBottom="@+id/lbl_Exterior_Temp"
+        android:layout_toRightOf="@+id/lbl_Exterior_Temp"
+        android:layout_toEndOf="@+id/lbl_Exterior_Temp" />
+
+    <TextView
+        android:text="Fan Speed:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_Fan"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/imageButtonDec"
+        android:layout_toLeftOf="@+id/imageButtonDec"
+        android:layout_toStartOf="@+id/imageButtonDec" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggleBtnFan2"
+        android:textOff="2"
+        android:textOn="2"
+        android:layout_alignBaseline="@+id/toggleBtnFan1"
+        android:layout_alignBottom="@+id/toggleBtnFan1"
+        android:layout_toRightOf="@+id/toggleBtnFan1"
+        android:layout_toEndOf="@+id/toggleBtnFan1"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggleBtnFan1"
+        android:textOff="1"
+        android:textOn="1"
+        android:layout_alignBottom="@+id/lbl_Fan"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
