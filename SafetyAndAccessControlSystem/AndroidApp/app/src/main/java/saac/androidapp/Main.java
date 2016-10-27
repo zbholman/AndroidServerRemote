@@ -100,16 +100,18 @@ public class Main extends AppCompatActivity {
         channelssh.disconnect();
     }
 
+    //Start of the app
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         final String user = "pi";
         final String pass = "IST440FA";
-        final String host = "130.203.86.177";
+        final String host = "104.39.120.129";
 
-        final String dir = "python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
+        final String dir = "sudo python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
         final int port = 22;
 
         //Instantiates widgets for use in onclick
@@ -126,7 +128,7 @@ public class Main extends AppCompatActivity {
         Button button11 = (Button) findViewById(R.id.button11);
         Button button12 = (Button) findViewById(R.id.button12);
 
-        //Fields to contain password and password asteriks, as well as event description
+        //Fields to contain password and password asterisks, as well as event description
         final EditText editText = (EditText) findViewById(R.id.editText);
         final EditText editText2 = (EditText) findViewById(R.id.editText2);
         final EditText editText3 = (EditText) findViewById(R.id.editText3);
@@ -187,6 +189,8 @@ public class Main extends AppCompatActivity {
                             ex.printStackTrace();
 
                         }*/
+
+                //Starts SSH asynchronously, so app does not hesitate when making connection
                 new AsyncTask<Integer, Void, Void>() {
                     String command = dir + "/Doors_locked.py";
 
@@ -224,6 +228,8 @@ public class Main extends AppCompatActivity {
                             ex.printStackTrace();
 
                         }*/
+
+                //Starts SSH asynchronously, so app does not hesitate when making connection
                 new AsyncTask<Integer, Void, Void>() {
                     String command = dir + "/Doors_unlock.py";
 
@@ -262,6 +268,8 @@ public class Main extends AppCompatActivity {
                             ex.printStackTrace();
 
                         }*/
+
+                //Starts SSH asynchronously, so app does not hesitate when making connection
                 new AsyncTask<Integer, Void, Void>() {
                     String command = dir + "/car_alarm.py";
 
@@ -297,7 +305,7 @@ public class Main extends AppCompatActivity {
                     sCode = "*";
                     sNum = "1";
                 }
-                //checks if PASSWORD is 1 digit away from being 6, therefore it need to authenticate
+                //checks if PASSWORD is 1 digit away from being 6, therefore it needs to authenticate
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "1";
                     //CORRECT
@@ -331,16 +339,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("2");
                     sCode = "*";
                     sNum = "2";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "2";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "2");
                 }
@@ -359,16 +364,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("3");
                     sCode = "*";
                     sNum = "3";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "3";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "3");
                 }
@@ -387,16 +389,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("4");
                     sCode = "*";
                     sNum = "4";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "4";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "4");
                 }
@@ -415,16 +414,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("5");
                     sCode = "*";
                     sNum = "5";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "5";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "5");
                 }
@@ -443,7 +439,8 @@ public class Main extends AppCompatActivity {
                     editText2.setText("6");
                     sCode = "*";
                     sNum = "6";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "6";
                     if (sNum.matches("123456")) {
                         editText.setText("");
@@ -466,7 +463,7 @@ public class Main extends AppCompatActivity {
 
                         }*/
 
-                        //Access Pi asynchronously
+                        //Starts SSH asynchronously, so app does not hesitate when making connection
                         new AsyncTask<Integer, Void, Void>() {
                             String command = dir + "/Doors_unlock.py";
 
@@ -481,11 +478,13 @@ public class Main extends AppCompatActivity {
                                 return null;
                             }
                         }.execute(1);
-                    } else {
+                    }
+                    else {
                         editText.setText("");
                         editText3.setText("Wrong Password");
                     }
-                } else {
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "6");
                 }
@@ -504,16 +503,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("7");
                     sCode = "*";
                     sNum = "7";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "7";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "7");
                 }
@@ -532,16 +528,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("8");
                     sCode = "*";
                     sNum = "8";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "8";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "8");
                 }
@@ -560,16 +553,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("9");
                     sCode = "*";
                     sNum = "9";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "1";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "9");
                 }
@@ -598,16 +588,13 @@ public class Main extends AppCompatActivity {
                     editText2.setText("0");
                     sCode = "*";
                     sNum = "0";
-                } else if (sCode.matches("\\* \\* \\* \\* \\*")) {
+                }
+                else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "0";
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    } else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
-                } else {
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+                }
+                else {
                     editText.setText(sCode + " *");
                     editText2.setText(sNum + "0");
                 }
