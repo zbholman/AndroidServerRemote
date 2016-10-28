@@ -10,11 +10,17 @@ from pymongo import MongoClient
 class Log:
 	def __init__(self):
 		#initialize db connection
-	def get_db():
-                from pymongo import MongoClient
-                client = MongoClient('localhost:27017')
-                db = client.dbNiravkumar
-                return db
+		client = MongoClient()
+		db = client.dbCar
+
+	#NOT SURE WHAT THIS METHOD DOES. PLEASE EXPLAIN TO ME(ION) NIRAVH
+
+	#def get_db():
+#                from pymongo import MongoClient
+#                client = MongoClient('localhost:27017')
+#                db = client.dbNiravkumar
+#                return db
+
 	
 	#Method that determines what collections to put the message into
 	#and puts that message into the collection.
