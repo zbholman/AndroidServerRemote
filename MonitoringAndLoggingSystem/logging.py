@@ -13,6 +13,18 @@ class Log:
 		client = MongoClient()
 		db = client.dbCar
 
+		#Check if the collections exist
+		Check_Collection_errors()
+                Check_Collection_brs()
+                Check_Collection_clc()
+                Check_Collection_ems()
+                Check_Collection_ccs()
+                Check_Collection_mls()
+                Check_Collection_cns()
+                Check_Collection_dts()
+                Check_Collection_lis()
+                Check_Collection_sac()
+
 	#NOT SURE WHAT THIS METHOD DOES. PLEASE EXPLAIN TO ME(ION) NIRAVH
 
 	#def get_db():
