@@ -65,7 +65,107 @@ class Log:
                 print get_message(db)
 
 
+	#Methods to check if the collections exist
 
+	#Check if errors collection exists
+	def Check_Collection_errors():
+        	exist_flag = False #Flag on if the collection exists. Will be changed to True if the collection does exist
+        	for i in db.collection_names(): #Loop through all of the collections on the database
+                	if(i == "errors"): #If the current index is the collection we are looking for, set the exist flag to true
+                        	exist_flag = True
+
+        	if(not(exist_flag)): #If the flag was never set to true after the loop
+                	db.errors.insert_one({"Init": "Initialization of errors collection"}) #Initialize the collection
+
+	#Check if the break system collection exists
+	def Check_Collection_brs():
+        	exist_flag = False
+        	for i in db.collection_names():
+                	if(i == "brs"):
+                        	exist_flag = True
+
+        	if(not(exist_flag)):
+                	db.brs.insert_one({"Init": "Initialization of brs collection"})
+
+	#check if the climate control system collection exists
+        def Check_Collection_clc():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "clc"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of clc collection"})
+
+        #check if the energy management system collection exists
+        def Check_Collection_ems():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "ems"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of ems collection"})
+
+        #check if the command and control system collection exists
+        def Check_Collection_ccs():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "ccs"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of ccs collection"})
+      
+	  #check if the monitoring and logging system collection exists
+        def Check_Collection_mls():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "mls"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of mls collection"})
+
+        #check if the connectivity and notification system collection exists
+        def Check_Collection_cns():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "cns"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of cns collection"})
+
+        #check if the drive train system collection exists
+        def Check_Collection_dts():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "dts"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of dts collection"})
+
+        #check if the lighting system collection exists
+        def Check_Collection_lis():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "lis"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of lis collection"})
+
+        #check if the safety and access system collection exists
+        def Check_Collection_sac():
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "sac"):
+                                exist_flag = True
+
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of sac collection"})
 
 
 	#This method add message to log in a database for future use
