@@ -6,106 +6,32 @@
 #This class is the code responsible for creating logs and storing them in a Mongo Database. 
 import json
 from pymongo import MongoClient
+from Message import Message
 
 class Log:
-	def __init__(self):
-		#initialize db connection
-		client = MongoClient()
-		db = client.dbCar
-
-		#Check if the collections exist
-                Check_Collection_errors()
-		Check_Collection_brs()
-                Check_Collection_clc()
-                Check_Collection_ems()
-                Check_Collection_ccs()
-                Check_Collection_mls()
-                Check_Collection_cns()
-                Check_Collection_dts()
-                Check_Collection_lis()
-                Check_Collection_sac()
-
-	#NOT SURE WHAT THIS METHOD DOES. PLEASE EXPLAIN TO ME(ION) NIRAVH
-
-	def get_db():
-                from pymongo import MongoClient
-                client = MongoClient('localhost:27017')
-                db = client.dbCar
-                return db
-
-	
-	#Method that determines what collections to put the message into
-	#and puts that message into the collection.
-	#Sorts it by HealthCode, Origin, and puts all messages into a default collection
-	def Parse_Message_To_Collection(inc_message):
-		
-		#If the payload contains a healthcode, put it in the errors collection
-        	if(inc_message.Return_Payload()[:2:] == "HC"):
-                	add_message(inc_message, db.errors)
-
-		#Put the message into the collection dependant on where the message originated from
-        	if(inc_message.Return_Origin_ID() == "brs"):
-                	add_message(inc_message, db.brs)                                                              
-        	elif(inc_message.Return_Origin_ID() == "clc"):
-                	add_message(inc_message, db.clc)
-       		elif(inc_message.Return_Origin_ID() == "ems"):
-                	add_message(inc_message, db.ems)
-        	elif(inc_message.Return_Origin_ID() == "ccs"):
-                	add_message(inc_message, db.ccs) 
-        	elif(inc_message.Return_Origin_ID() == "mls"):
-                	add_message(inc_message, db.mls)
-        	elif(inc_message.Return_Origin_ID() == "cns"):
-                	add_message(inc_message, db.cns)
-        	elif(inc_message.Return_Origin_ID() == "dts"):
-                	add_message(inc_message, db.dts)
-        	elif(inc_message.Return_Origin_ID() == "lis"):
-                	add_message(inc_message, db.lis)
-        	elif(inc_message.Return_Origin_ID() == "sac"):
-                	add_message(inc_message, db.sac)
-		
-		#Put all of the messages into one central default collection
-		add_message(inc_message, db.default)
 
 
-	#Method to add a message to the mongo database
-        def add_message(message, collection):
-		collection.insert(message.Convert_To_Dictionary())
-	
+        #Check if errors collection exists
+        def Check_Collection_errors(self):
+                exist_flag = False #Flag on if the collection exists. Will be changed to True if the collection does exist
+                for i in db.collection_names(): #Loop through all of the collections on the database
+                        if(i == "errors"): #If the current index is the collection we are looking for, set the exist flag to true
+                                exist_flag = True
 
-	#returns a message from the current database, collection 'logging'
-        def get_message(db):
-                return db.logging.find_one()
-	#inits class for testing purposes
-        if __name__ == "__main__":
+                if(not(exist_flag)): #If the flag was never set to true after the loop
+                        db.errors.insert_one({"Init": "Initialization of errors collection"}) #Initialize the collection
 
-                db = get_db()
-                add_message(db)
-                print get_message(db)
+        #Check if the break system collection exists
+        def Check_Collection_brs(self):
+                exist_flag = False
+                for i in db.collection_names():
+                        if(i == "brs"):
+                                exist_flag = True
 
+                if(not(exist_flag)):
+                        db.brs.insert_one({"Init": "Initialization of brs collection"})
 
-	#Methods to check if the collections exist
-
-	#Check if errors collection exists
-	def Check_Collection_errors(self):
-        	exist_flag = False #Flag on if the collection exists. Will be changed to True if the collection does exist
-        	for i in db.collection_names(): #Loop through all of the collections on the database
-                	if(i == "errors"): #If the current index is the collection we are looking for, set the exist flag to true
-                        	exist_flag = True
-
-        	if(not(exist_flag)): #If the flag was never set to true after the loop
-                	db.errors.insert_one({"Init": "Initialization of errors collection"}) #Initialize the collection
-
-	#Check if the break system collection exists
-	def Check_Collection_brs(self):
-        	exist_flag = False
-        	for i in db.collection_names():
-                	if(i == "brs"):
-                        	exist_flag = True
-
-        	if(not(exist_flag)):
-                	db.brs.insert_one({"Init": "Initialization of brs collection"})
-
-	#check if the climate control system collection exists
+        #check if the climate control system collection exists
         def Check_Collection_clc(self):
                 exist_flag = False
                 for i in db.collection_names():
@@ -134,8 +60,8 @@ class Log:
 
                 if(not(exist_flag)):
                         db.brs.insert_one({"Init": "Initialization of ccs collection"})
-      
-	  #check if the monitoring and logging system collection exists
+
+          #check if the monitoring and logging system collection exists
         def Check_Collection_mls(self):
                 exist_flag = False
                 for i in db.collection_names():
@@ -184,6 +110,85 @@ class Log:
 
                 if(not(exist_flag)):
                         db.brs.insert_one({"Init": "Initialization of sac collection"})
+
+
+	global client 
+	client = MongoClient()
+	global db 
+	db = client.dbCar
+
+
+	def __init__(self):
+		#initialize db connection
+		client = MongoClient()
+		db = client.dbCar
+
+	#NOT SURE WHAT THIS METHOD DOES. PLEASE EXPLAIN TO ME(ION) NIRAVH
+
+	def get_db():
+                from pymongo import MongoClient
+                client = MongoClient('localhost:27017')
+                db = client.dbCar
+                return db
+
+	
+	#Method that determines what collections to put the message into
+	#and puts that message into the collection.
+	#Sorts it by HealthCode, Origin, and puts all messages into a default collection
+	def Parse_Message_To_Collection(self, inc_message):
+		print(inc_message)
+		#If the payload contains a healthcode, put it in the errors collection
+        	if(inc_message.Return_Payload()[:2:] == "HC"):
+			self.Check_Collection_errors()
+                	self.add_message(inc_message, db.errors)
+
+		#Put the message into the collection dependant on where the message originated from
+        	if(inc_message.Return_Origin_ID() == "brs"):
+			self.Check_Collection_brs()
+                	self.add_message(inc_message, db.brs)                                                              
+        	elif(inc_message.Return_Origin_ID() == "clc"):
+			self.Check_Collection_clc()
+                	self.add_message(inc_message, db.clc)
+       		elif(inc_message.Return_Origin_ID() == "ems"):
+			self.Check_Collection_ems()
+                	self.add_message(inc_message, db.ems)
+        	elif(inc_message.Return_Origin_ID() == "ccs"):
+			self.Check_Collection_ccs()
+                	self.add_message(inc_message, db.ccs) 
+        	elif(inc_message.Return_Origin_ID() == "mls"):
+                	self.Check_Collection_mls()
+			self.add_message(inc_message, db.mls)
+        	elif(inc_message.Return_Origin_ID() == "cns"):
+			self.Check_Collection_cns()
+                	self.add_message(inc_message, db.cns)
+        	elif(inc_message.Return_Origin_ID() == "dts"):
+			self.Check_Collection_dts()
+                	self.add_message(inc_message, db.dts)
+        	elif(inc_message.Return_Origin_ID() == "lis"):
+			self.Check_Collection_lis()
+                	self.add_message(inc_message, db.lis)
+        	elif(inc_message.Return_Origin_ID() == "sac"):
+			self.Check_Collection_sac()
+                	self.add_message(inc_message, db.sac)
+		
+		#Put all of the messages into one central default collection
+		self.add_message(inc_message)
+
+
+	#Method to add a message to the mongo database
+        def add_message(self, message, c = db.default):
+		c.insert(message.ConvertToDictionary())	
+
+	#returns a message from the current database, collection 'logging'
+        def get_message(db):
+                return db.logging.find_one()
+	#inits class for testing purposes
+        if __name__ == "__main__":
+
+                db = get_db()
+                add_message(db)
+                print get_message(db)
+
 
 
 	#This method add message to log in a database for future use
