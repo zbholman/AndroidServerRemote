@@ -35,10 +35,19 @@ pwm.set_pwm_freq(60)
 
 # To quit
 print('Moving servo on channel 0, press Ctrl-C to quit...')
+
+pwm.set_pwm(0, 0, servo_min)
+time.sleep(1.0)
 while True:
-    
-    
-    
+    if servo_current > servo_min:
+        servo_current = servo_current - 0
+        pwm.set_pwm(0, 0, servo_current)
+        print("Current Servo Position: ", servo_current)
+        time.sleep(0.5)
+    else:
+        pwm.set_pwm(0, 0, 375)
+        break
+      
     # Move servo on channel O between extremes.
     #pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
     #time.sleep(1) # 1 Second
