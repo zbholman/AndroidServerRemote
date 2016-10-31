@@ -1,7 +1,9 @@
-#IST 440
+#IST 440 Penn State Abington
+#Professor: Joseph Oakes
+#Fall 2016
 #DriveTrain
 #Author: Klaus Herchenroder and  Ghansyam Patel
-#Version: 1
+#Version: 3
 
 from __future__ import division
 import time
@@ -9,16 +11,13 @@ import time
 # Import the PCA9685 module.
 import Adafruit_PCA9685
 
-# Initialise the PCA9685 using the default address (0x40).
+# PWM Adafruit Library
 pwm = Adafruit_PCA9685.PCA9685()
-
-# Alternatively specify a different address and/or bus:
-#pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
 
 # Configure min and max servo pulse lengths
 servo_min = 150  # Min pulse length out of 4096 
-servo_neutral = 375
 servo_max = 600  # Max pulse length out of 4096
+servo_current = 375
 
 # Helper function to make setting a servo pulse width simpler
 def set_servo_pulse(channel, pulse):
@@ -37,14 +36,17 @@ pwm.set_pwm_freq(60)
 # To quit
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 while True:
+    
+    
+    
     # Move servo on channel O between extremes.
-    pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
-    time.sleep(1) # 1 Second
-    pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
-    time.sleep(1) # 1 Second
-    pwm.set_pwm(0, 0, servo_max) # Servo will be on position 180
-    time.sleep(1) # 1 Second
-    pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
-    time.sleep(1) # 1 Second
-    pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
-    time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_max) # Servo will be on position 180
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
+    #time.sleep(1) # 1 Second
