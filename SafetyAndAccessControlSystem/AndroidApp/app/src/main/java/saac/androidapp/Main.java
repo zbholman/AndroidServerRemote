@@ -100,6 +100,8 @@ public class Main extends AppCompatActivity {
         channelssh.disconnect();
     }
 
+
+
     //Start of the app
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,21 +193,10 @@ public class Main extends AppCompatActivity {
                         }*/
 
                 //Starts SSH asynchronously, so app does not hesitate when making connection
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = dir + "/Doors_locked.py";
+                String command = dir + "/Doors_locked.py";
+                startASync(user, pass, host, command, port);
 
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            // Execute command on the pi
-                            runPiCommand(user, pass, host, command, port);
-                            lock.start();
-                        } catch (JSchException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                }.execute(1);
-            }
+                }
         });
 
         //UNLOCK BUTTON
@@ -230,21 +221,9 @@ public class Main extends AppCompatActivity {
                         }*/
 
                 //Starts SSH asynchronously, so app does not hesitate when making connection
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = dir + "/Doors_unlock.py";
+                String command = dir + "/Doors_unlock.py";
+                startASync(user, pass, host, command, port);
 
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            // Execute command on the pi
-                            runPiCommand(user, pass, host, command, port);
-                            //unlocklights for final car - LightingSystem/PythonLights/Scroll_phat/unlock_lights.py
-                            unlock.start();
-                        } catch (JSchException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                }.execute(1);
             }
         });
 
@@ -270,20 +249,10 @@ public class Main extends AppCompatActivity {
                         }*/
 
                 //Starts SSH asynchronously, so app does not hesitate when making connection
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = dir + "/car_alarm.py";
 
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            // Execute command on the pi
-                            runPiCommand(user, pass, host, command, port);
-                            alarm.start();
-                        } catch (JSchException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                }.execute(1);
+                String command = dir + "/car_alarm.py";
+                startASync(user, pass, host, command, port);
+
             }
         });
 
@@ -292,7 +261,6 @@ public class Main extends AppCompatActivity {
         button.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
                 //gets current text and sets temp variables as content
-
                 String sCode = editText.getText().toString();
                 String sNum = editText2.getText().toString();
 
@@ -463,21 +431,8 @@ public class Main extends AppCompatActivity {
 
                         }*/
 
-                        //Starts SSH asynchronously, so app does not hesitate when making connection
-                        new AsyncTask<Integer, Void, Void>() {
-                            String command = dir + "/Doors_unlock.py";
-
-                            protected Void doInBackground(Integer... params) {
-                                try {
-                                    // Execute command on the pi
-                                    runPiCommand(user, pass, host, command, port);
-                                    unlock.start();
-                                } catch (JSchException e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            }
-                        }.execute(1);
+                        String command = dir + "/Doors_unlock.py";
+                        startASync(user, pass, host, command, port);
                     }
                     else {
                         editText.setText("");
@@ -638,6 +593,22 @@ public class Main extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    //Starts SSH asynchronously, so app does not hesitate when making connection
+    //5 arguments for Pi command line to log in and activate functionality.
+    public void startASync(final String user, final String pass, final String host, final String command, final int port) {
+        new AsyncTask<Integer, Void, Void>() {
+            protected Void doInBackground(Integer... params) {
+                try {
+                    // Execute command on the pi
+                    runPiCommand(user, pass, host, command, port);
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute(1);
     }
 
     @Override
