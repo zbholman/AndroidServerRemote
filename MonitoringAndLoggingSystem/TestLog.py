@@ -17,10 +17,14 @@ from logging import Log
 message01 = [ Message("CAR12345", "mls", "clc", 100, "SUR:HC"), Message("CAR12345", "brk", "mls", 100, "HC1: NOT SLOWING DOWN") , Message("CAR12345", "clc", "mls", 100, "HC3: TEMP 50F HUMIDITY 6%") , Message("CAR12345", "brk", "lis", 100, "SUR: BRK LT ON") , Message("CAR12345", "ccs", "dts", 100, "SUR: DR 23%") ]
 
 logging = Log()
-#Go through each item of message
 
+
+#Drop all of the previous collections to ensure new features of logging are working
+logging.bobby_drop_tables()
+
+
+#Go through all messages
 for i in message01:
-	print(i)
-	logging.Parse_Message_To_Collection(i)
+	logging.Parse_Message_To_Collection(i) #Puts message at index i in MongoDB
 
 print("Success")
