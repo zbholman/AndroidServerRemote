@@ -1,0 +1,2 @@
+  float volt = (float)readVcc()/1000;
+  float percent = ((volt-3)/0.7)*100;
