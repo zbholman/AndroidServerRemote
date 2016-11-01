@@ -152,9 +152,7 @@
         android:backgroundTintMode="add"
         android:layout_alignTop="@+id/iconLeftTurn"
         android:layout_toRightOf="@+id/switchRightTurn"
-        android:layout_toEndOf="@+id/switchRightTurn"
-        android:rotationX="n"
-        android:rotationY="n" />
+        android:layout_toEndOf="@+id/switchRightTurn"/>
 
     <ImageView
         android:layout_width="150dp"

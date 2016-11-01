@@ -110,7 +110,7 @@ public class LightsControl extends AppCompatActivity {
                 if (isChecked) {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "head_lights.py";
+                        String command = lightsDir + "running_lights.py";
                         protected Void doInBackground(Integer... params) {
                             try {
                                 // Execute command on the pi
@@ -174,7 +174,7 @@ public class LightsControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "/turn-leds-off.py";
+                        String command = lightsDir + "turn-leds-off.py";
                         protected Void doInBackground(Integer... params) {
                             // Else, turn off high beams
                             try {
