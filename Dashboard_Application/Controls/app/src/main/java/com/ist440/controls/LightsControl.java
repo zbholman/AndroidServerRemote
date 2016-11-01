@@ -40,17 +40,24 @@ public class LightsControl extends AppCompatActivity {
         // Create switch for lights
         final Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
         final Switch switchHeadLights = (Switch) findViewById(R.id.switchHeadLights);
-        Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
+        final Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
+        final Switch switchRightTurn = (Switch) findViewById(R.id.switchRightTurn);
+        final Switch switchHazards = (Switch) findViewById(R.id.switchHazardLight);
 
         // Create icon images
         final ImageView iconHighBeams = (ImageView) findViewById(R.id.iconHighBeams);
         final ImageView iconHeadLights = (ImageView) findViewById(R.id.iconHeadLights);
         final ImageView iconLeftTurn = (ImageView) findViewById(R.id.iconLeftTurn);
+        final ImageView iconRightTurn = (ImageView) findViewById(R.id.iconRightTurn);
+        final ImageView iconHazards = (ImageView) findViewById(R.id.iconHazardLight);
+
 
         // Set default state to false (off)
         switchHighBeams.setChecked(false);
         switchHeadLights.setChecked(false);
         switchLeftTurn.setChecked(false);
+        switchRightTurn.setChecked(false);
+        switchHazards.setChecked(false);
 
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -62,6 +69,7 @@ public class LightsControl extends AppCompatActivity {
                 if (isChecked) {
                     boolean success = true;
                     switchHeadLights.setChecked(false);
+
                     String command = lightsDir + "high_beams.py";
                     backgroundTask(username, password, hostname, command, port);
 
@@ -90,6 +98,7 @@ public class LightsControl extends AppCompatActivity {
                 if (isChecked) {
                     boolean success = true;
                     switchHighBeams.setChecked(false);
+
                     String command = lightsDir + "running_lights.py";
                     backgroundTask(username, password, hostname, command, port);
 
@@ -106,7 +115,7 @@ public class LightsControl extends AppCompatActivity {
             }
         });
 
-        // Create listener event for high beams
+        // Create listener event for left turn signal
         switchLeftTurn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
@@ -116,7 +125,66 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
+                    switchRightTurn.setChecked(false);
+
                     String command = lightsDir + "turn_signal.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If the light turns on, set icon to visible
+                    if (success) {iconLeftTurn.setVisibility(View.VISIBLE);}
+                } else {
+                    boolean success = true;
+                    final String command = lightsDir + "turn-leds-off.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If light turns off, set icon to invisible
+                    if (success) {iconLeftTurn.setVisibility(View.INVISIBLE);}
+                }
+            }
+        });
+
+        // Create listener event for right turn signal
+        switchRightTurn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called when switch is toggled
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on high beams
+                if (isChecked) {
+                    boolean success = true;
+                    switchLeftTurn.setChecked(false);
+
+                    String command = lightsDir + "turn_signal_2.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If the light turns on, set icon to visible
+                    if (success) {iconLeftTurn.setVisibility(View.VISIBLE);}
+                } else {
+                    boolean success = true;
+                    final String command = lightsDir + "turn-leds-off.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If light turns off, set icon to invisible
+                    if (success) {iconLeftTurn.setVisibility(View.INVISIBLE);}
+                }
+            }
+        });
+
+        // Create listener event for right turn signal
+        switchHazards.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called when switch is toggled
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on high beams
+                if (isChecked) {
+                    boolean success = true;
+                    switchLeftTurn.setChecked(false);
+                    switchRightTurn.setChecked(false);
+
+                    String command = lightsDir + "hazards.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
