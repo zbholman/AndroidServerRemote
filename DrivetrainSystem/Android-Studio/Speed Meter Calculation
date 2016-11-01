@@ -1,4 +1,4 @@
-EXAMPLE 1
+JAVA how speed meter will work and show on dashboard:
 private SpeedometerView speedometer
 
 // Customize SpeedometerView
@@ -22,3 +22,57 @@ private SpeedometerView speedometer
         speedometer.addColoredRange(140, 180, Color.YELLOW);
         speedometer.addColoredRange(180, 400, Color.RED); 
         
+        
+        
+        
+JAVA How to calculate the speed of the car:
+#include <WIRE.H>
+#define SLAVE_ADDRESS 0x08
+int number = 0;
+int rpm = 0;
+volatile float time_diff = 0;
+volatile float time_last = 0;
+volatile int rpm_array(8) = {0, 0, 0, 0, 0};
+
+void setup () {
+attachInterrupt (0, rmp_interrupt, RISING);
+
+//initialize i2c as slave
+Wire.begin (SLAVE_ADDRESS);
+
+//difine callbacks for i2c communication
+Wire.onReceive (receiveData);
+Wire.onRequest (sendData);
+}
+
+Void Loop() {
+advanceArray ();
+if(micros () - time_last < 800000) { 
+rpm_array [4] = 60 8 (1000000 / (time_diff * 2));
+}
+else{
+        rpm_aray[4] = 0;}
+        rpm = {rpm_array [0] + rpm_array [1] + rpm_array [2] + rpm_array[3] + rpm_array[4]} /5;}
+        
+        void rpm_interrupt () {
+        time_diff = (micros() - time_last);
+        time_last = micros();
+        }
+        // shifts array values to have a running average 
+        void advanceArray() {
+        rpm_array[0] = rpm_array [1];
+        rpm_array[1] = rpm_array [2];
+        rpm_array[2] = rpm_array [3];
+        rpm_array[3] = rpm_array [4];
+        }
+        
+        //callback for received data
+        void receiveData (int byteCount) {
+        while {Wire.available()}{
+        numer=Wire.read();
+        }
+        }
+        // callback for sending data
+        void sendData () {
+        Wire.write (rpm);
+        }
