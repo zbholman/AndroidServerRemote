@@ -269,23 +269,14 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("1");
-
-                    sCode = "*";
-                    sNum = "1";
                 }
                 //checks if PASSWORD is 1 digit away from being 6, therefore it needs to authenticate
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
-                    sNum = sNum + "1";
-                    //CORRECT
-                    if (sNum.matches("123456")) {
-                        editText.setText("");
-                        editText3.setText("Doors Unlocked!");
-                    }
                     //INCORRECT
-                    else {
-                        editText.setText("");
-                        editText3.setText("Wrong Password");
-                    }
+                    sNum = sNum + "1";
+                    editText.setText("");
+                    editText3.setText("Wrong Password");
+
                 }
                 //If string is not empty, adds space and * for better visual display of Asterisks
                 else {
@@ -305,8 +296,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("2");
-                    sCode = "*";
-                    sNum = "2";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "2";
@@ -330,8 +319,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("3");
-                    sCode = "*";
-                    sNum = "3";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "3";
@@ -355,8 +342,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("4");
-                    sCode = "*";
-                    sNum = "4";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "4";
@@ -380,8 +365,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("5");
-                    sCode = "*";
-                    sNum = "5";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "5";
@@ -405,8 +388,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("6");
-                    sCode = "*";
-                    sNum = "6";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "6";
@@ -456,8 +437,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("7");
-                    sCode = "*";
-                    sNum = "7";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "7";
@@ -481,8 +460,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("8");
-                    sCode = "*";
-                    sNum = "8";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "8";
@@ -506,8 +483,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("9");
-                    sCode = "*";
-                    sNum = "9";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "1";
@@ -541,8 +516,6 @@ public class Main extends AppCompatActivity {
                     editText3.setText("");
                     editText.setText("*");
                     editText2.setText("0");
-                    sCode = "*";
-                    sNum = "0";
                 }
                 else if (sCode.matches("\\* \\* \\* \\* \\*")) {
                     sNum = sNum + "0";
