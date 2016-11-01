@@ -38,8 +38,8 @@ public class LightsControl extends AppCompatActivity {
         final int port = 22;
 
         // Create switch for lights
-        Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
-        Switch switchHeadLights = (Switch) findViewById(R.id.switchHeadLights);
+        final Switch switchHighBeams = (Switch) findViewById(R.id.switchHighBeams);
+        final Switch switchHeadLights = (Switch) findViewById(R.id.switchHeadLights);
         Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
 
         // Create icon images
@@ -61,36 +61,16 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "high_beams.py";
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                // Execute command on the pi
-                                runPiCommand(username, password, hostname, command, port);
-                            } catch (JSchException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
+                    switchHeadLights.setChecked(false);
+                    String command = lightsDir + "high_beams.py";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconHighBeams.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "turn-leds-off.py";
-                        protected Void doInBackground(Integer... params) {
-                            // Else, turn off high beams
-                            try {
-                                // Execute command on the pi
-                                runPiCommand(username, password, hostname, command, port);
-                            } catch (JSchException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
+                    String command = lightsDir + "turn-leds-off.py";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
                     if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
@@ -109,36 +89,16 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "running_lights.py";
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                // Execute command on the pi
-                                runPiCommand(username, password, hostname, command, port);
-                            } catch (JSchException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
+                    switchHighBeams.setChecked(false);
+                    String command = lightsDir + "running_lights.py";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconHeadLights.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "turn-leds-off.py";
-                        protected Void doInBackground(Integer... params) {
-                            // Else, turn off high beams
-                            try {
-                                // Execute command on the pi
-                                runPiCommand(username, password, hostname, command, port);
-                            } catch (JSchException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
+                    String command = lightsDir + "turn-leds-off.py";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
                     if (success) {iconHeadLights.setVisibility(View.INVISIBLE);}
@@ -156,36 +116,15 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "turn_signal.py";
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                // Execute command on the pi
-                                runPiCommand(username, password, hostname, command, port);
-                            } catch (JSchException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
+                    String command = lightsDir + "turn_signal.py";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconLeftTurn.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = lightsDir + "turn-leds-off.py";
-                        protected Void doInBackground(Integer... params) {
-                            // Else, turn off high beams
-                            try {
-                                // Execute command on the pi
-                                runPiCommand(username, password, hostname, command, port);
-                            } catch (JSchException e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
+                    final String command = lightsDir + "turn-leds-off.py";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
                     if (success) {iconLeftTurn.setVisibility(View.INVISIBLE);}
@@ -195,8 +134,23 @@ public class LightsControl extends AppCompatActivity {
 
     }
 
+    public void backgroundTask(final String username, final String password, final String hostname, final String command, final int port) {
+        new AsyncTask<Integer, Void, Void>() {
+            protected Void doInBackground(Integer... params) {
+                // Else, turn off high beams
+                try {
+                    // Execute command on the pi
+                    runPiCommand(username, password, hostname, command, port);
+                } catch (JSchException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute(1);
+    }
     // This method is connects to the pi, and runs the command given
     public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
+
         // New Jsch object for connecting
         JSch jsch = new JSch();
 
