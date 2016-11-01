@@ -1,8 +1,3 @@
-#IST 440
-# Drive Train (Team 02)
-# Author:Tapan Patel, Joe Altomare 
-# Version: 5
-# Date: 10/27/2016
 package com.example.tapanapatel.drivetrainfinal;
 
 import android.os.Bundle;
@@ -109,3 +104,24 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+/* #include <Wire.h>
+
+#define SLAVE_ADDRESS 0x08
+int number = 0;
+int rpm = 0;
+volatile float time_diff = 0;
+volatile float time_last = 0;
+volatile int rpm_array(8) = {0, 0, 0, 0, 0};
+
+void setup () {
+attachInterrupt (0, rmp_interrupt, RISING);
+
+//initialize i2c as slave
+Wire.begin (SLAVE_ADDRESS);
+
+//difine callbacks for i2c communication
+Wire.onReceive (receiveData);
+Wire.onRequest (sendData);
+}
+
