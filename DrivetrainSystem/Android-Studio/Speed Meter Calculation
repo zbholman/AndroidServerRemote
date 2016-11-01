@@ -1,4 +1,5 @@
-/*     private SpeedometerView speedometer
+EXAMPLE 1
+private SpeedometerView speedometer
 
 // Customize SpeedometerView
         speedometer = (SpeedometerView) v.findViewById(R.id.speedometer);
@@ -19,4 +20,5 @@
 // Configure value range colors
         speedometer.addColoredRange(30, 140, Color.GREEN);
         speedometer.addColoredRange(140, 180, Color.YELLOW);
-        speedometer.addColoredRange(180, 400, Color.RED); */
+        speedometer.addColoredRange(180, 400, Color.RED); 
+        
