@@ -173,11 +173,21 @@ class Log:
 		
 		#Put all of the messages into one central default collection
 		self.add_message(inc_message)
-
+	
 
 	#Method to add a message to the mongo database
         def add_message(self, message, c = db.default):
 		c.insert(message.ConvertToDictionary())	
+
+
+	
+	#drop all tables. This is for testing purposes. This method MUST be removed before build
+	def bobby_drop_tables(self):
+		for i in db.collection_names(): #go through all of the collections in the database
+			if( not( i == "system.indexes")): #Ensuring that the system.indexes collection does not get deleted		
+				getattr(db, i).drop() #This line is doing 'db.[value at i].drop()						
+
+	
 
 	#returns a message from the current database, collection 'logging'
         def get_message(db):
