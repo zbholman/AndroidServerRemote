@@ -9,7 +9,7 @@
 
 #Import the message and log class
 from Message import Message
-from logging_beta import Log
+from logging import Log
 
 
 #Create several messages to test with
