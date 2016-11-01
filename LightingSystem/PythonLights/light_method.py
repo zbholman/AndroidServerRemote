@@ -50,11 +50,26 @@ def l_signal():
     ]
     return logo
 
-images = [hazrdLight,r_signal,l_signal]
+def running_light():
+    G = green
+    O = nothing
+    logo = [
+    O, O, O, O, O, O, O, O,
+    O, O, O, O, G, G, O, O,
+    G, G, G, O, G, O, G, O,
+    O, O, O, O, G, O, O, G,
+    G, G, G, O, G, O, O, G,
+    O, O, O, O, G, O, O, G,
+    G, G, G, O, G, O, G, O,
+    O, O, O, O, G, G, O, O,
+    ]
+    return logo
+
+images = [hazrdLight, r_signal, l_signal, running_light]
 count = 0
 while True:
     s.set_pixels(images[count % len(images)]())
-    time.sleep(.9)
+    time.sleep(.8)
     s.clear()
-    time.sleep(.9)
+    time.sleep(.8)
     count += 1
