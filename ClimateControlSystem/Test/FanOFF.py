@@ -20,7 +20,7 @@ def GPIOsetup():
     GPIO.setwarnings(False)
 #Turns the fan off 
 def fanOFF():
-    GPIO.output(FAN_PIN, 1) #Pin means fan is off 
+    GPIO.output(FAN_PIN, GPIO.HIGH) #Pin means fan is off 
     print("fan off") #It displays that the fan is off
     return()
 
