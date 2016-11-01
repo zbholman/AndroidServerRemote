@@ -1,0 +1,43 @@
+# Cooling.py
+# IST440 Team 3
+# author: Ahmad Alhaddad
+#date 11/1/2016
+
+#import statements of GPIO
+import RPi.GPIO as GPIO
+import time
+
+
+# GPIO pin on raspberry Pi to connect to the Cooling Pad to pin via Fan connected to relay One
+cooling_Pin = (NUM)
+
+# setup GPIO pins.
+def GPIOsetup():
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(Cooling_Pin, GPIO.OUT)
+
+# turn relay ON that is cooling Pad ON
+def CoolON():
+        GPIOsetup()
+        GPIO.output(Cooling_Pin, 0) #cool on
+	print("Cool On")
+        return()
+
+# relay OFF that is cooling Pad OFF
+def CoolOFF():
+        GPIOsetup()
+        GPIO.output(Cooling_Pin, 1) #cool off
+	print("Cool Off")
+        return()
+
+try:
+	CoolingON()
+        time.sleep(15)
+	CoolOFF()
+
+except KeyboardInterrupt:
+        print "Quit"
+
+
+GPIO.cleanup()
