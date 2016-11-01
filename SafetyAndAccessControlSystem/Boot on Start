@@ -1,0 +1,3 @@
+cron -e
+
+@reboot /usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/Doors_locked.py
