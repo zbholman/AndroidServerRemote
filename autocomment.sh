@@ -16,6 +16,8 @@ printf "\nWhat project is this for?\n"
 read projectName
 printf "\nWho is your professor?\n"
 read professor
+printf "\nWhich team directory is yours?\n ex: LightingSystem"
+read team
 printf "\nWhat file extension are you looking for? ex: py\n"
 read fileType
 
@@ -57,7 +59,7 @@ function checkHeader() {
 
 ### Set internal file seperator to recognize spaces in filenames
 IFS=$'\n'
-
+cd $team
 ### Find all python files in team directory, and run header function
 for f in $(find . -name \*.$fileType); do
   checkHeader $f $commentChar
