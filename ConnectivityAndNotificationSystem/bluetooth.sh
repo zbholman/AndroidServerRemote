@@ -32,7 +32,7 @@ sudo pi-bluetooth --version | grep 3
 			fi
 		exit 1
 	fi
-# 
+# if can't install bluetooth firmware
 sudo bluez --version | grep 3
 	if [ "$?" = "1" ]; then
 		sudo apt-get install bluez bluez-firmware
