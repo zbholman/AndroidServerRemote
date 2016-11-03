@@ -1,11 +1,11 @@
-# display message if the device is trying to update and there is no internet connection
+#  to display message if the device is trying to update and there is no internet connection
 sudo apt-get update
 	if [ "$?" = "1" ]; then
 		echo "Cannot update check internet connection" 1>&2
 		exit 1
 	fi
 	
-# display messges when there is an error with repositiories 
+# to display messges when there is an error with repositiories 
 sudo apt-get upgrade -y
 	if [ "$?" = "1" ]; then
 		echo "Cannot upgrade repositories something went wrong" 1>&2
@@ -64,6 +64,8 @@ sudo usermod -G bluetooth -a pi
 		echo "Failed to provide permission" 1>&2
 		exit 1
 	fi
+
+# if there is no bluetooth activity
 cat /etc/group | grep bluetooth
 	if [ "$?" = "1" ]; then
 		echo "no bluetooth activity found" 1>&2
