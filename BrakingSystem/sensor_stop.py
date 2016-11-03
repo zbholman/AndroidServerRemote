@@ -25,6 +25,6 @@ while True:
         else:
             p.ChangeDutyCycle(9)#engage brake
 
-except KeyboardInterrupt:
+    except KeyboardInterrupt:
         GPIO.cleanup()
         p.stop()
