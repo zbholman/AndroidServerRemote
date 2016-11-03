@@ -61,19 +61,47 @@ cat /etc/group | grep bluetooth
 
 # to check the raspberry pi bluetooth name
 sudo hciconfig hci0 name
+	if [ "$?" = "1" ]; then
+		echo "Couldn't retrieve bluetooth device name" 1>&2
+		exit 1
+	fi
 
 # to set the bluetooth name
 sudo hciconfig hci0 name raspberrypi
+	if [ "$?" = "1" ]; then
+		echo "Cannot install pi-bluetooth" 1>&2
+		exit 1
+	fi
 
 # make the raspberry pi discoverable
 sudo hciconfig hci0 piscan
+	if [ "$?" = "1" ]; then
+		echo "Cannot make the pi bluetooth visible" 1>&2
+		exit 1
+	fi
+
 
 # setup agent to listen for pairing request
 sudo bluetooth-agent 1234
+	if [ "$?" = "1" ]; then
+		echo "Couldnt listen to the pairing request" 1>&2
+		exit 1
+	fi
+
 
 # list currently connected bluetooth devices
 sudo bluez-test-device list
+	if [ "$?" = "1" ]; then
+		echo "Cannot list the connected devices" 1>&2
+		exit 1
+	fi
+
 
 # package required for 'pand' command
 sudo apt-get install bluez-compat
+	if [ "$?" = "1" ]; then
+		echo "Cannot install bluez-compat" 1>&2
+		exit 1
+	fi
+
 
