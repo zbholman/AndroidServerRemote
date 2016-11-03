@@ -1,19 +1,22 @@
+# display message if the device is trying to update and there is no internet connection
 sudo apt-get update
 	if [ "$?" = "1" ]; then
 		echo "Cannot update check internet connection" 1>&2
 		exit 1
 	fi
-
+# display messges when there is an error with repositiories 
 sudo apt-get upgrade -y
 	if [ "$?" = "1" ]; then
 		echo "Cannot upgrade repositories something went wrong" 1>&2
 		exit 1
 	fi
+# if can't install repositories 
 sudo apt-get install
 	if [ "$?" = "1" ]; then
 		echo "Cannot install repositories something went wrong" 1>&2
 		exit 1
 	fi
+# if can't update the distribution
 sudo apt-get dist-upgrade -y
 	if [ "$?" = "1" ]; then
 		echo "Cannot upgrade the distribution" 1>&2
