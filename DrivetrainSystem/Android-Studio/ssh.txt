@@ -83,7 +83,7 @@
          } 
  
  
-         // Set the password for the session 
+         // Set the password for the session (JAVA)
          assert session != null; 
          session.setPassword(password); 
  
@@ -110,7 +110,7 @@
          } catch (JSchException e) { 
              e.printStackTrace(); 
          } 
-         // Use this if there is any need for output to return to android 
+         // Use this if there is any need for output to return to android (JAVA)
  //        ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
  // 
  //        channelssh.setOutputStream(baos); 
