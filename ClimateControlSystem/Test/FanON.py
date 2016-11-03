@@ -17,9 +17,13 @@ def GPIOsetup():
     GPIO.setwarnings(False)
 #Turns the fan on 
 def fanON(): #
+    GPIOsetup()
     GPIO.output(FAN_PIN, 0)#Pin means fan is on 
     print("fan on")#It displays that the fan is on
     return()
 
 #turns fan on
 fanON()
+
+# Reset GPIO settings
+GPIO.cleanup()
