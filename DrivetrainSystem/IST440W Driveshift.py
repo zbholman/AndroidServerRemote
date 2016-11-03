@@ -1,12 +1,9 @@
-Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:01:18) [MSC v.1900 32 bit (Intel)] on win32
-Type "copyright", "credits" or "license()" for more information.
->>> 
 #IST 440 Penn State Abington
 #Professor: Joseph Oakes
 #Fall 2016
 #DriveTrain
 #Author: Klaus Herchenroder
-#Version: 3
+#Version: 4
 
 
 from __future__ import division
@@ -22,7 +19,7 @@ pwm = Adafruit_PCA9685.PCA9685()
 servo_min = 150  # Min pulse length out of 4096 
 servo_max = 600  # Max pulse length out of 4096
 servo_neutral = 375 #The max pulse length of neutal
-servo_drive = 375 #The value to be changed for speed
+servo_drive = 400 #The value to be changed for speed
 
 
 # Helper function to make setting a servo pulse width simpler
@@ -101,3 +98,4 @@ while True:
     #time.sleep(1) # 1 Second
     #pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
     #time.sleep(1) # 1 Second
+
