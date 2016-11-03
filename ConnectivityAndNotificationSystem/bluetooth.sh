@@ -42,6 +42,7 @@ sudo bluez --version | grep 3
 			fi
 		exit 1
 	fi
+# if can't install bluetooth
 sudo blueman --version | grep 2.1
 	if [ "$?" = "1" ]; then
 		sudo apt-get install blueman
