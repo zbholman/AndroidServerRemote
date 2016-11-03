@@ -5,7 +5,7 @@ import queue
 import bluetooth
 import time
 
-# Connects us to a pi
+# Connects to pi
 class ConnectToPi :
         def __init__(self):
                 s = socket.socket()
@@ -56,6 +56,7 @@ class FromPiToPiConnection:
                         c.send('Thank you for connecting')
                         c.close()
 
+# to connect to server via socaket
 class ConnectToServer:
 
         def __init__(self, input_queue, output_queue):
