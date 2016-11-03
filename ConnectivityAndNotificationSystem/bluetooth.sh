@@ -4,24 +4,28 @@ sudo apt-get update
 		echo "Cannot update check internet connection" 1>&2
 		exit 1
 	fi
+	
 # display messges when there is an error with repositiories 
 sudo apt-get upgrade -y
 	if [ "$?" = "1" ]; then
 		echo "Cannot upgrade repositories something went wrong" 1>&2
 		exit 1
 	fi
+	
 # if can't install repositories 
 sudo apt-get install
 	if [ "$?" = "1" ]; then
 		echo "Cannot install repositories something went wrong" 1>&2
 		exit 1
 	fi
+	
 # if can't update the distribution
 sudo apt-get dist-upgrade -y
 	if [ "$?" = "1" ]; then
 		echo "Cannot upgrade the distribution" 1>&2
 		exit 1
 	fi
+	
 # check blutooth verson and update to new driver if needed
 sudo pi-bluetooth --version | grep 3
 	if [ "$?" = "1" ]; then
@@ -32,7 +36,8 @@ sudo pi-bluetooth --version | grep 3
 			fi
 		exit 1
 	fi
-# if can't install bluetooth firmware
+	
+# install or update bluetooth firmware
 sudo bluez --version | grep 3
 	if [ "$?" = "1" ]; then
 		sudo apt-get install bluez bluez-firmware
@@ -42,7 +47,7 @@ sudo bluez --version | grep 3
 			fi
 		exit 1
 	fi
-# if can't install bluetooth
+# installed or update bluetooth
 sudo blueman --version | grep 2.1
 	if [ "$?" = "1" ]; then
 		sudo apt-get install blueman
@@ -52,6 +57,8 @@ sudo blueman --version | grep 2.1
 			fi
 		exit 1
 	fi
+
+# check for user permission
 sudo usermod -G bluetooth -a pi
 	if [ "$?" = "1" ]; then
 		echo "Failed to provide permission" 1>&2
