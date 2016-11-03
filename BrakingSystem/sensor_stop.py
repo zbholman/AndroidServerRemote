@@ -3,6 +3,7 @@
 #Fall 2016
 #Team Pump Your Brakes
 #Members: Abu Sakif, David Austin, Qili Jian, Abu Chowdhury, Gary Martorana, Chakman Fung
+
 from grovepi import *
 import RPi.GPIO as GPIO
 import time
@@ -19,13 +20,10 @@ while True:
     try:
         # Read distance value from Ultrasonic
         distant = ultrasonicRead(ultrasonic_ranger)
-        d = str(distant)
         if distant <= 50:
-            time.sleep(10)  # sleep time added
-        elif distant <= 15:
-            setText("Getting a little too Close " + d + " cm")
+            p.ChangeDutyCycle(13.5)#engage brake
         else:
-            setText("Dist = " + d + " cm")
+            p.ChangeDutyCycle(9)#engage brake
 
 except KeyboardInterrupt:
         GPIO.cleanup()
