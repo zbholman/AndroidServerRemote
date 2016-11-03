@@ -1,9 +1,12 @@
+Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:01:18) [MSC v.1900 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> 
 #IST 440 Penn State Abington
 #Professor: Joseph Oakes
 #Fall 2016
 #DriveTrain
 #Author: Klaus Herchenroder
-#Version: 2
+#Version: 3
 
 
 from __future__ import division
@@ -51,10 +54,13 @@ while True:
 	    
     elif(mode == 's'): #Sets car into reverse
 	    pwm.set_pwm(0, 0, servo_drive)
+	    if servo_drive > 375:
+		    servo_drive = servo_drive - (((359 - servo_drive) * 2) + 16)
+	    pwm.set_pwm(0, 0, servo_drive)
 	    
     elif(mode == 'w'): #Sets car into drive
 	    if servo_drive < 359:
-		    servo_drive = servo_drive
+		    servo_drive = servo_drive + (((359 - servo_drive) * 2) + 16)
 	    pwm.set_pwm(0, 0, servo_drive)
 	    
     elif(mode == 'n'): #Sets car into neutral 
@@ -72,7 +78,7 @@ while True:
 	    servo_drive = servo_drive - 10
 	    pwm.set_pwm(0, 0, servo_drive)
 
-    elif(mode == 'f'):
+    elif(mode == 'f'): #Emergency Stop
 	    if servo_drive != 375:
 		    servo_drive = 375
 
