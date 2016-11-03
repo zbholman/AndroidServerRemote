@@ -22,6 +22,7 @@ sudo apt-get dist-upgrade -y
 		echo "Cannot upgrade the distribution" 1>&2
 		exit 1
 	fi
+# check blutooth verson and update to new driver if needed
 sudo pi-bluetooth --version | grep 3
 	if [ "$?" = "1" ]; then
 		sudo apt-get install pi-bluetooth
@@ -31,6 +32,7 @@ sudo pi-bluetooth --version | grep 3
 			fi
 		exit 1
 	fi
+# 
 sudo bluez --version | grep 3
 	if [ "$?" = "1" ]; then
 		sudo apt-get install bluez bluez-firmware
