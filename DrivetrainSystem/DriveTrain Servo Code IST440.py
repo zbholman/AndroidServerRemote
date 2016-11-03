@@ -1,106 +1,100 @@
-#IST 440
-# Drive Train (Team 02)
-# Author: Ghansyam Patel, Rahul Manoharan, and Klaus 
-# Version: 1.02
-# Date: 09/30/2016
-#GoPiGo Robot for DriveTrain
-from gopigo import *
-import sys
-import RPi.GPIO as GPIO
+#IST 440 Penn State Abington
+#Professor: Joseph Oakes
+#Fall 2016
+#DriveTrain
+#Author: Klaus Herchenroder
+#Version: 3
+
+
+from __future__ import division
 import time
 
-GPIO.setmode(GPIO.BOARD)
+# Import the PCA9685 module.
+import Adafruit_PCA9685
 
-GPIO.setup(12, GPIO.OUT)
+# PWM Adafruit Library
+pwm = Adafruit_PCA9685.PCA9685()
 
-p = GPIO.PWM(12, 50)
+# Configure min and max servo pulse lengths
+servo_min = 150  # Min pulse length out of 4096 
+servo_max = 600  # Max pulse length out of 4096
+servo_neutral = 375 #The max pulse length of neutal
+servo_drive = 375 #The value to be changed for speed
 
-p.start(2.5)
 
-#Displays the Start Up Screen
-print('Welcome to the DriveTrain System')
-print('Press:')
-print('p to Park the Car')
-print('r to Reverse the Car')
-print('n to Neutral')
-print('d to Drive the Car')
-print('l to Move the Car Left')
-print('r to Move the Car Right')
-print('i to Increase the Speed')
-print('e to Decrease the Speed')
-print('z to Exit the Drive Mode')
+# Helper function to make setting a servo pulse width simpler
+def set_servo_pulse(channel, pulse):
+    pulse_length = 1000000    # 1,000,000 us per second
+    pulse_length //= 60       # 60 Hz
+    print('{0}us per period'.format(pulse_length))
+    pulse_length //= 4096     # 12 bits of resolution
+    print('{0}us per bit'.format(pulse_length))
+    pulse *= 1000
+    pulse //= pulse_length
+    pwm.set_pwm(channel, 0, pulse)
 
-car = '    ______'
-car1= '  /___ __\\___'
-car2= '   o-----o    '
+# Set frequency to 60hz, for servos.
+pwm.set_pwm_freq(60)
 
+# To quit
+print('Moving servo on channel 0, press Ctrl-C to quit...')
+
+pwm.set_pwm(0, 0, servo_min)
+time.sleep(1.0)
 while True:
-    print"Drive Mode:",
+    print('Drive Mode:')
     mode = raw_input()
-    if (mode == 'p'):
-        stop()  #Car In The Park Mode
-        
-    elif (mode == 'r'):
-	p.ChangeDutyCycle(2.5)  # turn towards 0 degree
-	time.sleep(1) # sleep 1 second
-        bwd() #Car Reversing
-        
-    elif (mode == 'n'):
-	p.ChangeDutyCycle(7.5)  # turn towards 90 degree
-	time.sleep(1) # sleep 1 second
-        stop()  #Car In The Neutral Mode
-        
-    elif (mode == 'd'):
-	p.ChangeDutyCycle(12.5) # turn towards 180 degree
-        time.sleep(1) # sleep 1 second
-        fwd() #Car Moving Forward
+    pwm.set_pwm(0, 0, neutral) #Sets te car into neutral
 
-    elif (mode == 'l'):
-        left() #Car Turning Left
+    if(mode == 'p'): #Sets car into park, place holder code
+	    print('Stop')
+	    
+    elif(mode == 's'): #Sets car into reverse
+	    pwm.set_pwm(0, 0, servo_drive)
+	    if servo_drive > 375:
+		    servo_drive = servo_drive - (((359 - servo_drive) * 2) + 16)
+	    pwm.set_pwm(0, 0, servo_drive)
+	    
+    elif(mode == 'w'): #Sets car into drive
+	    if servo_drive < 359:
+		    servo_drive = servo_drive + (((359 - servo_drive) * 2) + 16)
+	    pwm.set_pwm(0, 0, servo_drive)
+	    
+    elif(mode == 'n'): #Sets car into neutral 
+	    pwm.set_pwm(0, 0, 375)
+	    
+    elif(mode == 't'): #Speeds up the car
+	    if servo_drive <= 375 && servo_drive > 359:
+		    servo_drive = 375
+	    servo_drive = servo_drive + 10
+	    pwm.set_pwm(0, 0, servo_drive)
 
-    elif (mode == 't'):
-        right() #Car Turning Right
+    elif(mode == 'g'): #Speeds down the car
+	    if servo_drive < 375 && servo_drive >= 359:
+		    servo_drive = 359
+	    servo_drive = servo_drive - 10
+	    pwm.set_pwm(0, 0, servo_drive)
 
-    elif (mode == 'i'):
-        increase_speed() #Increasing The Car Speed
+    elif(mode == 'f'): #Emergency Stop
+	    if servo_drive != 375:
+		    servo_drive = 375
 
-    elif (mode == 'e'):
-        decrease_speed() #Car Turning Left
-
-    elif (mode == 'z'):
-        stop() #Car Stops before Exiting Drive Mode
-        print('Exiting Drive Mode') #Leaving Drive Mode
-        print(car) #Printing Car
-        print(car1) #Printing Car
-        print(car2) #Printing Car
-        print('Good Bye!') #Exiting Message!
-        sys.exit()
-    else:
-        print('Wrong Drive Mode Command, Please Try Again')
-    time.sleep(.1)
-
-#Original Servo Code
-
-#import RPi.GPIO as GPIO
-#import time
-
-#GPIO.setmode(GPIO.BOARD)
-
-#GPIO.setup(12, GPIO.OUT)
-
-#p = GPIO.PWM(12, 50)
-
-#p.start(2.5)
-
-#try:
-#        while True:
-#		p.ChangeDutyCycle(2.5)  # turn towards 0 degree
-#		time.sleep(1) # sleep 1 second
-#		p.ChangeDutyCycle(7.5)  # turn towards 90 degree
-#		time.sleep(1) # sleep 1 second
-#		p.ChangeDutyCycle(12.5) # turn towards 180 degree
-#               time.sleep(1) # sleep 1 second
-                
-#except KeyboardInterrupt:
-#	p.stop()
-#        GPIO.cleanup()
+    elif(mode == 'q'): #Exits gear shift
+	    pwm.set_pwm(0, 0, neutral)
+	    sys.exit()
+	    
+    else: #If invalid command is entered
+	    print('No Command try again')
+	    time.sleep(0.1)
+  
+    # Move servo on channel O between extremes.
+    #pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_max) # Servo will be on position 180
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_neutral) # Servo will be on position 90
+    #time.sleep(1) # 1 Second
+    #pwm.set_pwm(0, 0, servo_min) # Servo will be on position 0
+    #time.sleep(1) # 1 Second
