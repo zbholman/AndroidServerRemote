@@ -105,23 +105,4 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-/* #include <Wire.h>
-
-#define SLAVE_ADDRESS 0x08
-int number = 0;
-int rpm = 0;
-volatile float time_diff = 0;
-volatile float time_last = 0;
-volatile int rpm_array(8) = {0, 0, 0, 0, 0};
-
-void setup () {
-attachInterrupt (0, rmp_interrupt, RISING);
-
-//initialize i2c as slave
-Wire.begin (SLAVE_ADDRESS);
-
-//difine callbacks for i2c communication
-Wire.onReceive (receiveData);
-Wire.onRequest (sendData);
-}
 
