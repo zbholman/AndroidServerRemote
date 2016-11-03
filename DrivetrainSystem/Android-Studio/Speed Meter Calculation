@@ -1,4 +1,4 @@
-JAVA how speed meter will work and show on dashboard:
+JAVA and python how speed meter will work and show on dashboard:
 private SpeedometerView speedometer
 
 // Customize SpeedometerView
@@ -25,7 +25,7 @@ private SpeedometerView speedometer
         
         
         
-JAVA How to calculate the speed of the car:
+JAVA How to calculate the speed of the car according to python code:
 #include <WIRE.H>
 #define SLAVE_ADDRESS 0x08
 int number = 0;
