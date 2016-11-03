@@ -15,16 +15,14 @@ GPIO.setup(11,GPIO.OUT)
 
 p = GPIO.PWM(11,50)#PWM'Post-width Modulation' puts pin 11 to 50Hz
 p.start(9)
-
-while True:
-    try:
-        # Read distance value from Ultrasonic
+try:
+    while True:
+# Read distance value from Ultrasonic
         distant = ultrasonicRead(ultrasonic_ranger)
         if distant <= 50:
             p.ChangeDutyCycle(13.5)#engage brake
         else:
             p.ChangeDutyCycle(9)#engage brake
-
-    except KeyboardInterrupt:
-        GPIO.cleanup()
-        p.stop()
+except KeyboardInterrupt:
+    GPIO.cleanup()
+    p.stop()
