@@ -1,20 +1,14 @@
 import json
 import pyowm #Python Open Weather Map
+import bluetooth
 
-server_sock= BluetoothSocket( RFCOMM ) 
-server_sock.bind(("",PORT_ANY)) 
-server_sock.listen(1) 
- 
- 
-port = server_sock.getsockname()[1] 
- 
- 
-uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+#Bluetooth hexidecimal address of Raspberry Pi device
+bd_addr = "50:46:5D:1D:00:4C"
 
-advertise_service( server_sock, "SampleServer",
-                   service_id = uuid,
-                   service_classes = [ uuid, SERIAL_PORT_CLASS ],
-                   profiles = [ SERIAL_PORT_PROFILE ])
+port = 1
+
+sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
+sock.connect((bd_addr, port))
 
 try:
 # Register API Key with source
@@ -42,9 +36,11 @@ try:
  fileName = 'outdoorWeather.json' # name of the JSON output file
  outFile = open(fileName, 'w') # W stands for writing, writing out to the JSON file
  json.dump(outdoorTempTOjson, outFile) # Dumping all contents from Temp to Json
- client_sock.send(outdoorTempTOjson)
+sock.send(outdoorTempTOjson)
  print ("sending [%s]" % outdoorTempTOjson)
  outFile.close() # Close the outfile
 
 except IOError:
  print("Error")
+ 
+ sock.close()
