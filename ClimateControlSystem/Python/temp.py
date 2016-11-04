@@ -3,9 +3,9 @@
 # Course: IST 440W
 # Purpose: Check temperature sensor
 
-import os
-import glob
-import time
+import os # Get the complete path of the current working directory
+import glob # Return a possibly-empty list of path names
+import time 
 
 #Create folders for temperature sensor probe
 os.system('modprobe w1-gpio') 
