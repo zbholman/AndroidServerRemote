@@ -1,6 +1,6 @@
 import json
 import hashlib
-
+# Ivan Defined it to be usable for all send methods
 '''
 Ivan and the boys have come to the conclusion of this standard messaging system between systems.
 Ver: 2
