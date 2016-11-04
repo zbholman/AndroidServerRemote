@@ -1,3 +1,8 @@
+# Author: Niravh Patel, Jacky Chen
+# Date: 11/4/2016
+# Course: IST 440W
+# Purpose: Turn Off Fan One 
+
 #import required Python libraries
 import RPi.GPIO as GPIO
 import time
