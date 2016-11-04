@@ -1,10 +1,12 @@
 package climatecontrol.ist440.climatecontrol;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 
@@ -51,5 +53,48 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+  	toggleBtnFan1 = (ToggleButton) findViewById(R.id.toggleBtnFan1);
+
+
+        toggleBtnFan1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                if (toggleBtnFan1.isChecked()) {
+                    toggleBtnFan1.setBackgroundColor(Color.GREEN);
+                } else {
+                    toggleBtnFan1.setBackgroundColor(Color.GRAY);
+                }
+
+            }
+
+
+        });
+
+
+        toggleBtnFan2 = (ToggleButton) findViewById(R.id.toggleBtnFan2);
+
+
+        toggleBtnFan2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                if (toggleBtnFan2.isChecked()) {
+                    toggleBtnFan2.setBackgroundColor(Color.GREEN);
+                } else {
+                    toggleBtnFan2.setBackgroundColor(Color.GRAY);
+                }
+
+            }
+
+
+        });
+
+
+    }
+
+
 
 }
