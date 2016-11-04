@@ -1,7 +1,7 @@
 # Author: Niravh Patel, Jacky Chen
 # Date: 11/4/2016
 # Course: IST 440W
-# Purpose: Turn on AC 
+# Purpose: Turn off AC 
 
 import required Python libraries
 import RPi.GPIO as GPIO
