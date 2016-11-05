@@ -1,33 +1,33 @@
 package climatecontrol.ist440.climatecontrol;
 
+
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
-
-
 
 public class MainActivity extends AppCompatActivity {
 
     private int mCounter = 60;
-    Button imageButtonInc;
-    Button imageButtonDec;
+    ToggleButton toggleBtnFan1;
+    ToggleButton toggleBtnFan2;
+
+    ImageButton imageButtonInc;
+    ImageButton imageButtonDec;
     TextView txt_Temp;
 
 
-  @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-
-
-        imageButtonInc = (Button) findViewById(R.id.imageButtonInc);
+        imageButtonInc = (ImageButton) findViewById(R.id.imageButtonInc);
         txt_Temp = (TextView) findViewById(R.id.txt_Temp);
 
         imageButtonInc.setOnClickListener(new View.OnClickListener() {
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-      });
+        });
 
-        imageButtonDec = (Button) findViewById(R.id.imageButtonDec);
+        imageButtonDec = (ImageButton) findViewById(R.id.imageButtonDec);
         txt_Temp = (TextView) findViewById(R.id.txt_Temp);
 
         imageButtonDec.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-  	toggleBtnFan1 = (ToggleButton) findViewById(R.id.toggleBtnFan1);
+        toggleBtnFan1 = (ToggleButton) findViewById(R.id.toggleBtnFan1);
 
 
         toggleBtnFan1.setOnClickListener(new View.OnClickListener() {
