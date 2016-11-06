@@ -64,13 +64,20 @@ class Log:
 
 
 	#This method add message to log in a database for future use
-	#This method retrievs the message by subsystems
-        def RetrieveBySubSystem():
-                pass
+	#This method retrievs the message by subsystems. C is the collection being used
+        def RetrieveBySubSystem(self, c):
+		pass			
+	
+			
 
 	#This method retrieves the messages by error from log
-        def RetrieveErrors():
-                pass
+        def Retrieve_Errors(self):
+		messages = db.errors.find() #Put the collection messages into an array calles messages
+		new_File = open("Errors.txt", 'w') #Create a new txt file
+		for i in messages: #Loop through the messages
+			new_File.write(str(i) + "\n") #Write to the text file the message in the collection
+		new_File.close() #close the textfile
+		
 
 	#This method retrieves all the messages from log
         def RetrieveAll():

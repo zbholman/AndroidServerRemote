@@ -27,4 +27,6 @@ logging.bobby_drop_tables()
 for i in message01:
 	logging.Parse_Message_To_Collection(i) #Puts message at index i in MongoDB
 
+logging.Retrieve_Errors()
+
 print("Success")
