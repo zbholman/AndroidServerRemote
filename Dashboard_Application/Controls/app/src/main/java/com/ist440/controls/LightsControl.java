@@ -140,7 +140,7 @@ public class LightsControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     final String command = lightsDir + "turn-leds-off.py";
-                    String endCommand = "kill $(ps aux | grep '[p]ython csp_build.py' | awk '{print $2}')";
+                    String endCommand = "kill $(ps aux | grep '[p]ython turn_signal.py' | awk '{print $2}')";
 
                     backgroundTask(username, password, hostname, endCommand, port);
                     backgroundTask(username, password, hostname, command, port);
@@ -170,7 +170,7 @@ public class LightsControl extends AppCompatActivity {
                     if (success) {iconRightTurn.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    final String endCommand = "kill $(ps aux | grep '[p]ython csp_build.py' | awk '{print $2}')";
+                    final String endCommand = "kill $(ps aux | grep '[p]ython turn_signal_2.py' | awk '{print $2}')";
                     backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
@@ -201,7 +201,7 @@ public class LightsControl extends AppCompatActivity {
                     if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    String endCommand = "kill $(ps aux | grep '[p]ython csp_build.py' | awk '{print $2}')";
+                    String endCommand = "kill $(ps aux | grep '[p]ython hazards.py' | awk '{print $2}')";
 
                     backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
