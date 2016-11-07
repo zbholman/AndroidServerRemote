@@ -25,7 +25,6 @@ class Log:
 	#and puts that message into the collection.
 	#Sorts it by HealthCode, Origin, and puts all messages into a default collection
 	def Parse_Message_To_Collection(self, inc_message):
-		print(inc_message)
 		#If the payload contains a healthcode, put it in the errors collection
         	if(inc_message.Return_Payload()[:2:] == "HC"):
                 	self.add_message(inc_message, db.errors)
@@ -66,22 +65,24 @@ class Log:
 	#This method add message to log in a database for future use
 	#This method retrievs the message by subsystems. C is the collection being used
         def RetrieveBySubSystem(self, c):
-		pass			
+		new_File = open(c + "_Collection.txt", 'w') #Create a new text file using the collection that is being used in the name
+		messages = getattr(db, c).find() #Get the messages in the collection		
+
+		for i in messages: #Loop through the messages
+			current_Message = Message(i['CID'], i['OID'], i['DID'], i['TTL'], i['PLD'], i['TS'], i['UID'], i['CKS'])
+			new_File.write(str(current_Message) + "\n\n") #Write to the text file the message in the collection
+		
+		new_File.close() #close the textfile			
 	
 			
 
 	#This method retrieves the messages by error from log
         def Retrieve_Errors(self):
-		messages = db.errors.find() #Put the collection messages into an array calles messages
-		new_File = open("Errors.txt", 'w') #Create a new txt file
-		for i in messages: #Loop through the messages
-			new_File.write(str(i) + "\n") #Write to the text file the message in the collection
-		new_File.close() #close the textfile
-		
+		self.RetrieveBySubSystem("errors")	
 
 	#This method retrieves all the messages from log
-        def RetrieveAll():
-                pass
+        def RetrieveAll(self):
+                self.RetrieveBySubSystem("default")
 	
 	#This method will clear all messages
         def ClearAll():
