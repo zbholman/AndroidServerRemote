@@ -8,6 +8,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -51,6 +54,7 @@ public class LightsControl extends AppCompatActivity {
         final ImageView iconRightTurn = (ImageView) findViewById(R.id.iconRightTurn);
         final ImageView iconHazards = (ImageView) findViewById(R.id.iconHazardLight);
 
+        // Set all icons to invisibule
         iconHazards.setVisibility(View.INVISIBLE);
         iconHighBeams.setVisibility(View.INVISIBLE);
         iconHeadLights.setVisibility(View.INVISIBLE);
@@ -63,6 +67,13 @@ public class LightsControl extends AppCompatActivity {
         switchLeftTurn.setChecked(false);
         switchRightTurn.setChecked(false);
         switchHazards.setChecked(false);
+
+        // Create animation for blinking icons
+        final Animation animation = new AlphaAnimation(1, 0);
+        animation.setDuration(750);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
 
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -135,8 +146,10 @@ public class LightsControl extends AppCompatActivity {
                     String command = lightsDir + "turn_signal.py";
                     backgroundTask(username, password, hostname, command, port);
 
-                    // If the light turns on, set icon to visible
-                    if (success) {iconLeftTurn.setVisibility(View.VISIBLE);}
+                    // If the light turns on, start blinking left turn icon
+                    while (success) {
+                        iconLeftTurn.startAnimation(animation);
+                    }
                 } else {
                     boolean success = true;
                     final String command = lightsDir + "turn-leds-off.py";
@@ -146,7 +159,9 @@ public class LightsControl extends AppCompatActivity {
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
-                    if (success) {iconLeftTurn.setVisibility(View.INVISIBLE);}
+                    if (success) {
+                        iconLeftTurn.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });
@@ -166,8 +181,11 @@ public class LightsControl extends AppCompatActivity {
                     final String command = lightsDir + "turn_signal_2.py";
                     backgroundTask(username, password, hostname, command, port);
 
-                    // If the light turns on, set icon to visible
-                    if (success) {iconRightTurn.setVisibility(View.VISIBLE);}
+                    // If the light turns on, start blinking right turn icon
+                    while (success) {
+                        iconRightTurn.startAnimation(animation);
+                    }
+
                 } else {
                     boolean success = true;
                     final String endCommand = "kill $(ps aux | grep '[p]ython turn_signal_2.py' | awk '{print $2}')";
@@ -207,8 +225,10 @@ public class LightsControl extends AppCompatActivity {
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
 
-                    // If light turns off, set icon to invisible
-                    if (success) {iconHazards.setVisibility(View.INVISIBLE);}
+                    // If light turns off, start blinking hazards icon
+                    while (success) {
+                        iconHazards.startAnimation(animation);
+                    }
                 }
             }
         });
