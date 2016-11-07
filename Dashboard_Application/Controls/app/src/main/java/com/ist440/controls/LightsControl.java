@@ -84,13 +84,20 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
+
+                    // Turn off other lights to avoid conflict
                     switchHeadLights.setChecked(false);
+                    switchHazards.setChecked(false);
+                    switchLeftTurn.setChecked(false);
+                    switchRightTurn.setChecked(false);
 
                     String command = lightsDir + "high_beams.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconHighBeams.setVisibility(View.VISIBLE);}
+
+                // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
                     String command = lightsDir + "turn-leds-off.py";
@@ -110,9 +117,13 @@ public class LightsControl extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // If the toggle is switched to "ON" run the following
-                // turn on high beams
+                // turn on head lights
                 if (isChecked) {
                     boolean success = true;
+                    // Turn off other lights to avoid conflict
+                    switchHazards.setChecked(false);
+                    switchLeftTurn.setChecked(false);
+                    switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
                     String command = lightsDir + "running_lights.py";
@@ -122,6 +133,8 @@ public class LightsControl extends AppCompatActivity {
                     if (success) {iconHeadLights.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
+
+                    // Turn LEDs off if head light switch is turned off
                     String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
 
@@ -141,7 +154,11 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
+                    // Turn off other lights to avoid conflict
+                    switchHeadLights.setChecked(false);
+                    switchHazards.setChecked(false);
                     switchRightTurn.setChecked(false);
+                    switchHighBeams.setChecked(false);
 
                     String command = lightsDir + "turn_signal.py";
                     backgroundTask(username, password, hostname, command, port);
@@ -176,7 +193,11 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
+                    // Turn off other lights to avoid conflict
+                    switchHeadLights.setChecked(false);
+                    switchHazards.setChecked(false);
                     switchLeftTurn.setChecked(false);
+                    switchHighBeams.setChecked(false);
 
                     final String command = lightsDir + "turn_signal_2.py";
                     backgroundTask(username, password, hostname, command, port);
@@ -209,8 +230,11 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
+                    // Turn off other lights to avoid conflict
+                    switchHeadLights.setChecked(false);
                     switchLeftTurn.setChecked(false);
                     switchRightTurn.setChecked(false);
+                    switchHighBeams.setChecked(false);
 
                     String command = lightsDir + "hazards.py";
                     backgroundTask(username, password, hostname, command, port);
