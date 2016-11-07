@@ -38,7 +38,8 @@
         tools:style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
         android:layout_toStartOf="@+id/iconRightTurn"
         android:layout_alignRight="@+id/switchHighBeams"
-        android:layout_alignEnd="@+id/switchHighBeams" />
+        android:layout_alignEnd="@+id/switchHighBeams"
+        android:layout_toLeftOf="@+id/iconRightTurn" />
 
     <ImageView
         android:layout_width="150dp"

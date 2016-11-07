@@ -51,6 +51,11 @@ public class LightsControl extends AppCompatActivity {
         final ImageView iconRightTurn = (ImageView) findViewById(R.id.iconRightTurn);
         final ImageView iconHazards = (ImageView) findViewById(R.id.iconHazardLight);
 
+        iconHazards.setVisibility(View.INVISIBLE);
+        iconHighBeams.setVisibility(View.INVISIBLE);
+        iconHeadLights.setVisibility(View.INVISIBLE);
+        iconLeftTurn.setVisibility(View.INVISIBLE);
+        iconRightTurn.setVisibility(View.INVISIBLE);
 
         // Set default state to false (off)
         switchHighBeams.setChecked(false);
@@ -159,14 +164,14 @@ public class LightsControl extends AppCompatActivity {
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
-                    if (success) {iconLeftTurn.setVisibility(View.VISIBLE);}
+                    if (success) {iconRightTurn.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
-                    if (success) {iconLeftTurn.setVisibility(View.INVISIBLE);}
+                    if (success) {iconRightTurn.setVisibility(View.INVISIBLE);}
                 }
             }
         });
@@ -188,14 +193,14 @@ public class LightsControl extends AppCompatActivity {
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
-                    if (success) {iconLeftTurn.setVisibility(View.VISIBLE);}
+                    if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
-                    if (success) {iconLeftTurn.setVisibility(View.INVISIBLE);}
+                    if (success) {iconHazards.setVisibility(View.INVISIBLE);}
                 }
             }
         });
