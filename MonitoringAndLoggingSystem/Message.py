@@ -34,7 +34,7 @@ class Message:
 
     #Default toString method
     def __str__(self):
-        return 'CID: ' + self.car_id + "\nOID:" + self.origin_id + "\nDID: " + self.destination_id + "\nTS: " +	str(self.TranslateTimestamp()) + "\nTTL: " + str(self.ttl) + "\nUID: " + self.uuid + "\nPLD: " + self.payload + "\nCKS: "+ self.checksum
+        return 'CID: ' + self.car_id + "\nOID: " + self.origin_id + "\nDID: " + self.destination_id + "\nTS: " + str(self.TranslateTimestamp()) + "\nTTL: " + str(self.ttl) + "\nUID: " + self.uuid + "\nPLD: " + self.payload + "\nCKS: "+ self.checksum
 
     #Returns string JSON representation of current message object based on message formatting standard
     def ConvertToJSON(self):
