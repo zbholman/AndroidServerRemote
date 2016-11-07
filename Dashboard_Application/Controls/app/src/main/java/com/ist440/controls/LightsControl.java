@@ -140,6 +140,9 @@ public class LightsControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     final String command = lightsDir + "turn-leds-off.py";
+                    String endCommand = "kill $(ps aux | grep '[p]ython csp_build.py' | awk '{print $2}')";
+
+                    backgroundTask(username, password, hostname, endCommand, port);
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -160,13 +163,15 @@ public class LightsControl extends AppCompatActivity {
                     boolean success = true;
                     switchLeftTurn.setChecked(false);
 
-                    String command = lightsDir + "turn_signal_2.py";
+                    final String command = lightsDir + "turn_signal_2.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconRightTurn.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
+                    final String endCommand = "kill $(ps aux | grep '[p]ython csp_build.py' | awk '{print $2}')";
+                    backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
 
@@ -196,6 +201,9 @@ public class LightsControl extends AppCompatActivity {
                     if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
+                    String endCommand = "kill $(ps aux | grep '[p]ython csp_build.py' | awk '{print $2}')";
+
+                    backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
 
