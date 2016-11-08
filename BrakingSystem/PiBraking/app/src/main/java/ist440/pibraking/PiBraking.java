@@ -19,7 +19,7 @@ import java.util.Properties;
 
 public class PiBraking extends AppCompatActivity {
 
-    ImageView imageView, imageView2, imageView3, imageView4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
