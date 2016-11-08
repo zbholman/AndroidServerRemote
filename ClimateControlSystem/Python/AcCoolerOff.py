@@ -1,4 +1,4 @@
-# Author: Niravh Patel, Jacky Chen, , Yusef Savage
+# Author: Niravh Patel, Jacky Chen, Yusef Savage,Ahmad Alhaddad
 # Date: 11/4/2016
 # Course: IST 440W
 # Purpose: Turn off AC 
