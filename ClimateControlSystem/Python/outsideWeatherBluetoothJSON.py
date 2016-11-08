@@ -1,6 +1,6 @@
 import json
 
-import pyowm  # Python Open Weather Map
+import pyowm  # Python Open Weather Mapa
 import socket
 import bluetooth
 
