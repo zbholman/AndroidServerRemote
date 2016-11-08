@@ -26,19 +26,19 @@ scrollphat.set_brightness(10)
 
 #turns lights off
 def clear(pause):
-    for x in range(11):   #11 pixels in a row
-        for y in range(3):  # 5 pixels in a column
-            scrollphat.set_pixel(x,y,0)
-            scrollphat.update()
-            time.sleep(pause)
+    #for x in range(11):   #11 pixels in a row
+    for y in range(3):  # 5 pixels in a column
+         scrollphat.set_pixel(x,y,0)
+         scrollphat.update()
+         time.sleep(pause)
 
 #turn lights on			
 def paint(pause):
-    for x in range(11):		#11 pixels in a row 
-        for y in range(3):		#5 pixels in a column
-            scrollphat.set_pixel(x,y,1)
-            scrollphat.update()
-            time.sleep(pause)
+    #for x in range(11):		#11 pixels in a row 
+    for y in range(3):		#5 pixels in a column
+         scrollphat.set_pixel(x,y,1)
+         scrollphat.update()
+         time.sleep(pause)
 
 while(True):
     try:
