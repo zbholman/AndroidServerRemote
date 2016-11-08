@@ -24,9 +24,9 @@ scrollphat.set_pixel(10,2,1)
 scrollphat.set_pixel(8,0,1)
 scrollphat.set_pixel(9,1,1)
 scrollphat.set_pixel(9,3,1)
-scrollphat.set_pixel(8,5,1)
+scrollphat.set_pixel(8,4,1)
 
-#one pixel in 4th row not working
+#one pixel in 5th row not working
 
 
 scrollphat.update()
