@@ -26,5 +26,3 @@ if sense.accelerometer >= 5:
 	time.sleep(5)
 elif sense.accelerometer < 5:
 	doors_unlock()
-
-	
