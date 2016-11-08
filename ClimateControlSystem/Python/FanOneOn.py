@@ -1,4 +1,4 @@
-# Author: Niravh Patel, Jacky Chen,Ahmad Alhaddad
+# Author: Niravh Patel, Jacky Chen,Ahmad Alhaddad, Yusef Savage
 # Date: 11/4/2016
 # Course: IST 440W
 # Purpose: Turn on Fan One 
