@@ -10,6 +10,8 @@ scrollphat.set_brightness(10)
 
 
 scrollphat.set_pixel(0,2,1)
+
+
 scrollphat.set_pixel(1,2,1)
 scrollphat.set_pixel(2,2,1)
 scrollphat.set_pixel(3,2,1)
