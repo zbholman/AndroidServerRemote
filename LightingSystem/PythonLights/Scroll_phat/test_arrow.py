@@ -1,7 +1,7 @@
 import scrollphat
 
 import math
-import system
+import sys
 import time
 
 
