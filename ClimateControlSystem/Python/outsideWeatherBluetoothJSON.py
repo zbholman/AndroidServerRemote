@@ -1,19 +1,21 @@
 import json
 
-import pyowm  # Python Open Weather Map
+import pyowm  # Python Open Weather Mapa
+import socket
 import bluetooth
 
-server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+#create the socket object
+socket_client = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 
+#Create host and port
+host = ''
 port = 1
-server_sock.bind(("", port))
-server_sock.listen(1)
 
-client_sock, address = server_sock.accept()
-print "Accepted connection from", address
+socket_client.connect((host, port))
+
 
 while True:
-    data = client_sock.recv(1024)
+    
     try:
         # Register API Key with source
         API_key = '89cb9b3c8c3c1ee033be08ffcfd26076'
@@ -42,9 +44,8 @@ while True:
         json.dump(outdoorTempTOjson, outFile)  # Dumping all contents from Temp to Json
         print("sending [%s]" % outdoorTempTOjson)  # Print the contents of the JSON file being sent
         outFile.close()  # Close the outfile
-        #What is the socket name??????
-        #socket.sendfile(outFile)
-        client_sock.close()
+        socket_client.send(outFile)
+        socket_client.close()
         server_sock.close()
     except IOError:
         print("Error")
