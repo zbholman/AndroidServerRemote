@@ -24,7 +24,6 @@ for i in pinList:
 def trigger() :
         for i in pinList: 
           GPIO.output(i, 1)
-#         GPIO.cleanup()
           break
      
 
