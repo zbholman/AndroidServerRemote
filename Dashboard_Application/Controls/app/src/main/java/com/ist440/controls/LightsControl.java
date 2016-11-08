@@ -8,9 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -34,7 +31,7 @@ public class LightsControl extends AppCompatActivity {
         // initialize variables for connecting to pi
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "130.203.105.79"; // Pi IP on PSU network
+        final String hostname = "104.39.121.91"; // Pi IP on PSU network
 //        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
         final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights/Scroll_phat/";
@@ -69,11 +66,11 @@ public class LightsControl extends AppCompatActivity {
         switchHazards.setChecked(false);
 
         // Create animation for blinking icons
-        final Animation animation = new AlphaAnimation(1, 0);
-        animation.setDuration(750);
-        animation.setInterpolator(new LinearInterpolator());
-        animation.setRepeatCount(Animation.INFINITE);
-        animation.setRepeatMode(Animation.REVERSE);
+        //final Animation animation = new AlphaAnimation(1, 0);
+        //animation.setDuration(750);
+        //animation.setInterpolator(new LinearInterpolator());
+        //animation.setRepeatCount(Animation.INFINITE);
+        //animation.setRepeatMode(Animation.REVERSE);
 
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -164,13 +161,17 @@ public class LightsControl extends AppCompatActivity {
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking left turn icon
-                    while (success) {
-                        iconLeftTurn.startAnimation(animation);
+                    if (success) {
+                        iconLeftTurn.setVisibility(View.VISIBLE);
                     }
+                    //while (success) {
+                        //iconLeftTurn.setVisibility(View.VISIBLE);
+                        //iconLeftTurn.startAnimation(animation);
+                    //}
                 } else {
                     boolean success = true;
                     final String command = lightsDir + "turn-leds-off.py";
-                    String endCommand = "kill $(ps aux | grep '[p]ython turn_signal.py' | awk '{print $2}')";
+                    String endCommand = "kill $(ps aux | grep '[t]urn_signal.py' | awk '{print $2}')";
 
                     backgroundTask(username, password, hostname, endCommand, port);
                     backgroundTask(username, password, hostname, command, port);
@@ -203,13 +204,14 @@ public class LightsControl extends AppCompatActivity {
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking right turn icon
-                    while (success) {
-                        iconRightTurn.startAnimation(animation);
+                    if (success) {
+                        iconRightTurn.setVisibility(View.VISIBLE);
+                        //iconRightTurn.startAnimation(animation);
                     }
 
                 } else {
                     boolean success = true;
-                    final String endCommand = "kill $(ps aux | grep '[p]ython turn_signal_2.py' | awk '{print $2}')";
+                    final String endCommand = "kill $(ps aux | grep '[t]urn_signal_2.py' | awk '{print $2}')";
                     backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
@@ -243,15 +245,17 @@ public class LightsControl extends AppCompatActivity {
                     if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    String endCommand = "kill $(ps aux | grep '[p]ython hazards.py' | awk '{print $2}')";
+                    String endCommand = "kill $(ps aux | grep '[h]azards.py' | awk '{print $2}')";
 
                     backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, start blinking hazards icon
-                    while (success) {
-                        iconHazards.startAnimation(animation);
+                    if (success) {
+                        iconHazards.setVisibility(View.VISIBLE);
+
+                        //iconHazards.startAnimation(animation);
                     }
                 }
             }
