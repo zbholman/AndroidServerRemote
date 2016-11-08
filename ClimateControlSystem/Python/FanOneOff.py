@@ -1,4 +1,4 @@
-# Author: Niravh Patel, Jacky Chen
+# Author: Niravh Patel, Jacky Chen,Ahmad Alhaddad
 # Date: 11/4/2016
 # Course: IST 440W
 # Purpose: Turn Off Fan One 
