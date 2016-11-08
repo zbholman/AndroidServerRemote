@@ -111,9 +111,9 @@ public class Main extends AppCompatActivity {
 
         final String user = "pi";
         final String pass = "IST440FA";
-        final String host = "104.39.120.129";
+        final String host = "75.102.85.199";
 
-        final String dir = "sudo python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
+        final String dir = "python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
         final int port = 22;
 
         //Instantiates widgets for use in onclick
@@ -221,7 +221,7 @@ public class Main extends AppCompatActivity {
                         }*/
 
                 //Starts SSH asynchronously, so app does not hesitate when making connection
-                String command = dir + "/Doors_unlock.py";
+                String command = dir + "/Doors_unlock.py &";
                 startASync(user, pass, host, command, port);
 
             }
@@ -250,7 +250,7 @@ public class Main extends AppCompatActivity {
 
                 //Starts SSH asynchronously, so app does not hesitate when making connection
 
-                String command = dir + "/car_alarm.py";
+                String command = dir + "/car_alarmOn.py &";
                 startASync(user, pass, host, command, port);
 
             }
