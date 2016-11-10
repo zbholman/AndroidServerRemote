@@ -253,7 +253,7 @@ public class LightsControl extends AppCompatActivity {
 
                     // If light turns off, start blinking hazards icon
                     if (success) {
-                        iconHazards.setVisibility(View.VISIBLE);
+                        iconHazards.setVisibility(View.INVISIBLE);
 
                         //iconHazards.startAnimation(animation);
                     }
