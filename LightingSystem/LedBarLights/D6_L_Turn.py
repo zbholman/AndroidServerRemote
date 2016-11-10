@@ -4,7 +4,7 @@ import random
 
 # Connect the Grove LED Bar to digital port D5
 # DI,DCKI,VCC,GND
-ledbar = 5
+ledbar = 6
 
 grovepi.pinMode(ledbar,"OUTPUT")
 i = 0
@@ -19,7 +19,6 @@ while True:
         grovepi.ledBar_orientation(ledbar, 1)
         time.sleep(.5)
 
-        print ("Test 2) Set level")
         # ledbar_setLevel(pin,level)
         # level: (0-10)
 
@@ -37,3 +36,4 @@ while True:
         break
     except IOError:
         print ("Error")
+                           

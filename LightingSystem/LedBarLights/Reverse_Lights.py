@@ -16,12 +16,15 @@ while True:
         # ledbar_setLed(pin,led,state)
         # led: which led (1-10)
         # state: off or on (0,1)
-        grovepi.ledBar_setLed(ledbar, 1, 1)
+
+        # green to red
+        grovepi.ledBar_orientation(ledbar, 0)
+        time.sleep(.5)
+
+        grovepi.ledBar_setLed(ledbar, 2, 1)
 
     except KeyboardInterrupt:
         grovepi.ledBar_setBits(ledbar, 0)
         break
     except IOError:
         print ("Error")
-
-

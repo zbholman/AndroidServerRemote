@@ -1,4 +1,4 @@
-# Author: Niravh Patel, Jacky Chen, Mohammed Ammouni
+# Author: Niravh Patel, Jacky Chen, Mohammed Ammouni,Ahmad Alhaddad, Yusef Savage
 # Date: 11/4/2016
 # Course: IST 440W
 # Purpose: Turn off Fan Two
@@ -24,7 +24,6 @@ for i in pinList:
 def trigger() :
         for i in pinList: 
           GPIO.output(i, 1)
-#         GPIO.cleanup()
           break
      
 

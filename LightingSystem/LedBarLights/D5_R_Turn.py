@@ -19,7 +19,6 @@ while True:
         grovepi.ledBar_orientation(ledbar, 1)
         time.sleep(.5)
 
-        print ("Test 2) Set level")
         # ledbar_setLevel(pin,level)
         # level: (0-10)
 
