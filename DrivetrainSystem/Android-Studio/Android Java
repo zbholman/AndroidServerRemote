@@ -16,6 +16,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import java.util.Properties;
+import android.widget.CompoundButton;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "104.39.121.152";
+        final String hostname = "104.39.120.244";
 
 
         final String RelayDir = "python /home/pi/Team02/PSUABFA16IST440W/DrivetrainSystem/Relay";
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray();
                 try {
                     jsonObj.put("id", 12345);
-                    jsonObj.put("name", "Climate System");
+                    jsonObj.put("name", "Drivetrain System");
 
                     jsonArray.put("system1");
                     jsonArray.put("system2");
@@ -63,13 +64,62 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
         ToggleButton tg1, tg2, tg3, tg4;
         tg1 = (ToggleButton) findViewById(R.id.toggleButton1);
         tg2 = (ToggleButton) findViewById(R.id.toggleButton2);
         tg3 = (ToggleButton) findViewById(R.id.toggleButton3);
         tg4 = (ToggleButton) findViewById(R.id.toggleButton4);
     }
+
+    {
+        ToggleButton tg1 = (ToggleButton) findViewById(R.id.toggleButton1);
+        tg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                } else {
+                    // The toggle is disabled
+                }
+            }
+        });
+    }
+    {
+        ToggleButton tg2 = (ToggleButton) findViewById(R.id.toggleButton2);
+        tg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                } else {
+                    // The toggle is disabled
+                }
+            }
+        });
+    }
+    {
+        ToggleButton tg3 = (ToggleButton) findViewById(R.id.toggleButton3);
+        tg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                } else {
+                    // The toggle is disabled
+                }
+            }
+        });
+    }
+    {
+        ToggleButton tg4 = (ToggleButton) findViewById(R.id.toggleButton4);
+        tg4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                } else {
+                    // The toggle is disabled
+                }
+            }
+        });
+    }
+
 
     public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
         // New Jsch object for connecting
@@ -150,4 +200,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+}
