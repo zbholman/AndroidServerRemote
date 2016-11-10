@@ -157,7 +157,7 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String command = lightsDir + "turn_signal.py";
+                    String command = lightsDir + "turn_signal_refactored.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking left turn icon
@@ -171,7 +171,7 @@ public class LightsControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     final String command = lightsDir + "turn-leds-off.py";
-                    String endCommand = "kill $(ps aux | grep '[t]urn_signal.py' | awk '{print $2}')";
+                    String endCommand = "kill $(ps aux | grep '[t]urn_signal_refactored.py' | awk '{print $2}')";
 
                     backgroundTask(username, password, hostname, endCommand, port);
                     backgroundTask(username, password, hostname, command, port);
@@ -200,7 +200,7 @@ public class LightsControl extends AppCompatActivity {
                     switchLeftTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    final String command = lightsDir + "turn_signal_2.py";
+                    final String command = lightsDir + "turn_signal_refactored_2.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking right turn icon
@@ -211,7 +211,7 @@ public class LightsControl extends AppCompatActivity {
 
                 } else {
                     boolean success = true;
-                    final String endCommand = "kill $(ps aux | grep '[t]urn_signal_2.py' | awk '{print $2}')";
+                    final String endCommand = "kill $(ps aux | grep '[t]urn_signal_refactored_2.py' | awk '{print $2}')";
                     backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
                     backgroundTask(username, password, hostname, command, port);
@@ -238,14 +238,14 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String command = lightsDir + "hazards.py";
+                    String command = lightsDir + "hazard_lights.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    String endCommand = "kill $(ps aux | grep '[h]azards.py' | awk '{print $2}')";
+                    String endCommand = "kill $(ps aux | grep '[h]azard_lights.py' | awk '{print $2}')";
 
                     backgroundTask(username, password, hostname, endCommand, port);
                     final String command = lightsDir + "turn-leds-off.py";
