@@ -40,17 +40,20 @@ def car_alarm():
 images = [car_alarm]
 s.set_pixels(images[count % len(images)]())
 
+#Sets initial orientations
 curOri = s.get_orientation()
 curPitch = curOri["pitch"]
 curRoll = curOri["roll"]
 curYaw = curOri["yaw"]
 
+#With a frequency of 30ms, checks current orientation to check for Impact
 while True:
     o = s.get_orientation()
     pitch = o["pitch"]
     roll = o["roll"]
     yaw = o["yaw"]
-  
+    
+    #Checks values to see if a 3 point change in any axis has occurred
     if((abs(curPitch - pitch) > 3) or (abs(curRoll - roll) > 3) or (abs(curYaw - yaw) > 3))
         subprocess.Popen("set_alarmOff.py", shell=True)
             break
