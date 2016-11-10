@@ -6,6 +6,8 @@
 from sense_hat import SenseHat
 import time
 import pygame
+import set_alarmOff
+import subprocess
 
 pygame.mixer.init()
 pygame.mixer.music.load("setalarm.mp3")
@@ -36,9 +38,27 @@ def car_alarm():
   return logo
     
 images = [car_alarm]
-count = 0
-
-
 s.set_pixels(images[count % len(images)]())
-time.sleep(.75)
-count += 1
+
+curOri = s.get_orientation()
+curPitch = curOri["pitch"]
+curRoll = curOri["roll"]
+curYaw = curOri["yaw"]
+
+while True:
+    o = s.get_orientation()
+    pitch = o["pitch"]
+    roll = o["roll"]
+    yaw = o["yaw"]
+  
+    if((abs(curPitch - pitch) > 3) or (abs(curRoll - roll) > 3) or (abs(curYaw - yaw) > 3))
+        subprocess.Popen("set_alarmOff.py", shell=True)
+            break
+    else:
+        # Continue if the inner loop wasn't broken.
+        sleep (0.03)
+        continue
+    # Inner loop was broken, break the outer.
+    break
+
+    
