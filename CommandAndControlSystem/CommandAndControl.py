@@ -10,7 +10,8 @@ Last Updated: 11/10/2016
 #Imports
 import queue
 import serial
-import socket
+import pika
+import sys
 from threading import Thread
 
 
@@ -24,24 +25,22 @@ def msgQueue():
 
 #Send the message to monitoring and logging. Can use basic ports for this.
 def sendToMonitoringAndLogging(message):
-	host = socket.gethostname()
-	port = 9001
-	s = socket.socket()
-	s.bind((host,port))
-	s.listen(5)
-	
-	#Gets connection from Monitoring & Logging Client.
-	conn, addr = s.accept()
+	connection = pika.BlockingConnection(pika.ConnectionParameters(
+        host='localhost'))
+	channel = connection.channel()
 
-	while True:
-		#sends message
-		conn.send(message.encode())
+	channel.queue_declare(queue='Command and Control System', durable=True)
 
-		data = conn.recv(1024).decode()
-		print(data)
-		break
-	conn.close() 
+	message = ' '.join(sys.argv[1:]) or "Command and Control System"
+	channel.basic_publish(exchange='',
+                     	 routing_key='Command and Control System',
+                     	 body=message,
+                     	 properties=pika.BasicProperties(
+                	        delivery_mode = 2, # make message persistent
+        	              ))
 
+	print(" [x] Sent %r" % message)
+	connection.close()
 #Main Loop for listening and blasting out messages.
 def main():
 	#Sets up a queue for messages
