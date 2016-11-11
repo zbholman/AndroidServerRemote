@@ -26,8 +26,8 @@ class Log:
 	#Sorts it by HealthCode, Origin, and puts all messages into a default collection
 	def Parse_Message_To_Collection(self, inc_message):
 		#If the payload contains a healthcode, put it in the errors collection
-        	if(inc_message.Return_Payload()[:2:] == "HC"):
-                	self.add_message(inc_message, db.errors)
+		if(inc_message.Return_Payload()[:2:] == "HC"):
+               		 self.add_message(inc_message, db.errors)
 		#Put the message into the collection dependant on where the message originated from
         	
 		self.add_message(inc_message , getattr(db, inc_message.Return_Origin_ID() ) )

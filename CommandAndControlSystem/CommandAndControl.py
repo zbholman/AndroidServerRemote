@@ -1,34 +1,61 @@
-import serial
-from threading import Thread
+'''
+
+Command & Control System
+Written by: Matthew Smith, Anthony Curran, Elaine Tang, and Andrew Rooney.
+This file is the source code for the Command & Control System, which serves as the brain of this automated vehicle.
+Last Updated: 11/10/2016
+
+'''
+
+#Imports
 import queue
-
-ser = serial.Serial('/dev/ttyUSB0', 9500) #Sets up a serialization port.
-testString = "Hello!"
-print ('Sending "%s"' % testString)
-ser.write('%s\n' % testString)
-
-while True:
-        incomingMsg = ser.readline().strip()
-        print('Recieved %s' % incomingMsg)
-        ser.write ('RPI Recieved: %s\n' % incomingMsg)
+import serial
+import pika
+import sys
+from threading import Thread
 
 
-#Tells the queue that processing the task is complete
+#Handles the message queue
+def msgQueue():
+	while True:
+		item = q.get() #Gets last message queued.	
+		ser.write(item) #Writes it to the serial port, all devices will get this running on BAUD 9500)
+		sendToMonitoringAndLogging(item) #Forwards message to sTMAL function.
+		q.task_done() #Task done, what a champ.
 
-def taskt(t):
-        while True:
-                print(t.get())
-                t.task_done()
-#setup the quese object as t 0 = infinite
-#sets the number of threads obkects to be 10
-t = queue.Queue(maxsize=0)
-num_threads = 10
+#Send the message to monitoring and logging. Can use basic ports for this.
+def sendToMonitoringAndLogging(message):
+	connection = pika.BlockingConnection(pika.ConnectionParameters(
+        host='localhost'))
+	channel = connection.channel()
 
-#Loop to put 100 numbers on the queue
-for y in range(100):
-        t.put(x)
+	channel.queue_declare(queue='Command and Control System', durable=True)
 
-#looping 10 threads
-#create worker thread
-#worker is ended when the main thread ends
+	message = ' '.join(sys.argv[1:]) or "Command and Control System"
+	channel.basic_publish(exchange='',
+                     	 routing_key='Command and Control System',
+                     	 body=message,
+                     	 properties=pika.BasicProperties(
+                	        delivery_mode = 2, # make message persistent
+        	              ))
+
+	print(" [x] Sent %r" % message)
+	connection.close()
+#Main Loop for listening and blasting out messages.
+def main():
+	#Sets up a queue for messages
+	q = Queue()
+	t = Thread(target=msgQueue)
+	t.daemon = True
+	t.start()
+	
+	#Serial Port Listening and adding messages to the MsgQueue.
+	ser = serial.Serial('/dev/ttyUSB0', 9500)
+	while True:
+		incMsg = ser.readline()
+		print('Recieved: %s' % incMsg)
+		q.put(incMsg)
+
+if __name__ == "__main__":
+    main()
 
