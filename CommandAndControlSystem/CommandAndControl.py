@@ -8,9 +8,11 @@ Last Updated: 11/10/2016
 '''
 
 #Imports
-from serial import Serial
-from threading import Thread
 import queue
+import serial
+import socket
+from threading import Thread
+
 
 #Handles the message queue
 def msgQueue():
@@ -22,9 +24,23 @@ def msgQueue():
 
 #Send the message to monitoring and logging. Can use basic ports for this.
 def sendToMonitoringAndLogging(message):
-	#Finish this. They will just be another .py on our own system, so use basic socket programming.
-	#I have the code for this and can send this to you. Really simple. 
-	print('Finish This')
+	host = socket.gethostname()
+	port = 9001
+	s = socket.socket()
+	s.bind((host,port))
+	s.listen(5)
+	
+	#Gets connection from Monitoring & Logging Client.
+	conn, addr = s.accept()
+
+	while True:
+		#sends message
+		conn.send(message.encode())
+
+		data = conn.recv(1024).decode()
+		print(data)
+		break
+	conn.close() 
 
 #Main Loop for listening and blasting out messages.
 def main():
@@ -36,8 +52,11 @@ def main():
 	
 	#Serial Port Listening and adding messages to the MsgQueue.
 	ser = serial.Serial('/dev/ttyUSB0', 9500)
-	incMsg = ser.readline()
-	print('Recieved: %s' % incMsg)
-	q.put(incMsg)
+	while True:
+		incMsg = ser.readline()
+		print('Recieved: %s' % incMsg)
+		q.put(incMsg)
 
-main()
+if __name__ == "__main__":
+    main()
+
