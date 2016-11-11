@@ -1,0 +1,138 @@
+package climatecontrol.ist440.climatecontrol;
+
+import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+public class MainActivity extends AppCompatActivity {
+
+    private int mCounter = 60;
+    ToggleButton toggleBtnFan1;
+    ToggleButton toggleBtnFan2;
+
+    ImageButton imageButtonInc;
+    ImageButton imageButtonDec;
+    TextView txt_Temp;
+    Switch switch_AC;
+    Switch switch_Heat;
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+//increase and decrease buttons
+
+        imageButtonInc = (ImageButton) findViewById(R.id.imageButtonInc);
+        txt_Temp = (TextView) findViewById(R.id.txt_Temp);
+        switch_AC = (Switch) findViewById(R.id.switch_AC);
+        switch_Heat = (Switch) findViewById(R.id.switch_Heat);
+
+
+        imageButtonInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mCounter ++;
+                txt_Temp.setText(Integer.toString(mCounter));
+
+                if (imageButtonInc.isPressed()) {
+                    switch_Heat.setChecked(true);
+                }
+
+                if (switch_Heat.isChecked()) {
+                    switch_AC.setChecked(false);
+                }
+
+                if (imageButtonInc.isPressed()) {
+                    txt_Temp.setTextColor(Color.RED);
+                }
+
+            }
+
+        });
+
+        imageButtonDec = (ImageButton) findViewById(R.id.imageButtonDec);
+        txt_Temp = (TextView) findViewById(R.id.txt_Temp);
+        switch_Heat = (Switch) findViewById(R.id.switch_Heat);
+        switch_AC = (Switch) findViewById(R.id.switch_AC);
+
+        imageButtonDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mCounter --;
+                txt_Temp.setText(Integer.toString(mCounter));
+
+                if (imageButtonDec.isPressed()) {
+                    switch_AC.setChecked(true);
+                }
+
+                if (switch_AC.isChecked()) {
+                    switch_Heat.setChecked(false);
+                }
+
+                if (imageButtonDec.isPressed()) {
+                    txt_Temp.setTextColor(Color.BLUE);
+                }
+
+
+            }
+        });
+
+//toggle buttons
+
+        toggleBtnFan1 = (ToggleButton) findViewById(R.id.toggleBtnFan1);
+
+
+        toggleBtnFan1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                if (toggleBtnFan1.isChecked()) {
+                    toggleBtnFan1.setBackgroundColor(Color.GREEN);
+                } else {
+                   toggleBtnFan1.setBackgroundColor(Color.GRAY);
+                }
+
+            }
+
+
+        });
+
+
+        toggleBtnFan2 = (ToggleButton) findViewById(R.id.toggleBtnFan2);
+
+
+        toggleBtnFan2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                if (toggleBtnFan2.isChecked()) {
+                    toggleBtnFan2.setBackgroundColor(Color.GREEN);
+                } else {
+                    toggleBtnFan2.setBackgroundColor(Color.GRAY);
+                }
+
+            }
+
+
+        });
+
+
+
+
+
+    }
+
+
+
+}

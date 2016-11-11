@@ -89,7 +89,13 @@
         app:layout_anchorGravity="center_vertical|right"
         android:layout_gravity="top|left"
         android:layout_height="350dp"
-       android:layout_width="250dp" />
+        android:layout_width="250dp"/>    
+        <!-- custom:circle_progress="150" -->
+     <!--android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:max="150"
+        android:progress="85" -->
+             
 
 
     #ProgressBar that will surround the Speedometer

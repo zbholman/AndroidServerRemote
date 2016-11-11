@@ -49,10 +49,8 @@ count = 0
 i=0
 
 #picture will blink three times before becoming still
-while (i<3): 
-   s.set_pixels(images[count % len(images)]())
-   time.sleep(.75)
-   s.clear()
-   time.sleep(.75)
-   s.set_pixels(images[count % len(images)]())
-   i+=1
+
+s.set_pixels(images[count % len(images)]())
+time.sleep(.75)
+
+   

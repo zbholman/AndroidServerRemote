@@ -44,12 +44,5 @@ def doors_lock():
 images = [doors_lock]
 count = 0
 
-i=0
-
-while (i<3): #image will flash 3 times when 
-   s.set_pixels(images[count % len(images)]())
-   time.sleep(.75)
-   s.clear()
-   time.sleep(.75)
-   s.set_pixels(images[count % len(images)]())
-   i+=1
+s.set_pixels(images[count % len(images)]())
+time.sleep(.75)

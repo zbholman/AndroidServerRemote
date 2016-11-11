@@ -1,7 +1,8 @@
-# Author: Niravh Patel, Jacky Chen,Ahmad Alhaddad, Yusef Savage
+# Author: Niravh Patel, Jacky Chen, Yusef Savage,Ahmad Alhaddad
 # Date: 11/4/2016
 # Course: IST 440W
-# Purpose: Turn Off Fan One 
+# Purpose: Turn off Heating pad
+
 
 #import required Python libraries
 import RPi.GPIO as GPIO
@@ -12,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 
 # init list with pin numbers
 
-pinList = [23]
+pinList = [27]
 
 # loop through pins and set mode and state to 'low'
 

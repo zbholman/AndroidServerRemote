@@ -1,7 +1,7 @@
-# Author: Niravh Patel, Jacky Chen,Ahmad Alhaddad, Yusef Savage
+# Author: Niravh Patel, Jacky Chen, Yusef Savage,Ahmad Alhaddad
 # Date: 11/4/2016
 # Course: IST 440W
-# Purpose: Turn Off Fan One 
+# Purpose: Turn on AC 
 
 #import required Python libraries
 import RPi.GPIO as GPIO
@@ -12,27 +12,25 @@ GPIO.setmode(GPIO.BCM)
 
 # init list with pin numbers
 
-pinList = [23]
+pinList = [22]
 
 # loop through pins and set mode and state to 'low'
 
 for i in pinList: 
     GPIO.setwarnings(False)
     GPIO.setup(i, GPIO.OUT) 
-    GPIO.output(i,1)
+    GPIO.output(i,0)
 
 def trigger() :
         for i in pinList: 
-          GPIO.output(i, 1)
+          GPIO.output(i,0)
 #         GPIO.cleanup()
           break
      
-
 try: 
-    trigger()
+	trigger()
          
       
 except KeyboardInterrupt:
   print "  Quit" 
   # Reset GPIO settings
-  GPIO.cleanup()

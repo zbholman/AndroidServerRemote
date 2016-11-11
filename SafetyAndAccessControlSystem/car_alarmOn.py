@@ -6,6 +6,8 @@
 from sense_hat import SenseHat
 import time
 import pygame
+import set_alarmOff
+import subprocess
 
 pygame.mixer.init()
 pygame.mixer.music.load("setalarm.mp3")
@@ -36,9 +38,30 @@ def car_alarm():
   return logo
     
 images = [car_alarm]
-count = 0
-
-
 s.set_pixels(images[count % len(images)]())
-time.sleep(.75)
-count += 1
+
+#Sets initial orientations
+curOri = s.get_orientation()
+curPitch = curOri["pitch"]
+curRoll = curOri["roll"]
+curYaw = curOri["yaw"]
+
+#With a frequency of 30ms, checks current orientation to check for Impact
+while True:
+    o = s.get_orientation()
+    pitch = o["pitch"]
+    roll = o["roll"]
+    yaw = o["yaw"]
+    
+    #Checks values to see if a 3 point change in any axis has occurred
+    if((abs(curPitch - pitch) > 3) or (abs(curRoll - roll) > 3) or (abs(curYaw - yaw) > 3))
+        subprocess.Popen("set_alarmOff.py", shell=True)
+            break
+    else:
+        # Continue if the inner loop wasn't broken.
+        sleep (0.03)
+        continue
+    # Inner loop was broken, break the outer.
+    break
+
+    

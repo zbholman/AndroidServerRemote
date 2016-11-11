@@ -11,12 +11,16 @@ import android.view.MenuItem;
 import android.widget.ToggleButton;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+
 import java.util.Properties;
 import android.widget.CompoundButton;
+
+import static android.widget.CompoundButton.OnCheckedChangeListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "104.39.120.244";
+        final String hostname = "104.39.123.135";
 
 
-        final String RelayDir = "python /home/pi/Team02/PSUABFA16IST440W/DrivetrainSystem/Relay";
+        final String driveDir  = "python/home/pi/Desktop/Drive";
         final int port = 22;
 
 
-                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // final TextView text1 = (TextView) findViewById(R.id.TextView1);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -72,52 +76,146 @@ public class MainActivity extends AppCompatActivity {
     }
 
     {
-        ToggleButton tg1 = (ToggleButton) findViewById(R.id.toggleButton1);
-        tg1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // Create toggle for changing
+        final ToggleButton ToggleButtonPARK = (ToggleButton) findViewById(R.id.toggleButton1);
+        final ToggleButton ToggleButtonNEUTRAL = (ToggleButton) findViewById(R.id.toggleButton2);
+        final ToggleButton ToggleButtonDRIVE = (ToggleButton) findViewById(R.id.toggleButton3);
+        final ToggleButton ToggleButtonREVERSE = (ToggleButton) findViewById(R.id.toggleButton4);
+
+        ToggleButtonDRIVE.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called
+          //  @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on Park
                 if (isChecked) {
-                    // The toggle is enabled
+                    boolean success = true;
+
+                    // Turn off other lights to avoid conflict
+                    ToggleButtonNEUTRAL.setChecked(false);
+                    ToggleButtonREVERSE.setChecked(false);
+                    ToggleButtonPARK.setChecked(false);
+
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+
+                    // If the switch it turned off, turn off the leds
                 } else {
-                    // The toggle is disabled
+                    boolean success = true;
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
                 }
+
+
             }
+
+
         });
-    }
-    {
-        ToggleButton tg2 = (ToggleButton) findViewById(R.id.toggleButton2);
-        tg2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        ToggleButtonNEUTRAL.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called
+            //  @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on Park
                 if (isChecked) {
-                    // The toggle is enabled
+                    boolean success = true;
+
+                    // Turn off other lights to avoid conflict
+                    ToggleButtonDRIVE.setChecked(false);
+                    ToggleButtonREVERSE.setChecked(false);
+                    ToggleButtonPARK.setChecked(false);
+
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+
+                    // If the switch it turned off, turn off the leds
                 } else {
-                    // The toggle is disabled
+                    boolean success = true;
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
                 }
+
+
             }
+
+
         });
-    }
-    {
-        ToggleButton tg3 = (ToggleButton) findViewById(R.id.toggleButton3);
-        tg3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+
+        ToggleButtonREVERSE.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called
+            //  @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on Park
                 if (isChecked) {
-                    // The toggle is enabled
+                    boolean success = true;
+
+                    // Turn off other lights to avoid conflict
+                    ToggleButtonDRIVE.setChecked(false);
+                    ToggleButtonNEUTRAL.setChecked(false);
+                    ToggleButtonPARK.setChecked(false);
+
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+
+                    // If the switch it turned off, turn off the leds
                 } else {
-                    // The toggle is disabled
+                    boolean success = true;
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
                 }
+
+
             }
+
+
         });
-    }
-    {
-        ToggleButton tg4 = (ToggleButton) findViewById(R.id.toggleButton4);
-        tg4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        ToggleButtonPARK.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called
+            //  @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on Park
                 if (isChecked) {
-                    // The toggle is enabled
+                    boolean success = true;
+
+                    // Turn off other lights to avoid conflict
+                    ToggleButtonDRIVE.setChecked(false);
+                    ToggleButtonREVERSE.setChecked(false);
+                    ToggleButtonNEUTRAL.setChecked(false);
+
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+
+                    // If the switch it turned off, turn off the leds
                 } else {
-                    // The toggle is disabled
+                    boolean success = true;
+                    String command = driveDir + "Driveshift.py";
+                    backgroundTask(username, password, hostname, command, port);
+
                 }
+
+
             }
+
+
         });
+
+
     }
 
 
@@ -200,4 +298,3 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}

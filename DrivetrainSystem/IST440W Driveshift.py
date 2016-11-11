@@ -39,8 +39,9 @@ pwm.set_pwm_freq(60)
 # To quit
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 
-pwm.set_pwm(0, 0, servo_min)
-time.sleep(1.0)
+#pwm.set_pwm(0, 0, servo_min)
+#time.sleep(1.0)
+
 while True:
     print('Drive Mode:')
     mode = raw_input()

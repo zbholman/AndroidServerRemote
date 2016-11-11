@@ -47,7 +47,7 @@ sudo bluez --version | grep 3
 			fi
 		exit 1
 	fi
-# installed or update bluetooth
+# install or update bluetooth
 sudo blueman --version | grep 2.1
 	if [ "$?" = "1" ]; then
 		sudo apt-get install blueman
@@ -119,4 +119,10 @@ sudo apt-get install bluez-compat
 		exit 1
 	fi
 
-
+# connect to phone and sets up network interface
+sudo pand --connect ##device address -n
+	if [ "$?" = "1" ]; then
+		echo "Can't get device address" 1>&2
+		exit 1
+	fi
+		
