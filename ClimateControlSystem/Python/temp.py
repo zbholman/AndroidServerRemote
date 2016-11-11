@@ -41,7 +41,7 @@ while True:
    print(read_temp()) #Display temperature 
    t = read_temp() #Assign t as reading temperature
    if (t > 76.0): # If the temperature is above 70 degrees the fan will turn on
-	print (True) #Turn on the fan
+	print (True) #Turn on the fan , GPIO.output(23, True)
    else:
-	print (False) #Turn off the fan
+	print (False) #Turn off the fan, GPIO.output(23, False)
 
