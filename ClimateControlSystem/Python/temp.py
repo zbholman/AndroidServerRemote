@@ -34,9 +34,14 @@ def read_temp():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0 #Celsius temperature 
         temp_f = temp_c * 9.0 / 5.0 + 32.0 #Fahrenheit temperature
-        return temp_c, temp_f #Prints out temperature
+        return temp_f #Prints out temperature
 	
 #Continue to read temperature every second	
 while True:
-	print(read_temp())	
-	time.sleep(1)
+   print(read_temp()) #Display temperature 
+   t = read_temp() #Assign t as reading temperature
+   if (t > 76.0): # If the temperature is above 70 degrees the fan will turn on
+	print (True) #Turn on the fan , GPIO.output(23, True)
+   else:
+	print (False) #Turn off the fan, GPIO.output(23, False)
+
