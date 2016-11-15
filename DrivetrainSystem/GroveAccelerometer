@@ -2,8 +2,7 @@
 # Drive Train (Team 02)
 # Author: LaQuelle Martin and Rahul Manoharan
 # Date: 10/10/2016
-#Grove Accelerometer 
-
+#Sense Hat accelerometer provides the amount of gravitational force that acts on each axis 
 
 from sense_hat import SenseHat
 
