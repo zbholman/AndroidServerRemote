@@ -34,6 +34,69 @@ def set_servo_pulse(channel, pulse):
   pulse *= 1000
   pulse //= pulse_length 
   pwm.set_pwm(channel, 0, pulse)
+
+#Set Frequency to 60Hz for the Servos
+pwm.set_pwm_freq(60)
+
+#To Quit 
+print('Moving Servo on channel 0, Press Ctrl-C To Quit')
+
+while True:
+  print"Drive Mode:",
+  mode = raw_input()
+  
+  if (mode == 'p'):
+    print('Stop')
+    pwm.set_pwm(0, 0, servo_neutral)
+    
+  elif (mode == 's'):
+    pwm.set_pwm(1, 1, steering_center)
+    if servo_drive > 375:
+      servo_drive = servo_drive - (((servo_drive - 375) * 2) + 16)
+    pwm.set_pwm(0, 0, servo_drive)
+  
+  elif (mode == 'w'):
+    pwm.set_pwm(1, 1, steering_center)
+    if servo_drive < 359:
+      servo_drive = servo_drive + (((359 - servo_drive) *2) + 16)
+    pwm.set_pwm(0, 0, servo_drive)
+    
+  elif (mode == 'n'):
+    pwm.set_pwm(0, 0, 375)
+    
+  elif (mode == 'r'):
+    if servo_drive <= 375 and servo_drive > 359:
+      servo_drive = 375
+    servo_drive = servo_drive + 10
+    pwm.set_pwm(0, 0, servo_drive)
+
+  elif (mode == 'f'):
+    if servo_drive < 375 and servo_drive >= 359:
+      servo_drive = 359
+    servo_drive = servo_drive - 10
+    pwm.set_pwm(0, 0, servo_drive)
+    
+  elif (mode == 'a'):
+    pwm.set_pwm(1, 1, steering_left)
+    
+  elif (mode == 'c'):
+    pwm.set_pwm(1, 1, steering_center)
+    
+  elif (mode == 'a'):
+    pwm.set_pwm(1, 1, steering_right)
+    
+    
+  elif (mode == 'q'):
+    pwm.set_pwm(0, 0, servo_neutral)
+    pwm.set_pwm(1, 1, steering_center)
+    print('Good Bye')
+    sys.exit()
+    
+  else: 
+    print('No Command Try Again')
+  time.sleep(0.1)
+  
+  
   
   
 
