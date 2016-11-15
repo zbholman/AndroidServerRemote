@@ -22,5 +22,5 @@ while True:
     y=round(y, 0)
     z=round(z, 0)
 
-#Displays axis data
+#Displays axis data which represents the acceleration intensity of the axis
     print("x={0}, y={1}, z={2}".format(x, y, z))
