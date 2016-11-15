@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
@@ -30,16 +29,16 @@ public class PiBraking extends AppCompatActivity {
         final String password = "raspberry";
         final String hostname = "104.39.123.213";
 
-        final String scriptDir = "python /home/pi";
+        final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
         final int port = 22;
 
 
         final ToggleButton absBrake = (ToggleButton) findViewById(R.id.absBrake);
 
-        final ImageView imageView =(ImageView) findViewById(R.id.imageView);
-        final ImageView imageView2 =(ImageView) findViewById(R.id.imageView2);
-        final ImageView imageView3 =(ImageView) findViewById(R.id.imageView3);
-        final ImageView imageView4 =(ImageView) findViewById(R.id.imageView4);
+        final ImageView imageView =(ImageView) findViewById(R.id.fRight);
+        final ImageView imageView2 =(ImageView) findViewById(R.id.rLeft);
+        final ImageView imageView3 =(ImageView) findViewById(R.id.rRight);
+        final ImageView imageView4 =(ImageView) findViewById(R.id.fLeft);
 
         imageView.setVisibility(View.INVISIBLE);
         imageView2.setVisibility(View.INVISIBLE);

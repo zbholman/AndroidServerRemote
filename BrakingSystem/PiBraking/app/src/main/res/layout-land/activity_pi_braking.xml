@@ -13,65 +13,58 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/auto_pic_resize"
-        android:id="@+id/imageView5"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    app:srcCompat="@drawable/auto_pic_resize"
+    android:id="@+id/brakeStatus"
+    android:layout_alignParentTop="true"
+    android:layout_toLeftOf="@+id/absBrake"
+    android:layout_toStartOf="@+id/absBrake"
+    android:layout_marginRight="91dp"
+    android:layout_marginEnd="91dp" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        app:srcCompat="@android:color/transparent"
+        android:id="@+id/rRight"
+        android:background="#50ff2f2f"
+        android:layout_alignTop="@+id/rLeft"
+        android:layout_alignStart="@+id/fRight"
+        android:layout_alignLeft="@+id/fRight" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        app:srcCompat="@android:color/transparent"
+        android:id="@+id/fRight"
+        android:background="#50ff2f2f"
+        android:layout_alignTop="@+id/fLeft"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        app:srcCompat="@android:color/transparent"
+        android:id="@+id/fLeft"
+        android:background="#50ff2f2f"
+        android:layout_marginTop="62dp"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/absBrake"
-        android:layout_toStartOf="@+id/absBrake"
-        android:layout_marginRight="91dp"
-        android:layout_marginEnd="91dp" />
+        android:layout_toLeftOf="@+id/fRight"
+        android:layout_toStartOf="@+id/fRight"
+        android:layout_marginRight="123dp"
+        android:layout_marginEnd="123dp" />
 
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        app:srcCompat="@android:color/transparent"
-        android:id="@+id/imageView3"
-        android:background="#50ff2f2f"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignStart="@+id/imageView" />
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        app:srcCompat="@android:color/transparent"
-        android:layout_marginTop="21dp"
-        android:id="@+id/imageView2"
-        android:background="#50ff2f2f"
-        android:layout_below="@+id/absBrake"
-        android:layout_alignLeft="@+id/imageView4"
-        android:layout_alignStart="@+id/imageView4" />
-
-    <Button
-        android:text="brake"
+    <ToggleButton
+        android:text="ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/brake"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_alignLeft="@+id/absBrake"
-        android:layout_alignStart="@+id/absBrake" />
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        app:srcCompat="@android:color/transparent"
-        android:id="@+id/imageView"
-        android:background="#50ff2f2f"
-        android:layout_marginLeft="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_alignTop="@+id/imageView4"
-        android:layout_toRightOf="@+id/imageView4"
-        android:layout_toEndOf="@+id/imageView4" />
-
-    <Button
-        android:text="Ebrake"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_toRightOf="@+id/imageView5"
-        android:layout_toEndOf="@+id/imageView5"
-        android:id="@+id/button4" />
+        android:id="@+id/eBrake"
+        android:textOff="Ebrake:OFF"
+        android:textOn="Ebrake:ON"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/brakeStatus"
+        android:layout_alignEnd="@+id/brakeStatus" />
 
     <ToggleButton
         android:text="ToggleButton"
@@ -81,9 +74,9 @@
         android:textOff="ABS:OFF"
         android:textOn="ABS:ON"
         android:allowUndo="false"
-        android:layout_marginRight="72dp"
-        android:layout_marginEnd="72dp"
-        android:layout_centerVertical="true"
+        android:layout_marginRight="68dp"
+        android:layout_marginEnd="68dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -91,13 +84,25 @@
         android:layout_width="20dp"
         android:layout_height="40dp"
         app:srcCompat="@android:color/transparent"
-        android:id="@+id/imageView4"
+        android:id="@+id/rLeft"
         android:background="#50ff2f2f"
-        android:layout_marginLeft="101dp"
-        android:layout_marginStart="101dp"
-        android:layout_marginBottom="35dp"
-        android:layout_above="@+id/absBrake"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="73dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/fLeft"
+        android:layout_alignStart="@+id/fLeft" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:id="@+id/brake"
+        android:textOff="Brake:OFF"
+        android:textOn="Brake:On"
+        android:layout_above="@+id/rRight"
+        android:layout_alignRight="@+id/absBrake"
+        android:layout_alignEnd="@+id/absBrake"
+        android:layout_marginRight="37dp"
+        android:layout_marginEnd="37dp" />
 
 </RelativeLayout>

@@ -17,7 +17,7 @@
         android:text="ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView3"
+        android:layout_below="@+id/rRight"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="102dp"
         android:id="@+id/absBrake"
@@ -28,7 +28,7 @@
         android:layout_width="35dp"
         android:layout_height="65dp"
         app:srcCompat="@android:color/transparent"
-        android:id="@+id/imageView4"
+        android:id="@+id/fLeft"
         android:background="#50ff2f2f"
         android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp"
@@ -41,19 +41,19 @@
         android:layout_height="65dp"
         app:srcCompat="@android:color/transparent"
         android:layout_marginTop="53dp"
-        android:id="@+id/imageView2"
+        android:id="@+id/rLeft"
         android:background="#50ff2f2f"
 
         android:layout_below="@+id/absBrake"
-        android:layout_alignLeft="@+id/imageView4"
-        android:layout_alignStart="@+id/imageView4" />
+        android:layout_alignLeft="@+id/fLeft"
+        android:layout_alignStart="@+id/fLeft" />
 
     <ImageView
         android:layout_width="35dp"
         android:layout_height="65dp"
         app:srcCompat="@android:color/transparent"
         android:layout_marginTop="60dp"
-        android:id="@+id/imageView3"
+        android:id="@+id/rRight"
         android:background="#50ff2f2f"
         android:layout_marginRight="38dp"
         android:layout_marginEnd="38dp"
@@ -65,11 +65,11 @@
         android:layout_width="35dp"
         android:layout_height="65dp"
         app:srcCompat="@android:color/transparent"
-        android:id="@+id/imageView"
+        android:id="@+id/fRight"
         android:background="#50ff2f2f"
 
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_alignStart="@+id/imageView3" />
+        android:layout_alignTop="@+id/rLeft"
+        android:layout_alignLeft="@+id/rRight"
+        android:layout_alignStart="@+id/rRight" />
 
 </RelativeLayout>
