@@ -21,10 +21,10 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // Locate the button in activity_main.xml
-        ImageButton button = (ImageButton) findViewById(R.id.btnLightControls);
+        ImageButton lightControls = (ImageButton) findViewById(R.id.btnLightControls);
 
         // Capture button clicks
-        button.setOnClickListener(new OnClickListener() {
+        lightControls.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
 
                 // Start NewActivity.class
