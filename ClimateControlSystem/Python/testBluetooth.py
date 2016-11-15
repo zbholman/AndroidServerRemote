@@ -6,7 +6,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(23,GPIO.OUT)
 
-uuid = "00001101-0000-1000-8000-00805F9B34FB"
 
 
 server_sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM )
@@ -19,13 +18,18 @@ client_sock, client_info = server_sock.accept()
 print "Accepted connection from ", client_info
 while True:	        	
 	data = client_sock.recv(1024)
- 			
+
 	if (data == "0"):
-		print ("Fan OFF")
+		print ("LED OFF")
 		GPIO.output(23,GPIO.HIGH)
 	elif (data == "1"):
-		print ("Fan ON")
+		print ("LED ON")
 		GPIO.output(23,GPIO.LOW)
- 		
+ 	elif (data == "msg"):
+		data = str("hi") + "!"
+
+	client_sock.send(data)
+	print ("sending %s " % data)
+	
 client_sock.close()
 server_sock.close()
