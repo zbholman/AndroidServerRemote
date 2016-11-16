@@ -1,6 +1,8 @@
 import bluetooth
 import RPi.GPIO as GPIO
 import time
+import os
+import glob
  
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -34,8 +36,6 @@ def read_temp():
         temp_f = temp_c * 9.0 / 5.0 + 32.0 #Fahrenheit temperature
         return temp_f #Prints out temperature
 
-
-
 server_sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM )
 server_sock.bind(("",1))
 server_sock.listen(1)
@@ -46,7 +46,7 @@ client_sock, client_info = server_sock.accept()
 print "Accepted connection from ", client_info
 while True:	        	
 	data = client_sock.recv(1024)
-	client_sock.send(str(read_temp() + "!")
+	#client_sock.send(str(read_temp() + "!")
 
 	if (data == "0"):
 		print ("LED OFF")
@@ -57,7 +57,7 @@ while True:
  	elif (data == "msg"):
 		data = str("hi") + "!"
 
-	#client_sock.send(data)
+	client_sock.send(str(read_temp()))
 	print ("sending %s " % data)
 	
 client_sock.close()
