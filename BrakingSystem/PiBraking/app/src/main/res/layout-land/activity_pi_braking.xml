@@ -59,17 +59,6 @@
         android:text="ToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/eBrake"
-        android:textOff="Ebrake:OFF"
-        android:textOn="Ebrake:ON"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/brakeStatus"
-        android:layout_alignEnd="@+id/brakeStatus" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/absBrake"
         android:textOff="ABS:OFF"
         android:textOn="ABS:ON"
@@ -93,16 +82,38 @@
 
     <ToggleButton
         android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:id="@+id/brake"
         android:textOff="Brake:OFF"
         android:textOn="Brake:On"
-        android:layout_above="@+id/rRight"
+        android:layout_below="@+id/rRight"
+        android:layout_alignLeft="@+id/eBrake"
+        android:layout_alignStart="@+id/eBrake"
+        android:layout_marginTop="11dp" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eBrake"
+        android:textOff="Ebrake:OFF"
+        android:textOn="Ebrake:ON"
+        android:layout_alignTop="@+id/fRight"
         android:layout_alignRight="@+id/absBrake"
         android:layout_alignEnd="@+id/absBrake"
-        android:layout_marginRight="37dp"
-        android:layout_marginEnd="37dp" />
+        android:layout_marginTop="11dp" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eBrake"
+        android:layout_alignRight="@+id/brake"
+        android:layout_alignEnd="@+id/brake"
+        android:layout_marginTop="20dp"
+        android:id="@+id/sensorBrake"
+        android:textOff="Sensor:OFF"
+        android:textOn="Sensor:ON"
+        android:layout_width="wrap_content" />
 
 </RelativeLayout>

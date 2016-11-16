@@ -34,6 +34,9 @@ public class PiBraking extends AppCompatActivity {
 
 
         final ToggleButton absBrake = (ToggleButton) findViewById(R.id.absBrake);
+        final ToggleButton sensorBrake = (ToggleButton) findViewById(R.id.sensorBrake);
+        final ToggleButton eBrake = (ToggleButton) findViewById(R.id.eBrake);
+        final ToggleButton brake = (ToggleButton) findViewById(R.id.brake);
 
         final ImageView imageView =(ImageView) findViewById(R.id.fRight);
         final ImageView imageView2 =(ImageView) findViewById(R.id.rLeft);
@@ -54,7 +57,7 @@ public class PiBraking extends AppCompatActivity {
                 if (isChecked) {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/servo1.py";
+                        String command = scriptDir + "/absbraking.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -97,6 +100,18 @@ public class PiBraking extends AppCompatActivity {
 
             }
         });
+        brake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+              if(isChecked){
+                  boolean success = true;
+                  new AsyncTask<Integer, Void, Void>()
+              }
+            }
+        });
+
+
     }
 
 
