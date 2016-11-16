@@ -21,10 +21,10 @@ class Monitor:
     subsys_last_heard = {}
     
     #time in milliseconds for watchdog to ask for subsystem status
-    timeout_warning = 2000
+    timeout_warning = 5000
     
     #time in milliseconds for watchdog to declare subsystem unresponsive
-    timeout_critical = 5000
+    timeout_critical = 10000
 
 
     #This method initializes Monitor instance, setting the "last_heard" 
@@ -33,88 +33,12 @@ class Monitor:
         self.start_monitor_time = datetime.datetime.now()
         for subsys in subsys_ids:
             self.subsys_last_heard[subsys] = self.start_monitor_time
+	
+	#This method should be called by the message threading queue in order
+	#to process the message, update watchdogs, interface with CNS and Logger
+    def ProcessMessage(self, recieved_message):
+		pass
 
-        
-
-        exitFlag = 0
-        
-        #Method converts json string to a message object. Needs to add error handling for impropper json formatting
-        def ConvertFromJSON(json_string):
-            contents = json.loads(json_string)
-            return Message(contents['CID'], contents['OID'], contents['DID'], contents['TTL'], contents['PLD'], contents['TS'], contents['CKS'])
-
-        #Threading setup
-        class myThread (threading.Thread):
-            def __init__(self, threadID, name, q):
-                threading.Thread.__init__(self)
-                self.threadID = threadID
-                self.name = name
-                self.q = q
-            def run(self):
-                print ("Starting " + self.name)
-                process_data(self.name, self.q)
-                print ("Exiting " + self.name)
-
-        def process_data(threadName, q):
-            while not exitFlag:
-                queueLock.acquire()
-                if not workQueue.empty():
-                    object = ConvertFromJSON(q.get())
-                    if object.CompareChecksum():
-                        print ("%s: Processed %s > %s : %s::" % (threadName, subsys_ids[object.origin_id], subsys_ids[object.destination_id], object.payload))
-                    else:
-                        print("%s processing checksum error" % (threadName))
-                
-                queueLock.release()
-                time.sleep(1)
-
-
-        threadList = ["Thread-1", "Thread-2", "Thread-3"]
-        messageList = ['{"CID": "car10393", "DID": "brs", "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a", "TTL": 100, "OID": "ccs", "PLD": "payload: This message format defined by subteams", "TS": "1475104399.039066"}',
-                       '{"CID": "car10393", "DID": "mls", "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a", "TTL": 100, "OID": "ccs", "PLD": "payload: This message format defined by subteams", "TS": "1476102339.032081"}', 
-                       '{"CID": "car10393", "DID": "dts", "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a", "TTL": 100, "OID": "ccs", "PLD": "payload: This message format defined by subteams", "TS": "1475104399.039066"}', 
-                       '{"CID": "car10393", "DID": "ems", "CKS": "8fcffd1c1dbd62c199aa13c9043azdsd", "TTL": 100, "OID": "ccs", "PLD": "payload: This message format defined by subteams", "TS": "1475104399.039066"}' 
-                       ]
-        queueLock = threading.Lock()
-        workQueue = queue.Queue(10)
-        threads = []
-        threadID = 1
-
-        # Create new threads
-        for tName in threadList:
-            thread = myThread(threadID, tName, workQueue)
-            thread.start()
-            threads.append(thread)
-            threadID += 1
-
-        # Fill the queue
-        queueLock.acquire()
-        for message_received in messageList:
-            workQueue.put(message_received)
-        queueLock.release()
-
-        # Wait for queue to empty
-        while not workQueue.empty():
-            pass
-
-        # Notify threads it's time to exit
-        exitFlag = 1
-
-        # Wait for all threads to complete
-        for t in threads:
-            t.join()
-        print ("Exiting Main Thread")
-
-
-
-    #This method takes a serial json representation of a message that is 
-	#intercepted on the communication bus and attempts to turn it into a
-	#local message object. If successful, returns object and also updates
-	#the "lastHeardFrom" time for the subsystem from which the message 
-	#originated from.                
-    def CreateNewMessage(self, recieved_message):
-        pass
-    
     #This method sends a ping to the destination subsystem as a status
 	#request to see that the subsystem is still functioning and healthy
 	#To implement, create a new message object and populate it with the

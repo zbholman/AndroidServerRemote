@@ -9,9 +9,9 @@ import pygame
 import set_alarmOff
 import subprocess
 
-pygame.mixer.init()
-pygame.mixer.music.load("setalarm.mp3")
-pygame.mixer.music.play()
+#pygame.mixer.init()
+#pygame.mixer.music.load("setalarm.mp3")
+#pygame.mixer.music.play()
 
 s = SenseHat()
 s.clear()
@@ -53,8 +53,23 @@ while True:
     roll = o["roll"]
     yaw = o["yaw"]
     
+    if(pitch < 10):
+        tempPitch = pitch + 360
+    else:
+        tempPitch = pitch
+      
+    if(roll < 10):
+        tempRoll =  roll + 360
+    else:
+        tempRoll = roll
+      
+    if(yaw < 10):
+        tempYaw = yaw + 360
+    else:
+        tempYaw = yaw
+      
     #Checks values to see if a 3 point change in any axis has occurred
-    if((abs(curPitch - pitch) > 3) or (abs(curRoll - roll) > 3) or (abs(curYaw - yaw) > 3))
+    if((abs(curPitch - pitch) > 9) or (abs(curRoll - roll) > 9) or (abs(curYaw - yaw) > 9) or (abs(curPitch - tempPitch) > 9) or (abs(curRoll - tempRoll) > 9) or (abs(curYaw - tempYaw) > 9)):
         subprocess.Popen("set_alarmOff.py", shell=True)
             break
     else:

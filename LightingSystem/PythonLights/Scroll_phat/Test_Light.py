@@ -1,7 +1,5 @@
 import time
 import grovepi
-import running_lights #delete these files. No longer needed. 
-import high_beams #delete these files. No longer needed.
 import scrollphat
 
 # Connect the Grove Light Sensor to analog port A0
@@ -13,7 +11,7 @@ light_sensor = 0
 led = 4
 
 # Turn on LED once sensor exceeds threshold resistance
-threshold = 10
+threshold = 700
 
 grovepi.pinMode(light_sensor,"INPUT")
 grovepi.pinMode(led,"OUTPUT")
@@ -29,7 +27,7 @@ while True:
         # Calculate resistance of sensor in K
         resistance = (float)(1023 - sensor_value) * 10 / sensor_value
 
-        if resistance > sensor_value:
+        if sensor_value < threshold:
 
             scrollphat.set_brightness(500)
             #go through columns then rows, turning all pixels on
@@ -47,11 +45,7 @@ while True:
                  for x in range(11):
                       scrollphat.set_pixel(x,y,True)
                       scrollphat.update()
-	
-            print("running lights")
-        print("sensor_value = %d resistance =%.2f" %(sensor_value,  resistance))
-        time.sleep(.5)
+
 
     except IOError:
         print ("Error")
-
