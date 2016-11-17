@@ -16,13 +16,13 @@ import Adafruit_PCA9685
 pwm = Adafruit_PCA9685.PCA9685()
 
 #Configures Min and Max for the Servo Pulse Lengths
-servo_min = 150
-servo_max = 600
-servo_neutral = 375
-servo_drive = 400
-steering_left = 300
-steering_center = 355
-steering_right = 420
+servo_min = 150   #Servo Position of 0. For Servo 0
+servo_max = 600   #Servo Position of 180. For Servo 0
+servo_neutral = 375  #Servo Position of 90. For Servo 0
+servo_drive = 400    #Servo 0 for Car Speed. 
+steering_left = 300     #Servo Position of 0. For Servo 1
+steering_center = 355   #Servo Position of 90. For Servo 1
+steering_right = 420    #Servo Position of 180. For Servo 1
 
 #Helper Function to Make Setting a Servo Pulse Widht Simpler
 def set_servo_pulse(channel, pulse):
