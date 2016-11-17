@@ -1,4 +1,6 @@
-
+//Author: Qili Jian
+//Project IST 440 - Braking System
+//Date: 10/17/16
 package ist440.pibraking;
 
 import android.os.AsyncTask;
@@ -16,18 +18,18 @@ import com.jcraft.jsch.Session;
 
 import java.util.Properties;
 
-public class PiBraking extends AppCompatActivity {
+    public class PiBraking extends AppCompatActivity {
 
 
-
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pi_braking);
 
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "104.39.123.213";
+        final String hostname = "192.168.1.105";
+        //final String hostname = "192.168.1.105";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
         final int port = 22;
@@ -38,143 +40,288 @@ public class PiBraking extends AppCompatActivity {
         final ToggleButton eBrake = (ToggleButton) findViewById(R.id.eBrake);
         final ToggleButton brake = (ToggleButton) findViewById(R.id.brake);
 
-        final ImageView imageView =(ImageView) findViewById(R.id.fRight);
-        final ImageView imageView2 =(ImageView) findViewById(R.id.rLeft);
-        final ImageView imageView3 =(ImageView) findViewById(R.id.rRight);
-        final ImageView imageView4 =(ImageView) findViewById(R.id.fLeft);
 
-        imageView.setVisibility(View.INVISIBLE);
-        imageView2.setVisibility(View.INVISIBLE);
-        imageView3.setVisibility(View.INVISIBLE);
-        imageView4.setVisibility(View.INVISIBLE);
+        final ImageView fRight = (ImageView) findViewById(R.id.fRight);
+        final ImageView rLeft = (ImageView) findViewById(R.id.rLeft);
+        final ImageView rRight = (ImageView) findViewById(R.id.rRight);
+        final ImageView fLeft = (ImageView) findViewById(R.id.fLeft);
+
+        fRight.setVisibility(View.INVISIBLE);
+        rLeft.setVisibility(View.INVISIBLE);
+        rRight.setVisibility(View.INVISIBLE);
+        fLeft.setVisibility(View.INVISIBLE);
 
 
+        brake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-
-        absBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/absbraking.py";
+                                    if (isChecked){
+                                        boolean success = true;
+                                        new AsyncTask<Integer, Void, Void>() {
+                                            String command = scriptDir + "/brake.py";
 
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(username, password, hostname, command, port);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
-                    if (success) {
-                        imageView.setVisibility(View.VISIBLE);
-                        imageView2.setVisibility(View.VISIBLE);
-                        imageView3.setVisibility(View.VISIBLE);
-                        imageView4.setVisibility(View.VISIBLE);
+                                            protected Void doInBackground(Integer... params) {
+                                                try {
+                                                    executeRemoteCommand(username, password, hostname, command, port);
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                return null;
+                                            }
+                                        }.execute(1);
+                                        if (success) {
+                                            fRight.setVisibility(View.VISIBLE);
+                                            rLeft.setVisibility(View.VISIBLE);
+                                            rRight.setVisibility(View.VISIBLE);
+                                            fLeft.setVisibility(View.VISIBLE);
+
+
+                                        }
+
+                                    } else {
+                                        boolean success = true;
+                                        new AsyncTask<Integer, Void, Void>() {
+                                            String command = scriptDir + "/sensorbrake.py";
+
+                                            protected Void doInBackground(Integer... params) {
+                                                try {
+                                                    executeRemoteCommand(username, password, hostname, command, port);
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                return null;
+                                            }
+                                        }.execute(1);
+                                        if(success){
+                                            fRight.setVisibility(View.INVISIBLE);
+                                            rLeft.setVisibility(View.INVISIBLE);
+                                            rRight.setVisibility(View.INVISIBLE);
+                                            fLeft.setVisibility(View.INVISIBLE);
+                                        }
+
+                                    }
+
 
                     }
-                } else {
-                    boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = "^c";
+                });
+                absBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            boolean success = true;
+                            new AsyncTask<Integer, Void, Void>() {
+                                String command = scriptDir + "/absbraking.py";
 
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(username, password, hostname, command, port);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                protected Void doInBackground(Integer... params) {
+                                    try {
+                                        executeRemoteCommand(username, password, hostname, command, port);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    return null;
+                                }
+                            }.execute(1);
+                            if (success) {
+                                fRight.setVisibility(View.VISIBLE);
+                                rLeft.setVisibility(View.VISIBLE);
+                                rRight.setVisibility(View.VISIBLE);
+                                fLeft.setVisibility(View.VISIBLE);
+
+
                             }
-                            return null;
+
+                        } else {
+                            boolean success = true;
+                            new AsyncTask<Integer, Void, Void>() {
+                                String command = scriptDir + "/braking.py";
+
+                                protected Void doInBackground(Integer... params) {
+                                    try {
+                                        executeRemoteCommand(username, password, hostname, command, port);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    return null;
+                                }
+                            }.execute(1);
+                            if(success){
+                                fRight.setVisibility(View.INVISIBLE);
+                                rLeft.setVisibility(View.INVISIBLE);
+                                rRight.setVisibility(View.INVISIBLE);
+                                fLeft.setVisibility(View.INVISIBLE);
+                            }
+
                         }
-                    }.execute(1);
-                    if (success) {
-                        imageView.setVisibility(View.INVISIBLE);
-                        imageView2.setVisibility(View.INVISIBLE);
-                        imageView3.setVisibility(View.INVISIBLE);
-                        imageView4.setVisibility(View.INVISIBLE);
+
 
                     }
+
+
+                });
+            sensorBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        boolean success = true;
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command = scriptDir + "/sensor_start.py";
+
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(username, password, hostname, command, port);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+
+
+                    } else {
+                        boolean success = true;
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command = scriptDir + "/sensor_stop.py";
+
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(username, password, hostname, command, port);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+                        if(success){
+                            fRight.setVisibility(View.INVISIBLE);
+                            rLeft.setVisibility(View.INVISIBLE);
+                            rRight.setVisibility(View.INVISIBLE);
+                            fLeft.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+
+
                 }
 
-            }
-        });
-        brake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-              if(isChecked){
-                  boolean success = true;
-                  new AsyncTask<Integer, Void, Void>()
-              }
-            }
-        });
+            });
+            eBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        boolean success = true;
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command = scriptDir + "/E-Brake Python/engage_e_brake.py";
+
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(username, password, hostname, command, port);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+                        if (success) {
+                            fRight.setVisibility(View.VISIBLE);
+                            rLeft.setVisibility(View.VISIBLE);
+                            rRight.setVisibility(View.VISIBLE);
+                            fLeft.setVisibility(View.VISIBLE);
 
 
-    }
+                        }
+
+                    } else {
+                        boolean success = true;
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command = scriptDir + "/E-Brake Python/disengage_e_brake";
+
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(username, password, hostname, command, port);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+                        if(success){
+                            fRight.setVisibility(View.INVISIBLE);
+                            rLeft.setVisibility(View.INVISIBLE);
+                            rRight.setVisibility(View.INVISIBLE);
+                            fLeft.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+
+
+                }
+
+
+            });
+        }
 
 
 
 
-            // This method is connects to the pi, and runs the command given
-            public void executeRemoteCommand(String username,
-                                             String password,
-                                             String hostname,
-                                             String command,
-                                             int port)
+                    // This method is connects to the pi, and runs the command given
+                    public void executeRemoteCommand (String username,
+                            String password,
+                            String hostname,
+                            String command,
+                    int port)
                     throws JSchException {
-                // New Jsch object for connecting
-                JSch jsch = new JSch();
+                        // New Jsch object for connecting
+                        JSch jsch = new JSch();
 
-                // Try to create a session using username, hostname, and port
-                Session session = null;
-                try {
-                    session = jsch.getSession(username, hostname, port);
-                } catch (JSchException e) {
-                    e.printStackTrace();
-                }
+                        // Try to create a session using username, hostname, and port
+                        Session session = null;
+                        try {
+                            session = jsch.getSession(username, hostname, port);
+                        } catch (JSchException e) {
+                            e.printStackTrace();
+                        }
 
-                // Set the password for the session
-                assert session != null;
-                session.setPassword(password);
+                        // Set the password for the session
+                        assert session != null;
+                        session.setPassword(password);
 
-                // Avoid asking for key confirmation
-                Properties prop = new Properties();
-                prop.put("StrictHostKeyChecking", "no");
-                session.setConfig(prop);
+                        // Avoid asking for key confirmation
+                        Properties prop = new Properties();
+                        prop.put("StrictHostKeyChecking", "no");
+                        session.setConfig(prop);
 
-                // Attempt to connect
-                try {
-                    session.connect();
-                } catch (JSchException e) {
-                    e.printStackTrace();
-                }
+                        // Attempt to connect
+                        try {
+                            session.connect();
+                        } catch (JSchException e) {
+                            e.printStackTrace();
+                        }
 
-                // SSH Channel
-                ChannelExec channelssh = null;
-                try {
-                    channelssh = (ChannelExec)
-                            session.openChannel("exec");
-                } catch (JSchException e) {
-                    e.printStackTrace();
-                }
-                // Use this if there is any need for output to return to android
+                        // SSH Channel
+                        ChannelExec channelssh = null;
+                        try {
+                            channelssh = (ChannelExec)
+                                    session.openChannel("exec");
+                        } catch (JSchException e) {
+                            e.printStackTrace();
+                        }
+                        // Use this if there is any need for output to return to android
 //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //
 //        channelssh.setOutputStream(baos);
 
-                // Execute command
-                assert channelssh != null;
-                channelssh.setCommand(command);
-                try {
-                    channelssh.connect();
-                } catch (JSchException e) {
-                    e.printStackTrace();
+                        // Execute command
+                        assert channelssh != null;
+                        channelssh.setCommand(command);
+                        try {
+                            channelssh.connect();
+                        } catch (JSchException e) {
+                            e.printStackTrace();
+                        }
+                        channelssh.disconnect();
+                    }
                 }
-                channelssh.disconnect();
-            }
-        }
-
 
 

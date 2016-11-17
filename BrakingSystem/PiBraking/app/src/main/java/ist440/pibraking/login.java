@@ -1,3 +1,6 @@
+//Author: Qili Jian ,  Chak Fung
+//Project IST 440 - Braking System
+//Date: 10/17/16
 package ist440.pibraking;
 
 import android.content.Intent;
