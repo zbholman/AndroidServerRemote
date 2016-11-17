@@ -111,7 +111,7 @@ public class Main extends AppCompatActivity {
 
         final String user = "pi";
         final String pass = "IST440FA";
-        final String host = "75.102.85.199";
+        final String host = "130.203.87.152";
 
         final String dir = "python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem";
         final int port = 22;
@@ -193,7 +193,7 @@ public class Main extends AppCompatActivity {
                         }*/
 
                 //Starts SSH asynchronously, so app does not hesitate when making connection
-                String command = dir + "/Doors_locked.py";
+                String command = dir + "/Doors_locked.py &";
                 startASync(user, pass, host, command, port);
 
                 }
