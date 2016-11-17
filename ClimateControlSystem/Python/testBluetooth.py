@@ -44,20 +44,24 @@ port = server_sock.getsockname()[1]
 print "Waiting for connection on RFCOMM channel %d" % port
 client_sock, client_info = server_sock.accept()
 print "Accepted connection from ", client_info
-while True:	        	
-	data = client_sock.recv(1024)
-	#client_sock.send(str(read_temp() + "!")
 
+client_sock.send(str(read_temp()))
+print ("sending %s" % read_temp())
+
+while True:	        	
+	#client_sock.send(str(read_temp()))
+	#print ("sending %s" % read_temp())
+	
+	data =  client_sock.recv(1024)
 	if (data == "0"):
 		print ("LED OFF")
 		GPIO.output(23,GPIO.HIGH)
 	elif (data == "1"):
 		print ("LED ON")
 		GPIO.output(23,GPIO.LOW)
- 	elif (data == "msg"):
-		data = str("hi") + "!"
-
-	client_sock.send(str(read_temp()))
+ 
+	#client_sock.send(str(read_temp()))
+	
 	print ("sending %s " % data)
 	
 client_sock.close()
