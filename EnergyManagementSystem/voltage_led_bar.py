@@ -4,11 +4,17 @@
 # and translate it into precentage displayable on
 # both Android and an LED bar
 
-import math
 import time
-import grovepi
-import RPi.GPIO
-import smbus
+from dotstar import Adafruit_DotStar
+
+numpixels = 8
+
+datapin = 16
+clockpin = 20
+strip = Adafruit_DotStar(numpixels, datapin, clockpin)
+
+strip.begin()
+strip.setBrightness(64)
 
 def getVoltage(self, input=0):
         if input == 1:
