@@ -39,11 +39,20 @@ def set_servo_pulse(channel, pulse):
 pwm.set_pwm_freq(60)
 
 #To Quit 
-print('Moving Servo on channel 0, Press Ctrl-C To Quit')
+print('Press Ctrl-C To Quit')
+print("Press P To Park Car")
+print("Press W For Drive Mode")
+print("Press A To Turn Left")
+print("Press S To Reverse")
+print("Press D To Turn Right")
+print("Press T To Increase Speed")
+print("Press G To Decrease Speed")
 
 while True:
   print"Drive Mode:",
   mode = raw_input()
+  pwm.set_pwm(0, 0, servo_neutral)
+  pwm.set_pwm(0, 0, steering_center)
   
   if (mode == 'p'):
     print('Stop')
