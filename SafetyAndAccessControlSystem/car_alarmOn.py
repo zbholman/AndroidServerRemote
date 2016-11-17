@@ -64,10 +64,10 @@ while True:
         elsif(curPitch < 30 and newPitch > 330):
             tempPitch = curPitch + 360
             if(abs(tempPitch - newPitch) > 5):
-                subprocess.Popen("set_alarmOff.py", shell=True)
+                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 break
         elsif(abs(curYaw - newYaw) > 5):
-            subprocess.Popen("set_alarmOff.py", shell=True)
+            subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
             break
         else:
             # Continue if the inner loop wasn't broken.
