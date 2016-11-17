@@ -8,7 +8,7 @@ from doors_locked.py import doors_lock
 from doors_unlock.py import doors_unlock
 import pygame #Python module
 
-#Play door locking sound
+#Load door locking sound
 pygame.mixer.init()
 pygame.mixer.music.load("/home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/lockcar.wav")
 
