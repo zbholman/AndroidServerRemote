@@ -5,16 +5,16 @@
 # both Android and an LED bar
 
 import time
-from dotstar import Adafruit_DotStar
+from dotstar import Adafruit_DotStar # imports library/module
 
-numpixels = 8
+numpixels = 8 # Amount if LEDs
 
-datapin = 16
-clockpin = 20
+datapin = 23 # GPIO pin 23
+clockpin = 24 # GPIO pin 24
 strip = Adafruit_DotStar(numpixels, datapin, clockpin)
 
-strip.begin()
-strip.setBrightness(64)
+strip.begin() # initialize pins for output
+strip.setBrightness(64) # limit brightness to ~1/4 duty cycle
 
 def getVoltage(self, input=0):
         if input == 1:
@@ -33,10 +33,28 @@ i = 0
 
 if CurrentVoltage <= 8400:
 	for i in range (0,11):
-		grovepi.ledBar_init(ledbar, 1) # initialize the entire LED bar to show full charge
+		#grovepi.ledBar_init(ledbar, 1) # initialize the entire LED bar to show full charge
+		strip.setPixelColor(0, 255, 0, 0)
+		strip.setPixelColor(1, 255, 0, 0)
+		strip.setPixelColor(2, 255, 0, 0)
+		strip.setPixelColor(3, 255, 0, 0)
+		strip.setPixelColor(4, 255, 0, 0)
+		strip.setPixelColor(5, 255, 255, 0)
+		strip.setPixelColor(6, 255, 255, 0)
+		strip.setPixelColor(7, 0, 255, 0)
+		strip.show()
 elif CurrentVoltage < 8160:
 	for i in range (0,11):
-		grovepi.ledBar_setLed(ledbar, 10, 0) # turn off top-most LED to show <90% charge left
+		#grovepi.ledBar_setLed(ledbar, 10, 0) # turn off top-most LED to show <90% charge left
+		strip.setPixelColor(0, 0, 0, 0) # turns off first led
+		strip.setPixelColor(1, 255, 0, 0)
+		strip.setPixelColor(2, 255, 0, 0)
+		strip.setPixelColor(3, 255, 0, 0)
+		strip.setPixelColor(4, 255, 0, 0)
+		strip.setPixelColor(5, 255, 255, 0)
+		strip.setPixelColor(6, 255, 255, 0)
+		strip.setPixelColor(7, 0, 255, 0)
+		strip.show()
 elif CurrentVoltage < 7920:
 	for i in range (0,11):
 		grovepi.ledBar_setLed(ledbar, 10, 0) # turn off two top-most LEDs to show <80% charge left
