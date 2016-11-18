@@ -1,7 +1,7 @@
-nterface for incoming xBee messages, change this stuff based on your team.
+#Interface for incoming xBee messages, change this stuff based on your team.
 #Written by Team 1
 #Date: 11/14/2016
-#Last Updated: 11/17/2016
+#Last Updated: 11/18/2016
 
 '''
 Notes
@@ -11,8 +11,7 @@ Notes
 '''
 
 import serial
-import sys
-from threading import Thread
+import threading
 
 #Dictionary of acceptable messages
 #Put your message codes in here, that way you can listen for them down below. Two examples provided. 
@@ -21,35 +20,39 @@ acceptedSources = {
 	'Lighting':2,
 }
 
-def listen():
-	try:
-		#Sets up serial port, listens for new lines to read.
-		ser = serial.Serial('/dev/ttyUSB0', 9500)
-		print('Listening')
-	
-		#Loop for message listening. Start in it's own thread.
-		while True:
-			incMsg = ser.readline().split()
+#Main function for listening.
+def listen(ser):
+	while True:
+		try:
+			print('Listening...')	
+			incMsg = ser.readline()
+			print(incMsg)
 			#Basic check, if the message is coming from the accepted sources, do your work.
 			if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
-				doSomething()
-	except(RuntimeError, OSError, ValueError, IOError) as e:
-		print('Error:' + e)
-		
+				doSomething(ser)
+		except(RuntimeError, OSError, ValueError, IOError) as e:
+			print('Error:' + str(e))
+			break
+			
 #General function for your system work. 
 #Here, you do some action based on the message.
-def doSomething():
+def doSomething(ser):
 	pass
 
 #Main function.
-def main():
+def main(ser):
 	try:
+		print("Creating listen thread")
 		#Creates a thread for message listening.
 		listenThread = Thread(target=listen)
-		listenThread.daemon = True
 		listenThread.start()
+		print('Listen Thread Created.')
+		#Waits for thread to end.
+		listenThread.join()
 	except(RuntimeError, OSError, ValueError, IOError) as e:
-		print('Error:' + e)
-		
+		print('Error:' + str(e))
+					
 if __name__ == '__main__':
-	main()
+	#Sets up serial port, listens for new lines to read.
+	ser = serial.Serial('/dev/ttyUSB0', 9500)
+	main(ser)
