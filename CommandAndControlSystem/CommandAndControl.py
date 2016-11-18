@@ -13,7 +13,7 @@ import sys
 from threading import *
 
 #Handles the message queue
-def msgQueue(q,ser):
+def msgQueue():
 	while True:
 		item = q.get() #Gets last message queued.
 		if item is None:
@@ -41,7 +41,7 @@ def sendToMonitoringAndLogging(message):
 	connection.close()
 	
 #Main Loop for listening and blasting out messages.
-def main(q,ser):
+def main():
 	while True:	
 		try:
 			#Serial Port Listening and adding messages to the MsgQueue.
@@ -61,5 +61,5 @@ def main(q,ser):
 			break
 			
 if __name__ == "__main__":
-	main(q,ser)
+	main()
 
