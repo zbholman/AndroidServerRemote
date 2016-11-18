@@ -6,16 +6,18 @@ Last Updated: 11/10/2016
 '''
 
 #Imports
-import queue
+from queue import *
 import serial
 import pika
 import sys
-import threading
+from threading import *
 
 #Handles the message queue
 def msgQueue(q,ser):
 	while True:
-		item = q.get() #Gets last message queued.	
+		item = q.get() #Gets last message queued.
+		if item is None:
+			break	
 		ser.write(item) #Writes it to the serial port, all devices will get this running on BAUD 9500)
 		sendToMonitoringAndLogging(item) #Forwards message to sTMAL function.
 		q.task_done() #Task done, what a champ.
@@ -35,7 +37,6 @@ def sendToMonitoringAndLogging(message):
                      	 properties=pika.BasicProperties(
                 	        delivery_mode = 2, # make message persistent
         	              ))
-
 	print(" [x] Sent %r" % message)
 	connection.close()
 	
@@ -43,6 +44,15 @@ def sendToMonitoringAndLogging(message):
 def main(q,ser):
 	while True:	
 		try:
+			#Serial Port Listening and adding messages to the MsgQueue.
+			ser = serial.Serial('/dev/ttyUSB0', 9500)
+			#Sets up a queue and thread for messages
+			q = Queue(maxsize=0)
+			t = Thread(target=msgQueue)
+			t.daemon = True
+			t.start()
+			main(q,ser)
+
 			incMsg = ser.readline()
 			print('Recieved: %s' % incMsg)
 			q.put(incMsg)
@@ -51,12 +61,5 @@ def main(q,ser):
 			break
 			
 if __name__ == "__main__":
-	#Serial Port Listening and adding messages to the MsgQueue.
-	ser = serial.Serial('/dev/ttyUSB0', 9500)
-	
-	#Sets up a queue and thread for messages
-	q = Queue()
-	t = Thread(target=msgQueue)
-	t.daemon = True
-	t.start()
 	main(q,ser)
+
