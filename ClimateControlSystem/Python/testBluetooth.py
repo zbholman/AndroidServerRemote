@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 import glob
+import time
  
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -41,28 +42,40 @@ server_sock.bind(("",1))
 server_sock.listen(1)
 
 port = server_sock.getsockname()[1]
-print "Waiting for connection on RFCOMM channel %d" % port
+
+print "Waiting for connection on RFCOMM channel %d" % port 
 client_sock, client_info = server_sock.accept()
 print "Accepted connection from ", client_info
 
-client_sock.send(str(read_temp()))
-print ("sending %s" % read_temp())
-
-while True:	        	
+loopStart = time.time()
+timePassed = 0.0
+timePassed1= 0.0
+timePassed2= 0.0
+#client_sock.send(str(read_temp()))
+#print ("sending %s" % read_temp())
+while timePassed < 100 :
+	loopStart1= time.time()
+	while timePassed1 <4:
+		client_sock.send(str(read_temp()))	        	
+		print ("sending %s" % read_temp())
+		now=time.time()
+		timePassed1 = now - loopStart1
+	
+	loopStart2= time.time()
+	while timePassed2 <4:
+                now1= time.time()
+                timePassed2 = now1 - loopStart2
+		if client_sock.recv(1024) == "0":
+			print ("LED OFF")
+			GPIO.output(23,GPIO.HIGH)
+		elif client_sock.recv(1024) == "1":
+			print ("LED ON")
+			GPIO.output(23,GPIO.LOW)
+	timePassed= 0.0
+	timePassed1=0.0
+	timePassed2=0.0	
 	#client_sock.send(str(read_temp()))
-	#print ("sending %s" % read_temp())
-	
-	data =  client_sock.recv(1024)
-	if (data == "0"):
-		print ("LED OFF")
-		GPIO.output(23,GPIO.HIGH)
-	elif (data == "1"):
-		print ("LED ON")
-		GPIO.output(23,GPIO.LOW)
- 
-	#client_sock.send(str(read_temp()))
-	
-	print ("sending %s " % data)
-	
+	#print ("sending %s " % data)
+ 	
 client_sock.close()
 server_sock.close()
