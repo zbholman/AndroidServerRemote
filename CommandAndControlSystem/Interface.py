@@ -20,47 +20,41 @@ acceptedSources = {
 	'Lighting':2,
 }
 
-#Subclass for listening.
-class listen(threading.Thread):
-	#Main function
-	def __init__(self):
-		threading.Thread.__init__(self)
-		try:
-			#Sets up serial port, listens for new lines to read.
-			ser = serial.Serial('/dev/ttyUSB0', 9500)
-			print('Listening...')
-	
-			#Loop for message listening. Start in it's own thread.
-			while True:
-				incMsg = ser.readline()
-				print(incMsg)
-				#Basic check, if the message is coming from the accepted sources, do your work.
-				if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
-					doSomething()
-		except(RuntimeError, OSError, ValueError, IOError) as e:
-			print('Error:' + str(e))
-			
-		
-	#General function for your system work. 
-	#Here, you do some action based on the message.
-	def doSomething():
-		pass
+#Sets up serial port, listens for new lines to read.
+ser = serial.Serial('/dev/ttyUSB0', 9500)
 
-#Main function loop.
-def main():
+#Main function for listening.
+def listen(ser):
 	while True:
 		try:
-			print("Creating listen thread")
-			#Creates a thread for message listening.
-			listenThread = listen()
-			listenThread.start()
-			print('Listen Thread Created.')
-			#Waits for thread completion.
-			listenThread.join() 
+			print('Listening...')	
+			incMsg = ser.readline()
+			print(incMsg)
+			#Basic check, if the message is coming from the accepted sources, do your work.
+			if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
+					doSomething(ser)
 		except(RuntimeError, OSError, ValueError, IOError) as e:
 			print('Error:' + str(e))
 			break
+			
+#General function for your system work. 
+#Here, you do some action based on the message.
+def doSomething(ser):
+	pass
+
+#Main function.
+def main(ser):
+	try:
+		print("Creating listen thread")
+		#Creates a thread for message listening.
+		listenThread = Thread(target=listen)
+		listenThread.start()
+		print('Listen Thread Created.')
+		#Waits for thread to end.
+		listenThread.join()
+	except(RuntimeError, OSError, ValueError, IOError) as e:
+		print('Error:' + str(e))
 		
-		
+			
 if __name__ == '__main__':
-	main()
+	main(ser)
