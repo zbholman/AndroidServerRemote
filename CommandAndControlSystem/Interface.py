@@ -1,7 +1,7 @@
-nterface for incoming xBee messages, change this stuff based on your team.
+#Interface for incoming xBee messages, change this stuff based on your team.
 #Written by Team 1
 #Date: 11/14/2016
-#Last Updated: 11/17/2016
+#Last Updated: 11/18/2016
 
 '''
 Notes
@@ -11,8 +11,7 @@ Notes
 '''
 
 import serial
-import sys
-from threading import Thread
+import threading
 
 #Dictionary of acceptable messages
 #Put your message codes in here, that way you can listen for them down below. Two examples provided. 
@@ -21,35 +20,47 @@ acceptedSources = {
 	'Lighting':2,
 }
 
-def listen():
-	try:
-		#Sets up serial port, listens for new lines to read.
-		ser = serial.Serial('/dev/ttyUSB0', 9500)
-		print('Listening')
+#Subclass for listening.
+class listen(threading.Thread):
+	#Main function
+	def __init__(self):
+		threading.Thread.__init__(self)
+		try:
+			#Sets up serial port, listens for new lines to read.
+			ser = serial.Serial('/dev/ttyUSB0', 9500)
+			print('Listening...')
 	
-		#Loop for message listening. Start in it's own thread.
-		while True:
-			incMsg = ser.readline().split()
-			#Basic check, if the message is coming from the accepted sources, do your work.
-			if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
-				doSomething()
-	except(RuntimeError, OSError, ValueError, IOError) as e:
-		print('Error:' + e)
+			#Loop for message listening. Start in it's own thread.
+			while True:
+				incMsg = ser.readline()
+				print(incMsg)
+				#Basic check, if the message is coming from the accepted sources, do your work.
+				if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
+					doSomething()
+		except(RuntimeError, OSError, ValueError, IOError) as e:
+			print('Error:' + str(e))
+			
 		
-#General function for your system work. 
-#Here, you do some action based on the message.
-def doSomething():
-	pass
+	#General function for your system work. 
+	#Here, you do some action based on the message.
+	def doSomething():
+		pass
 
-#Main function.
+#Main function loop.
 def main():
-	try:
-		#Creates a thread for message listening.
-		listenThread = Thread(target=listen)
-		listenThread.daemon = True
-		listenThread.start()
-	except(RuntimeError, OSError, ValueError, IOError) as e:
-		print('Error:' + e)
+	while True:
+		try:
+			print("Creating listen thread")
+			#Creates a thread for message listening.
+			listenThread = listen()
+			listenThread.start()
+			print('Listen Thread Created.')
+			#Waits for thread completion.
+			listenThread.join() 
+		except(RuntimeError, OSError, ValueError, IOError) as e:
+			print('Error:' + str(e))
+			break
+		
 		
 if __name__ == '__main__':
 	main()
