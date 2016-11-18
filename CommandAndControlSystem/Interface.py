@@ -20,9 +20,6 @@ acceptedSources = {
 	'Lighting':2,
 }
 
-#Sets up serial port, listens for new lines to read.
-ser = serial.Serial('/dev/ttyUSB0', 9500)
-
 #Main function for listening.
 def listen(ser):
 	while True:
@@ -32,7 +29,7 @@ def listen(ser):
 			print(incMsg)
 			#Basic check, if the message is coming from the accepted sources, do your work.
 			if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
-					doSomething(ser)
+				doSomething(ser)
 		except(RuntimeError, OSError, ValueError, IOError) as e:
 			print('Error:' + str(e))
 			break
@@ -54,7 +51,8 @@ def main(ser):
 		listenThread.join()
 	except(RuntimeError, OSError, ValueError, IOError) as e:
 		print('Error:' + str(e))
-		
-			
+					
 if __name__ == '__main__':
+	#Sets up serial port, listens for new lines to read.
+	ser = serial.Serial('/dev/ttyUSB0', 9500)
 	main(ser)
