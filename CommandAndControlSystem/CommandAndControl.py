@@ -15,11 +15,7 @@ import threading
 #Serial Port Listening and adding messages to the MsgQueue.
 ser = serial.Serial('/dev/ttyUSB0', 9500)
 
-#Sets up a queue and thread for messages
-q = Queue()
-t = Thread(target=msgQueue)
-t.daemon = True
-t.start()
+
 
 #Handles the message queue
 def msgQueue(q,ser):
@@ -59,4 +55,9 @@ def main(q,ser):
 			break
 			
 if __name__ == "__main__":
-    main(q,ser)
+	#Sets up a queue and thread for messages
+	q = Queue()
+	t = Thread(target=msgQueue)
+	t.daemon = True
+	t.start()
+	main(q,ser)
