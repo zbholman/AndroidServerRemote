@@ -12,11 +12,6 @@ import pika
 import sys
 import threading
 
-#Serial Port Listening and adding messages to the MsgQueue.
-ser = serial.Serial('/dev/ttyUSB0', 9500)
-
-
-
 #Handles the message queue
 def msgQueue(q,ser):
 	while True:
@@ -43,6 +38,7 @@ def sendToMonitoringAndLogging(message):
 
 	print(" [x] Sent %r" % message)
 	connection.close()
+	
 #Main Loop for listening and blasting out messages.
 def main(q,ser):
 	while True:	
@@ -55,6 +51,9 @@ def main(q,ser):
 			break
 			
 if __name__ == "__main__":
+	#Serial Port Listening and adding messages to the MsgQueue.
+	ser = serial.Serial('/dev/ttyUSB0', 9500)
+	
 	#Sets up a queue and thread for messages
 	q = Queue()
 	t = Thread(target=msgQueue)
