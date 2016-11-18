@@ -1,10 +1,8 @@
 '''
-
 Command & Control System
 Written by: Matthew Smith, Anthony Curran, Elaine Tang, and Andrew Rooney.
 This file is the source code for the Command & Control System, which serves as the brain of this automated vehicle.
 Last Updated: 11/10/2016
-
 '''
 
 #Imports
@@ -12,11 +10,19 @@ import queue
 import serial
 import pika
 import sys
-from threading import Thread
+import threading
 
+#Serial Port Listening and adding messages to the MsgQueue.
+ser = serial.Serial('/dev/ttyUSB0', 9500)
+
+#Sets up a queue and thread for messages
+q = Queue()
+t = Thread(target=msgQueue)
+t.daemon = True
+t.start()
 
 #Handles the message queue
-def msgQueue():
+def msgQueue(q,ser):
 	while True:
 		item = q.get() #Gets last message queued.	
 		ser.write(item) #Writes it to the serial port, all devices will get this running on BAUD 9500)
@@ -42,20 +48,15 @@ def sendToMonitoringAndLogging(message):
 	print(" [x] Sent %r" % message)
 	connection.close()
 #Main Loop for listening and blasting out messages.
-def main():
-	#Sets up a queue for messages
-	q = Queue()
-	t = Thread(target=msgQueue)
-	t.daemon = True
-	t.start()
-	
-	#Serial Port Listening and adding messages to the MsgQueue.
-	ser = serial.Serial('/dev/ttyUSB0', 9500)
-	while True:
-		incMsg = ser.readline()
-		print('Recieved: %s' % incMsg)
-		q.put(incMsg)
-
+def main(q,ser):
+	while True:	
+		try:
+			incMsg = ser.readline()
+			print('Recieved: %s' % incMsg)
+			q.put(incMsg)
+		except(RuntimeError, OSError, ValueError, IOError) as e:
+			print('Error:' + str(e))
+			break
+			
 if __name__ == "__main__":
-    main()
-
+    main(q,ser)
