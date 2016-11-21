@@ -11,7 +11,8 @@ i = 0
 
 while True:
     try:
-        # ledbar_setLed(pin,led,state)
+        grovepi.ledBar_init(ledbar, 0) 
+	# ledbar_setLed(pin,led,state)
         # led: which led (1-10)
         # state: off or on (0,1)
 

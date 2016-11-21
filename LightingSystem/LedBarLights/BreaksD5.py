@@ -12,11 +12,11 @@ i = 0
 
 while True:
     try:
-        print ("Test 3) Switch on/off a single LED")
         # ledbar_setLed(pin,led,state)
         # led: which led (1-10)
         # state: off or on (0,1)
-        grovepi.ledBar_setLed(ledbar, 1, 1)
+        grovepi.ledBar_setLed(ledbar, 10, 1)
+	
 
     except KeyboardInterrupt:
         grovepi.ledBar_setBits(ledbar, 0)

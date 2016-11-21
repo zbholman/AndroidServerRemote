@@ -48,9 +48,6 @@ while True:
                       scrollphat.set_pixel(x,y,True)
                       scrollphat.update()
 	
-            print("running lights")
-        print("sensor_value = %d resistance =%.2f" %(sensor_value,  resistance))
-        time.sleep(.5)
 
     except IOError:
         print ("Error")
