@@ -1,0 +1,165 @@
+package drivetrain.ist440.drivetrain;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+
+public class DriveTrain extends AppCompatActivity {
+
+    // Windows 10
+    String address;
+    final int handlerState = 0;                    /
+    public String readMessage;
+    Handler bluetoothHandler;
+    ImageButton imageButton_Up,imageButton_Down,imageButton_Left,imageButton_Right;
+    Button btnDis,btn_Park,btn_Reverse,btn_Neutral,btn_Drive;
+    TextView txt_Speed;
+    //int mCounter = 50;
+    int minSpeed = 0, maxSpeed = 50;
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+
+                bluetoothHandler = new Handler() {
+                    public void handleMessage(android.os.Message msg) {
+                        if (msg.what == handlerState) {                   
+                            readMessage = (String) msg.obj;
+                            txt_Speed.setText(readMessage);         // print speed of the car
+
+                        }
+
+                    }
+
+                };
+            } catch (Exception e) {
+                // TODO: handle exception
+                Toast.makeText(getBaseContext(), "Handler not called", Toast.LENGTH_SHORT).show();
+
+            } finally {
+                
+                bluetoothHandler.postDelayed(this, 1000);
+            }
+
+        }
+    };
+
+
+    private BluetoothAdapter btAdapter = null;
+    private BluetoothSocket btSocket = null;
+    private ConnectedThread mConnectedThread;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_drive_train);
+
+        btnDis = (Button) findViewById(R.id.btnDis);
+        btn_Drive = (Button) findViewById(R.id.btn_Drive);
+        btn_Neutral = (Button) findViewById(R.id.btn_Neutral);
+        btn_Reverse = (Button) findViewById(R.id.btn_Reverse);
+        btn_Park = (Button) findViewById(R.id.btn_Park);
+        imageButton_Up = (ImageButton) findViewById(R.id.imageButton_Up);
+        imageButton_Down = (ImageButton) findViewById(R.id.imageButton_Down);
+        imageButton_Left = (ImageButton) findViewById(R.id.imageButton_Left);
+        imageButton_Right = (ImageButton) findViewById(R.id.imageButton_Right);
+        txt_Speed = (TextView) findViewById(R.id.txt_Speed);
+
+        btn_Park.setBackgroundColor(Color.RED);
+        btn_Park.setBackgroundColor(Color.WHITE);
+
+
+        bluetoothHandler = new Handler();
+
+        ///Set time interval here
+        bluetoothHandler.postDelayed(runnable, 1000);
+
+
+        btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+        checkBTState();                                     // check the status of Bluetooth
+
+
+        btnDis.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Disconnect();
+                Toast.makeText(getBaseContext(), "Exited", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        imageButton_Up.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(imageButton_Up.isPressed()){
+                    btn_Drive.setBackgroundColor(Color.GREEN);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    mConnectedThread.write( "w" );    // Send the signal to car to move up
+                    Toast.makeText( getBaseContext(), "Car Ready To Move", Toast.LENGTH_SHORT ).show();
+
+                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+            }}
+        });
+        imageButton_Down.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (imageButton_Down.isPressed()) {
+                    btn_Reverse.setBackgroundColor(Color.RED);
+                    btn_Drive.setBackgroundColor(Color.WHITE);
+                    btn_Drive.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    Toast.makeText(getBaseContext(), "Reverse Mode", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        imageButton_Right.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(imageButton_Up.isPressed()){
+                    btn_Drive.setBackgroundColor(Color.GREEN);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+                }}
+        });
+
+        imageButton_Left.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(imageButton_Up.isPressed()){
+                    btn_Drive.setBackgroundColor(Color.GREEN);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+                }}
+        });
+
+    }
