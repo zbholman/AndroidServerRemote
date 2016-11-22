@@ -5,9 +5,11 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,13 +17,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static drivetrain.ist440.drivetrain.R.id.imageButton_Stop;
+
 
 
 public class DriveTrain extends AppCompatActivity {
@@ -31,8 +39,8 @@ public class DriveTrain extends AppCompatActivity {
     final int handlerState = 0;
     public String readMessage;
     Handler bluetoothHandler;
-    ImageButton imageButton_Up,imageButton_Down,imageButton_Left,imageButton_Right;
-    Button btnDis,btn_Park,btn_Reverse,btn_Neutral,btn_Drive;
+    ImageButton imageButton_Up, imageButton_Down, imageButton_Left, imageButton_Right, imageButton_NoGear, imageButton_Stop;
+    Button btnDis, btn_Park, btn_Reverse, btn_Neutral, btn_Drive;
     TextView txt_Speed;
     //int mCounter = 50;
     int minSpeed = 0, maxSpeed = 50;
@@ -42,7 +50,7 @@ public class DriveTrain extends AppCompatActivity {
             try {
 
                 bluetoothHandler = new Handler() {
-                    public void handleMessage(android.os.Message msg) {
+                    public void handleMessage(Message msg) {
                         if (msg.what == handlerState) {
                             readMessage = (String) msg.obj;
                             txt_Speed.setText(readMessage);         // print speed of the car
@@ -68,6 +76,11 @@ public class DriveTrain extends AppCompatActivity {
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
     private ConnectedThread mConnectedThread;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,14 +93,16 @@ public class DriveTrain extends AppCompatActivity {
         btn_Reverse = (Button) findViewById(R.id.btn_Reverse);
         btn_Park = (Button) findViewById(R.id.btn_Park);
 
+        imageButton_NoGear = (ImageButton) findViewById(R.id.imageButton_NoGear);
         imageButton_Up = (ImageButton) findViewById(R.id.imageButton_Up);
         imageButton_Down = (ImageButton) findViewById(R.id.imageButton_Down);
         imageButton_Left = (ImageButton) findViewById(R.id.imageButton_Left);
         imageButton_Right = (ImageButton) findViewById(R.id.imageButton_Right);
+        imageButton_Stop = (ImageButton) findViewById(R.id.imageButton_Stop);
         txt_Speed = (TextView) findViewById(R.id.txt_Speed);
 
         btn_Park.setBackgroundColor(Color.RED);
-        btn_Park.setBackgroundColor(Color.WHITE);
+
 
 
         bluetoothHandler = new Handler();
@@ -110,27 +125,32 @@ public class DriveTrain extends AppCompatActivity {
         imageButton_Up.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(imageButton_Up.isPressed()){
+                if (imageButton_Up.isPressed()) {
                     btn_Drive.setBackgroundColor(Color.GREEN);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
                     btn_Neutral.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
                     btn_Park.setClickable(false);
+                    btn_Park.setBackgroundColor(Color.WHITE);
 
-                    mConnectedThread.write( "w" );    // Send the signal to car to move up
-                    Toast.makeText( getBaseContext(), "Car Ready To Move", Toast.LENGTH_SHORT ).show();
+                    mConnectedThread.write("w");    // Send the signal to car to move up
+                    Toast.makeText(getBaseContext(), "Car Ready To Move", Toast.LENGTH_SHORT).show();
 
                     Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
-            }}
+                }
+            }
         });
         imageButton_Down.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (imageButton_Down.isPressed()) {
-                    btn_Reverse.setBackgroundColor(Color.RED);
+                    btn_Reverse.setBackgroundColor(Color.YELLOW);
                     btn_Drive.setBackgroundColor(Color.WHITE);
                     btn_Drive.setClickable(false);
                     btn_Neutral.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
                     btn_Park.setClickable(false);
+                    btn_Park.setBackgroundColor(Color.WHITE);
 
                     Toast.makeText(getBaseContext(), "Reverse Mode", Toast.LENGTH_SHORT).show();
                 }
@@ -140,31 +160,73 @@ public class DriveTrain extends AppCompatActivity {
         imageButton_Right.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(imageButton_Up.isPressed()){
+                if (imageButton_Up.isPressed()) {
                     btn_Drive.setBackgroundColor(Color.GREEN);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
                     btn_Neutral.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
                     btn_Park.setClickable(false);
+                    btn_Park.setBackgroundColor(Color.WHITE);
 
                     Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
-                }}
+                }
+            }
         });
 
         imageButton_Left.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(imageButton_Up.isPressed()){
+                if (imageButton_Up.isPressed()) {
                     btn_Drive.setBackgroundColor(Color.GREEN);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
                     btn_Neutral.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
                     btn_Park.setClickable(false);
+                    btn_Park.setBackgroundColor(Color.WHITE);
 
                     Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
-                }}
+                }
+            }
         });
 
+        imageButton_Stop.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if (imageButton_Stop.isPressed()) {
+                    btn_Park.setBackgroundColor(Color.RED);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
+                    btn_Drive.setClickable(false);
+                    btn_Drive.setBackgroundColor(Color.WHITE);
+
+                    Toast.makeText(getBaseContext(), "Car Not Moving", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        imageButton_NoGear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if (imageButton_NoGear.isPressed()) {
+                    btn_Neutral.setBackgroundColor(Color.BLUE);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Park.setClickable(false);
+                    btn_Drive.setClickable(false);
+                    btn_Park.setBackgroundColor(Color.WHITE);
+
+                    Toast.makeText(getBaseContext(), "Car Not Moving", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void findViewById(ImageButton imageButton_stop) {
@@ -255,6 +317,42 @@ public class DriveTrain extends AppCompatActivity {
                 startActivityForResult(enableBtIntent, 1);
             }
         }
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("DriveTrain Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
     }
 
     //create new class for connect thread
