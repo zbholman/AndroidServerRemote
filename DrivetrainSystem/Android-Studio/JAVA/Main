@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 
 public class DriveTrain extends AppCompatActivity {
 
-    // Windows 10
+    // Windows 10 conncetion
     String address;
     final int handlerState = 0;                    /
     public String readMessage;
