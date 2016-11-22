@@ -81,6 +81,77 @@
         android:layout_above="@+id/imageButton_Right"
         android:layout_alignEnd="@+id/imageButton_Down"
         android:layout_marginBottom="52dp"
+        android:layout_alignStart="@+id/imageButton_Down" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/right"
+        android:id="@+id/imageButton_Right"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/left"
+        android:id="@+id/imageButton_Left"
+        android:layout_alignTop="@+id/imageButton_Right"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/btn_dialog"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/imageButton_Stop"/>
+
+</RelativeLayout>
+
+    <Button
+        android:text="N"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/btn_Neutral"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="R"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/btn_Reverse"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/btn_Drive" />
+
+    <TextView
+        android:text="00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="125sp"
+        android:id="@+id/txt_Speed"
+        android:layout_alignTop="@+id/imageButton_Left"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/down"
+        android:id="@+id/imageButton_Down"
+        android:layout_marginBottom="35dp"
+        android:layout_above="@+id/btn_Drive"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/up"
+        android:id="@+id/imageButton_Up"
+        android:layout_above="@+id/imageButton_Right"
+        android:layout_alignEnd="@+id/imageButton_Down"
+        android:layout_marginBottom="52dp"
         android:layout_alignStart="@+id/txt_Speed" />
 
     <ImageButton
