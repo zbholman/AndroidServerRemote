@@ -34,3 +34,27 @@ def sendToNotification(message):
         	              ))
 	print(" [x] Sent %r" % message)
 connection.close()
+
+#Main Loop for listening and blasting out messages.
+def main():
+	while True:	
+		try:
+			#Serial Port Listening and adding messages to the MsgQueue.
+			ser = serial.Serial('/dev/ttyUSB0', 9500)
+			#Sets up a queue and thread for messages
+			q = Queue(maxsize=0)
+			t = Thread(target=msgQueue)
+			t.daemon = True
+			t.start()
+			main(q,ser)
+
+			incMsg = ser.readline()
+			print('Recieved: %s' % incMsg)
+			q.put(incMsg)
+		except(RuntimeError, OSError, ValueError, IOError) as e:
+			print('Error:' + str(e))
+			break
+			
+if __name__ == "__main__":
+	main()
+
