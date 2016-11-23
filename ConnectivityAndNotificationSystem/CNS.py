@@ -7,6 +7,14 @@ import pika
 import sys
 from threading import *
 
-
+#Handles the message queue
+def msgQueue():
+	while True:
+		item = q.get() #Gets last message queued.
+		if item is None:
+			break	
+		ser.write(item) #Writes it to the serial port, all devices will get this running on BAUD 9500)
+		sendToNotification(item) #Forwards message to sTMAL function.
+q.task_done() #Task done, what a champ.
 
 
