@@ -1,5 +1,16 @@
 package com.example.ist.energymonitor;
 
+/*
+    Class: IST440W
+    Professor: Joseph Oakes
+    Penn State Abington
+    Team 5 - Energy Management System
+    
+    This is an Energy Monitoring System which includes highly alerting and power monitoring features that 
+    rapidly responds in real time with appropriate actions to maintain and optimize the performance 
+    of the car. The main goal is to communicate with other sub systems to alert users to any changes in 
+    depletion of power and provide further instructions to follow */
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
