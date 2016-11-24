@@ -27,6 +27,6 @@ while True:
 
     number = readNumber()
     print ("Arduino: Here's the current RPM: "), number
-
-	  MPH = ( (4.5 * number) * 60) / 63360
+    
+    MPH = ( (4.5 * number) * 60) / 63360
     print ("Here's the current MPH: "), MPH
