@@ -5,6 +5,9 @@ import grovepi
 rightledbar = 5
 leftledbar = 6
 
+grovepi.ledBar_init(rightledbar, 0)
+grovepi.ledBar_init(leftledbar, 0)
+
 grovepi.pinMode(rightledbar,"OUTPUT")
 grovepi.pinMode(leftledbar,"OUTPUT")
 
