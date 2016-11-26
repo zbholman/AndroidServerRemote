@@ -1,0 +1,64 @@
+  btnDis.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Disconnect();
+                Toast.makeText(getBaseContext(), "Exited", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        imageButton_Up.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(imageButton_Up.isPressed()){
+                    btn_Drive.setBackgroundColor(Color.GREEN);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    mConnectedThread.write( "w" );    // Send the signal to car to move up
+                    Toast.makeText( getBaseContext(), "Car Ready To Move", Toast.LENGTH_SHORT ).show();
+
+                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+            }}
+        });
+        imageButton_Down.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (imageButton_Down.isPressed()) {
+                    btn_Reverse.setBackgroundColor(Color.RED);
+                    btn_Drive.setBackgroundColor(Color.WHITE);
+                    btn_Drive.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    Toast.makeText(getBaseContext(), "Reverse Mode", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        imageButton_Right.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(imageButton_Up.isPressed()){
+                    btn_Drive.setBackgroundColor(Color.GREEN);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+                }}
+        });
+
+        imageButton_Left.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(imageButton_Up.isPressed()){
+                    btn_Drive.setBackgroundColor(Color.GREEN);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Park.setClickable(false);
+
+                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+                }}
+        });
