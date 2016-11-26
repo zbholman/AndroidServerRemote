@@ -6,8 +6,6 @@
 # Penn State Abington
 
 import sys
-import time
-
 import scrollphat
 
 #low brightness

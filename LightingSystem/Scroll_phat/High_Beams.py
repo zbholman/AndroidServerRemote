@@ -5,11 +5,9 @@
 # IST 440W - Joe Oakes
 # Penn State Abington
 
-
 import sys
 import sys
 import time
-
 import scrollphat
 
 #max brightness

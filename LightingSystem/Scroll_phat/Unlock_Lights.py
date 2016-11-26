@@ -20,7 +20,7 @@ for y in range(5):
 
 time.sleep(.500)
 scrollphat.clear()
-
+time.sleep(.250)
 #iterate through columns and rows, turning all pixels on
 for y in range(5):
     for x in range(11):
