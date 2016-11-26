@@ -34,8 +34,8 @@ public class LightsControl extends AppCompatActivity {
         final String hostname = "104.39.121.91"; // Pi IP on PSU network
 //        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
-        final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights/Scroll_phat/";
-        final String ledBarLightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/LedBarLights/";
+        final String lightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/Scroll_phat/";
+        final String ledBarLightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/";
         final int port = 22;
 
         // Create switch for lights
@@ -65,13 +65,6 @@ public class LightsControl extends AppCompatActivity {
         switchLeftTurn.setChecked(false);
         switchRightTurn.setChecked(false);
         switchHazards.setChecked(false);
-
-        // Create animation for blinking icons
-        //final Animation animation = new AlphaAnimation(1, 0);
-        //animation.setDuration(750);
-        //animation.setInterpolator(new LinearInterpolator());
-        //animation.setRepeatCount(Animation.INFINITE);
-        //animation.setRepeatMode(Animation.REVERSE);
 
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
