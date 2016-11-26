@@ -57,7 +57,7 @@ while(True):
         pause_time = 0.5
         paint(pause_time)
         clear(pause_time)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, SystemExit):
         scrollphat.clear()
         sys.exit(-1)
 
