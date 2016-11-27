@@ -25,3 +25,4 @@ channel.basic_consume(callback,
                      queue='Monitoring and Logging System')
 #Starts server to listen for messages until the consumers are cancelled
 channel.start_consuming()
+
