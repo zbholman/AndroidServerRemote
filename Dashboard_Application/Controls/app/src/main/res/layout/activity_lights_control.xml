@@ -44,20 +44,6 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="110dp"
-        android:src="@drawable/icon_head_lights"
-        android:layout_marginTop="30dp"
-        android:id="@+id/iconHeadLights"
-        android:visibility="visible"
-        android:elevation="24dp"
-        android:tint="@android:color/holo_orange_light"
-        android:backgroundTintMode="add"
-        android:layout_below="@+id/lblLightingControls"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="110dp"
         android:src="@drawable/icon_high_beam"
         android:id="@+id/iconHighBeams"
         android:visibility="visible"
@@ -181,4 +167,19 @@
         android:layout_alignTop="@+id/iconRightTurn"
         android:layout_toRightOf="@+id/iconRightTurn"
         android:layout_toEndOf="@+id/iconRightTurn" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="110dp"
+        android:src="@drawable/icon_head_lights"
+        android:id="@+id/iconHeadLights"
+        android:visibility="visible"
+        android:elevation="24dp"
+        android:tint="@android:color/holo_orange_light"
+        android:backgroundTintMode="add"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

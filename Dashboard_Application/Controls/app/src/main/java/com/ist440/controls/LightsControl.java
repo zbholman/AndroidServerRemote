@@ -36,7 +36,7 @@ public class LightsControl extends AppCompatActivity {
 
         final String scriptsDir = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/";
         final String lightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/Scroll_phat/";
-        final String ledBarLightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/";
+        // final String ledBarLightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/";
         final int port = 22;
 
         // Create switch for lights
@@ -53,7 +53,7 @@ public class LightsControl extends AppCompatActivity {
         final ImageView iconRightTurn = (ImageView) findViewById(R.id.iconRightTurn);
         final ImageView iconHazards = (ImageView) findViewById(R.id.iconHazardLight);
 
-        // Set all icons to invisibule
+        // Set all icons to invisible
         iconHazards.setVisibility(View.INVISIBLE);
         iconHighBeams.setVisibility(View.INVISIBLE);
         iconHeadLights.setVisibility(View.INVISIBLE);
