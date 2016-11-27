@@ -1,5 +1,6 @@
 import time
 import grovepi
+import sys
 
 # DI,DCKI,VCC,GND
 ledbar = 5
@@ -29,4 +30,4 @@ while True:
     except (KeyboardInterrupt, SystemExit):
         for i in range(3, 10):
             grovepi.ledBar_setLed(ledbar, i, 0)
-        break
+        sys.exit(-1)
