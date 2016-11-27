@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="70dp"
-        android:id="@+id/txtControlCenterHome"
+        android:id="@+id/lblControlCenterHome"
         android:textAlignment="center"
         android:textColor="#ffffff" />
 
@@ -33,7 +33,22 @@
         android:width="200dp"
         android:textAlignment="center"
         android:textColor="#ffffff"
-        android:layout_below="@+id/txtControlCenterHome"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lighting Controls"
+        android:id="@+id/textView"
+        android:textSize="40dp"
+        android:autoText="false"
+        android:lines="2"
+        android:width="200dp"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/lblControlCenterHome"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="27dp" />
@@ -51,5 +66,21 @@
         android:layout_alignEnd="@+id/lblLightingControls"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/lblLightingControls" />
+
+    <TextView
+        android:text="Climate Control"
+        android:layout_width="wrap_content"
+        android:textSize="40dp"
+        android:lines="2"
+        android:textColor="#ffffff"
+        android:width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:id="@+id/lblClimateControl"
+        android:layout_alignBaseline="@+id/lblLightingControls"
+        android:layout_alignBottom="@+id/lblLightingControls"
+        android:layout_toRightOf="@+id/lblLightingControls"
+        android:layout_toEndOf="@+id/lblLightingControls" />
 
 </RelativeLayout>
