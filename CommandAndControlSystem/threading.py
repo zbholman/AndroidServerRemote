@@ -1,6 +1,5 @@
 import queue
 
-from threading import Thread
 
 
 #Tells the queue that processing the task is complete
