@@ -31,7 +31,7 @@ public class LightsControl extends AppCompatActivity {
         // initialize variables for connecting to pi
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "104.39.121.91"; // Pi IP on PSU network
+        final String hostname = "192.168.1.1"; // Pi IP on Ad Hoc Network
 //        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
         final String scriptsDir = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/";
@@ -229,14 +229,14 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String command = scriptsDir + "Hazard_On.py";
+                    String command = scriptsDir + "Hazards_On.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    String command = scriptsDir + "Hazard_Off.py";
+                    String command = scriptsDir + "Hazards_Off.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, start blinking hazards icon
