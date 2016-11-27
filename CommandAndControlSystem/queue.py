@@ -5,14 +5,13 @@ def worker():
                 q.task_done()
 
 def Queue(self):
-        q = Queue(maxsize = 0)
-        for i in range(5):
-                t = Thread(target=worker)
-                t.daemon = True
-                t.start()
+	q = Queue(maxsize = 0)
+	for i in range(5):
+		t = Thread(target=worker)
+		t.daemon = True
+		t.start()
 
-        for item in source():
-                q.put(item)
+	for item in source():
+		q.put(item)
 
-        q.join()
-
+	q.join()
