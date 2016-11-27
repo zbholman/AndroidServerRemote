@@ -34,6 +34,7 @@ public class LightsControl extends AppCompatActivity {
         final String hostname = "104.39.121.91"; // Pi IP on PSU network
 //        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
+        final String scriptsDir = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/";
         final String lightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/Scroll_phat/";
         final String ledBarLightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/";
         final int port = 22;
@@ -66,6 +67,8 @@ public class LightsControl extends AppCompatActivity {
         switchRightTurn.setChecked(false);
         switchHazards.setChecked(false);
 
+        // Variables for storing light states
+
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             // Function that gets called when switch is toggled
@@ -75,14 +78,13 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
-
                     // Turn off other lights to avoid conflict
                     switchHeadLights.setChecked(false);
                     switchHazards.setChecked(false);
                     switchLeftTurn.setChecked(false);
                     switchRightTurn.setChecked(false);
 
-                    String command = lightsDir + "high_beams.py";
+                    String command = lightsDir + "High_Beams.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
@@ -91,7 +93,7 @@ public class LightsControl extends AppCompatActivity {
                 // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
-                    String command = lightsDir + "turn-leds-off.py";
+                    String command = lightsDir + "Leds_Off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -117,7 +119,7 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String command = lightsDir + "running_lights.py";
+                    String command = lightsDir + "Running_Lights.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
@@ -126,7 +128,7 @@ public class LightsControl extends AppCompatActivity {
                     boolean success = true;
 
                     // Turn LEDs off if head light switch is turned off
-                    String command = lightsDir + "turn-leds-off.py";
+                    String command = lightsDir + "Leds_Off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -151,10 +153,8 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String frontLights = lightsDir + "turn_signal_refactored.py";
-                    String backLights = ledBarLightsDir + "D5_R_Turn.py";
-                    backgroundTask(username, password, hostname, frontLights, port);
-                    backgroundTask(username, password, hostname, backLights, port);
+                    String command = scriptsDir + "Left_Turn_On.sh";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking left turn icon
                     if (success) {
@@ -166,12 +166,7 @@ public class LightsControl extends AppCompatActivity {
                     //}
                 } else {
                     boolean success = true;
-                    final String command = lightsDir + "turn-leds-off.py";
-                    String endFrontLights = "kill $(ps aux | grep '[t]urn_signal_refactored.py' | awk '{print $2}')";
-                    String endBackLights = "kill $(ps aux | grep '[D]5_R_Turn.py' | awk '{print $2}')";
-
-                    backgroundTask(username, password, hostname, endFrontLights, port);
-                    backgroundTask(username, password, hostname, endBackLights, port);
+                    String command = scriptsDir + "Left_Turn_Off.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -198,11 +193,8 @@ public class LightsControl extends AppCompatActivity {
                     switchLeftTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String frontLights = lightsDir + "turn_signal_refactored_2.py";
-                    String backLights = ledBarLightsDir + "D5_R_Turn.py";
-
-                    backgroundTask(username, password, hostname, frontLights, port);
-                    backgroundTask(username, password, hostname, backLights, port);
+                    String command = scriptsDir + "Right_Turn_On.sh";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking right turn icon
                     if (success) {
@@ -212,12 +204,7 @@ public class LightsControl extends AppCompatActivity {
 
                 } else {
                     boolean success = true;
-                    final String endFrontLights = "kill $(ps aux | grep '[t]urn_signal_refactored_2.py' | awk '{print $2}')";
-                    final String endBackLights = "kill $(ps aux | grep '[D]5_R_Turn.py' | awk '{print $2}')";
-                    final String command = lightsDir + "turn-leds-off.py";
-
-                    backgroundTask(username, password, hostname, endFrontLights, port);
-                    backgroundTask(username, password, hostname, endBackLights, port);
+                    String command = scriptsDir + "Right_Turn_Off.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -242,24 +229,19 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String command = lightsDir + "hazard_lights.py";
+                    String command = scriptsDir + "Hazard_On.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    String endCommand = "kill $(ps aux | grep '[h]azard_lights.py' | awk '{print $2}')";
-
-                    backgroundTask(username, password, hostname, endCommand, port);
-                    final String command = lightsDir + "turn-leds-off.py";
+                    String command = scriptsDir + "Hazard_Off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, start blinking hazards icon
                     if (success) {
                         iconHazards.setVisibility(View.INVISIBLE);
-
-                        //iconHazards.startAnimation(animation);
                     }
                 }
             }
