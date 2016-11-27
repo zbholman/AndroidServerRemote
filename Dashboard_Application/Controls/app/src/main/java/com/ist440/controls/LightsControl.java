@@ -45,6 +45,7 @@ public class LightsControl extends AppCompatActivity {
         final Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
         final Switch switchRightTurn = (Switch) findViewById(R.id.switchRightTurn);
         final Switch switchHazards = (Switch) findViewById(R.id.switchHazardLight);
+        final Switch switchAutoLights = (Switch) findViewById(R.id.switchAutoLights);
 
         // Create icon images
         final ImageView iconHighBeams = (ImageView) findViewById(R.id.iconHighBeams);
@@ -52,6 +53,7 @@ public class LightsControl extends AppCompatActivity {
         final ImageView iconLeftTurn = (ImageView) findViewById(R.id.iconLeftTurn);
         final ImageView iconRightTurn = (ImageView) findViewById(R.id.iconRightTurn);
         final ImageView iconHazards = (ImageView) findViewById(R.id.iconHazardLight);
+        final ImageView iconAutoLights = (ImageView) findViewById(R.id.iconAutoLights);
 
         // Set all icons to invisible
         iconHazards.setVisibility(View.INVISIBLE);
@@ -59,6 +61,7 @@ public class LightsControl extends AppCompatActivity {
         iconHeadLights.setVisibility(View.INVISIBLE);
         iconLeftTurn.setVisibility(View.INVISIBLE);
         iconRightTurn.setVisibility(View.INVISIBLE);
+        iconAutoLights.setVisibility(View.INVISIBLE);
 
         // Set default state to false (off)
         switchHighBeams.setChecked(false);
@@ -66,6 +69,7 @@ public class LightsControl extends AppCompatActivity {
         switchLeftTurn.setChecked(false);
         switchRightTurn.setChecked(false);
         switchHazards.setChecked(false);
+        switchAutoLights.setChecked(false);
 
         // Variables for storing light states
 
@@ -79,6 +83,7 @@ public class LightsControl extends AppCompatActivity {
                 if (isChecked) {
                     boolean success = true;
                     // Turn off other lights to avoid conflict
+                    switchAutoLights.setChecked(false);
                     switchHeadLights.setChecked(false);
                     switchHazards.setChecked(false);
                     switchLeftTurn.setChecked(false);
@@ -91,6 +96,40 @@ public class LightsControl extends AppCompatActivity {
                     if (success) {iconHighBeams.setVisibility(View.VISIBLE);}
 
                 // If the switch it turned off, turn off the leds
+                } else {
+                    boolean success = true;
+                    String command = lightsDir + "Leds_Off.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If light turns off, set icon to invisible
+                    if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
+                }
+            }
+        });
+
+        switchAutoLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called when switch is toggled
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on high beams
+                if (isChecked) {
+                    boolean success = true;
+                    // Turn off other lights to avoid conflict
+                    switchHighBeams.setChecked(false);
+                    switchHeadLights.setChecked(false);
+                    switchHazards.setChecked(false);
+                    switchLeftTurn.setChecked(false);
+                    switchRightTurn.setChecked(false);
+
+                    String command = lightsDir + "Auto_Lights_On.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If the light turns on, set icon to visible
+                    if (success) {iconAutoLights.setVisibility(View.VISIBLE);}
+
+                    // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
                     String command = lightsDir + "Leds_Off.py";
