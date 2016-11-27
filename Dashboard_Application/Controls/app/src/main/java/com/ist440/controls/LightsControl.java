@@ -136,7 +136,7 @@ public class LightsControl extends AppCompatActivity {
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
-                    if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
+                    if (success) {iconAutoLights.setVisibility(View.INVISIBLE);}
                 }
             }
         });

@@ -57,7 +57,8 @@
         android:layout_alignStart="@+id/switchLeftTurn"
         android:layout_toStartOf="@+id/switchRightTurn"
         android:layout_alignRight="@+id/switchLeftTurn"
-        android:layout_alignEnd="@+id/switchLeftTurn" />
+        android:layout_alignEnd="@+id/switchLeftTurn"
+        android:layout_toLeftOf="@+id/switchRightTurn" />
 
     <Switch
         android:text="Auto Lights"
@@ -175,7 +176,7 @@
         android:layout_width="150sp"
         android:layout_height="110sp"
         android:src="@drawable/icon_head_lights"
-        android:id="@+id/imageView"
+        android:id="@+id/iconHeadLights"
         android:visibility="visible"
         android:elevation="24sp"
         android:tint="@android:color/holo_orange_light"
