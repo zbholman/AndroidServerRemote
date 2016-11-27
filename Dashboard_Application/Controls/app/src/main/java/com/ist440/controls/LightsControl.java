@@ -132,7 +132,7 @@ public class LightsControl extends AppCompatActivity {
                     // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
-                    String command = lightsDir + "Leds_Off.py";
+                    String command = "/home/pi/PSUABFA16IST440/LightingSystem/Scroll_phat/Auto_Lights_Off.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
