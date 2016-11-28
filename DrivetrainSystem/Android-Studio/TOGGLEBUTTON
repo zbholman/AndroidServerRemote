@@ -1,3 +1,12 @@
+#IST 440 Penn State Abington
+#Professor: Joseph Oakes
+#Fall 2016
+#DriveTrain
+#Author: Tapan Patel and Joseph Altomare
+#Version: 6
+
+
+
 package com.example.tapanapatel.drivetrainfinal;
 
 import android.os.Bundle;
