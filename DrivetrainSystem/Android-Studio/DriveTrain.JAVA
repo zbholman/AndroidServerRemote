@@ -1,3 +1,10 @@
+#IST 440 Penn State Abington
+#Professor: Joseph Oakes
+#Fall 2016
+#DriveTrain
+#Author: Tapan Patel and Joesph Altomare
+#Version: 5
+    
 package drivetrain.ist440.drivetrain;
 
 import android.bluetooth.BluetoothAdapter;
