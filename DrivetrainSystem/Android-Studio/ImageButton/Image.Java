@@ -1,4 +1,13 @@
- private GoogleApiClient client;
+#IST 440 Penn State Abington
+#Professor: Joseph Oakes
+#Fall 2016
+#DriveTrain
+#Author: Tapan Patel and Joseph Altomare
+#Version: 4 
+
+
+
+private GoogleApiClient client;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
