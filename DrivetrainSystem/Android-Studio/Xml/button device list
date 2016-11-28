@@ -1,3 +1,11 @@
+<!--IST 440 Penn State Abington
+Professor: Joseph Oakes
+Fall 2016
+DriveTrain
+Author: Tapan Patel and Joseph Altomare
+Version: 3 -->
+
+
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +17,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="drivetrain.ist440.drivetrain.DeviceList">
-
+    
+    <!-- layout of the paired devices -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +28,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+     <!-- layout of the paired devices button -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +39,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
+    
+     <!-- layout of the listView toggleButton -->
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
