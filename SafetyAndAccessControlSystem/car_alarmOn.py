@@ -55,10 +55,10 @@ while True:
     tempPitch = 0
     tempRoll = 0
     tempYaw = 0
-    if(abs(curPitch - newPitch) > 30):
+    if(abs(curPitch - newPitch) > 3):
         if(curPitch > 330 and newPitch < 30):
             tempPitch = newPitch + 360
-            if(abs(tempPitch - curPitch) > 30):
+            if(abs(tempPitch - curPitch) > 3):
                 print("before subP")
                 subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
@@ -66,13 +66,13 @@ while True:
                 break
         elif(curPitch < 30 and newPitch > 330):
             tempPitch = curPitch + 360
-            if(abs(tempPitch - newPitch) > 30):
+            if(abs(tempPitch - newPitch) > 3):
                 print("before subP")
                 subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
-        elif(abs(curPitch - newPitch) > 30):
+        elif(abs(curPitch - newPitch) > 3):
             print("before subP")
             subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
             print("after subP")
@@ -83,10 +83,10 @@ while True:
         #    sleep (0.03)
         #    continue
         
-    if(abs(curRoll - newRoll) > 1):
+    if(abs(curRoll - newRoll) > 3):
         if(curRoll > 330 and newRoll < 30):
             tempRoll = newRoll + 360
-            if(abs(tempRoll - curRoll) > 30):
+            if(abs(tempRoll - curRoll) > 3):
                 print("before subP")
                 subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
@@ -94,23 +94,23 @@ while True:
                 break
         elif(curRoll < 30 and newRoll > 330):
             tempRoll = curRoll + 360
-            if(abs(tempRoll - newRoll) > 30):
+            if(abs(tempRoll - newRoll) > 3):
                 print("before subP")
                 subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
-        elif(abs(curRoll - newRoll) > 30):
+        elif(abs(curRoll - newRoll) > 3):
             print("before subP")
             subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
             print("after subP")
             ii = 1
             break
     
-    if(abs(curYaw - newYaw) > 1):
+    if(abs(curYaw - newYaw) > 3):
         if(curYaw > 330 and newYaw < 30):
             tempYaw = newYaw + 360
-            if(abs(tempYaw - curYaw) > 30):
+            if(abs(tempYaw - curYaw) > 3):
                 print("before subP")
                 subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
@@ -118,13 +118,13 @@ while True:
                 break
         elif(curYaw < 30 and newYaw > 330):
             tempYaw = curYaw + 360
-            if(abs(tempYaw - newYaw) > 30):
+            if(abs(tempYaw - newYaw) > 3):
                 print("before subP")
                 subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
-        elif(abs(curYaw - newYaw) > 30):
+        elif(abs(curYaw - newYaw) > 3):
             print("before subP")
             subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
             print("after subP")
