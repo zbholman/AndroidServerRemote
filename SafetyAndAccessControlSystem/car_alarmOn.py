@@ -62,13 +62,13 @@ while True:
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 ii = 1
                 break
-        elsif(curPitch < 30 and newPitch > 330):
+        elif(curPitch < 30 and newPitch > 330):
             tempPitch = curPitch + 360
             if(abs(tempPitch - newPitch) > 1):
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 ii = 1
                 break
-        elsif(abs(curPitch - newPitch) > 1):
+        elif(abs(curPitch - newPitch) > 1):
             subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
             ii = 1
             break
@@ -84,13 +84,13 @@ while True:
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 ii = 1
                 break
-        elsif(curRoll < 30 and newRoll > 330):
+        elif(curRoll < 30 and newRoll > 330):
             tempRoll = curRoll + 360
             if(abs(tempRoll - newRoll) > 1):
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 ii = 1
                 break
-        elsif(abs(curRoll - newRoll) > 1):
+        elif(abs(curRoll - newRoll) > 1):
             subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
             ii = 1
             break
@@ -102,13 +102,13 @@ while True:
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 ii = 1
                 break
-        elsif(curYaw < 30 and newYaw > 330):
+        elif(curYaw < 30 and newYaw > 330):
             tempYaw = curYaw + 360
             if(abs(tempYaw - newYaw) > 1):
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 ii = 1
                 break
-        elsif(abs(curYaw - newYaw) > 1):
+        elif(abs(curYaw - newYaw) > 1):
             subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
             ii = 1
             break
