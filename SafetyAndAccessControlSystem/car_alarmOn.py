@@ -55,28 +55,59 @@ while True:
     tempPitch = 0
     tempRoll = 0
     tempYaw = 0
-    if(abs(curPitch - newPitch) > 5):
+    if(abs(curPitch - newPitch) > 1):
         if(curPitch > 330 and newPitch < 30):
             tempPitch = newPitch + 360
-            if(abs(tempPitch - curPitch) > 5):
+            if(abs(tempPitch - curPitch) > 1):
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 break
         elsif(curPitch < 30 and newPitch > 330):
             tempPitch = curPitch + 360
-            if(abs(tempPitch - newPitch) > 5):
+            if(abs(tempPitch - newPitch) > 1):
                 subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
                 break
-        elsif(abs(curYaw - newYaw) > 5):
+        elsif(abs(curPitch - newPitch) > 1):
             subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
             break
-        else:
+        #else:
             # Continue if the inner loop wasn't broken.
-            sleep (0.03)
-            continue
-    else:
-        # Continue if the inner loop wasn't broken.
-        sleep (0.03)
-        continue
+        #    sleep (0.03)
+        #    continue
+        
+    if(abs(curRoll - newRoll) > 1):
+        if(curRoll > 330 and newRoll < 30):
+            tempRoll = newRoll + 360
+            if(abs(tempRoll - curRoll) > 1):
+                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+                break
+        elsif(curRoll < 30 and newRoll > 330):
+            tempRoll = curRoll + 360
+            if(abs(tempRoll - newRoll) > 1):
+                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+                break
+        elsif(abs(curRoll - newRoll) > 1):
+            subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+            break
+    
+    if(abs(curYaw - newYaw) > 1):
+        if(curYaw > 330 and newYaw < 30):
+            tempYaw = newYaw + 360
+            if(abs(tempYaw - curYaw) > 1):
+                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+                break
+        elsif(curYaw < 30 and newYaw > 330):
+            tempYaw = curYaw + 360
+            if(abs(tempYaw - newYaw) > 1):
+                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+                break
+        elsif(abs(curYaw - newYaw) > 1):
+            subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+            break
+            
+    
+    # Continue if the inner loop wasn't broken.
+    sleep (0.03)
+    continue
     # Inner loop was broken, break the outer.
     break
 
