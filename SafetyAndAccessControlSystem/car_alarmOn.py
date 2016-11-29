@@ -37,7 +37,7 @@ def car_alarm():
   return logo
     
 images = [car_alarm]
-s.set_pixels(images[count % len(images)]())
+s.set_pixels(images[ 0 ]())
 
 #Sets initial orientations
 curOri = s.get_orientation()
