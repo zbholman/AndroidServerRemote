@@ -48,7 +48,7 @@ public class DriveTrain extends AppCompatActivity {
     final int handlerState = 0;
     public String readMessage;
     Handler bluetoothHandler;
-    ImageButton imageButton_Up, imageButton_Down, imageButton_Left, imageButton_Right, imageButton_NoGear, imageButton_Stop;
+    ImageButton imageButton_Up, imageButton_Down, imageButton_Left, imageButton_Right, imageButton_NoGear, imageButton_Stop, imageButton_Center;
     Button btnDis, btn_Park, btn_Reverse, btn_Neutral, btn_Drive;
     TextView txt_Speed;
     //int mCounter = 50;
@@ -108,6 +108,7 @@ public class DriveTrain extends AppCompatActivity {
         imageButton_Left = (ImageButton) findViewById(R.id.imageButton_Left);
         imageButton_Right = (ImageButton) findViewById(R.id.imageButton_Right);
         imageButton_Stop = (ImageButton) findViewById(R.id.imageButton_Stop);
+        imageButton_Center = (ImageButton) findViewById(R.id.imageButton_Center);
         txt_Speed = (TextView) findViewById(R.id.txt_Speed);
 
         btn_Park.setBackgroundColor(Color.RED);
@@ -144,9 +145,26 @@ public class DriveTrain extends AppCompatActivity {
                     btn_Park.setBackgroundColor(Color.WHITE);
 
                     mConnectedThread.write("w");    // Send the signal to car to move up
-                    Toast.makeText(getBaseContext(), "Car Ready To Move", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Car Moving", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        imageButton_Center.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if (imageButton_Up.isPressed()) {
+                    btn_Drive.setBackgroundColor(Color.GREEN);
+                    btn_Reverse.setBackgroundColor(Color.WHITE);
+                    btn_Reverse.setClickable(false);
+                    btn_Neutral.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
+                    btn_Park.setClickable(false);
+                    btn_Park.setBackgroundColor(Color.WHITE);
+
+                    mConnectedThread.write("c");    // tired are straight
+                    Toast.makeText(getBaseContext(), "Cars Tires Are Straight", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -161,7 +179,9 @@ public class DriveTrain extends AppCompatActivity {
                     btn_Park.setClickable(false);
                     btn_Park.setBackgroundColor(Color.WHITE);
 
-                    Toast.makeText(getBaseContext(), "Reverse Mode", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("s");    // Send the signal to car to move up
+                    Toast.makeText(getBaseContext(), "Car Moving Backward", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -178,7 +198,8 @@ public class DriveTrain extends AppCompatActivity {
                     btn_Park.setClickable(false);
                     btn_Park.setBackgroundColor(Color.WHITE);
 
-                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("d");    // Send the signal to car to move up
+                    Toast.makeText(getBaseContext(), "Car Moving Right", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -195,7 +216,9 @@ public class DriveTrain extends AppCompatActivity {
                     btn_Park.setClickable(false);
                     btn_Park.setBackgroundColor(Color.WHITE);
 
-                    Toast.makeText(getBaseContext(), "Drive Mode", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("a");    // Send the signal to car to move up
+                    Toast.makeText(getBaseContext(), "Car Moving Left", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -212,7 +235,9 @@ public class DriveTrain extends AppCompatActivity {
                     btn_Drive.setClickable(false);
                     btn_Drive.setBackgroundColor(Color.WHITE);
 
+                    mConnectedThread.write("p");    // Send the signal to car to move up
                     Toast.makeText(getBaseContext(), "Car Not Moving", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -227,9 +252,12 @@ public class DriveTrain extends AppCompatActivity {
                     btn_Reverse.setClickable(false);
                     btn_Park.setClickable(false);
                     btn_Drive.setClickable(false);
+                    btn_Drive.setBackgroundColor(Color.WHITE);
                     btn_Park.setBackgroundColor(Color.WHITE);
 
-                    Toast.makeText(getBaseContext(), "Car Not Moving", Toast.LENGTH_SHORT).show();
+                    mConnectedThread.write("n");    // Send the signal to car to move up
+                    Toast.makeText(getBaseContext(), "Car Moving Itself", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
