@@ -8,7 +8,7 @@ ledbar = 5
 grovepi.ledBar_init(ledbar, 0)
 grovepi.pinMode(ledbar,"OUTPUT")
 i = 0
-grovepi.ledBar_orientation(ledbar, 0)
+grovepi.ledBar_orientation(ledbar, 1)
 
 # ledbar_setLed(pin,led,state)
 # led: which led (1-10)
