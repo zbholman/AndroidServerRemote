@@ -19,16 +19,15 @@ Version: 3 -->
     android:background="#000000"
     tools:context="drivetrain.ist440.drivetrain.DriveTrain">
 
-    <!-- Disconnect Button -->
+
     <Button
         android:text="Disconnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/btnDis" /> 
+        android:id="@+id/btnDis"
+        android:layout_width="110dp"
+        android:layout_height="75dp" />
 
-    <!-- Park Button -->
     <Button
         android:text="P"
         android:layout_width="100dp"
@@ -37,7 +36,6 @@ Version: 3 -->
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/btnDis" />
 
-    <!-- Drive Button -->
     <Button
         android:text="D"
         android:layout_width="100dp"
@@ -47,7 +45,6 @@ Version: 3 -->
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/imageButton_Right" />
 
-    <!-- Neutral Button -->
     <Button
         android:text="N"
         android:layout_width="100dp"
@@ -56,7 +53,6 @@ Version: 3 -->
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
-    <!-- Reverse Button -->
     <Button
         android:text="R"
         android:layout_width="100dp"
@@ -65,18 +61,6 @@ Version: 3 -->
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/btn_Drive" />
 
-    <!-- SpeedOmeter View -->
-    <TextView
-        android:text="00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="125sp"
-        android:id="@+id/txt_Speed"
-        android:layout_alignTop="@+id/imageButton_Left"
-        android:layout_centerHorizontal="true" />
-
-    <!-- Down ImageButton -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +70,6 @@ Version: 3 -->
         android:layout_above="@+id/btn_Drive"
         android:layout_centerHorizontal="true" />
 
-    <!-- Up  ImageButton -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,7 +80,6 @@ Version: 3 -->
         android:layout_marginBottom="52dp"
         android:layout_alignStart="@+id/imageButton_Down" />
 
-    <!-- Right ImageButton -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,7 +88,6 @@ Version: 3 -->
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 
-    <!-- Left ImageButton -->
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,76 +96,39 @@ Version: 3 -->
         android:layout_alignTop="@+id/imageButton_Right"
         android:layout_alignParentStart="true" />
 
-    <!-- Stop ImageButton -->
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/btn_dialog"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@color/colorAccent"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/imageButton_Stop"/>
+        android:id="@+id/imageButton_Stop" />
 
-</RelativeLayout>
-
-    <Button
-        android:text="N"
+    <ImageButton
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/btn_Neutral"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="R"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/btn_Reverse"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/btn_Drive" />
+        app:srcCompat="@color/colorPrimary"
+        android:layout_below="@+id/imageButton_Stop"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/imageButton_NoGear" />
 
     <TextView
         android:text="00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:textSize="125sp"
+        android:textSize="200sp"
         android:id="@+id/txt_Speed"
-        android:layout_alignTop="@+id/imageButton_Left"
+        android:layout_above="@+id/imageButton_Down"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/down"
-        android:id="@+id/imageButton_Down"
-        android:layout_marginBottom="35dp"
-        android:layout_above="@+id/btn_Drive"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@color/common_plus_signin_btn_text_light_focused"
+        android:id="@+id/imageButton_Center"
+        android:layout_below="@+id/imageButton_NoGear"
+        android:layout_alignParentStart="true" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/up"
-        android:id="@+id/imageButton_Up"
-        android:layout_above="@+id/imageButton_Right"
-        android:layout_alignEnd="@+id/imageButton_Down"
-        android:layout_marginBottom="52dp"
-        android:layout_alignStart="@+id/txt_Speed" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/right"
-        android:id="@+id/imageButton_Right"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/left"
-        android:id="@+id/imageButton_Left"
-        android:layout_alignTop="@+id/imageButton_Right"
-        android:layout_alignStart="@+id/btn_Park" />
 
 </RelativeLayout>
