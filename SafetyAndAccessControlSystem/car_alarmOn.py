@@ -60,7 +60,7 @@ while True:
             tempPitch = newPitch + 360
             if(abs(tempPitch - curPitch) > 1):
                 print("before subP")
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
@@ -68,13 +68,13 @@ while True:
             tempPitch = curPitch + 360
             if(abs(tempPitch - newPitch) > 1):
                 print("before subP")
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
         elif(abs(curPitch - newPitch) > 1):
             print("before subP")
-            subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+            subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
             print("after subP")
             ii = 1
             break
@@ -88,7 +88,7 @@ while True:
             tempRoll = newRoll + 360
             if(abs(tempRoll - curRoll) > 1):
                 print("before subP")
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
@@ -96,13 +96,13 @@ while True:
             tempRoll = curRoll + 360
             if(abs(tempRoll - newRoll) > 1):
                 print("before subP")
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
         elif(abs(curRoll - newRoll) > 1):
             print("before subP")
-            subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+            subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
             print("after subP")
             ii = 1
             break
@@ -112,7 +112,7 @@ while True:
             tempYaw = newYaw + 360
             if(abs(tempYaw - curYaw) > 1):
                 print("before subP")
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
@@ -120,13 +120,13 @@ while True:
             tempYaw = curYaw + 360
             if(abs(tempYaw - newYaw) > 1):
                 print("before subP")
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
                 print("after subP")
                 ii = 1
                 break
         elif(abs(curYaw - newYaw) > 1):
             print("before subP")
-            subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+            subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
             print("after subP")
             ii = 1
             break
