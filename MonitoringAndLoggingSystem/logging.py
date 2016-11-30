@@ -16,9 +16,7 @@ class Log:
 
 
 	def __init__(self):
-		#initialize db connection
-		client = MongoClient()
-		db = client.dbCar
+		pass
 
 	
 	#Method that determines what collections to put the message into
