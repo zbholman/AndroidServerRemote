@@ -91,7 +91,9 @@ class Monitor:
             if(current_time - self.subsys_last_heard[subsys] > timeout_warning and self.subsys_timeout[subsys] == 'no'):
 				PingSystem(subsys)
 				self.subsys_timeout[subsys] = 'yes'
-			else if(current_time - self.subsys_last_heard[subsys] > timeout_critical and self.subsys_timeout[]):
+			elif(current_time - self.subsys_last_heard[subsys] > timeout_critical and self.subsys_timeout[subsys] == 'yes'):
+				ThrowUnresponsiveError(subsys)
+				self.subsys_timeout[subsys] = 'dead'
     
     #This method sends out an error message to warn the driver that a 
 	#subsystem is unresponsive if it hasn't sent a status update over 
