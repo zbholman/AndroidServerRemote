@@ -18,7 +18,7 @@ def millis():
     return int(round(time.time() * 1000))
 
 #set brightness to max 	
-scrollphat.set_brightness(5000)
+scrollphat.set_brightness(30)
 
 #the next few methods iterate through the rows and columns of the matrix
 #turning all the lights on then all off rapidly to simulate blinking
