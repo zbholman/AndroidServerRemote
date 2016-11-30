@@ -19,15 +19,15 @@ grovepi.ledBar_orientation(ledbar, 1)
 
 while True:
     try:
-        for i in range(3, 10):
+        for i in range(0, 9):
             grovepi.ledBar_setLed(ledbar, i, 1)
             time.sleep(.2)
 
-        for i in range(3, 10):
+        for i in range(0, 9):
             grovepi.ledBar_setLed(ledbar, i, 0)
             time.sleep(.2)
 
     except (KeyboardInterrupt, SystemExit):
-        for i in range(3, 10):
+        for i in range(0, 9):
             grovepi.ledBar_setLed(ledbar, i, 0)
         sys.exit(-1)
