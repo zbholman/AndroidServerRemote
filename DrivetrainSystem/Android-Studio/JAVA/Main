@@ -5,8 +5,6 @@
 #Author: Tapan Patel and Joseph Altomare
 #Version: 5
 
-
-
 package drivetrain.ist440.drivetrain;
 
 import android.bluetooth.BluetoothAdapter;
@@ -15,13 +13,16 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class DriveTrain extends AppCompatActivity {
     final int handlerState = 0;
     public String readMessage;
     Handler bluetoothHandler;
-    ImageButton imageButton_Up, imageButton_Down, imageButton_Left, imageButton_Right, imageButton_NoGear, imageButton_Stop, imageButton_Center;
+    ImageButton imageButton_Up, imageButton_Down, imageButton_Left, imageButton_Right, imageButton_Neutral, imageButton_Stop, imageButton_Center;
     Button btnDis, btn_Park, btn_Reverse, btn_Neutral, btn_Drive;
     TextView txt_Speed;
     //int mCounter = 50;
@@ -102,8 +103,8 @@ public class DriveTrain extends AppCompatActivity {
         btn_Reverse = (Button) findViewById(R.id.btn_Reverse);
         btn_Park = (Button) findViewById(R.id.btn_Park);
 
-        imageButton_NoGear = (ImageButton) findViewById(R.id.imageButton_NoGear);
         imageButton_Up = (ImageButton) findViewById(R.id.imageButton_Up);
+        imageButton_Neutral = (ImageButton) findViewById(R.id.imageButton_Neutral);
         imageButton_Down = (ImageButton) findViewById(R.id.imageButton_Down);
         imageButton_Left = (ImageButton) findViewById(R.id.imageButton_Left);
         imageButton_Right = (ImageButton) findViewById(R.id.imageButton_Right);
@@ -154,7 +155,7 @@ public class DriveTrain extends AppCompatActivity {
         imageButton_Center.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if (imageButton_Up.isPressed()) {
+                if (imageButton_Center.isPressed()) {
                     btn_Drive.setBackgroundColor(Color.GREEN);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
@@ -189,7 +190,7 @@ public class DriveTrain extends AppCompatActivity {
         imageButton_Right.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if (imageButton_Up.isPressed()) {
+                if (imageButton_Right.isPressed()) {
                     btn_Drive.setBackgroundColor(Color.GREEN);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
@@ -207,13 +208,13 @@ public class DriveTrain extends AppCompatActivity {
         imageButton_Left.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if (imageButton_Up.isPressed()) {
+                if (imageButton_Left.isPressed()) {
                     btn_Drive.setBackgroundColor(Color.GREEN);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
                     btn_Neutral.setClickable(false);
-                    btn_Neutral.setBackgroundColor(Color.WHITE);
                     btn_Park.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
                     btn_Park.setBackgroundColor(Color.WHITE);
 
                     mConnectedThread.write("a");    // Send the signal to car to move up
@@ -230,9 +231,9 @@ public class DriveTrain extends AppCompatActivity {
                     btn_Park.setBackgroundColor(Color.RED);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
-                    btn_Neutral.setClickable(false);
-                    btn_Neutral.setBackgroundColor(Color.WHITE);
+                    btn_Park.setClickable(false);
                     btn_Drive.setClickable(false);
+                    btn_Neutral.setBackgroundColor(Color.WHITE);
                     btn_Drive.setBackgroundColor(Color.WHITE);
 
                     mConnectedThread.write("p");    // Send the signal to car to move up
@@ -243,10 +244,10 @@ public class DriveTrain extends AppCompatActivity {
         });
 
 
-        imageButton_NoGear.setOnClickListener(new View.OnClickListener() {
+        imageButton_Neutral.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if (imageButton_NoGear.isPressed()) {
+                if (imageButton_Neutral.isPressed()) {
                     btn_Neutral.setBackgroundColor(Color.BLUE);
                     btn_Reverse.setBackgroundColor(Color.WHITE);
                     btn_Reverse.setClickable(false);
