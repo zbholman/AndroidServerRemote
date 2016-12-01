@@ -15,6 +15,7 @@ class CNS:
 		contentpayload = info.Return_Payload()
 		contentorigin = info.Return_Origin_ID()
 		if contentorigin == 'ems' :
+			#if contentpayload.split(":",1)[1] in contentpayload, this might be what you're looking for
 			if contentpayload == 'HC1':#open file object and check for Emmergency in PLd string
 				content = "Battery is running low"
 		return content
