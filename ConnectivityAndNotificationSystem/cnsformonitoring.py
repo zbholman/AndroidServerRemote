@@ -15,7 +15,6 @@ class CNS:
 		contentpayload = info.Return_Payload()
 		contentorigin = info.Return_Origin_ID()
 		if contentorigin == 'ems' :
-			#if contentpayload.split(":",1)[1] in contentpayload, this might be what you're looking for
 			if contentpayload == 'HC1':#open file object and check for Emmergency in PLd string
 				content = "Battery is running low"
 		return content
@@ -73,17 +72,3 @@ class CNS:
     def TranslateTimestamp(self):
         return time.ctime(self.timestamp)
 '''
-#This is how what I used to test this method
-# import json, smtplib, time
-# from TestingGrounds.Sumtim.Messager import Message
-# info = Message('2', 'ems', 3, '20', 'HC1: SOMETHING GOES HERE AND THE RETURNED CONTENT WILL FOLLOW.', timestamp=0.0, uuid='0', checksum='0')
-# communication = info.ConvertToJSON()
-#def receivedmessage(info):
-    #     contentpayload = info.Return_Payload()
-    #     contentorigin = info.Return_Origin_ID()
-    #     if contentorigin == 'ems':
-    #         if contentpayload.split(":",1)[1] in contentpayload:  # open file object and check for Emmergency in PLd string
-    #             content = contentpayload
-    #             print(content)
-    #     return content
-		
