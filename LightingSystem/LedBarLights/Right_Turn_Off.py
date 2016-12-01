@@ -1,7 +1,7 @@
 import grovepi
 
 # DI,DCKI,VCC,GND
-ledbar = 5
+ledbar = 6
 
 grovepi.ledBar_init(ledbar, 0)
 grovepi.pinMode(ledbar,"OUTPUT")
