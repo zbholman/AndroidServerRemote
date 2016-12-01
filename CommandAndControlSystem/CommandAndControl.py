@@ -5,12 +5,11 @@ Last Updated: 11/10/2016
 '''
 
 #Imports
-from queue import *
 import serial
 import pika
 import sys
-from threading import *
-
+import thread
+import queue
 #Handles the message queue
 def msgQueue():
         while True:
@@ -62,4 +61,4 @@ def main():
 if __name__ == "__main__":
         main()
 
-                                                                                                                                                      1,1           To                                                                                                                              
+                                                                                                                      
