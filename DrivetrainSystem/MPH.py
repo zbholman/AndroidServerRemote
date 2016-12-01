@@ -15,7 +15,7 @@ def writeNumber(value):
     bus.write_byte(address, value)
     return -1
 
-def redNumber():
+def readNumber():
     number = bus.read_byte(address)
     return number
 
