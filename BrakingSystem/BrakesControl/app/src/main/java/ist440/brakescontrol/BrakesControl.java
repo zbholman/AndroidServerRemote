@@ -1,5 +1,9 @@
 package ist440.brakescontrol;
 
+
+/**
+ * Created by QILI JIAN
+ */
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +36,7 @@ public class BrakesControl extends AppCompatActivity {
         //final String hostname = "192.168.1.105";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
-        final String scriptDir2 = "python /home/pi/PSUABFA16IST440/BrakingSystem/E-Brake Python";
+        //final String scriptDir2 = "python /home/pi/PSUABFA16IST440/BrakingSystem/E-Brake Python";
         final int port = 22;
 
 
@@ -182,7 +186,7 @@ public class BrakesControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir2 + "/disengage_e_brake";
+                        String command = scriptDir + "/disengage_e_brake";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -213,7 +217,7 @@ public class BrakesControl extends AppCompatActivity {
                 if (isChecked){
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir2 + "engage_e_brake.py";
+                        String command = scriptDir + "engage_e_brake.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -236,7 +240,7 @@ public class BrakesControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir2 + "disengage_e_brake";
+                        String command = scriptDir + "disengage_e_brake";
 
                         protected Void doInBackground(Integer... params) {
                             try {

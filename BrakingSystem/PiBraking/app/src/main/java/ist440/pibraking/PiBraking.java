@@ -28,10 +28,11 @@ import java.util.Properties;
 
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "192.168.1.105";
+        final String hostname = "130.203.86.100";
         //final String hostname = "192.168.1.105";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
+            final String scriptDir2= "python /home/pi/PSUABFA16IST440/BrakingSystem/E-Brake Python";
         final int port = 22;
 
 
@@ -57,9 +58,10 @@ import java.util.Properties;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                     if (isChecked){
+
                                         boolean success = true;
                                         new AsyncTask<Integer, Void, Void>() {
-                                            String command = scriptDir + "/brake.py";
+                                            String command = scriptDir + "/braking.py";
 
                                             protected Void doInBackground(Integer... params) {
                                                 try {
@@ -82,7 +84,7 @@ import java.util.Properties;
                                     } else {
                                         boolean success = true;
                                         new AsyncTask<Integer, Void, Void>() {
-                                            String command = scriptDir + "/sensorbrake.py";
+                                            String command = scriptDir + "/sensor_stop.py";
 
                                             protected Void doInBackground(Integer... params) {
                                                 try {
@@ -163,9 +165,9 @@ import java.util.Properties;
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked){
-                        boolean success = true;
+
                         new AsyncTask<Integer, Void, Void>() {
-                            String command = scriptDir + "/sensor_start.py";
+                            String command = scriptDir + "/sensor_stop.py";
 
                             protected Void doInBackground(Integer... params) {
                                 try {
@@ -181,7 +183,7 @@ import java.util.Properties;
                     } else {
                         boolean success = true;
                         new AsyncTask<Integer, Void, Void>() {
-                            String command = scriptDir + "/sensor_stop.py";
+                            String command = scriptDir2 + "/disengage_e_brake.py";
 
                             protected Void doInBackground(Integer... params) {
                                 try {
@@ -212,7 +214,7 @@ import java.util.Properties;
                     if (isChecked){
                         boolean success = true;
                         new AsyncTask<Integer, Void, Void>() {
-                            String command = scriptDir + "/E-Brake Python/engage_e_brake.py";
+                            String command = scriptDir2 + "engage_e_brake.py";
 
                             protected Void doInBackground(Integer... params) {
                                 try {
@@ -235,7 +237,7 @@ import java.util.Properties;
                     } else {
                         boolean success = true;
                         new AsyncTask<Integer, Void, Void>() {
-                            String command = scriptDir + "/E-Brake Python/disengage_e_brake";
+                            String command = scriptDir2 + "disengage_e_brake";
 
                             protected Void doInBackground(Integer... params) {
                                 try {
