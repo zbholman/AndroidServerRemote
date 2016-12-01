@@ -13,12 +13,12 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,7 +71,10 @@ public class ClimateControl extends AppCompatActivity {
 
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
+    private BluetoothAdapter btAdapter1 = null;
+    private BluetoothSocket btSocket1 = null;
     private ConnectedThread mConnectedThread;
+    private ConnectedThread mConnectedThread1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,8 +97,9 @@ public class ClimateControl extends AppCompatActivity {
 
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
-        checkBTState();                                     // check the status of Bluetooth
-
+        btAdapter1 = BluetoothAdapter.getDefaultAdapter();
+        checkBTState1();                                     // check the status of Bluetooth
+        checkBTState2();
 
         btnDis.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -128,10 +132,10 @@ public class ClimateControl extends AppCompatActivity {
                     txt_Temp.setTextColor(Color.RED);
                     // AC Pin goes ON Relay
 
-                    /*
-                    mConnectedThread.write( "acON" );    // Send "acON" via Bluetooth
+
+                    mConnectedThread.write("acON");    // Send "acON" via Bluetooth
                     Toast.makeText( getBaseContext(), "AC Turned ON", Toast.LENGTH_SHORT ).show();
-                    */
+
 
                 } else if (Integer.toString(mCounter).equals(readMessage)) {
                     Toast.makeText(getBaseContext(), "Temperature is equal", Toast.LENGTH_SHORT).show();
@@ -168,10 +172,10 @@ public class ClimateControl extends AppCompatActivity {
                     txt_Temp.setTextColor(Color.BLUE);
 
                     // HEATING PAD Pin goes ON Relay
-                     /*
-                    mConnectedThread.write( "heatON" );    // Send "heatON" via Bluetooth
+
+                    mConnectedThread.write("heatON");    // Send "heatON" via Bluetooth
                     Toast.makeText( getBaseContext(), "Heating Turned ON", Toast.LENGTH_SHORT ).show();
-                    */
+
 
                 }
                 if (imageButtonDec.isPressed() && mCounter == 65) {
@@ -191,15 +195,15 @@ public class ClimateControl extends AppCompatActivity {
                                          boolean isChecked) {
 
                 if(isChecked){
-                     /*
-                    mConnectedThread.write( "acON" );    // Send "acON" via Bluetooth
-                    */
+
+                    mConnectedThread.write("acON");    // Send "acON" via Bluetooth
+
 
                     Toast.makeText( getBaseContext(), "AC ON", Toast.LENGTH_SHORT ).show();
                 }else{
-                     /*
-                    mConnectedThread.write( "acOFF" );    // Send "acOFF" via Bluetooth
-                    */
+
+                    mConnectedThread.write("acOFF");    // Send "acOFF" via Bluetooth
+
                     Toast.makeText( getBaseContext(), "AC OFF", Toast.LENGTH_SHORT ).show();
                 }
 
@@ -213,15 +217,14 @@ public class ClimateControl extends AppCompatActivity {
                                          boolean isChecked) {
 
                 if(isChecked){
-                     /*
-                    mConnectedThread.write( "heatON" );    // Send "heatON" via Bluetooth
-                    */
+
+                    mConnectedThread.write("heatON");    // Send "heatON" via Bluetoot
 
                     Toast.makeText( getBaseContext(), "Heating ON", Toast.LENGTH_SHORT ).show();
                 }else{
-                     /*
-                    mConnectedThread.write( "heatOFF" );    // Send "heatOFF" via Bluetooth
-                    */
+
+                    mConnectedThread.write("heatOFF");    // Send "heatOFF" via Bluetooth
+
                     Toast.makeText( getBaseContext(), "Heating OFF", Toast.LENGTH_SHORT ).show();
                 }
 
@@ -232,10 +235,11 @@ public class ClimateControl extends AppCompatActivity {
     }
 
     private void Disconnect() {
-        if (btSocket != null) //If the btSocket is busy
+        if (btSocket != null && btSocket1 != null) //If the btSocket is busy
         {
             try {
                 btSocket.close(); //close connection
+                btSocket1.close(); //close connection
             } catch (IOException e) {
                 Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
             }
@@ -244,7 +248,7 @@ public class ClimateControl extends AppCompatActivity {
 
     }
 
-
+    // for all other controller ie AC , Heat
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         int port = 1;
@@ -253,6 +257,17 @@ public class ClimateControl extends AppCompatActivity {
 
         //creates secure outgoing connecetion with BT device using Port Number
         return btSocket;
+    }
+
+    //for Temperature
+    private BluetoothSocket createBluetoothSocket1(BluetoothDevice device) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        int port = 2;
+        Method m = device.getClass().getMethod("createRfcommSocket", int.class);
+        btSocket1 = (BluetoothSocket) m.invoke(device, port);
+
+        //creates secure outgoing connecetion with BT device using Port Number
+        return btSocket1;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -269,8 +284,10 @@ public class ClimateControl extends AppCompatActivity {
         //create device and set the MAC address
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
 
+
         try {
             btSocket = createBluetoothSocket(device);
+            btSocket1 = createBluetoothSocket1(device);
         } catch (IOException e) {
             Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_LONG).show();
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
@@ -279,36 +296,53 @@ public class ClimateControl extends AppCompatActivity {
         // Establish the Bluetooth socket connection.
         try {
             btSocket.connect();
+            btSocket1.connect();
         } catch (IOException e) {
             try {
                 btSocket.close();
+                btSocket1.close();
             } catch (IOException e2) {
                 //insert code to deal with this
             }
         }
-        mConnectedThread = new ConnectedThread(btSocket);
+        mConnectedThread = new ConnectedThread(btSocket); // for controllers
+        mConnectedThread1 = new ConnectedThread(btSocket1); //for temperature
         mConnectedThread.start();
+        mConnectedThread1.start();
         mConnectedThread.write("x");
     }
-
     @Override
     public void onPause() {
         super.onPause();
         try {
             //Don't leave Bluetooth sockets open when leaving activity
             btSocket.close();
+            btSocket1.close();
         } catch (IOException e2) {
             //insert code to deal with this
         }
     }
 
     //Checks that the Android device Bluetooth is available and prompts to be turned on if off
-    private void checkBTState() {
+    private void checkBTState1() {
 
         if (btAdapter == null) {
             Toast.makeText(getBaseContext(), "Device does not support bluetooth", Toast.LENGTH_LONG).show();
         } else {
             if (btAdapter.isEnabled()) {
+            } else {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, 1);
+            }
+        }
+    }
+
+    private void checkBTState2() {
+
+        if (btAdapter1 == null) {
+            Toast.makeText(getBaseContext(), "Device does not support bluetooth", Toast.LENGTH_LONG).show();
+        } else {
+            if (btAdapter1.isEnabled()) {
             } else {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, 1);
