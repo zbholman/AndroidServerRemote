@@ -2,7 +2,7 @@ import time
 import grovepi
 
 # DI,DCKI,VCC,GND
-ledbar = 6
+ledbar = 5
 
 grovepi.ledBar_init(ledbar, 0)
 grovepi.pinMode(ledbar,"OUTPUT")
