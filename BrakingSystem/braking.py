@@ -22,10 +22,11 @@ try:
                 timePassed = now - loopStart#current time minus time when program started
                 timePassed = int(timePassed)#makes timePassed into integer
                 p.ChangeDutyCycle(13.5)#engage brake
-        if timePassed >= 2:
+        if timePassed = 2:
                 p.ChangeDutyCycle(9)#disengage brakes after 2 seconds
-                p.stop()#stops power to servo
-                GPIO.cleanup()
+                if timePassed > 2:
+                        p.stop()#stops power to servo
+                        GPIO.cleanup()
 
 except KeyboardInterrupt:
         GPIO.cleanup()
