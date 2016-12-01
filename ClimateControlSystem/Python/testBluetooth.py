@@ -7,7 +7,7 @@ import time
  
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(23,GPIO.OUT)
+GPIO.setup(24,GPIO.OUT)
 
 os.system('modprobe w1-gpio') 
 os.system('modprobe w1-therm')
@@ -34,18 +34,32 @@ def read_temp():
     if equals_pos != -1:
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0 #Celsius temperature 
-        temp_f = temp_c * 9.0 / 5.0 + 32.0 #Fahrenheit temperature
-        return temp_f #Prints out temperature
+        temp_f = temp_c * 9.0 / 5.0 + 32.0 #Fahrenheit temp
+        return temp_f  #Prints out temperature
 
 server_sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM )
-server_sock.bind(("",1))
-server_sock.listen(1)
+server_sock.bind(("",2))
+server_sock.listen(2)
 
 port = server_sock.getsockname()[1]
 
 print "Waiting for connection on RFCOMM channel %d" % port 
 client_sock, client_info = server_sock.accept()
 print "Accepted connection from ", client_info
+
+while True:
+	#data=client_sock.recv(1024)
+	client_sock.send(str(int(read_temp())))
+	print ("sending %s" % read_temp())
+	
+	'''
+	if data == "0":
+		GPIO.output(24,GPIO.HIGH)
+		print("AC ON")
+	elif data == "1":
+		GPIO.output(24,GPIO.LOW)
+		print("AC OFF")
+	
 
 loopStart = time.time()
 timePassed = 0.0
@@ -76,6 +90,6 @@ while timePassed < 100 :
 	timePassed2=0.0	
 	#client_sock.send(str(read_temp()))
 	#print ("sending %s " % data)
- 	
+''' 	
 client_sock.close()
 server_sock.close()

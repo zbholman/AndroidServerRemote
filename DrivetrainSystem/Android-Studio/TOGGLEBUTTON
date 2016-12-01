@@ -1,3 +1,12 @@
+#IST 440 Penn State Abington
+#Professor: Joseph Oakes
+#Fall 2016
+#DriveTrain
+#Author: Tapan Patel and Joseph Altomare
+#Version: 6
+
+
+
 package com.example.tapanapatel.drivetrainfinal;
 
 import android.os.Bundle;
@@ -11,290 +20,131 @@ import android.view.MenuItem;
 import android.widget.ToggleButton;
 import org.json.JSONObject;
 import org.json.JSONArray;
-
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-
 import java.util.Properties;
+import android.widget.ImageButton;
 import android.widget.CompoundButton;
 
-import static android.widget.CompoundButton.OnCheckedChangeListener;
-
-
 public class MainActivity extends AppCompatActivity {
-    //@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        final String username = "pi";
-        final String password = "raspberry";
-        final String hostname = "104.39.123.135";
-
-
-        final String driveDir  = "python/home/pi/Desktop/Drive";
-        final int port = 22;
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // final TextView text1 = (TextView) findViewById(R.id.TextView1);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                JSONObject jsonObj = new JSONObject();
-                JSONArray jsonArray = new JSONArray();
-                try {
-                    jsonObj.put("id", 12345);
-                    jsonObj.put("name", "Drivetrain System");
-
-                    jsonArray.put("system1");
-                    jsonArray.put("system2");
-
-                    jsonObj.put("sys", jsonArray);
-
-                    //  text1.setText(jsonObj.toString());
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-
-                }
-
-            }
-
-        });
         ToggleButton tg1, tg2, tg3, tg4;
+
         tg1 = (ToggleButton) findViewById(R.id.toggleButton1);
         tg2 = (ToggleButton) findViewById(R.id.toggleButton2);
         tg3 = (ToggleButton) findViewById(R.id.toggleButton3);
         tg4 = (ToggleButton) findViewById(R.id.toggleButton4);
-    }
 
-    {
-        // Create toggle for changing
-        final ToggleButton ToggleButtonPARK = (ToggleButton) findViewById(R.id.toggleButton1);
-        final ToggleButton ToggleButtonNEUTRAL = (ToggleButton) findViewById(R.id.toggleButton2);
-        final ToggleButton ToggleButtonDRIVE = (ToggleButton) findViewById(R.id.toggleButton3);
-        final ToggleButton ToggleButtonREVERSE = (ToggleButton) findViewById(R.id.toggleButton4);
 
-        ToggleButtonDRIVE.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-            // Function that gets called
-          //  @Override
+        // Create Toggle for P, R ,N, D
+        final ToggleButton ToggleP = (ToggleButton) findViewById(R.id.toggleButton1);
+        final ToggleButton ToggleR = (ToggleButton) findViewById(R.id.toggleButton2);
+        final ToggleButton ToggleN = (ToggleButton) findViewById(R.id.toggleButton3);
+        final ToggleButton ToggleD = (ToggleButton) findViewById(R.id.toggleButton4);
+
+        ToggleD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            // Function that gets called toggled
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // If the toggle is switched to "ON" run the following
-                // turn on Park
+                // Drive
                 if (isChecked) {
                     boolean success = true;
 
                     // Turn off other lights to avoid conflict
-                    ToggleButtonNEUTRAL.setChecked(false);
-                    ToggleButtonREVERSE.setChecked(false);
-                    ToggleButtonPARK.setChecked(false);
+                    ToggleN.setChecked(false);
+                    ToggleP.setChecked(false);
+                    ToggleR.setChecked(false);
 
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
-
-
-                    // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
+
 
                 }
-
-
             }
-
-
         });
 
-        ToggleButtonNEUTRAL.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        ToggleR.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-            // Function that gets called
-            //  @Override
+            // Function that gets called toggled
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // If the toggle is switched to "ON" run the following
-                // turn on Park
+                // Reverse
                 if (isChecked) {
                     boolean success = true;
 
                     // Turn off other lights to avoid conflict
-                    ToggleButtonDRIVE.setChecked(false);
-                    ToggleButtonREVERSE.setChecked(false);
-                    ToggleButtonPARK.setChecked(false);
+                    ToggleN.setChecked(false);
+                    ToggleP.setChecked(false);
+                    ToggleD.setChecked(false);
 
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
-
-
-                    // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
+
 
                 }
-
-
             }
-
-
         });
 
+        ToggleN.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-        ToggleButtonREVERSE.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-            // Function that gets called
-            //  @Override
+            // Function that gets called toggled
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // If the toggle is switched to "ON" run the following
-                // turn on Park
+                // Neutral
                 if (isChecked) {
                     boolean success = true;
 
                     // Turn off other lights to avoid conflict
-                    ToggleButtonDRIVE.setChecked(false);
-                    ToggleButtonNEUTRAL.setChecked(false);
-                    ToggleButtonPARK.setChecked(false);
+                    ToggleD.setChecked(false);
+                    ToggleP.setChecked(false);
+                    ToggleR.setChecked(false);
 
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
-
-
-                    // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
+
 
                 }
-
-
             }
-
-
         });
 
-        ToggleButtonPARK.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        ToggleP.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-            // Function that gets called
-            //  @Override
+            // Function that gets called toggled
+            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // If the toggle is switched to "ON" run the following
-                // turn on Park
+                // Park
                 if (isChecked) {
                     boolean success = true;
 
                     // Turn off other lights to avoid conflict
-                    ToggleButtonDRIVE.setChecked(false);
-                    ToggleButtonREVERSE.setChecked(false);
-                    ToggleButtonNEUTRAL.setChecked(false);
+                    ToggleN.setChecked(false);
+                    ToggleD.setChecked(false);
+                    ToggleR.setChecked(false);
 
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
-
-
-                    // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
-                    String command = driveDir + "Driveshift.py";
-                    backgroundTask(username, password, hostname, command, port);
+
 
                 }
-
-
             }
-
-
         });
 
+        Object ib1 = (ImageButton) findViewById(R.id.ImageButton1);
+        Object ib2 = (ImageButton) findViewById(R.id.ImageButton2);
+        Object ib3 = (ImageButton) findViewById(R.id.ImageButton3);
+        Object ib4 = (ImageButton) findViewById(R.id.ImageButton4);
 
-    }
+        // Create Toggle for up, down ,right, left
+        final ImageButton Imageup = (ImageButton) findViewById(R.id.ImageButton1);
+        final ImageButton Imagedown =(ImageButton) findViewById(R.id.ImageButton2);
+        final ImageButton Imageleft = (ImageButton) findViewById(R.id.ImageButton3);
+        final ImageButton Imageright = (ImageButton) findViewById(R.id.ImageButton4);
 
-
-    public void runPiCommand(String username, String password, String hostname, String command, int port) throws JSchException {
-        // New Jsch object for connecting
-        JSch jsch = new JSch();
-
-
-        // Try to create a session using username, hostname, and port
-        Session session = null;
-        try {
-            session = jsch.getSession(username, hostname, port);
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-
-
-        // Set the password for the session (JAVA)
-        assert session != null;
-        session.setPassword(password);
-
-
-        // Avoid asking for key confirmation
-        Properties prop = new Properties();
-        prop.put("StrictHostKeyChecking", "no");
-        session.setConfig(prop);
-
-
-        // Attempt to connect
-        try {
-            session.connect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-
-
-        // SSH Channel
-        ChannelExec channelssh = null;
-        try {
-            channelssh = (ChannelExec)
-                    session.openChannel("exec");
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        // Use this if there is any need for output to return to android (JAVA)
-        //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //
-        //        channelssh.setOutputStream(baos);
-
-
-        // Execute command
-        assert channelssh != null;
-        channelssh.setCommand(command);
-        try {
-            channelssh.connect();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        channelssh.disconnect();
-
-    }
-    //@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    //@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }

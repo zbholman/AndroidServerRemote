@@ -37,7 +37,7 @@ def car_alarm():
   return logo
     
 images = [car_alarm]
-s.set_pixels(images[count % len(images)]())
+s.set_pixels(images[ 0 ]())
 
 #Sets initial orientations
 curOri = s.get_orientation()
@@ -51,33 +51,92 @@ while True:
     newPitch = o["pitch"]
     newRoll = o["roll"]
     newYaw = o["yaw"]
-    
+    ii = 0 
     tempPitch = 0
     tempRoll = 0
     tempYaw = 0
-    if(abs(curPitch - newPitch) > 5):
+    if(abs(curPitch - newPitch) > 3):
         if(curPitch > 330 and newPitch < 30):
             tempPitch = newPitch + 360
-            if(abs(tempPitch - curPitch) > 5):
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+            if(abs(tempPitch - curPitch) > 3):
+                print("before subP")
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                print("after subP")
+                ii = 1
                 break
-        elsif(curPitch < 30 and newPitch > 330):
+        elif(curPitch < 30 and newPitch > 330):
             tempPitch = curPitch + 360
-            if(abs(tempPitch - newPitch) > 5):
-                subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+            if(abs(tempPitch - newPitch) > 3):
+                print("before subP")
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                print("after subP")
+                ii = 1
                 break
-        elsif(abs(curYaw - newYaw) > 5):
-            subprocess.Popen("usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/set_alarmOff.py", shell=True)
+        elif(abs(curPitch - newPitch) > 3):
+            print("before subP")
+            subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+            print("after subP")
+            ii = 1
             break
-        else:
+        #else:
             # Continue if the inner loop wasn't broken.
-            sleep (0.03)
-            continue
-    else:
-        # Continue if the inner loop wasn't broken.
-        sleep (0.03)
+        #    sleep (0.03)
+        #    continue
+        
+    if(abs(curRoll - newRoll) > 3):
+        if(curRoll > 330 and newRoll < 30):
+            tempRoll = newRoll + 360
+            if(abs(tempRoll - curRoll) > 3):
+                print("before subP")
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                print("after subP")
+                ii = 1
+                break
+        elif(curRoll < 30 and newRoll > 330):
+            tempRoll = curRoll + 360
+            if(abs(tempRoll - newRoll) > 3):
+                print("before subP")
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                print("after subP")
+                ii = 1
+                break
+        elif(abs(curRoll - newRoll) > 3):
+            print("before subP")
+            subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+            print("after subP")
+            ii = 1
+            break
+    
+    if(abs(curYaw - newYaw) > 3):
+        if(curYaw > 330 and newYaw < 30):
+            tempYaw = newYaw + 360
+            if(abs(tempYaw - curYaw) > 3):
+                print("before subP")
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                print("after subP")
+                ii = 1
+                break
+        elif(curYaw < 30 and newYaw > 330):
+            tempYaw = curYaw + 360
+            if(abs(tempYaw - newYaw) > 3):
+                print("before subP")
+                subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+                print("after subP")
+                ii = 1
+                break
+        elif(abs(curYaw - newYaw) > 3):
+            print("before subP")
+            subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/car_alarmOff.py", shell=True)
+            print("after subP")
+            ii = 1
+            break
+            
+    
+    # Continue if the inner loop wasn't broken.
+    if(ii == 0):
+        time.sleep (0.03)
         continue
-    # Inner loop was broken, break the outer.
-    break
+    else: # Inner loop was broken, break the outer.
+        break
 
     

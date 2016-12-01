@@ -31,11 +31,12 @@ public class LightsControl extends AppCompatActivity {
         // initialize variables for connecting to pi
         final String username = "pi";
         final String password = "raspberry";
-        final String hostname = "104.39.121.91"; // Pi IP on PSU network
+        final String hostname = "192.168.1.1"; // Pi IP on Ad Hoc Network
 //        final String hostname = "192.168.1.251"; // Pi IP on Brian's home network
 
-        final String lightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/PythonLights/Scroll_phat/";
-        final String ledBarLightsDir = "python /home/pi/Team04/PSUABFA16IST440/LightingSystem/LedBarLights/";
+        final String scriptsDir = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/";
+        final String lightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/Scroll_phat/";
+        // final String ledBarLightsDir = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/";
         final int port = 22;
 
         // Create switch for lights
@@ -44,6 +45,7 @@ public class LightsControl extends AppCompatActivity {
         final Switch switchLeftTurn = (Switch) findViewById(R.id.switchLeftTurn);
         final Switch switchRightTurn = (Switch) findViewById(R.id.switchRightTurn);
         final Switch switchHazards = (Switch) findViewById(R.id.switchHazardLight);
+        final Switch switchAutoLights = (Switch) findViewById(R.id.switchAutoLights);
 
         // Create icon images
         final ImageView iconHighBeams = (ImageView) findViewById(R.id.iconHighBeams);
@@ -51,13 +53,15 @@ public class LightsControl extends AppCompatActivity {
         final ImageView iconLeftTurn = (ImageView) findViewById(R.id.iconLeftTurn);
         final ImageView iconRightTurn = (ImageView) findViewById(R.id.iconRightTurn);
         final ImageView iconHazards = (ImageView) findViewById(R.id.iconHazardLight);
+        final ImageView iconAutoLights = (ImageView) findViewById(R.id.iconAutoLights);
 
-        // Set all icons to invisibule
+        // Set all icons to invisible
         iconHazards.setVisibility(View.INVISIBLE);
         iconHighBeams.setVisibility(View.INVISIBLE);
         iconHeadLights.setVisibility(View.INVISIBLE);
         iconLeftTurn.setVisibility(View.INVISIBLE);
         iconRightTurn.setVisibility(View.INVISIBLE);
+        iconAutoLights.setVisibility(View.INVISIBLE);
 
         // Set default state to false (off)
         switchHighBeams.setChecked(false);
@@ -65,13 +69,9 @@ public class LightsControl extends AppCompatActivity {
         switchLeftTurn.setChecked(false);
         switchRightTurn.setChecked(false);
         switchHazards.setChecked(false);
+        switchAutoLights.setChecked(false);
 
-        // Create animation for blinking icons
-        //final Animation animation = new AlphaAnimation(1, 0);
-        //animation.setDuration(750);
-        //animation.setInterpolator(new LinearInterpolator());
-        //animation.setRepeatCount(Animation.INFINITE);
-        //animation.setRepeatMode(Animation.REVERSE);
+        // Variables for storing light states
 
         switchHighBeams.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -82,14 +82,14 @@ public class LightsControl extends AppCompatActivity {
                 // turn on high beams
                 if (isChecked) {
                     boolean success = true;
-
                     // Turn off other lights to avoid conflict
+                    switchAutoLights.setChecked(false);
                     switchHeadLights.setChecked(false);
                     switchHazards.setChecked(false);
                     switchLeftTurn.setChecked(false);
                     switchRightTurn.setChecked(false);
 
-                    String command = lightsDir + "high_beams.py";
+                    String command = lightsDir + "High_Beams.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
@@ -98,11 +98,45 @@ public class LightsControl extends AppCompatActivity {
                 // If the switch it turned off, turn off the leds
                 } else {
                     boolean success = true;
-                    String command = lightsDir + "turn-leds-off.py";
+                    String command = lightsDir + "Leds_Off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
                     if (success) {iconHighBeams.setVisibility(View.INVISIBLE);}
+                }
+            }
+        });
+
+        switchAutoLights.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            // Function that gets called when switch is toggled
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // If the toggle is switched to "ON" run the following
+                // turn on high beams
+                if (isChecked) {
+                    boolean success = true;
+                    // Turn off other lights to avoid conflict
+                    switchHighBeams.setChecked(false);
+                    switchHeadLights.setChecked(false);
+                    switchHazards.setChecked(false);
+                    switchLeftTurn.setChecked(false);
+                    switchRightTurn.setChecked(false);
+
+                    String command = lightsDir + "Auto_Lights_On.py";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If the light turns on, set icon to visible
+                    if (success) {iconAutoLights.setVisibility(View.VISIBLE);}
+
+                    // If the switch it turned off, turn off the leds
+                } else {
+                    boolean success = true;
+                    String command = "/home/pi/PSUABFA16IST440/LightingSystem/Scroll_phat/Auto_Lights_Off.sh";
+                    backgroundTask(username, password, hostname, command, port);
+
+                    // If light turns off, set icon to invisible
+                    if (success) {iconAutoLights.setVisibility(View.INVISIBLE);}
                 }
             }
         });
@@ -124,7 +158,7 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String command = lightsDir + "running_lights.py";
+                    String command = lightsDir + "Running_Lights.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
@@ -133,7 +167,7 @@ public class LightsControl extends AppCompatActivity {
                     boolean success = true;
 
                     // Turn LEDs off if head light switch is turned off
-                    String command = lightsDir + "turn-leds-off.py";
+                    String command = lightsDir + "Leds_Off.py";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -158,10 +192,8 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String frontLights = lightsDir + "turn_signal_refactored.py";
-                    String backLights = ledBarLightsDir + "D5_R_Turn.py";
-                    backgroundTask(username, password, hostname, frontLights, port);
-                    backgroundTask(username, password, hostname, backLights, port);
+                    String command = scriptsDir + "Left_Turn_On.sh";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking left turn icon
                     if (success) {
@@ -173,12 +205,7 @@ public class LightsControl extends AppCompatActivity {
                     //}
                 } else {
                     boolean success = true;
-                    final String command = lightsDir + "turn-leds-off.py";
-                    String endFrontLights = "kill $(ps aux | grep '[t]urn_signal_refactored.py' | awk '{print $2}')";
-                    String endBackLights = "kill $(ps aux | grep '[D]5_R_Turn.py' | awk '{print $2}')";
-
-                    backgroundTask(username, password, hostname, endFrontLights, port);
-                    backgroundTask(username, password, hostname, endBackLights, port);
+                    String command = scriptsDir + "Left_Turn_Off.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -205,11 +232,8 @@ public class LightsControl extends AppCompatActivity {
                     switchLeftTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String frontLights = lightsDir + "turn_signal_refactored_2.py";
-                    String backLights = ledBarLightsDir + "D5_R_Turn.py";
-
-                    backgroundTask(username, password, hostname, frontLights, port);
-                    backgroundTask(username, password, hostname, backLights, port);
+                    String command = scriptsDir + "Right_Turn_On.sh";
+                    backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, start blinking right turn icon
                     if (success) {
@@ -219,12 +243,7 @@ public class LightsControl extends AppCompatActivity {
 
                 } else {
                     boolean success = true;
-                    final String endFrontLights = "kill $(ps aux | grep '[t]urn_signal_refactored_2.py' | awk '{print $2}')";
-                    final String endBackLights = "kill $(ps aux | grep '[D]5_R_Turn.py' | awk '{print $2}')";
-                    final String command = lightsDir + "turn-leds-off.py";
-
-                    backgroundTask(username, password, hostname, endFrontLights, port);
-                    backgroundTask(username, password, hostname, endBackLights, port);
+                    String command = scriptsDir + "Right_Turn_Off.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, set icon to invisible
@@ -249,24 +268,19 @@ public class LightsControl extends AppCompatActivity {
                     switchRightTurn.setChecked(false);
                     switchHighBeams.setChecked(false);
 
-                    String command = lightsDir + "hazard_lights.py";
+                    String command = scriptsDir + "Hazards_On.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If the light turns on, set icon to visible
                     if (success) {iconHazards.setVisibility(View.VISIBLE);}
                 } else {
                     boolean success = true;
-                    String endCommand = "kill $(ps aux | grep '[h]azard_lights.py' | awk '{print $2}')";
-
-                    backgroundTask(username, password, hostname, endCommand, port);
-                    final String command = lightsDir + "turn-leds-off.py";
+                    String command = scriptsDir + "Hazards_Off.sh";
                     backgroundTask(username, password, hostname, command, port);
 
                     // If light turns off, start blinking hazards icon
                     if (success) {
                         iconHazards.setVisibility(View.INVISIBLE);
-
-                        //iconHazards.startAnimation(animation);
                     }
                 }
             }

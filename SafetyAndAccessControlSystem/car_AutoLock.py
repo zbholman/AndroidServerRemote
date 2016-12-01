@@ -4,13 +4,13 @@
 # Purpose: Detect car speed with accelerometer from Sense HAT and display door lock/unlock functions based on speed
 
 from sense_hat import SenseHat
-from doors_locked.py import doors_lock
-from doors_unlock.py import doors_unlock
-import pygame #Python module
+#import pygame
+import time
+import subproccess
 
 #Load door locking sound
-pygame.mixer.init()
-pygame.mixer.music.load("/home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/lockcar.wav")
+#pygame.mixer.init()
+#pygame.mixer.music.load("/home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/lockcar.wav")
 
 #Get car speed from accelerometer
 sense = SenseHat()
@@ -21,8 +21,8 @@ print(sense.accelerometer)
 
 #Call display functions of locking/unlocking car if speed is over or under 5
 if sense.accelerometer >= 5:
-	door_lock()
-	pygame.mixer.music.play()
+	subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/Doors_locked.py", shell=True)
+	#pygame.mixer.music.play()
 	time.sleep(5)
 elif sense.accelerometer < 5:
-	doors_unlock()
+	subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/Doors_unlock.py", shell=True)

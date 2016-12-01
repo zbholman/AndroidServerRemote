@@ -1,100 +1,94 @@
-#! /usr/bin/env python3
-import os
+import bluetooth
 import RPi.GPIO as GPIO
 import time
-import datetime
-import sys
-from temp import read_temp
-# 5 * * * * sudo python /home/pi/fan.py
-# A crontab will run every hour and check the temp. If the temp is > 49 the script will start the fan
-# until the temperature goes down to 28. When it does, the script will end, shutting down the fan as well.
-# If the script executes again while a previous script is running, the latter will exit
-# ... meaning the pi is in hell, and will never get bellow FAN_END value :P
+import os
+import glob
+import time
 
-# Identify which pin controls the relay
-FAN_PIN = 23  # the yellow box ex: GPIO18
-# Temperature check. Start fan if temp > 49C
-FAN_START = 25
-# Temperature check. Shut down under 28C
-FAN_END = 26
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(24,GPIO.OUT)
 
-# Get what action. If you manually turning on/off the fan
-action = sys.argv.pop()
+os.system('modprobe w1-gpio')
+os.system('modprobe w1-therm')
 
+#Gets the ID of temperature sensor
+base_dir = '/sys/bus/w1/devices/'
+device_folder = glob.glob(base_dir + '28*')[0]
+device_file = device_folder + '/w1_slave'
 
-def GPIOsetup():
-	GPIO.setwarnings(False) 
-	GPIO.setmode(GPIO.BCM)
-	GPIO.setup(FAN_PIN, GPIO.OUT)
-	
-def fanON():
-	GPIOsetup()
-	GPIO.output(FAN_PIN, 0)	#fan on
-	return()
-def fanOFF():
-	GPIOsetup()
-	GPIO.output(FAN_PIN, 1)	#fan off
-	return()
-	
-def get_temp_from_system():
-	print(read_temp)
-	return read_temp()
-#	res = os.popen('vcgencmd measure_temp').readline()
-#	return(res.replace("temp=","").replace("'C\n",""))
+#Opens folder for temperature sensor
+def read_temp_raw():
+    f = open(device_file, 'r')
+    lines = f.readlines()
+    f.close()
+    return lines
 
-def check_fan(pin):
-	GPIOsetup()
-	return GPIO.input(pin)
+#Reads the temperature coming from sensor
+def read_temp():
+    lines = read_temp_raw()
+    while lines[0].strip()[-3:] != 'YES':
+        time.sleep(0.2)
+        lines = read_temp_raw()
+    equals_pos = lines[1].find('t=')
+    if equals_pos != -1:
+        temp_string = lines[1][equals_pos+2:]
+        temp_c = float(temp_string) / 1000.0 #Celsius temperature 
+        temp_f = temp_c * 9.0 / 5.0 + 32.0 #Fahrenheit temp
+server_sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM )
+server_sock.bind(("",1))
+server_sock.listen(1)
 
-def run(pin):
-	current_date = datetime.datetime.now()
-	temp = get_temp_from_system()
-	if float(temp) >= FAN_START:
-		print(temp+' @ '+str(current_date))
-		if check_fan(pin) == 1:
-			print('Fan is Off...Starting Fan')
-			fanON()
-		else:
-			time.sleep(5) # Remove, if you want real-time checking
-			print('Fan is ON')
-	elif float(temp) <= FAN_END:
-		print(temp+' @ '+str(current_date))
-		if check_fan(pin) == 0:
-			print('Fan is on...Shuting it Down')
-			fanOFF()
-			GPIO.cleanup()
-			return 1 # exit script. The pi has cooled down
-		else:
-			time.sleep(5) # Remove, if you want real-time checking
-			print('Fan is OFF')
-	else:
-			pass # while the script is passing through here, there will be no output on screen
-			
-			
-if action == "on" :
-   print "Turning fan on"
-   fanON()
-elif action == "off" :
-   print "Turning fan off"
-   fanOFF()
+port = server_sock.getsockname()[1]
 
-# first check if script is already running
-if check_fan(FAN_PIN) == 0:
-	print('Fan is on, script must be running from another instance...')
-	print (read_temp)
-else:
-	temp = get_temp_from_system()
-	if float(temp) < FAN_START:
-		print('Pi is operating under normal temperatures.')
-	else:
-		try:
-			while(True):
-				tmp = run(FAN_PIN)
-				if tmp == 1: # value returned from line 60
-					break
-		except KeyboardInterrupt:
-			fanOFF()
-			GPIO.cleanup()
-		finally:
-			fanOFF()
-			GPIO.cleanup()
+print "Waiting for connection on RFCOMM channel %d" % port
+client_sock, client_info = server_sock.accept()
+print "Accepted connection from ", client_info
+
+while True:
+        data=client_sock.recv(1024)
+        #client_sock.send(str(int(read_temp())))
+        #print ("sending %s" % read_temp())
+
+        
+        if data == "0":
+               # GPIO.output(24,GPIO.HIGH)
+                print("AC ON")
+        elif data == "1":
+               # GPIO.output(24,GPIO.LOW)
+                print("AC OFF")
+        
+'''
+loopStart = time.time()
+timePassed = 0.0
+timePassed1= 0.0
+timePassed2= 0.0
+#client_sock.send(str(read_temp()))
+#print ("sending %s" % read_temp())
+while timePassed < 100 :
+        loopStart1= time.time()
+        while timePassed1 <4:
+client_sock.send(str(read_temp()))                      
+                print ("sending %s" % read_temp())
+                now=time.time()
+                timePassed1 = now - loopStart1
+        
+        loopStart2= time.time()
+        while timePassed2 <4:
+                now1= time.time()
+                timePassed2 = now1 - loopStart2
+                if client_sock.recv(1024) == "0":
+                        print ("LED OFF")
+                        GPIO.output(23,GPIO.HIGH)
+                elif client_sock.recv(1024) == "1":
+                        print ("LED ON")
+                        GPIO.output(23,GPIO.LOW)
+        timePassed= 0.0
+        timePassed1=0.0
+        timePassed2=0.0 
+        #client_sock.send(str(read_temp()))
+        #print ("sending %s " % data)
+'''
+client_sock.close()
+server_sock.close() 
+
