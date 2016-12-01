@@ -49,7 +49,7 @@ def main():
                         t = Thread(target=msgQueue)
                         t.daemon = True
                         t.start()
-                        main(q,ser)
+                        
 
                         incMsg = ser.readline()
                         print('Recieved: %s' % incMsg)
