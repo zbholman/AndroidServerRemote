@@ -9,7 +9,7 @@ import serial
 import pika
 import sys
 import thread
-import queue
+import Queue
 #Handles the message queue
 def msgQueue():
         while True:
