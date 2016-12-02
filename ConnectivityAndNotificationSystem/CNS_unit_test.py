@@ -1,4 +1,4 @@
-import unnitest
+import unittest
 from CNS import msgQueue
 from CNS import sendToNotification
 
