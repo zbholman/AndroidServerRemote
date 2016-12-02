@@ -15,10 +15,10 @@ class CNS:
 		contentpayload = info.Return_Payload()
 		contentorigin = info.Return_Origin_ID()
 		if contentorigin == 'ems' :
-			if contentpayload == 'HC1':#open file object and check for Emmergency in PLd string
+			#if contentpayload == 'HC1':#open file object and check for Emmergency in PLd string
 			#I think this is what you want and you won't need the second if statement here.
-			#content = contentpayload.rpartition(':')[2]
-				content = "Battery is running low"
+			content = contentpayload.rpartition(':')[2]
+				#content = "Battery is running low"
 		return content
 
 	'''	for id in message['OID'] == "brk" :
