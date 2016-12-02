@@ -82,10 +82,16 @@ class Log:
         def RetrieveAll(self):
                 self.RetrieveBySubSystem("default")
 	
-	#This method will clear all messages
-        def ClearAll():
-                pass
+	#This method will clear all messages in a collection
+        def ClearAll(self, collection):
+                getattr(db, collection).delete_many({})
 
 	#This method will clear messages up to the date provided
-	def ClearupToDate():
-		pass
+	def ClearupToDate(self, date, collection):
+		#Open up all of the messages
+		messages = getattr(db,collection).find()
+		#Go through all of the messages, if the date is before the date given, drop the record in the database
+		
+		for i in messages:
+			if(i['TS'] < date):
+				getattr(db,collection).remove({'UID' : i['UID']})
