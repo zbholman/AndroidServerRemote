@@ -15,7 +15,7 @@ def msgQueue():
 			break	
 		ser.write(item) #Writes it to the serial port, all devices will get this running on BAUD 9500)
 		sendToNotification(item) #Forwards message to sTMAL function.
-q.task_done() #Task done, what a champ.
+		q.task_done() #Task done, what a champ.
 
 #Send the message to monitoring and logging. Can use basic ports for this.
 def sendToNotification(message):
@@ -33,7 +33,7 @@ def sendToNotification(message):
                 	        delivery_mode = 2, # make message persistent
         	              ))
 	print(" [x] Sent %r" % message)
-connection.close()
+	connection.close()
 
 #Main Loop for listening and blasting out messages.
 def main():
