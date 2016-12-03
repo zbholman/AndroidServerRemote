@@ -29,17 +29,18 @@ import java.lang.reflect.Method;
 
 public class ClimateControl extends AppCompatActivity {
 
-    // String for MAC address
-    String address;
     final int handlerState = 0;                    //used to identify handler message
     public String readMessage;
+    // String for MAC address
+    String address;
     Handler bluetoothHandler;
     ImageButton imageButtonInc, imageButtonDec;
     Button btnDis;
     TextView txt_Temp, txt_PI_Temp;
     Switch switch_AC, switch_Heat;
-    int mCounter = 65;
+    int mCounter = 70;
     int minTemp = 59, maxTemp = 80;
+    int testTemp;
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -113,7 +114,6 @@ public class ClimateControl extends AppCompatActivity {
         txt_Temp.setTextColor(Color.WHITE);
         txt_Temp.setText(Integer.toString(mCounter));
 
-
         imageButtonInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,22 +126,21 @@ public class ClimateControl extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Max Temperature Reached", Toast.LENGTH_SHORT).show();
                     txt_Temp.setText(Integer.toString(mCounter));
 
-                } else if (imageButtonInc.isPressed() && mCounter > 65) {
-                    switch_Heat.setChecked(false);
-                    switch_AC.setChecked(true);
+                } else if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) > Integer.valueOf(readMessage))) {
+                    switch_Heat.setChecked(true);
+                    switch_AC.setChecked(false);
                     txt_Temp.setTextColor(Color.RED);
                     // AC Pin goes ON Relay
 
-
-                    mConnectedThread.write("acON");    // Send "acON" via Bluetooth
-                    Toast.makeText( getBaseContext(), "AC Turned ON", Toast.LENGTH_SHORT ).show();
+                    mConnectedThread.write("heatON");    // Send "acON" via Bluetooth
+                    Toast.makeText(getBaseContext(), "Heating Turned ON", Toast.LENGTH_SHORT).show();
 
 
                 } else if (Integer.toString(mCounter).equals(readMessage)) {
                     Toast.makeText(getBaseContext(), "Temperature is equal", Toast.LENGTH_SHORT).show();
                 }
 
-                if (imageButtonInc.isPressed() && mCounter == 65) {
+                if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) == Integer.valueOf(readMessage))) {
                     switch_Heat.setChecked(false);
                     switch_AC.setChecked(false);
                     txt_Temp.setTextColor(Color.WHITE);
@@ -166,19 +165,19 @@ public class ClimateControl extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Min Temperature Reached", Toast.LENGTH_SHORT).show();
                     txt_Temp.setText(Integer.toString(mCounter));
 
-                } else if (imageButtonDec.isPressed() && mCounter < 65) {
-                    switch_Heat.setChecked(true);
-                    switch_AC.setChecked(false);
+                } else if (imageButtonDec.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) < Integer.valueOf(readMessage))) {
+                    switch_Heat.setChecked(false);
+                    switch_AC.setChecked(true);
                     txt_Temp.setTextColor(Color.BLUE);
 
                     // HEATING PAD Pin goes ON Relay
 
-                    mConnectedThread.write("heatON");    // Send "heatON" via Bluetooth
-                    Toast.makeText( getBaseContext(), "Heating Turned ON", Toast.LENGTH_SHORT ).show();
+                    mConnectedThread.write("acON");    // Send "heatON" via Bluetooth
+                    Toast.makeText(getBaseContext(), "AC Turned ON", Toast.LENGTH_SHORT).show();
 
 
                 }
-                if (imageButtonDec.isPressed() && mCounter == 65) {
+                if (imageButtonDec.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) == Integer.valueOf(readMessage))) {
                     switch_Heat.setChecked(false);
                     switch_AC.setChecked(false);
                     txt_Temp.setTextColor(Color.WHITE);
@@ -194,17 +193,13 @@ public class ClimateControl extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
 
-                if(isChecked){
+                if (isChecked) {
 
                     mConnectedThread.write("acON");    // Send "acON" via Bluetooth
-
-
-                    Toast.makeText( getBaseContext(), "AC ON", Toast.LENGTH_SHORT ).show();
-                }else{
-
+                    Toast.makeText(getBaseContext(), "AC ON", Toast.LENGTH_SHORT).show();
+                } else {
                     mConnectedThread.write("acOFF");    // Send "acOFF" via Bluetooth
-
-                    Toast.makeText( getBaseContext(), "AC OFF", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(getBaseContext(), "AC OFF", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -215,19 +210,13 @@ public class ClimateControl extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-
-                if(isChecked){
-
+                if (isChecked) {
                     mConnectedThread.write("heatON");    // Send "heatON" via Bluetoot
-
-                    Toast.makeText( getBaseContext(), "Heating ON", Toast.LENGTH_SHORT ).show();
-                }else{
-
+                    Toast.makeText(getBaseContext(), "Heating ON", Toast.LENGTH_SHORT).show();
+                } else {
                     mConnectedThread.write("heatOFF");    // Send "heatOFF" via Bluetooth
-
-                    Toast.makeText( getBaseContext(), "Heating OFF", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText(getBaseContext(), "Heating OFF", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
@@ -311,6 +300,7 @@ public class ClimateControl extends AppCompatActivity {
         mConnectedThread1.start();
         mConnectedThread.write("x");
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -406,4 +396,3 @@ public class ClimateControl extends AppCompatActivity {
 
 
 }
-
