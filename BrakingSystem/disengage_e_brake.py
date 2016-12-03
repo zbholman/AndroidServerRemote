@@ -16,5 +16,6 @@ p.start(13.5)
 
 try:
     p.ChangeDutyCycle(9)#disengage emergency brake
-    p.stop()
+except KeyboardInterrupt:
     GPIO.cleanup()
+    p.stop()
