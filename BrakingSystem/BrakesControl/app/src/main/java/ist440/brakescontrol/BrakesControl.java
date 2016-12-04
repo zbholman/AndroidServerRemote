@@ -34,6 +34,7 @@ public class BrakesControl extends AppCompatActivity {
 
         Intent myIntent =  getIntent();
 
+        // initialize variables for connecting to pi from the Login java class
         final String username = myIntent.getExtras().getString("username");
         final String password = myIntent.getExtras().getString("password");
         final String hostname = myIntent.getExtras().getString("hostname");
@@ -43,18 +44,19 @@ public class BrakesControl extends AppCompatActivity {
         //final String scriptDir2 = "python /home/pi/PSUABFA16IST440/BrakingSystem/E-Brake Python";
         final int port = 22;
 
-
+        //Creating toggle button for all brakes
         final ToggleButton absBrake = (ToggleButton) findViewById(R.id.absBrake);
         final ToggleButton sensorBrake = (ToggleButton) findViewById(R.id.sensorBrake);
         final ToggleButton eBrake = (ToggleButton) findViewById(R.id.eBrake);
         final ToggleButton brake = (ToggleButton) findViewById(R.id.brake);
 
-
+        //Creating the icon for each brake
         final ImageView fRight = (ImageView) findViewById(R.id.fRight);
         final ImageView rLeft = (ImageView) findViewById(R.id.rLeft);
         final ImageView rRight = (ImageView) findViewById(R.id.rRight);
         final ImageView fLeft = (ImageView) findViewById(R.id.fLeft);
 
+        //set all icon to invisible
         fRight.setVisibility(View.INVISIBLE);
         rLeft.setVisibility(View.INVISIBLE);
         rRight.setVisibility(View.INVISIBLE);

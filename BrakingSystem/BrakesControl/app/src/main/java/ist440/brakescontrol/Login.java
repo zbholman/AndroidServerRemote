@@ -17,7 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
-    Button b1;
+    //define variables
+    Button logIn;
     EditText username, password, hostname;
 
     @Override
@@ -25,7 +26,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        b1 = (Button) findViewById(R.id.main_Enter);
+        logIn = (Button) findViewById(R.id.main_Enter);
     }
 
     // initialize variables for connecting to pi
