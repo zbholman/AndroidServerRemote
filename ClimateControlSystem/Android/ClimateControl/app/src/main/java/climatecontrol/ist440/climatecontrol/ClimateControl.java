@@ -36,11 +36,13 @@ public class ClimateControl extends AppCompatActivity {
     Handler bluetoothHandler;
     ImageButton imageButtonInc, imageButtonDec;
     Button btnDis;
-    TextView txt_Temp, txt_PI_Temp;
+    TextView txt_Temp, txt_PI_Temp, txt_Exterior_Temp, txt_Humidity;
     Switch switch_AC, switch_Heat;
     int mCounter = 70;
     int minTemp = 59, maxTemp = 80;
     int testTemp;
+    String insideTemp, exteriorTemp, humidity;
+
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -50,8 +52,13 @@ public class ClimateControl extends AppCompatActivity {
                     public void handleMessage(android.os.Message msg) {
                         if (msg.what == handlerState) {                   //if message is what we want
                             readMessage = (String) msg.obj;
-                            txt_PI_Temp.setText(readMessage);         // here it print temperature from PI
-
+                            String aString[] = readMessage.split(" ");
+                            insideTemp = aString[0];
+                            exteriorTemp = aString[1];
+                            humidity = aString[2];
+                            txt_PI_Temp.setText(insideTemp);         // here it print temperature from PI
+                            txt_Exterior_Temp.setText(exteriorTemp);
+                            txt_Humidity.setText(humidity + " %");
                         }
 
                     }
@@ -87,6 +94,8 @@ public class ClimateControl extends AppCompatActivity {
         imageButtonDec = (ImageButton) findViewById(R.id.imageButtonDec);
         txt_Temp = (TextView) findViewById(R.id.txt_Temp);
         txt_PI_Temp = (TextView) findViewById(R.id.txt_PI_Temp);
+        txt_Exterior_Temp = (TextView) findViewById(R.id.txt_Exterior_Temp);
+        txt_Humidity = (TextView) findViewById(R.id.txt_Humidity);
         switch_AC = (Switch) findViewById(R.id.switch_AC);
         switch_Heat = (Switch) findViewById(R.id.switch_Heat);
 
@@ -126,7 +135,7 @@ public class ClimateControl extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Max Temperature Reached", Toast.LENGTH_SHORT).show();
                     txt_Temp.setText(Integer.toString(mCounter));
 
-                } else if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) > Integer.valueOf(readMessage))) {
+                } else if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) > Integer.valueOf(insideTemp))) {
                     switch_Heat.setChecked(true);
                     switch_AC.setChecked(false);
                     txt_Temp.setTextColor(Color.RED);
@@ -136,11 +145,11 @@ public class ClimateControl extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Heating Turned ON", Toast.LENGTH_SHORT).show();
 
 
-                } else if (Integer.toString(mCounter).equals(readMessage)) {
+                } else if (Integer.toString(mCounter).equals(insideTemp)) {
                     Toast.makeText(getBaseContext(), "Temperature is equal", Toast.LENGTH_SHORT).show();
                 }
 
-                if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) == Integer.valueOf(readMessage))) {
+                if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) == Integer.valueOf(insideTemp))) {
                     switch_Heat.setChecked(false);
                     switch_AC.setChecked(false);
                     txt_Temp.setTextColor(Color.WHITE);
@@ -165,7 +174,7 @@ public class ClimateControl extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Min Temperature Reached", Toast.LENGTH_SHORT).show();
                     txt_Temp.setText(Integer.toString(mCounter));
 
-                } else if (imageButtonDec.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) < Integer.valueOf(readMessage))) {
+                } else if (imageButtonDec.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) < Integer.valueOf(insideTemp))) {
                     switch_Heat.setChecked(false);
                     switch_AC.setChecked(true);
                     txt_Temp.setTextColor(Color.BLUE);
@@ -177,7 +186,7 @@ public class ClimateControl extends AppCompatActivity {
 
 
                 }
-                if (imageButtonDec.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) == Integer.valueOf(readMessage))) {
+                if (imageButtonDec.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) == Integer.valueOf(insideTemp))) {
                     switch_Heat.setChecked(false);
                     switch_AC.setChecked(false);
                     txt_Temp.setTextColor(Color.WHITE);
