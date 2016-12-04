@@ -1,9 +1,13 @@
+/**
+ * Author Qili Jian
+ * IST 440W
+ * Penn State Abington
+ * TEAM 1, Pump Your Brake
+ */
 package ist440.brakescontrol;
 
 
-/**
- * Created by QILI JIAN
- */
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -186,7 +190,7 @@ public class BrakesControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/disengage_e_brake";
+                        String command = scriptDir + "/eBrakeOff.py.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -217,7 +221,7 @@ public class BrakesControl extends AppCompatActivity {
                 if (isChecked){
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "engage_e_brake.py";
+                        String command = scriptDir + "eBrakeOn.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -240,7 +244,7 @@ public class BrakesControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "disengage_e_brake";
+                        String command = scriptDir + "eBrakeOff.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
