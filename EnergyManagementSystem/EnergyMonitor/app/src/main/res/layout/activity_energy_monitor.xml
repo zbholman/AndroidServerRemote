@@ -9,84 +9,116 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="?attr/colorButtonNormal"
-    tools:context="climatecontrol.ist440.climatecontrol.ClimateControl">
+    android:background="@android:color/white"
+    tools:context="energymonitor.ist.energymonitor.EnergyMonitor">
 
-
-    <Button
-        android:text="Disconnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDis"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@android:color/darker_gray" />
 
     <TextView
-        android:text="Energy Used:"
-        android:textColor="@color/colorAccent"
-        android:textSize="26sp"
+        android:text="Energy Consumption: Since Last Charge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Label_energyused"
-        android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/btnDis"
-        android:layout_toEndOf="@+id/btnDis"
-        android:clickable="false"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:text="Energy Remaining:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Label_energyrem"
-        android:textColor="@color/colorAccent"
-        android:textSize="26sp"
-        android:layout_marginLeft="83dp"
-        android:layout_marginStart="83dp"
-        android:layout_below="@+id/Label_energyused"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="49dp"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_PI_Volt"
-        android:layout_alignBaseline="@+id/btnDis"
-        android:layout_alignBottom="@+id/btnDis"
-        android:layout_toRightOf="@+id/txt_energyremaining"
-        android:layout_toEndOf="@+id/txt_energyremaining"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp" />
-
-    <TextView
-        android:text="60%"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_energyused"
+        android:id="@+id/main_title"
         android:textColor="@android:color/holo_green_light"
-        android:textSize="30sp"
         android:textStyle="normal|bold"
-        android:layout_alignTop="@+id/Label_energyused"
-        android:layout_alignLeft="@+id/Label_energyused"
-        android:layout_alignStart="@+id/Label_energyused"
-        android:layout_marginLeft="174dp"
-        android:layout_marginStart="174dp" />
+        android:textSize="24sp" />
+
+    <TextView
+        android:text="Battery Level :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Label_batLevel"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/txt_batLevel"
+        android:layout_toStartOf="@+id/txt_batLevel" />
 
     <TextView
         android:text="40%"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_energyremaining"
+        android:id="@+id/txt_batLevel"
         android:textColor="@android:color/holo_green_light"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="normal|bold"
-        android:layout_alignTop="@+id/Label_energyrem"
-        android:layout_toRightOf="@+id/txt_energyused"
-        android:layout_toEndOf="@+id/txt_energyused" />
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/bat_icon"
+        android:layout_toEndOf="@+id/bat_icon"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <TextView
+        android:text="00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/txt_PI_Volt"
+        android:layout_alignBaseline="@+id/Label_energyused"
+        android:layout_alignBottom="@+id/Label_energyused"
+        android:layout_alignLeft="@+id/Label_batLevel"
+        android:layout_alignStart="@+id/Label_batLevel"
+        android:textSize="22sp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Energy Used :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Label_energyused"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="normal|bold"
+        android:textSize="22sp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignBaseline="@+id/Label_energyrem"
+        android:layout_alignBottom="@+id/Label_energyrem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="@android:dimen/notification_large_icon_width"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/batteryicon"
+        android:id="@+id/bat_icon"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_below="@+id/main_title"
+        android:layout_toRightOf="@+id/Label_energyused"
+        android:layout_toEndOf="@+id/Label_energyused"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:text="Energy Remaining :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:id="@+id/Label_energyrem"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="normal|bold"
+        android:textSize="22sp"
+        android:layout_alignTop="@+id/bat_icon"
+        android:layout_alignLeft="@+id/txt_batLevel"
+        android:layout_alignStart="@+id/txt_batLevel" />
+
+    <TextView
+        android:text="00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_PI_energy"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_alignBaseline="@+id/Label_energyrem"
+        android:layout_alignBottom="@+id/Label_energyrem"
+        android:layout_toRightOf="@+id/Label_energyrem"
+        android:layout_toEndOf="@+id/Label_energyrem"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        android:textStyle="normal|bold" />
 
 </RelativeLayout>
