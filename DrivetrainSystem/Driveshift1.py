@@ -63,7 +63,6 @@ while True:
 	    
 	    
     elif (mode == 's'): #Sets car into reverse
-	    #pwm.set_pwm(0, 0, servo_drive)
             pwm.set_pwm(1, 1, steering_center)
 	    if servo_drive > 375:
 		    servo_drive = servo_drive - (((servo_drive - 375) * 2) + 16)
