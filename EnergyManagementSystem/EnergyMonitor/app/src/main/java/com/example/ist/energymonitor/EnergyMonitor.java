@@ -40,7 +40,8 @@ public class EnergyMonitor extends AppCompatActivity {
     public String readMessage;
     public Handler bluetoothHandler;
     Button btnDis;
-    TextView txt_PI_Volt, txt_energyused, txt_energyremaining, Label_energyused, Label_energyrem;
+    ImageView bat_icon;
+    TextView txt_PI_Volt, main_title, txt_batLevel, txt_PI_energy, Label_energyused, Label_energyrem, Label_batLevel;
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -73,6 +74,7 @@ public class EnergyMonitor extends AppCompatActivity {
 
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
+    private ConnectedThread mConnectedThread;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,11 +82,13 @@ public class EnergyMonitor extends AppCompatActivity {
         setContentView(R.layout.activity_energy_monitor);
 
         btnDis = (Button) findViewById(R.id.btnDis);
+        bat_icon = (ImageView) findViewById(R.id.bat_icon);
         txt_PI_Volt = (TextView) findViewById(R.id.txt_PI_Volt);
-        txt_energyused = (TextView) findViewById(R.id.txt_energyused);
-        txt_energyremaining = (TextView) findViewById(R.id.txt_energyremaining);
+        Label_batLevel = (TextView) findViewById(R.id.Label_batLevel);
+        txt_batLevel = (TextView) findViewById(R.id.txt_batLevel);
+        txt_PI_energy = (TextView) findViewById(R.id.txt_PI_energy);
         Label_energyused = (TextView) findViewById(R.id.Label_energyused);
-        Label_energyrem = (TextView) findViewById(R.id.Label_energyrem);
+        Label_energyrem = (TextView) findViewById(R.id.Label_batLevel);
 
 
         bluetoothHandler = new Handler();

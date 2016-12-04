@@ -1,13 +1,19 @@
 import bluetooth
-import RPi.GPIO as GPIO
 import time
 import os #Enable wire drivers and interface with sensor
 import glob #Load drivers
 import time #Define time
- 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(24,GPIO.OUT)
+import pyowm
+
+
+API_key = '89cb9b3c8c3c1ee033be08ffcfd26076'
+owm = pyowm.OWM(API_key)
+# Register a location: city,state AND print
+location = 'Philadelphia,PA'
+ # Find a location to observe outdoor weather
+obs = owm.weather_at_place(location)
+w = obs.get_weather()
+
 
 os.system('modprobe w1-gpio')  
 os.system('modprobe w1-therm')
@@ -37,6 +43,16 @@ def read_temp():
         temp_f = temp_c * 9.0 / 5.0 + 32.0 #Fahrenheit temp
         return temp_f  #Prints out temperature
 
+def exterior_temp():
+        # Check outdoor Fahrenheit temperature and print
+        outdoorFahrenheit = w.get_temperature('fahrenheit')
+        return outdoorFahrenheit['temp']
+    
+def humidity():
+        # Check outdoor Humidity percentage and print
+        outdoorHumidity = w.get_humidity()
+        return outdoorHumidity
+
 server_sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM )
 server_sock.bind(("",2))
 server_sock.listen(2)
@@ -48,8 +64,9 @@ client_sock, client_info = server_sock.accept()
 print "Accepted connection from ", client_info
 
 while True:
-	client_sock.send(str(int(read_temp())))
-	print ("sending %s" % read_temp())	
+	client_sock.send((str(int(read_temp()))) + " " + (str(int(exterior_temp())))+ " " + (str(int(humidity()))))
+	print ("Sending : Sensor Temp: %s , Exterior Temp: %s ,Humidity: %s" % (read_temp(),exterior_temp(),humidity()))
+	
 client_sock.close()
 server_sock.close()
 
