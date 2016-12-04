@@ -54,8 +54,6 @@ print("c = center steering")
 while True:
     print"Drive Mode:",
     mode = raw_input()
-    #pwm.set_pwm(0, 0, servo_neutral) #Sets the car into neutral
-    #pwm.set_pwm(1, 1 steering_center) #Set steering to center
 
     if (mode == 'p'): #Sets car into park, place holder code
 	    print('Stop')
