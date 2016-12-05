@@ -1,17 +1,27 @@
+/*
+IST 440 Penn State Abington
+Professor: Joseph Oakes
+Fall 2016
+ClimateControl
+Author: Nirav
+
+Class Info:
+These DeviceList class gets the list of devices which are paired with the a tablet.
+*/
+
 package climatecontrol.ist440.climatecontrol;
+// Import statements
 
-
-                                                                                import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.widget.TextView;
 import android.widget.Toast;
 
