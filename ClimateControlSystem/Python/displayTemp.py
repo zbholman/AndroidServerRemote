@@ -2,7 +2,7 @@
 #Professor: Joseph Oakes
 #Fall 2016
 #Controller.py
-#Author: Nirav Patel
+#Author: Nirav,Jacky,Mo
 
 # displayTemp.py reads the tempertaure from the sensor which is attached to raspberry pi and sends the data to client
 # via Bluetooth Socket connection.It also read the outside temperature and humidity through a API and sends that infomation
