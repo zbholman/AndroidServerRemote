@@ -1,8 +1,12 @@
+/**
+ * Author: Chakman Fung
+ * IST 440W
+ * Penn State Abington
+ * TEAM 1, Pump Your Brake
+ */
+
 package ist440.brakescontrol;
 
-/**
- * Created by QILI JIAN on 11/17/2016.
- */
 
 
 import android.content.Intent;
@@ -13,7 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
-    Button b1;
+    //define variables
+    Button logIn;
     EditText username, password, hostname;
 
     @Override
@@ -21,13 +26,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        b1 = (Button) findViewById(R.id.main_Enter);
+        logIn = (Button) findViewById(R.id.main_Enter);
     }
 
+    // initialize variables for connecting to pi
     public void Enter(View view) {
         username = (EditText) findViewById(R.id.main_username);
         password = (EditText) findViewById(R.id.main_password);
         hostname = (EditText) findViewById(R.id.main_hostname);
+
+        //prompt for user to enter the info variables
 
         Intent myIntent = new Intent(Login.this, BrakesControl.class);
         startActivity(new Intent(Login.this, BrakesControl.class));
