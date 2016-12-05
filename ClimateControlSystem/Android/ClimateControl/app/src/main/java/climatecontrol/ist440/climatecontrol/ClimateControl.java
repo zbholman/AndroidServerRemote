@@ -299,18 +299,14 @@ public class ClimateControl extends AppCompatActivity {
     //OnReusume Intent Method
     public void onResume() {
         super.onResume();
-
         //Get MAC address from DeviceListActivity via intent
         Intent intent = getIntent();
-
         //Get the MAC address from the DeviceListActivty via EXTRA
         address = intent.getStringExtra(DeviceList.EXTRA_ADDRESS);
 
         //create device and set the MAC address
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
-
-
-        try {
+     try {
             btSocket = createBluetoothSocket(device);
             btSocket1 = createBluetoothSocket1(device);
         } catch (IOException e) {
