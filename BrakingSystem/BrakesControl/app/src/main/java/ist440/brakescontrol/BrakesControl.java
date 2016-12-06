@@ -62,7 +62,7 @@ public class BrakesControl extends AppCompatActivity {
         rRight.setVisibility(View.INVISIBLE);
         fLeft.setVisibility(View.INVISIBLE);
 
-
+        // what it does When the button pressed.
         brake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
