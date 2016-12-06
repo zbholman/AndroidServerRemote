@@ -223,7 +223,7 @@ public class BrakesControl extends AppCompatActivity {
                 if (isChecked){
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "eBrakeOn.py";
+                        String command = scriptDir + "/eBrakeOn.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -246,7 +246,7 @@ public class BrakesControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "eBrakeOff.py";
+                        String command = scriptDir + "/eBrakeOff.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
