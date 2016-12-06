@@ -99,7 +99,6 @@ public class DriveTrain extends AppCompatActivity {
         ///Set time interval here
         bluetoothHandler.postDelayed(runnable, 1000);
 
-
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         btAdapter1 = BluetoothAdapter.getDefaultAdapter();
         checkBTState1();                                     // check the status of Bluetooth
