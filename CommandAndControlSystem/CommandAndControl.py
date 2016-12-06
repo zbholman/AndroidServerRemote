@@ -8,13 +8,16 @@ Last Updated: 11/10/2016
 import serial
 import pika
 import sys
-import thread
-import Queue
+import threading
+from Queue import Queue
 import logging
 
 logging.warning('Watch out!')  # will print a message to the console
 logging.info('I told you so')  # will not print anything
 #Handles the message queue
+
+q = Queue()
+
 def msgQueue():
         while True:
                 item = q.get() #Gets last message queued.
@@ -50,7 +53,7 @@ def main():
                         ser = serial.Serial('/dev/ttyUSB0', 9500)
                         #Sets up a queue and thread for messages
                         q = Queue(maxsize=5)
-                        t = Thread(target=msgQueue)
+                        t = threading.Thread(target=msgQueue)
                         t.daemon = True
                         t.start()
                         
