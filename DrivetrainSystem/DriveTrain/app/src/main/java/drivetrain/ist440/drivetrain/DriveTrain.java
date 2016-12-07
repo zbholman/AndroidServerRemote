@@ -42,7 +42,7 @@ public class DriveTrain extends AppCompatActivity {
 
                 bluetoothHandler = new Handler() {
                     public void handleMessage(android.os.Message msg) {
-                        if (msg.what == handlerState) {                   
+                        if (msg.what == handlerState) {
                             readMessage = (String) msg.obj;
                             txt_Speed.setText(readMessage);         // here it print the speed of the car
 
