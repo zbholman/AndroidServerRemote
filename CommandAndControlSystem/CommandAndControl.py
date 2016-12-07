@@ -54,7 +54,7 @@ def main():
 	
 	q = Queue(maxsize=5)
 	
-	t = threading.Thread(target=msgQueue, args=(ser,q))
+	t = threading.Thread(target=msgQueue, args=(ser,q,))
 	t.daemon = True
 	
 	print('Queue and Thread done')
