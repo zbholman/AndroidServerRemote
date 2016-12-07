@@ -76,7 +76,7 @@ public class BrakesControl extends AppCompatActivity {
                     }
                 }.execute(1);
                 new AsyncTask<Integer, Void, Void>() {
-                    String command = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/BrakesOn.py";
+                    String command = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/Brakes_On.py";
                     protected Void doInBackground(Integer... params) {
                         try {
                             executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
