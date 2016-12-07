@@ -134,21 +134,6 @@
     <ImageView
         android:layout_width="150sp"
         android:layout_height="110sp"
-        android:src="@drawable/icon_hazards"
-        android:visibility="visible"
-        android:elevation="24sp"
-        android:tint="@android:color/holo_orange_light"
-        android:backgroundTintMode="add"
-        android:id="@+id/iconHazardLight"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/lblLightingControls"
-        android:layout_toEndOf="@+id/lblLightingControls"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp" />
-
-    <ImageView
-        android:layout_width="150sp"
-        android:layout_height="110sp"
         android:src="@drawable/icon_left_turn"
         android:id="@+id/iconLeftTurn"
         android:visibility="visible"
@@ -213,4 +198,19 @@
         android:layout_below="@+id/lblLightingControls"
         android:layout_toLeftOf="@+id/lblLightingControls"
         android:layout_toStartOf="@+id/lblLightingControls" />
+
+    <ImageView
+        android:layout_width="150sp"
+        android:layout_height="110sp"
+        android:src="@drawable/icon_hazards"
+        android:visibility="visible"
+        android:elevation="24sp"
+        android:tint="@android:color/holo_orange_light"
+        android:backgroundTintMode="add"
+        android:id="@+id/iconHazardLight"
+        android:layout_marginLeft="69dp"
+        android:layout_marginStart="69dp"
+        android:layout_alignTop="@+id/iconRightTurn"
+        android:layout_toRightOf="@+id/lblLightingControls"
+        android:layout_toEndOf="@+id/lblLightingControls" />
 </RelativeLayout>
