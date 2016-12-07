@@ -5,17 +5,15 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+
 import android.widget.ImageButton;
-import android.widget.Switch;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +26,7 @@ import java.lang.reflect.Method;
 
 public class DriveTrain extends AppCompatActivity {
 
-    // String for MAC address
+    // String for Windows address
     String address;
     final int handlerState = 0;
     public String readMessage;
@@ -44,9 +42,9 @@ public class DriveTrain extends AppCompatActivity {
 
                 bluetoothHandler = new Handler() {
                     public void handleMessage(android.os.Message msg) {
-                        if (msg.what == handlerState) {                   //if message is what we want
+                        if (msg.what == handlerState) {
                             readMessage = (String) msg.obj;
-                            txt_Speed.setText(readMessage);         // here it print temperature from PI
+                            txt_Speed.setText(readMessage);         // here it print the speed of the car
 
                         }
 
@@ -101,7 +99,7 @@ public class DriveTrain extends AppCompatActivity {
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         btAdapter1 = BluetoothAdapter.getDefaultAdapter();
-        checkBTState1();                                     // check the status of Bluetooth
+        checkBTState1();                                     // check the status of Bluetooth and its connection
         checkBTState2();
 
         btnDis.setOnClickListener(new View.OnClickListener() {
@@ -257,7 +255,7 @@ public class DriveTrain extends AppCompatActivity {
 
     }
 
-    // for all other controller ie AC , Heat
+    // for all other controller of how fast the car is moing and turning direction
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         int port = 1;
@@ -268,7 +266,7 @@ public class DriveTrain extends AppCompatActivity {
         return btSocket;
     }
 
-    //for Temperature
+    //for speed of the car
     private BluetoothSocket createBluetoothSocket1(BluetoothDevice device) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         int port = 2;
@@ -279,18 +277,18 @@ public class DriveTrain extends AppCompatActivity {
         return btSocket1;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @Override
     public void onResume() {
         super.onResume();
 
-        //Get MAC address from DeviceListActivity via intent
+        //Get windows address from DeviceListActivity via intent
         Intent intent = getIntent();
 
-        //Get the MAC address from the DeviceListActivty via EXTRA
+        //Get the windows address from the DeviceListActivty via EXTRA
         address = intent.getStringExtra(DeviceList.EXTRA_ADDRESS);
 
-        //create device and set the MAC address
+        //create device and set the windows address
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
 
 
@@ -314,8 +312,8 @@ public class DriveTrain extends AppCompatActivity {
                 //insert code to deal with this
             }
         }
-        mConnectedThread = new ConnectedThread(btSocket); // for controllers
-        mConnectedThread1 = new ConnectedThread(btSocket1); //for temperature
+        mConnectedThread = new ConnectedThread(btSocket); // for connection of moving the cars direction
+        mConnectedThread1 = new ConnectedThread(btSocket1); //for how fast the car is going
         mConnectedThread.start();
         mConnectedThread1.start();
         mConnectedThread.write("x");

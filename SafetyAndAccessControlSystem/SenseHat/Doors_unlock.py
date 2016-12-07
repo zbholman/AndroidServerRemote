@@ -1,4 +1,3 @@
-
 #Ashish Baby
 #IST 440W Fall 2016
 #PennState Abington
@@ -30,14 +29,14 @@ def doors_unlock():
     G = green
     O = nothing
     logo = [
-    O, O, O, O, O, O, O, O,
-    G, G, G, G, G, G, G, O,
-    G, O, O, O, O, O, G, O,
-    G, O, O, O, O, O, G, O,
-    G, O, O, O, O, O, G, O,
-    G, O, O, O, O, O, G, O,
-    G, G, G, G, G, G, G, O,
-    O, O, O, O, O, O, O, O,
+    G, G, G, G, G, G, G, G,
+    G, O, O, O, O, O, O, G,
+    G, O, O, O, O, O, O, G,
+    G, O, O, O, O, O, O, G,
+    G, O, O, O, O, O, O, G,
+    G, O, O, O, O, O, O, G,
+    G, O, O, O, O, O, O, G,
+    G, G, G, G, G, G, G, G,
     ]
     return logo
     

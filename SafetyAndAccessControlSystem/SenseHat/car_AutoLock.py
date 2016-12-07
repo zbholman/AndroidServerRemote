@@ -21,8 +21,8 @@ print(sense.accelerometer)
 
 #Call display functions of locking/unlocking car if speed is over or under 5
 if sense.accelerometer >= 5:
-	subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/Doors_locked.py", shell=True)
+	subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/SenseHat/Doors_locked.py", shell=True)
 	#pygame.mixer.music.play()
 	time.sleep(5)
 elif sense.accelerometer < 5:
-	subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/Doors_unlock.py", shell=True)
+	subprocess.Popen("/usr/bin/python /home/pi/PSUABFA16IST440/SafetyAndAccessControlSystem/SenseHat/Doors_unlock.py", shell=True)

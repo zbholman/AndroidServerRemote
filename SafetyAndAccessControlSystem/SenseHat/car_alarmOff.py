@@ -1,3 +1,9 @@
+#Ashish Baby
+#IST 440W Fall 2016
+#PennState Abington
+#Professor Oakes
+#10-4-16
+
 from sense_hat import SenseHat
 import time
 

@@ -31,7 +31,9 @@ public class BrakesControl extends AppCompatActivity {
         final String username = myIntent.getExtras().getString("username");
         final String password = myIntent.getExtras().getString("password");
         final String hostname = myIntent.getExtras().getString("hostname");
-        //final String hostname = "192.168.1.105";
+        final String hostnameLights = "192.168.1.1";
+        final String usernameLights = "pi";
+        final String passwordLights = "raspberry";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
         //final String scriptDir = "touch /home/pi/Desktop";
@@ -63,21 +65,52 @@ public class BrakesControl extends AppCompatActivity {
 
                 new AsyncTask<Integer, Void, Void>() {
                     String command = scriptDir + "/absbraking.py";
-
                     protected Void doInBackground(Integer... params) {
                         try {
                             executeRemoteCommand(username, password, hostname, command, port);
+                            exec
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         return null;
                     }
                 }.execute(1);
-
-
+                new AsyncTask<Integer, Void, Void>() {
+                    String command = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/Brakes_On.py";
+                    protected Void doInBackground(Integer... params) {
+                        try {
+                            executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
+                            exec
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                }.execute(1);
             }
 
         });
+        
+        brakes.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/Brakes_Off.sh";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
+                                exec
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                }
+            }
+        });
+        
         switchABS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
