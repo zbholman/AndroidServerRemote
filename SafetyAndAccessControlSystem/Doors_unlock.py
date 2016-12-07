@@ -30,14 +30,14 @@ def doors_unlock():
     G = green
     O = nothing
     logo = [
-    O, O, O, O, O, O, O, O,
     G, G, G, G, G, G, G, G,
     G, O, O, O, O, O, O, G,
     G, O, O, O, O, O, O, G,
     G, O, O, O, O, O, O, G,
     G, O, O, O, O, O, O, G,
+    G, O, O, O, O, O, O, G,
+    G, O, O, O, O, O, O, G,
     G, G, G, G, G, G, G, G,
-    O, O, O, O, O, O, O, O,
     ]
     return logo
     
