@@ -96,7 +96,7 @@ public class BrakesControl extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/BrakesOff.sh";
+                        String command = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/Brakes_Off.sh";
                         protected Void doInBackground(Integer... params) {
                             try {
                                 executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
