@@ -22,7 +22,7 @@ try:
         if distant <= 50:
             p.ChangeDutyCycle(13.5)#engage brake
         else:
-            p.ChangeDutyCycle(9)#engage brake
+            p.ChangeDutyCycle(9)#disengage brake
 except KeyboardInterrupt:
     GPIO.cleanup()
     p.stop()
