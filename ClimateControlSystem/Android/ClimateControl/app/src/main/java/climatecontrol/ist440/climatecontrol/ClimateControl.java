@@ -1,6 +1,23 @@
+
+/*
+
+IST 440 Penn State Abington
+Professor: Joseph Oakes
+Fall 2016
+ClimateControl
+Author: Nirav
+
+Class Info:
+
+ClimateControl  class acts as main class for these project.Climate control class has two bluetooth sockets created.
+Bluetooth sockets are created using port numbers. In these class port 1 is used to send the data to server and port 2
+used to recieving data.
+
+ */
+
 package climatecontrol.ist440.climatecontrol;
 
-
+// import statements
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -30,19 +47,19 @@ import java.lang.reflect.Method;
 public class ClimateControl extends AppCompatActivity {
 
     final int handlerState = 0;                    //used to identify handler message
-    public String readMessage;
-    // String for MAC address
-    String address;
-    Handler bluetoothHandler;
-    ImageButton imageButtonInc, imageButtonDec;
-    Button btnDis;
-    TextView txt_Temp, txt_PI_Temp, txt_Exterior_Temp, txt_Humidity;
-    Switch switch_AC, switch_Heat;
-    int mCounter = 70;
-    int minTemp = 59, maxTemp = 80;
+    public String readMessage;                     // used to read the message recieved from server.
+    String address;                                //used for storing bluetooth address.
+    Handler bluetoothHandler;                      // used to update the textbox each 1 second.
+    ImageButton imageButtonInc, imageButtonDec;     // imagebutton decalartions
+    Button btnDis;                                  // disconnect button declarions
+    TextView txt_Temp, txt_PI_Temp, txt_Exterior_Temp, txt_Humidity; // textboxes
+    Switch switch_AC, switch_Heat;                                  // swiches
+    int mCounter = 70;                                              // counter for user set temp
+    int minTemp = 59, maxTemp = 80;                                // max and min user can set temp.
     int testTemp;
-    String insideTemp, exteriorTemp, humidity;
+    String insideTemp, exteriorTemp, humidity;     // used to store the data recibed from server .
 
+    // Runnable method that had run method. It is used to upadate the textboxes containing data(temp,humidity) every 1 sec.
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -52,11 +69,11 @@ public class ClimateControl extends AppCompatActivity {
                     public void handleMessage(android.os.Message msg) {
                         if (msg.what == handlerState) {                   //if message is what we want
                             readMessage = (String) msg.obj;
-                            String aString[] = readMessage.split(" ");
-                            insideTemp = aString[0];
-                            exteriorTemp = aString[1];
-                            humidity = aString[2];
-                            txt_PI_Temp.setText(insideTemp);         // here it print temperature from PI
+                            String aString[] = readMessage.split(" ");   // Parsing string readmessage in storing in array.
+                            insideTemp = aString[0];                    // element 1 of array contains inside temp
+                            exteriorTemp = aString[1];                  // element 2 of array contains outside temp
+                            humidity = aString[2];                      // element 3 of array contains humidity.
+                            txt_PI_Temp.setText(insideTemp);           // here it set temperature in textboxes
                             txt_Exterior_Temp.setText(exteriorTemp);
                             txt_Humidity.setText(humidity + " %");
                         }
@@ -64,31 +81,34 @@ public class ClimateControl extends AppCompatActivity {
                     }
 
                 };
-            } catch (Exception e) {
-                // TODO: handle exception
+            } catch (Exception e) { //if handler was unable to called.
                 Toast.makeText(getBaseContext(), "Handler not called", Toast.LENGTH_SHORT).show();
 
             } finally {
                 //also call the same runnable to call it at regular interval
-                bluetoothHandler.postDelayed(this, 1000);
+                bluetoothHandler.postDelayed(this, 1000); //1000 = 1 sec.
             }
 
         }
     };
 
 
+    // Bluetooth adapter, Bluetooth Socket and Connected thread used for sending data to server (ie.acON, acOFF etc)
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
+    private ConnectedThread mConnectedThread;
+
+    // Bluetooth adapter, Bluetooth Socket and Connected thread used for recieving data from server (ie.temp,humdity)
     private BluetoothAdapter btAdapter1 = null;
     private BluetoothSocket btSocket1 = null;
-    private ConnectedThread mConnectedThread;
     private ConnectedThread mConnectedThread1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_climate_control);
+        setContentView(R.layout.activity_climate_control); // settting the xml.
 
+        // find the widgets from xml file.
         btnDis = (Button) findViewById(R.id.btnDis);
         imageButtonInc = (ImageButton) findViewById(R.id.imageButtonInc);
         imageButtonDec = (ImageButton) findViewById(R.id.imageButtonDec);
@@ -100,17 +120,16 @@ public class ClimateControl extends AppCompatActivity {
         switch_Heat = (Switch) findViewById(R.id.switch_Heat);
 
 
-        bluetoothHandler = new Handler();
+        // get Bluetooth adapter
 
-        ///Set time interval here
-        bluetoothHandler.postDelayed(runnable, 1000);
-
-
-        btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+        btAdapter = BluetoothAdapter.getDefaultAdapter();
         btAdapter1 = BluetoothAdapter.getDefaultAdapter();
-        checkBTState1();                                     // check the status of Bluetooth
+
+        // check the status of Bluetooth
+        checkBTState1();
         checkBTState2();
 
+        // Disconnect Listener that calls Disconnect method.
         btnDis.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Disconnect();
@@ -118,41 +137,44 @@ public class ClimateControl extends AppCompatActivity {
             }
         });
 
+        //Setting the switches and textboxes
+
         switch_AC.setChecked(false);
         switch_Heat.setChecked(false);
         txt_Temp.setTextColor(Color.WHITE);
         txt_Temp.setText(Integer.toString(mCounter));
 
+        //User Temp Increasing Button.
         imageButtonInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                mCounter++;
-                txt_Temp.setText(Integer.toString(mCounter));
+                mCounter++;                                     // increase the counter
+                txt_Temp.setText(Integer.toString(mCounter));   // set the textbox same as counter
 
-                if (mCounter > maxTemp) {
-                    mCounter = maxTemp;
-                    Toast.makeText(getBaseContext(), "Max Temperature Reached", Toast.LENGTH_SHORT).show();
-                    txt_Temp.setText(Integer.toString(mCounter));
+                if (mCounter > maxTemp) {                      //check if counter is gretaer than max temp
+                    mCounter = maxTemp;                        // if true sets counter equals max temp
+                    Toast.makeText(getBaseContext(), "Max Temperature Reached", Toast.LENGTH_SHORT).show(); //prints toast
+                    txt_Temp.setText(Integer.toString(mCounter));       //sets in textbox.
 
-                } else if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) > Integer.valueOf(insideTemp))) {
-                    switch_Heat.setChecked(true);
-                    switch_AC.setChecked(false);
-                    txt_Temp.setTextColor(Color.RED);
-                    // AC Pin goes ON Relay
+                } else if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) > Integer.valueOf(insideTemp))) { //checks if counter > insideTemp
+                    switch_Heat.setChecked(true); // if true heat is off
+                    switch_AC.setChecked(false);  // ac is turned ON
+                    txt_Temp.setTextColor(Color.RED); // textcolor would be RED.
 
+                    // Heating Pin goes ON Relay
                     mConnectedThread.write("heatON");    // Send "acON" via Bluetooth
                     Toast.makeText(getBaseContext(), "Heating Turned ON", Toast.LENGTH_SHORT).show();
 
 
-                } else if (Integer.toString(mCounter).equals(insideTemp)) {
+                } else if (Integer.toString(mCounter).equals(insideTemp)) { //if both are equal
                     Toast.makeText(getBaseContext(), "Temperature is equal", Toast.LENGTH_SHORT).show();
                 }
 
                 if (imageButtonInc.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) == Integer.valueOf(insideTemp))) {
-                    switch_Heat.setChecked(false);
-                    switch_AC.setChecked(false);
-                    txt_Temp.setTextColor(Color.WHITE);
+                    switch_Heat.setChecked(false); // sets heat off
+                    switch_AC.setChecked(false);   // sets ac off
+                    txt_Temp.setTextColor(Color.WHITE); //sets color of text white
                     // ALL pins on Relay are OFF
 
                 }
@@ -166,20 +188,20 @@ public class ClimateControl extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                mCounter--;
-                txt_Temp.setText(Integer.toString(mCounter));
+                mCounter--;                                    // decrese the counter
+                txt_Temp.setText(Integer.toString(mCounter));  // set the textbox same as counter
 
-                if (mCounter < minTemp) {
-                    mCounter = minTemp;
+                if (mCounter < minTemp) {                //check if counter is less than min temp
+                    mCounter = minTemp;                  // if true sets counter equals min temp
                     Toast.makeText(getBaseContext(), "Min Temperature Reached", Toast.LENGTH_SHORT).show();
-                    txt_Temp.setText(Integer.toString(mCounter));
+                    txt_Temp.setText(Integer.toString(mCounter)); //sets in textbox
 
                 } else if (imageButtonDec.isPressed() && (Integer.parseInt(String.valueOf(mCounter)) < Integer.valueOf(insideTemp))) {
-                    switch_Heat.setChecked(false);
-                    switch_AC.setChecked(true);
-                    txt_Temp.setTextColor(Color.BLUE);
+                    switch_Heat.setChecked(false);      // heat is off
+                    switch_AC.setChecked(true);        // ac is on
+                    txt_Temp.setTextColor(Color.BLUE); //text color is BLUE
 
-                    // HEATING PAD Pin goes ON Relay
+                    // AC Pin goes ON Relay
 
                     mConnectedThread.write("acON");    // Send "heatON" via Bluetooth
                     Toast.makeText(getBaseContext(), "AC Turned ON", Toast.LENGTH_SHORT).show();
@@ -196,6 +218,7 @@ public class ClimateControl extends AppCompatActivity {
 
         });
 
+        // Switch ON and OFF for AC
         switch_AC.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
@@ -214,6 +237,7 @@ public class ClimateControl extends AppCompatActivity {
             }
         });
 
+        //Switch ON and OFF Heatind PAD
         switch_Heat.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
@@ -232,6 +256,7 @@ public class ClimateControl extends AppCompatActivity {
 
     }
 
+    // Disconnect Method for disconnetind the client server connection.
     private void Disconnect() {
         if (btSocket != null && btSocket1 != null) //If the btSocket is busy
         {
@@ -270,20 +295,18 @@ public class ClimateControl extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
+
+    //OnReusume Intent Method
     public void onResume() {
         super.onResume();
-
         //Get MAC address from DeviceListActivity via intent
         Intent intent = getIntent();
-
         //Get the MAC address from the DeviceListActivty via EXTRA
         address = intent.getStringExtra(DeviceList.EXTRA_ADDRESS);
 
         //create device and set the MAC address
         BluetoothDevice device = btAdapter.getRemoteDevice(address);
-
-
-        try {
+     try {
             btSocket = createBluetoothSocket(device);
             btSocket1 = createBluetoothSocket1(device);
         } catch (IOException e) {
@@ -379,7 +402,7 @@ public class ClimateControl extends AppCompatActivity {
             while (true) {
                 try {
                     bytes = mmInStream.read(buffer);            //read bytes from input buffer
-                    String readMessage = new String(buffer, 0, bytes);
+                    String readMessage = new String(buffer, 0, bytes); //stores value in String readmessage
 
                     // Send the obtained bytes to the UI Activity via handler
                     bluetoothHandler.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();

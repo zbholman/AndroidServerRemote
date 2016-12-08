@@ -1,0 +1,355 @@
+package ist440.brakescontrol;
+/**Penn State Abington
+ #IST 440W
+ #Fall 2016
+ #Team Pump Your Brakes
+ #Members: Qili Jian,  Chakman Fung, Abu Sakif, David Austin,  **/
+
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.Switch;
+
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+
+import java.util.Properties;
+
+
+public class BrakesControl extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_brakes_control);
+
+        Intent myIntent = getIntent();
+
+        // initialize variables for connecting to pi from the Login java class
+        final String username = myIntent.getExtras().getString("username");
+        final String password = myIntent.getExtras().getString("password");
+        final String hostname = myIntent.getExtras().getString("hostname");
+        //final String hostnameLights = "192.168.1.1";
+        //final String usernameLights = "pi";
+        //final String passwordLights = "raspberry";
+
+        final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
+        //final String scriptDir = "touch /home/pi/Desktop";
+        //final String scriptDir2 = "python /home/pi/PSUABFA16IST440/BrakingSystem/E-Brake Python";
+        final int port = 22;
+
+        //Creating toggle button for all brakes
+        final Switch switchABS = (Switch) findViewById(R.id.absbraking);
+        final Switch switchEBrake = (Switch) findViewById(R.id.parking);
+        final Switch switchSensor = (Switch) findViewById(R.id.sensor_brake);
+        final Button brakes = (Button) findViewById(R.id.brakes);
+
+        //Creating the icon for each brake
+        final ImageView absIcon = (ImageView) findViewById(R.id.absBrake);
+        final ImageView eBrakeIcon = (ImageView) findViewById(R.id.eBrake);
+        final ImageView sensorIcon = (ImageView) findViewById(R.id.sensorBrake);
+
+
+        //set all icon to invisible
+        absIcon.setVisibility(View.INVISIBLE);
+        eBrakeIcon.setVisibility(View.INVISIBLE);
+        sensorIcon.setVisibility(View.INVISIBLE);
+
+        // what it does When the button pressed.
+        brakes.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/braking.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                }
+                else {
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command = scriptDir + "/brakes_off.sh";
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(username, password, hostname, command, port);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        /*brakes.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/braking.py";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/brakes_off.sh";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = "/home/pi/PSUABFA16IST440/BrakingSystem/brakes_off.sh";
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                }
+            }
+        });*/
+        
+        switchABS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/absbraking.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        absIcon.setVisibility(View.VISIBLE);
+
+
+
+                    }
+
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/braking.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        absIcon.setVisibility(View.INVISIBLE);
+
+                    }
+
+
+                }
+            }
+        });
+
+        switchEBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/eBrakeOn.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        eBrakeIcon.setVisibility(View.VISIBLE);
+
+
+
+                    }
+
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/eBrakeOff.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        eBrakeIcon.setVisibility(View.INVISIBLE);
+
+                    }
+
+
+                }
+            }
+        });
+        switchSensor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/sensor_stop.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        sensorIcon.setVisibility(View.VISIBLE);
+
+                    }
+
+                } else {
+                    boolean success = true;
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/eBrakeOff.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                    if (success) {
+                        sensorIcon.setVisibility(View.INVISIBLE);
+
+                    }
+
+
+                }
+            }
+        });
+    }
+
+    // This method is connects to the pi, and runs the command given
+    public void executeRemoteCommand (String username,
+                                      String password,
+                                      String hostname,
+                                      String command,
+                                      int port)
+            throws JSchException {
+        // New Jsch object for connecting
+        JSch jsch = new JSch();
+
+        // Try to create a session using username, hostname, and port
+        Session session = null;
+        try {
+            session = jsch.getSession(username, hostname, port);
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+
+        // Set the password for the session
+        assert session != null;
+        session.setPassword(password);
+
+        // Avoid asking for key confirmation
+        Properties prop = new Properties();
+        prop.put("StrictHostKeyChecking", "no");
+        session.setConfig(prop);
+
+        // Attempt to connect
+        try {
+            session.connect();
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+
+        // SSH Channel
+        ChannelExec channelssh = null;
+        try {
+            channelssh = (ChannelExec)
+                    session.openChannel("exec");
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+        // Use this if there is any need for output to return to android
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//        channelssh.setOutputStream(baos);
+
+        // Execute command
+        assert channelssh != null;
+        channelssh.setCommand(command);
+        try {
+            channelssh.connect();
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+        channelssh.disconnect();
+    }
+}
+
+

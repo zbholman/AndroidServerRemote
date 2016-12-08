@@ -3,7 +3,7 @@
 #Fall 2016
 #DriveTrain
 #Author: Tapan Patel and Joseph Altomare
-#Version: 4 
+#Version: 5
 
 
 
@@ -12,6 +12,7 @@
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drive_train);
 
+        #Finds the various button IDs
         btnDis = (Button) findViewById(R.id.btnDis);
         btn_Drive = (Button) findViewById(R.id.btn_Drive);
         btn_Neutral = (Button) findViewById(R.id.btn_Neutral);

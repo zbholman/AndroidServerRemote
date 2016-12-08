@@ -32,3 +32,4 @@ try:
 except KeyboardInterrupt:
         GPIO.cleanup()
         p.stop()
+        print ("I/O error({0}): {1}".format(e.errno, e.strerror)
