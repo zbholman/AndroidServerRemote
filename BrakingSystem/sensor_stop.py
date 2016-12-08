@@ -8,7 +8,7 @@ from grovepi import *
 import RPi.GPIO as GPIO
 import time
 
-ultrasonic_ranger = 4  # Insert ultrasonic_ranger to D4 on the grovepi
+ultrasonic_ranger = 400   # Insert ultrasonic_ranger to D4 on the grovepi
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(11,GPIO.OUT)
