@@ -1,8 +1,9 @@
 package ist440.brakescontrol;
-
-/**
- * Created by QILI JIAN on 11/17/2016.
- */
+/**Penn State Abington
+ #IST 440W
+ #Fall 2016
+ #Team Pump Your Brakes
+ #Members: Qili Jian,  Chakman Fung, Abu Sakif, David Austin,  **/
 
 
 import android.content.Intent;
@@ -13,15 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
-    Button b1;
+    //define the variables
+    Button logIn;
     EditText username, password, hostname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        b1 = (Button) findViewById(R.id.main_Enter);
+        //find the id for the in the UI
+        logIn = (Button) findViewById(R.id.main_Enter);
     }
 
     public void Enter(View view) {
@@ -29,6 +31,7 @@ public class Login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.main_password);
         hostname = (EditText) findViewById(R.id.main_hostname);
 
+        //User Input to Log In the second activity class.
         Intent myIntent = new Intent(Login.this, BrakesControl.class);
         startActivity(new Intent(Login.this, BrakesControl.class));
         myIntent.putExtra("username", username.getText().toString());
