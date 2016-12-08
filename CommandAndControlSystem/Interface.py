@@ -15,21 +15,28 @@ import threading
 
 #Dictionary of acceptable messages
 #Put your message codes in here, that way you can listen for them down below. Two examples provided. 
-acceptedSources = {	
+'''
+eptedSources = {	
 	'Breaking':1,
 	'Lighting':2,
 }
 
+'''
 #Main function for listening.
 def listen(ser):
 	while True:
 		try:
-			print('Listening...')	
+			print('Listening...')
+			doSomething(ser)
+	
 			incMsg = ser.readline()
 			print(incMsg)
+			
 			#Basic check, if the message is coming from the accepted sources, do your work.
-			if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
-				doSomething(ser)
+			#if incMsg == acceptedSources[1] or incMsg == acceptedSources[2]:
+			
+			#doSomething(ser, incMsg)
+
 		except(RuntimeError, OSError, ValueError, IOError) as e:
 			print('Error:' + str(e))
 			break
@@ -37,14 +44,17 @@ def listen(ser):
 #General function for your system work. 
 #Here, you do some action based on the message.
 def doSomething(ser):
-	pass
+	print('Sending back')
+	test = 'Hello!'
+	ser.write(test)
 
 #Main function.
-def main(ser):
+def main():
 	try:
+		ser = serial.Serial('/dev/ttyUSB0', 9600)
 		print("Creating listen thread")
 		#Creates a thread for message listening.
-		listenThread = Thread(target=listen)
+		listenThread = threading.Thread(target=listen, args=([ser]))
 		listenThread.start()
 		print('Listen Thread Created.')
 		#Waits for thread to end.
@@ -54,5 +64,5 @@ def main(ser):
 					
 if __name__ == '__main__':
 	#Sets up serial port, listens for new lines to read.
-	ser = serial.Serial('/dev/ttyUSB0', 9500)
-	main(ser)
+	main()
+

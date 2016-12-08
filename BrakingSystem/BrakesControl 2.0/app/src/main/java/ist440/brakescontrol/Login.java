@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class Login extends AppCompatActivity {
+    //define the variables
     Button logIn;
     EditText username, password, hostname;
 
@@ -21,7 +22,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        //find the id for the in the UI
         logIn = (Button) findViewById(R.id.main_Enter);
     }
 
@@ -30,6 +31,7 @@ public class Login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.main_password);
         hostname = (EditText) findViewById(R.id.main_hostname);
 
+        //User Input to Log In the second activity class.
         Intent myIntent = new Intent(Login.this, BrakesControl.class);
         startActivity(new Intent(Login.this, BrakesControl.class));
         myIntent.putExtra("username", username.getText().toString());
