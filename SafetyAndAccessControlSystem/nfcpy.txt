@@ -1,9 +1,0 @@
-pip install libusb1 pyserial
-
-import nfc
-clf = nfc.ContactlessFrontend('ttys0')
-print(clf)
-
-import nfc
-clf = nfc.ContactlessFrontend('ttys0')
-clf.connect(rdwr={}) # now touch a tag and remove it
