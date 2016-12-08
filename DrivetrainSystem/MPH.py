@@ -16,8 +16,8 @@ def writeNumber(value):
     return -1
 
 def readNumber():
-    number = bus.read_byte(address)
-    return number
+    rpm = bus.read_byte(address)
+    return rpm
 
 while True:
     var = input("enter a number:")
@@ -25,8 +25,8 @@ while True:
     print ("RPI: Hi Arduino, I sent you "), var
     time.sleep(1)
 
-    number = readNumber()
-    print ("Arduino: Here's the current RPM: "), number
+    rpm = readNumber()
+    print ("Arduino: Here's the current RPM: "), rpm
     
     MPH = ( (4.5 * number) * 60) / 63360
     print ("Here's the current MPH: "), MPH
