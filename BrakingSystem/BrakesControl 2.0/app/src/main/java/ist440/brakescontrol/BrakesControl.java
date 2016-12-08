@@ -1,9 +1,15 @@
 package ist440.brakescontrol;
+/**Penn State Abington
+ #IST 440W
+ #Fall 2016
+ #Team Pump Your Brakes
+ #Members: Qili Jian,  Chakman Fung, Abu Sakif, David Austin,  **/
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -31,9 +37,9 @@ public class BrakesControl extends AppCompatActivity {
         final String username = myIntent.getExtras().getString("username");
         final String password = myIntent.getExtras().getString("password");
         final String hostname = myIntent.getExtras().getString("hostname");
-        final String hostnameLights = "192.168.1.1";
-        final String usernameLights = "pi";
-        final String passwordLights = "raspberry";
+        //final String hostnameLights = "192.168.1.1";
+        //final String usernameLights = "pi";
+        //final String passwordLights = "raspberry";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
         //final String scriptDir = "touch /home/pi/Desktop";
@@ -58,40 +64,47 @@ public class BrakesControl extends AppCompatActivity {
         sensorIcon.setVisibility(View.INVISIBLE);
 
         // what it does When the button pressed.
-        brakes.setOnClickListener(new View.OnClickListener() {
+        brakes.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = scriptDir + "/braking.py";
 
-                /*new AsyncTask<Integer, Void, Void>() {
-                    String command = scriptDir + "/absbraking.py";
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            executeRemoteCommand(username, password, hostname, command, port);
-                            exec
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                }.execute(1);
-                new AsyncTask<Integer, Void, Void>() {
-                    String command = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/Brakes_On.py";
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
-                            exec
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                }.execute(1);
-            }*/
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(username, password, hostname, command, port);
 
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
+                }
+                else {
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command = scriptDir + "/brakes_off.sh";
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(username, password, hostname, command, port);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+                    }
+                }
+
+                return false;
+            }
         });
-        
-        brakes.setOnTouchListener(new OnTouchListener() {
+
+        /*brakes.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -100,33 +113,21 @@ public class BrakesControl extends AppCompatActivity {
                         protected Void doInBackground(Integer... params) {
                             try {
                                 executeRemoteCommand(username, password, hostname, command, port);
-                                exec
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             return null;
                         }
                     }.execute(1);
-                    new AsyncTask<Integer, Void, Void>() {
-                    String command = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/Brakes_On.py";
-                    protected Void doInBackground(Integer... params) {
-                        try {
-                            executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
-                            exec
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                }.execute(1);
                 }
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/Brakes_Off.sh";
+                        String command = scriptDir + "/brakes_off.sh";
                         protected Void doInBackground(Integer... params) {
                             try {
                                 executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
-                                exec
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -138,7 +139,7 @@ public class BrakesControl extends AppCompatActivity {
                         protected Void doInBackground(Integer... params) {
                             try {
                                 executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
-                                exec
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -147,7 +148,7 @@ public class BrakesControl extends AppCompatActivity {
                     }.execute(1);
                 }
             }
-        });
+        });*/
         
         switchABS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
