@@ -11,11 +11,13 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(11,GPIO.OUT)
 
-p = GPIO.PWM(11,50)#PWM'Pulse-width Modulation' puts pin 11 to 50Hz
+p = GPIO.PWM(11,50)    #PWM'Pulse-width Modulation' puts pin 11 to 50Hz
 p.start(9)
-
-try:
-    p.ChangeDutyCycle(13.5)#engage emergency brake
+try :
+#	while True :	
+	p.ChangeDutyCycle(7)   #engage emergency brake
+#	p.ChangeDutyCycle(7)
+#	p.ChangeDutyCycle(7)
 except KeyboardInterrupt:
-        GPIO.cleanup()
-        p.stop()
+	 GPIO.cleanup()
+	 p.stop()

@@ -8,7 +8,7 @@ from grovepi import *
 import RPi.GPIO as GPIO
 import time
 
-ultrasonic_ranger = 400   # Insert ultrasonic_ranger to D4 on the grovepi
+ultrasonic_ranger = 4# Insert ultrasonic_ranger to D4 on the grovepi
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(11,GPIO.OUT)
@@ -17,10 +17,10 @@ p = GPIO.PWM(11,50)#PWM'Pulse-width Modulation' puts pin 11 to 50Hz
 p.start(9)
 try:
     while True:
-# Read distance value from Ultrasonic
+	# Read distance value from Ultrasonic
         distant = ultrasonicRead(ultrasonic_ranger)
         if distant <= 50:
-            p.ChangeDutyCycle(13.5)#engage brake
+            p.ChangeDutyCycle(6.7) #engage brake
         else:
             p.ChangeDutyCycle(9)#disengage brake
 except KeyboardInterrupt:
