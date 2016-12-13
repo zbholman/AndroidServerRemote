@@ -8,10 +8,10 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-GPIO.setup(11,GPIO.OUT)#
+GPIO.setup(11,GPIO.OUT)
 
 p = GPIO.PWM(11,50)#PWM'Pulse-width Modulation' puts pin 11 to 50Hz
-p.start(13.5)
+p.start(9)
 try :
 	while True :
 		p.ChangeDutyCycle(5)#engage brake
