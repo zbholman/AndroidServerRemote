@@ -7,7 +7,7 @@
     "CKS": "8fcffdcd1c1dbd62c199aa2a13c9043a",
     "TTL": "100",
     "OID": "ccs",
-    "PLD": "Emergency",
+    "PLD": "batteryLow : Energy below 40%, please connect me to power source.",
     "TS": "1235542453.24325"
   },
 {
