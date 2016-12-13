@@ -37,9 +37,9 @@ public class BrakesControl extends AppCompatActivity {
         final String username = myIntent.getExtras().getString("username");
         final String password = myIntent.getExtras().getString("password");
         final String hostname = myIntent.getExtras().getString("hostname");
-        //final String hostnameLights = "192.168.1.1";
-        //final String usernameLights = "pi";
-        //final String passwordLights = "raspberry";
+        final String hostnameLights = "192.168.1.1";
+        final String usernameLights = "pi";
+        final String passwordLights = "raspberry";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
         //final String scriptDir = "touch /home/pi/Desktop";
@@ -82,6 +82,19 @@ public class BrakesControl extends AppCompatActivity {
                             return null;
                         }
                     }.execute(1);
+                    new AsyncTask<Integer, Void, Void>() {
+                        String command = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/Brakes_On.py";
+
+                        protected Void doInBackground(Integer... params) {
+                            try {
+                                executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    }.execute(1);
                 }
                 else {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -90,6 +103,18 @@ public class BrakesControl extends AppCompatActivity {
                             protected Void doInBackground(Integer... params) {
                                 try {
                                     executeRemoteCommand(username, password, hostname, command, port);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+                        new AsyncTask<Integer, Void, Void>() {
+                            String command =  "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/Brakes_Off.sh";
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
 
                                 } catch (Exception e) {
                                     e.printStackTrace();

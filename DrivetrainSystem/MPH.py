@@ -20,13 +20,12 @@ def readNumber():
     return rpm
 
 while True:
-    var = input("enter a number:")
+    var = 1
     writeNumber(var)
-    print ("RPI: Hi Arduino, I sent you "), var
     time.sleep(1)
 
     rpm = readNumber()
     print ("Arduino: Here's the current RPM: "), rpm
     
-    MPH = ( (4.5 * number) * 60) / 63360
+    MPH = ( (4.5 * rpm) * 60) / 63360
     print ("Here's the current MPH: "), MPH
