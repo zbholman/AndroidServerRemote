@@ -2,7 +2,6 @@
 #10/03/2016
 #Displays speakes off on sense hat.
 
-
 from sense_hat import SenseHat
 import time
 
