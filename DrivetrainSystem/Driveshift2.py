@@ -7,6 +7,7 @@
 
 
 from __future__ import division
+from ArduinoServo import ServoControl
 import time
 import sys
 
