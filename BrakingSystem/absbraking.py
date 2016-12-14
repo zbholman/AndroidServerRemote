@@ -14,20 +14,20 @@ GPIO.setup(11,GPIO.OUT)
 p = GPIO.PWM(11,50)#puts pin 11 at 50Hz
 p.start(9)
 
-loopStart =  time.time()   #time when program starts
-timePassed = 0.0
+#loopStart =  time.time()   #time when program starts
+#timePassed = 0.0
 try:
-        while timePassed < 4:
-                now = time.time()   #current time
-                timePassed = now - loopStart   #current time minus time program started
-                timePassed = int(timePassed)   #changes timePassed into Integer
+        while True : #timePassed < 4:
+                #now = time.time()   #current time
+                #timePassed = now - loopStart   #current time minus time program started
+                #timePassed = int(timePassed)   #changes timePassed into Integer
                 p.ChangeDutyCycle(7)   #engages brake
                 time.sleep(0.125)   #time between brake pumps
                 p.ChangeDutyCycle(9)   #disengages brake
                 time.sleep(0.125)
-        if timePassed >= 4:
-                p.stop()   #stops power to servo after 4 seconds
-                GPIO.cleanup()
+        #if timePassed >= 4:
+         #       p.stop()   #stops power to servo after 4 seconds
+          #      GPIO.cleanup()
 
 except KeyboardInterrupt:
         GPIO.cleanup()
