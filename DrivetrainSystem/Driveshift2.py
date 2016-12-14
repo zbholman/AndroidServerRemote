@@ -27,7 +27,7 @@ print("s = reverse")
 print("d = turn right")
 print("n = neutral")
 print("p = park")
-print("t = increase speed")
+print("f = increase speed")
 print("g = decrease speed")
 print("c = center steering")
 
@@ -36,37 +36,37 @@ while True:
     mode = raw_input()
 
     if (mode == 'p'): #Sets car into park, place holder code
-	    print('Stop')
-	    Servo.setGas(servo_neutral)
+	print('Stop')
+	Servo.setGas(servo_neutral)
 		
     elif (mode == 's'): #Sets car into reverse
         Servo.setGas(servo_neutral)
-	    #if servo_drive > servo_neutral:
-		#    servo_drive = servo_drive - (((servo_drive - 375) * 2) + 16)
-		servo_drive = 92
-	    Servo.setGas(servo_drive)
+	#if servo_drive > servo_neutral:
+            #servo_drive = servo_drive - (((servo_drive - 375) * 2) + 16)
+        servo_drive = 88
+	Servo.setGas(servo_drive)
 	    
     elif (mode == 'w'): #Sets car into drive
         Servo.setGas(servo_neutral)
-	    #if servo_drive < 359:
-		#    servo_drive = servo_drive + (((359 - servo_drive) * 2) + 16)
-		servo_drive = 92
-	    Servo.setGas(servo_drive)
+	#if servo_drive < 359:
+            #servo_drive = servo_drive + (((359 - servo_drive) * 2) + 16)
+        servo_drive = 92
+	Servo.setGas(servo_drive)
 	    
     elif (mode == 'n'): #Sets car into neutral 
-	    Servo.setGas(servo_neutral)
+	Servo.setGas(servo_neutral)
 	    
     elif (mode == 'f'): #Speeds up the car
-	    if servo_drive <= servo_neutral or servo_drive >= servo_max:
-		    servo_drive = servo_neutral
-	    servo_drive = servo_drive + 1
-	    Servo.setGas(servo_drive)
+	if servo_drive <= servo_neutral or servo_drive >= servo_max:
+            servo_drive = servo_neutral
+	servo_drive = servo_drive + 1
+	Servo.setGas(servo_drive)
 	    
     elif (mode == 'g'): #Slows down the car
-	    if servo_drive <= servo_neutral:
-		    servo_drive = servo_neutral
-	    servo_drive = servo_drive - 1
-	    Servo.setGas(servo_drive)
+	if servo_drive <= servo_neutral:
+	    servo_drive = servo_neutral
+	servo_drive = servo_drive - 1
+	Servo.setGas(servo_drive)
 
     elif (mode == 'a'): #Turns the car left
         Servo.setSteering(servo_min)
@@ -78,12 +78,13 @@ while True:
         Servo.setSteering(servo_max)
 	    
     elif (mode == 'q'): #Exits gear shift
-	    Servo.setGas(servo_neutral)
-	    Servo.setSteering(servo_neutral)
-	    print('Good Bye')
-	    sys.exit()
+	Servo.setGas(servo_neutral)
+	Servo.setSteering(servo_neutral)
+	print('Good Bye')
+	sys.exit()
 	    
 	    
     else: #If invalid command is entered
-	    print('No Command try again')
+	print('No Command try again')
+    
     time.sleep(0.1)
