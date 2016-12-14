@@ -37,9 +37,9 @@ public class BrakesControl extends AppCompatActivity {
         final String username = myIntent.getExtras().getString("username");
         final String password = myIntent.getExtras().getString("password");
         final String hostname = myIntent.getExtras().getString("hostname");
-        final String hostnameLights = "192.168.1.1";
-        final String usernameLights = "pi";
-        final String passwordLights = "raspberry";
+        //final String hostnameLights = "192.168.1.1";
+        //final String usernameLights = "pi";
+        //final String passwordLights = "raspberry";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
         final String scriptDir1 = "sh /home/pi/PSUABFA16IST440/BrakingSystem";
@@ -67,71 +67,47 @@ public class BrakesControl extends AppCompatActivity {
         // what it does When the button pressed.
         brakes.setOnTouchListener(new View.OnTouchListener() {
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/braking.py";
+                                      @Override
+                                      public boolean onTouch(View v, MotionEvent event) {
+                                          if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                              new AsyncTask<Integer, Void, Void>() {
+                                                  String command = scriptDir + "/braking.py";
 
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(username, password, hostname, command, port);
+                                                  protected Void doInBackground(Integer... params) {
+                                                      try {
+                                                          executeRemoteCommand(username, password, hostname, command, port);
 
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = "python /home/pi/PSUABFA16IST440/LightingSystem/LedBarLights/Brakes_On.py";
-
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
-                }
-                else {
-                    if (event.getAction() == MotionEvent.ACTION_UP) {
-                        new AsyncTask<Integer, Void, Void>() {
-                            //String command = scriptDir + "/./brakes_off.sh";
-                            String command = scriptDir1 + "/./brakes_off.sh";
+                                                      } catch (Exception e) {
+                                                          e.printStackTrace();
+                                                      }
+                                                      return null;
+                                                  }
+                                              }.execute(1);
+                                          } else {
+                                              if (event.getAction() == MotionEvent.ACTION_UP) {
+                                                  new AsyncTask<Integer, Void, Void>() {
+                                                      //String command = scriptDir + "/./brakes_off.sh";
+                                                      String command = scriptDir1 + "/./brakes_off.sh";
 
 
-                            protected Void doInBackground(Integer... params) {
-                                try {
-                                    executeRemoteCommand(username, password, hostname, command, port);
+                                                      protected Void doInBackground(Integer... params) {
+                                                          try {
+                                                              executeRemoteCommand(username, password, hostname, command, port);
 
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            }
-                        }.execute(1);
-                        new AsyncTask<Integer, Void, Void>() {
-                            String command =  "/home/pi/PSUABFA16IST440/LightingSystem/Scripts/Brakes_Off.sh";
-                            protected Void doInBackground(Integer... params) {
-                                try {
-                                    executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
+                                                          } catch (Exception e) {
+                                                              e.printStackTrace();
+                                                          }
+                                                          return null;
+                                                      }
+                                                  }.execute(1);
 
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                return null;
-                            }
-                        }.execute(1);
-                    }
 
-                }
-                return false;
-            }
-        });
+                                              }
+                                          }
+                                          return false;
+                                      }
+                                  });
+
 
         
         switchABS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
