@@ -69,13 +69,13 @@ while True:
 	Servo.setGas(servo_drive)
 
     elif (mode == 'a'): #Turns the car left
-        Servo.setSteering(servo_min)
+        Servo.setSteering(servo_max)
 
     elif (mode == 'c'): #Sets the steering to center
         Servo.setSteering(servo_neutral)
 			
     elif (mode == 'd'): #Turns the car right
-        Servo.setSteering(servo_max)
+        Servo.setSteering(servo_min)
 	    
     elif (mode == 'q'): #Exits gear shift
 	Servo.setGas(servo_neutral)
