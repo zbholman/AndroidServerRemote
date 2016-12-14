@@ -42,6 +42,7 @@ public class BrakesControl extends AppCompatActivity {
         final String passwordLights = "raspberry";
 
         final String scriptDir = "python /home/pi/PSUABFA16IST440/BrakingSystem";
+        final String scriptDir1 = "sh /home/pi/PSUABFA16IST440/BrakingSystem";
         //final String scriptDir = "touch /home/pi/Desktop";
         //final String scriptDir2 = "python /home/pi/PSUABFA16IST440/BrakingSystem/E-Brake Python";
         final int port = 22;
@@ -99,7 +100,10 @@ public class BrakesControl extends AppCompatActivity {
                 else {
                     if (event.getAction() == MotionEvent.ACTION_UP) {
                         new AsyncTask<Integer, Void, Void>() {
-                            String command = scriptDir + "/brakes_off.sh";
+                            //String command = scriptDir + "/./brakes_off.sh";
+                            String command = scriptDir1 + "/./brakes_off.sh";
+
+
                             protected Void doInBackground(Integer... params) {
                                 try {
                                     executeRemoteCommand(username, password, hostname, command, port);
@@ -123,57 +127,12 @@ public class BrakesControl extends AppCompatActivity {
                             }
                         }.execute(1);
                     }
-                }
 
+                }
                 return false;
             }
         });
 
-        /*brakes.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/braking.py";
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(username, password, hostname, command, port);
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
-                }
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/brakes_off.sh";
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = "/home/pi/PSUABFA16IST440/BrakingSystem/brakes_off.sh";
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(usernameLights, passwordLights, hostnameLights, command, port);
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }.execute(1);
-                }
-            }
-        });*/
         
         switchABS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -196,14 +155,12 @@ public class BrakesControl extends AppCompatActivity {
                     if (success) {
                         absIcon.setVisibility(View.VISIBLE);
 
-
-
                     }
 
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/braking.py";
+                        String command = scriptDir + "/eBrakeOff.py";
 
                         protected Void doInBackground(Integer... params) {
                             try {
