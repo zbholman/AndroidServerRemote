@@ -67,67 +67,98 @@ public class BrakesControl extends AppCompatActivity {
         // what it does When the button pressed.
         brakes.setOnTouchListener(new View.OnTouchListener() {
 
-                                      @Override
-                                      public boolean onTouch(View v, MotionEvent event) {
-                                          if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                                              new AsyncTask<Integer, Void, Void>() {
-                                                  String command = scriptDir + "/braking.py";
-
-                                                  protected Void doInBackground(Integer... params) {
-                                                      try {
-                                                          executeRemoteCommand(username, password, hostname, command, port);
-
-                                                      } catch (Exception e) {
-                                                          e.printStackTrace();
-                                                      }
-                                                      return null;
-                                                  }
-                                              }.execute(1);
-                                          } else {
-                                              if (event.getAction() == MotionEvent.ACTION_UP) {
-                                                  new AsyncTask<Integer, Void, Void>() {
-                                                      //String command = scriptDir + "/./brakes_off.sh";
-                                                      String command = scriptDir1 + "/./brakes_off.sh";
-
-
-                                                      protected Void doInBackground(Integer... params) {
-                                                          try {
-                                                              executeRemoteCommand(username, password, hostname, command, port);
-
-                                                          } catch (Exception e) {
-                                                              e.printStackTrace();
-                                                          }
-                                                          return null;
-                                                      }
-                                                  }.execute(1);
-
-
-                                              }
-                                          }
-                                          return false;
-                                      }
-                                  });
-
-
-        
-        switchABS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                    boolean success = true;
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/absbraking.py";
+                        String command = scriptDir1 + "/./brakes_On.sh";
 
                         protected Void doInBackground(Integer... params) {
                             try {
                                 executeRemoteCommand(username, password, hostname, command, port);
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             return null;
                         }
                     }.execute(1);
+                } else {
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        new AsyncTask<Integer, Void, Void>() {
+                            //String command = scriptDir + "/./brakes_off.sh";
+                            String command = scriptDir1 + "/./brakes_off.sh";
+
+
+                            protected Void doInBackground(Integer... params) {
+                                try {
+                                    executeRemoteCommand(username, password, hostname, command, port);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            }
+                        }.execute(1);
+
+
+                    }
+                }
+                return false;
+            }
+        });
+
+
+
+        switchABS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    boolean success = true;
+                    brakes.setOnTouchListener(new View.OnTouchListener() {
+
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                new AsyncTask<Integer, Void, Void>() {
+                                    String command = scriptDir1 + "/./absbrakes.sh";
+
+                                    protected Void doInBackground(Integer... params) {
+                                        try {
+                                            executeRemoteCommand(username, password, hostname, command, port);
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        return null;
+                                    }
+                                }.execute(1);
+                            } else {
+                                if (event.getAction() == MotionEvent.ACTION_UP) {
+                                    new AsyncTask<Integer, Void, Void>() {
+                                        //String command = scriptDir + "/./brakes_off.sh";
+                                        String command = scriptDir1 + "/./absbrakes_off.sh";
+
+
+                                        protected Void doInBackground(Integer... params) {
+                                            try {
+                                                executeRemoteCommand(username, password, hostname, command, port);
+
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                            return null;
+                                        }
+                                    }.execute(1);
+
+
+                                }
+                            }
+                            return false;
+                        }
+                    });
+
                     if (success) {
                         absIcon.setVisibility(View.VISIBLE);
 
@@ -135,18 +166,48 @@ public class BrakesControl extends AppCompatActivity {
 
                 } else {
                     boolean success = true;
-                    new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/eBrakeOff.py";
+                    brakes.setOnTouchListener(new View.OnTouchListener() {
 
-                        protected Void doInBackground(Integer... params) {
-                            try {
-                                executeRemoteCommand(username, password, hostname, command, port);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                new AsyncTask<Integer, Void, Void>() {
+                                    String command = scriptDir1 + "/./brakes_On.sh";
+
+                                    protected Void doInBackground(Integer... params) {
+                                        try {
+                                            executeRemoteCommand(username, password, hostname, command, port);
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        return null;
+                                    }
+                                }.execute(1);
+                            } else {
+                                if (event.getAction() == MotionEvent.ACTION_UP) {
+                                    new AsyncTask<Integer, Void, Void>() {
+                                        //String command = scriptDir + "/./brakes_off.sh";
+                                        String command = scriptDir1 + "/./brakes_off.sh";
+
+
+                                        protected Void doInBackground(Integer... params) {
+                                            try {
+                                                executeRemoteCommand(username, password, hostname, command, port);
+
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                            return null;
+                                        }
+                                    }.execute(1);
+
+
+                                }
                             }
-                            return null;
+                            return false;
                         }
-                    }.execute(1);
+                    });
                     if (success) {
                         absIcon.setVisibility(View.INVISIBLE);
 
@@ -184,7 +245,7 @@ public class BrakesControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/eBrakeOff.py";
+                        String command = scriptDir1 + "/./ebrake_off.sh";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -229,7 +290,7 @@ public class BrakesControl extends AppCompatActivity {
                 } else {
                     boolean success = true;
                     new AsyncTask<Integer, Void, Void>() {
-                        String command = scriptDir + "/eBrakeOff.py";
+                        String command = scriptDir1 + "/./sensor_off.sh";
 
                         protected Void doInBackground(Integer... params) {
                             try {
@@ -309,5 +370,3 @@ public class BrakesControl extends AppCompatActivity {
         channelssh.disconnect();
     }
 }
-
-
